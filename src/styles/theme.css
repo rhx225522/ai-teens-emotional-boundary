@@ -1,0 +1,85 @@
+/* ============================================================
+   永远在线的"搭子" · 全站主题
+   方案六·晨金破茧 —— 12 token 唯一色源（全站共享）
+   说明：所有章节页面统一引用本文件，禁止在页面内重复声明色板。
+   ============================================================ */
+:root{
+  /* —— 色板（12 token，不作替换） —— */
+  --cover-main:#1A3A4A;
+  --cover-deep:#0F2532;
+  --cover-dark-red:#421B17;
+  --gold:#F4C95D;
+  --gold-deep:#D4A017;
+  --risk:#B84A3E;
+  --bg:#F4F6F5;
+  --ink:#2A2A2A;
+  --ink-sub:#555555;
+  --ink-dim:#888888;        /* 弱信息灰：仅用于分隔线 / 描边等非文本 */
+  --ink-meta:#6A7075;       /* 图注·来源·角标文本色：对 #F4F6F5 对比 ≈4.7:1（AA） */
+  --step-1:#3A6B8A;
+  --step-2:#5B9AB5;
+  --divider:rgba(26,58,74,.12);
+
+  /* —— 排版刻度（角色化，替代散落的固定 px） —— */
+  --fs-display:clamp(34px,4.6vw,56px);
+  --fs-h2:clamp(26px,2.4vw,34px);
+  --fs-h3:21px;
+  --fs-lead:19px;
+  --fs-body:16px;
+  --fs-cap:13px;
+  --fs-meta:12.5px;
+
+  /* —— 间距刻度（4 基数） —— */
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px; --sp-5:24px;
+  --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:88px; --sp-10:120px;
+
+  /* —— 面与深度 —— */
+  --radius:10px;
+  --radius-sm:6px;
+  --hair:1px solid var(--divider);
+  --shadow-1:0 1px 2px rgba(15,37,50,.04), 0 8px 22px -10px rgba(15,37,50,.16);
+  --shadow-2:0 2px 6px rgba(15,37,50,.06), 0 22px 48px -20px rgba(15,37,50,.24);
+
+  --focus:#D4A017;
+  --ease-out:cubic-bezier(.16,.84,.44,1);
+}
+
+/* —— 全局 reset —— */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;caret-color:var(--focus)}
+
+/* ============================================================
+   顶部全局导航（全站共享）
+   序言 / 搭子 / 茧房 / 伤口 / 破茧 —— 五章直达 + 阅读进度条
+   ============================================================ */
+.site-nav{
+  position:sticky;top:0;z-index:1000;
+  background:var(--cover-deep);
+  box-shadow:0 1px 0 rgba(255,255,255,.06);
+}
+.site-nav-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  max-width:1200px;margin:0 auto;padding:0 24px;height:56px;
+}
+.site-nav-brand{
+  color:var(--gold);font-weight:700;font-size:15px;letter-spacing:1px;
+  text-decoration:none;white-space:nowrap;
+}
+.site-nav-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.site-nav-links::-webkit-scrollbar{display:none}
+.site-nav-links a{
+  color:rgba(255,255,255,.7);font-size:13px;text-decoration:none;
+  padding:6px 12px;border-radius:16px;white-space:nowrap;transition:all .2s;
+}
+.site-nav-links a:hover{color:var(--gold);background:rgba(244,201,93,.12)}
+.site-nav-links a.active{color:var(--cover-deep);background:var(--gold);font-weight:600}
+.site-nav-progress{height:2px;background:rgba(255,255,255,.08)}
+.site-nav-progress-fill{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--gold),var(--gold-deep));
+  transition:width .1s linear;
+}
+@media (max-width:640px){
+  .site-nav-inner{height:50px;padding:0 12px}
+  .site-nav-brand{font-size:13px}
+}

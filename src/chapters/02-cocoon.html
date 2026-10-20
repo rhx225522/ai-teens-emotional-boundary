@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二章 · 茧房·情感新织 | 永远在线的"搭子"</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- 全站主题（12 token + reset）已抽离到 ../styles/theme.css -->
+<link rel="stylesheet" href="../styles/theme.css">
+<style>
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+
+/* ========== 通用布局 ========== */
+.section{width:100%;padding:80px 0;position:relative}
+.container{width:70%;margin:0 auto;max-width:1100px}
+.container.narrow{max-width:780px}
+h2.ch-title{
+  font-size:26px;font-weight:700;color:var(--cover-main);
+  letter-spacing:1px;margin-bottom:8px;
+  padding-top:40px;border-top:2px solid var(--gold);
+  display:inline-block;padding-right:18px;
+}
+h2.ch-title .num{color:var(--gold-deep);margin-right:10px}
+h3.sec-title{
+  font-size:26px;font-weight:700;color:var(--cover-main);
+  letter-spacing:1px;margin-bottom:8px;
+  padding-top:40px;border-top:2px solid var(--gold);
+  display:inline-block;padding-right:18px;
+}
+h3.sec-title .idx{color:var(--gold-deep);margin-right:10px}
+p.body{
+  font-size:16px;color:var(--ink);line-height:1.9;
+  margin-bottom:18px;text-align:justify;text-indent:2em;
+}
+p.body .hl{color:var(--gold-deep);font-weight:600}
+p.body .risk{color:var(--risk);font-weight:600}
+p.body .num{color:var(--gold-deep);font-weight:700;font-size:1.05em}
+p.body .num.risk{color:var(--risk)}
+.quote{
+  margin:24px 0;padding:14px 20px;background:rgba(244,201,93,.06);
+  border-left:2px solid var(--gold);color:var(--ink-sub);
+  font-size:16px;line-height:1.85;border-radius:0 4px 4px 0;
+}
+.source-line{
+  font-size:12px;color:var(--ink-dim);
+  margin-top:18px;line-height:1.7;
+}
+.source-line a{color:var(--step-1);text-decoration:none;border-bottom:1px dotted var(--step-1)}
+.source-line a:hover{color:var(--gold-deep);border-color:var(--gold-deep)}
+/* 来源小字：统一收进所在「图」的右下角，弱化存在感（与弹幕面板来源同风格） */
+.src-corner{
+  position:absolute;right:12px;bottom:9px;left:auto;z-index:4;
+  margin:0;max-width:62%;font-size:10.5px;line-height:1.5;
+  text-align:right;pointer-events:none;
+}
+.src-corner a{color:inherit;border-bottom-color:currentColor;opacity:.85}
+.src-corner--img{
+  color:rgba(255,255,255,.88);
+  text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 10px rgba(0,0,0,.5);
+}
+.tag-caveat{
+  display:inline-block;font-size:12px;color:var(--ink-dim);
+  background:rgba(26,58,74,.06);padding:3px 10px;border-radius:10px;
+  margin-left:8px;letter-spacing:.5px;
+}
+.footnote-mark{
+  font-size:12px;color:var(--ink-dim);
+  border-bottom:1px dashed var(--gold-deep);
+  cursor:help;
+}
+
+/* ========== 封面：茧的内部视角 ========== */
+.cover{
+  height:100vh;min-height:680px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:var(--cover-deep) url("../../assets/images/covers/cover-ch2-cocoon.webp") center/cover no-repeat;
+  color:#fff;
+}
+.cover::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(8,24,32,.52) 0%, rgba(8,24,32,.20) 46%, rgba(8,24,32,.14) 72%, rgba(8,24,32,.52) 100%),
+    linear-gradient(180deg, rgba(8,24,32,.5) 0%, rgba(8,24,32,0) 30%, rgba(8,24,32,0) 68%, rgba(8,24,32,.6) 100%);
+}
+.cover-text{
+  position:relative;z-index:2;text-align:center;
+  max-width:760px;padding:0 20px;
+}
+/* 封面标题：背景插画已含书法标题，此处仅保留屏幕阅读器语义 */
+.cover-text h1{
+  position:absolute;width:1px;height:1px;
+  margin:-1px;padding:0;border:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
+.cover-text .sub{
+  font-size:23px;color:rgba(255,255,255,.92);
+  line-height:1.9;max-width:620px;margin:0 auto 28px;
+  text-shadow:0 1px 14px rgba(0,0,0,.62);
+}
+/* 眉标：PART 0N ＋ 两侧金色细线 */
+.cover-eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:22px;
+  margin:0 0 17px;
+  font-size:24px;font-weight:600;letter-spacing:.34em;text-indent:.34em;
+  color:var(--gold);font-variant-numeric:tabular-nums;
+}
+.cover-eyebrow::before,.cover-eyebrow::after{
+  content:"";flex:none;width:72px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(244,201,93,.75));
+}
+.cover-eyebrow::after{transform:scaleX(-1)}
+/* 幽灵编号：6% 白的巨大数字，给中央留白一个尺度；纯装饰、不抢读 */
+.cover-num{
+  position:absolute;left:50%;top:41%;transform:translate(-50%,-50%);
+  z-index:2;pointer-events:none;user-select:none;
+  font-size:clamp(64px, min(30vw, 24vh), 320px);
+  font-weight:800;line-height:1;letter-spacing:-.03em;
+  color:rgba(255,255,255,.06);font-variant-numeric:tabular-nums;
+}
+.scroll-cue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  font-size:13px;color:rgba(255,255,255,.7);
+  letter-spacing:.28em;text-align:center;z-index:2;
+}
+.scroll-cue::after{
+  content:"";display:block;width:1px;height:30px;margin:10px auto 0;
+  background:linear-gradient(to bottom, var(--gold), transparent);
+  animation:drop 2s infinite;
+}
+@keyframes drop{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* 茧内金色文本流动画 */
+@keyframes flowIn{
+  0%{opacity:0;transform:translate(var(--fx,0), var(--fy,0)) scale(.6)}
+  60%{opacity:.9}
+  100%{opacity:0;transform:translate(0,0) scale(1)}
+}
+
+/* ========== 2.1 对比滑块：三组真实档案（居中版式） ========== */
+.cmp-zone{text-align:center}
+.cmp-zone p.body{text-align:justify}
+.cmp-zone .source-line{text-align:right}
+/* 开篇：文字与章首引图左右排版（引图刻意收小、去阴影，不与下方三组滑块抢视觉） */
+.cmp-intro{
+  display:grid;grid-template-columns:1fr 36%;
+  gap:36px;align-items:center;margin:4px 0 0;
+}
+.cmp-intro-text{text-align:center}
+.cmp-intro-fig{margin:0;opacity:.94}
+.cmp-intro-fig img{
+  display:block;width:100%;height:auto;
+  border-radius:3px;box-shadow:none;background:transparent;
+}
+.cmp-intro-fig figcaption{
+  font-size:12px;color:#93a0a6;line-height:1.6;
+  margin-top:8px;text-align:center;
+}
+/* 2.1 作为滑动插画（左右对照）模块的小标题 */
+.slider-mod-title{
+  display:block;width:fit-content;text-align:left;
+  font-size:26px;font-weight:700;color:var(--cover-main);
+  letter-spacing:1px;margin-bottom:8px;
+  padding-top:40px;border-top:2px solid var(--gold);
+  padding-right:18px;
+}
+.slider-mod-title .idx{color:var(--gold-deep);margin-right:10px}
+@media (max-width:820px){
+  .cmp-intro{grid-template-columns:1fr;gap:20px}
+  .cmp-intro-fig{max-width:420px;margin:0 auto}
+}
+.cmp-list{margin:48px 0 0}
+.cmp-group{margin:0 0 54px}
+.cmp-group:last-child{margin-bottom:6px}
+.cmp-head{display:flex;justify-content:center;margin-bottom:14px}
+.cmp-group-title{font-size:18px;font-weight:700;color:var(--cover-main);letter-spacing:.5px}
+.cmp-slider{
+  position:relative;width:100%;aspect-ratio:16 / 9;
+  overflow:hidden;border-radius:8px;user-select:none;
+  touch-action:pan-y;cursor:ew-resize;background:#E8ECEB;
+  box-shadow:var(--shadow-1);
+}
+.cmp-layer{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;pointer-events:none;
+}
+.cmp-layer--top{clip-path:inset(0 35% 0 0);transition:clip-path .07s ease-out}
+.cmp-handle{position:absolute;top:0;bottom:0;left:65%;width:0;pointer-events:none;z-index:2}
+.cmp-handle-line{
+  position:absolute;top:0;bottom:0;left:0;width:2px;
+  background:rgba(255,255,255,.92);box-shadow:0 0 8px rgba(0,0,0,.35);
+}
+.cmp-handle-btn{
+  position:absolute;top:50%;left:0;transform:translate(-50%,-50%);
+  width:46px;height:46px;padding:0;border:none;border-radius:50%;
+  background:#fff;cursor:grab;
+  box-shadow:0 2px 12px rgba(0,0,0,.35);
+  display:flex;align-items:center;justify-content:center;gap:2px;
+  transition:transform .15s ease,box-shadow .15s ease;
+  pointer-events:auto;
+}
+.cmp-slider:hover .cmp-handle-btn,
+.cmp-handle-btn:focus-visible{
+  transform:translate(-50%,-50%) scale(1.14);
+  box-shadow:0 4px 18px rgba(0,0,0,.45);
+}
+.cmp-handle-btn:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.cmp-slider.is-dragging .cmp-handle-btn{cursor:grabbing}
+.cmp-arrow{font-size:20px;line-height:1;color:var(--cover-main)}
+.cmp-side-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:38px;height:38px;border-radius:50%;border:none;padding:0;
+  background:rgba(15,37,50,.42);color:#fff;font-size:20px;line-height:1;
+  cursor:pointer;z-index:3;transition:background .2s;
+}
+.cmp-side-btn:hover{background:rgba(15,37,50,.72)}
+.cmp-side-btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.cmp-side-btn--left{left:12px}
+.cmp-side-btn--right{right:12px}
+.cmp-quote{
+  margin:22px auto 0;max-width:660px;
+  font-size:16px;line-height:2.0;color:var(--ink);text-align:center;
+}
+.cmp-quote p{margin:0}
+.cmp-quote .hl{color:var(--gold-deep);font-weight:600}
+
+/* ========== 2.2 脑科学双曲线 ========== */
+.chart-block{
+  margin:32px 0;padding:24px 22px 18px;
+  background:#fff;border:1px solid var(--divider);
+  border-radius:6px;
+}
+.chart-block .chart-title{
+  font-size:15px;color:var(--cover-main);
+  font-weight:600;margin-bottom:6px;letter-spacing:.5px;
+}
+.chart-block .chart-sub{
+  font-size:12px;color:var(--ink-dim);margin-bottom:14px;
+}
+.chart-canvas{width:100%;height:380px}
+
+/* ========== 2.3 谄媚双图 · 图文左右换位的滚动叙事 ========== */
+/* 静态基线（窄屏 / 减少动效 / 无脚本）：文案与图依次纵向堆叠 */
+.syc-stick{position:relative}
+.syc-field{margin:26px 0}
+.syc-copy .body{margin-bottom:16px}
+.syc-copy .body:last-child{margin-bottom:0}
+.syc-left,.syc-right{
+  background:#fff;border:1px solid var(--divider);
+  border-radius:6px;padding:24px 22px;
+  margin:26px 0;
+}
+/* 主动模式（≥901px 宽且 ≥640px 高、允许动效）：把一屏钉在导航下方，图文左右换位 */
+.syc-stick.is-active{height:300vh}
+.syc-stick.is-active .syc-stage{
+  position:sticky;top:58px;height:calc(100vh - 58px);
+  display:flex;flex-direction:column;
+}
+.syc-stick.is-active .syc-head{flex:none;margin:0 0 12px}
+.syc-stick.is-active .syc-field{position:relative;flex:1;margin:0}
+.syc-stick.is-active .syc-copy,
+.syc-stick.is-active .syc-fig{
+  position:absolute;top:50%;left:0;width:46%;margin:0;
+  opacity:0;will-change:transform,opacity;
+}
+.syc-stick.is-active .syc-copy{z-index:1}
+/* 图卡始终压在文案之上：换位途中不会出现文字盖住卡片 */
+.syc-stick.is-active .syc-fig{z-index:2}
+/* 文案一先占右栏（由 JS 从右下滑入）；图起始在左栏，由 JS 平移到右栏 */
+.syc-stick.is-active [data-syc="copy1"]{left:54%}
+.syc-stick.is-active .syc-left,
+.syc-stick.is-active .syc-right{padding:20px}
+.syc-stick.is-active .single-bar{height:172px;margin:16px 0 8px}
+.syc-left .stitle,.syc-right .stitle{
+  font-size:15px;color:var(--cover-main);font-weight:600;
+  margin-bottom:6px;letter-spacing:.5px;
+}
+.syc-left .ssub,.syc-right .ssub{
+  font-size:12px;color:var(--ink-dim);margin-bottom:18px;
+}
+.single-bar{
+  display:flex;align-items:flex-end;gap:30px;
+  height:200px;margin:20px 0 10px;padding:0 10px;
+  border-bottom:1px solid var(--divider);
+}
+.sb-col{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  height:100%;justify-content:flex-end;
+}
+.sb-col .bar{
+  width:60%;background:var(--step-1);
+  border-radius:4px 4px 0 0;
+  transition:height 1.2s cubic-bezier(.2,.7,.3,1);
+  position:relative;
+}
+.sb-col.gold .bar{background:linear-gradient(180deg,var(--gold),var(--gold-deep))}
+.sb-col .bar .pct{
+  position:absolute;top:-26px;left:50%;transform:translateX(-50%);
+  font-size:18px;font-weight:700;color:var(--gold-deep);
+}
+.sb-col.gray .bar{background:var(--ink-dim)}
+.sb-col.gray .bar .pct{color:var(--ink-sub)}
+.sb-col .lbl{
+  font-size:13px;color:var(--ink-sub);
+  margin-top:10px;font-weight:500;
+}
+.syc-left .slegend{
+  font-size:12px;color:var(--ink-dim);
+  margin-top:10px;line-height:1.7;
+}
+.syc-three-values{
+  display:flex;gap:8px;margin-top:18px;
+  padding-top:14px;border-top:1px dashed var(--divider);
+}
+.syc-tv{
+  flex:1;text-align:center;
+  font-size:12px;color:var(--ink-sub);line-height:1.6;
+}
+.syc-tv .v{
+  display:block;font-size:20px;font-weight:700;
+  color:var(--gold-deep);margin-bottom:2px;
+}
+.syc-tv.risk .v{color:var(--risk)}
+.syc-tv .vt{display:block}
+
+/* 六 App 横条 */
+.app-bars{margin-top:8px}
+.app-row{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:11px;font-size:13px;
+}
+.app-row .aname{
+  flex:0 0 126px;display:inline-flex;align-items:center;gap:7px;
+  color:var(--ink-sub);text-align:left;font-weight:500;
+}
+/* 应用官方图标：取自各应用官方上架商店/官网，用于产品指认 */
+.app-row .app-icon{
+  width:20px;height:20px;flex:0 0 20px;border-radius:5px;
+  object-fit:cover;display:block;
+  box-shadow:0 1px 2px rgba(15,37,50,.14);
+}
+.app-row .atrack{
+  flex:1;height:22px;background:rgba(26,58,74,.06);
+  border-radius:3px;overflow:hidden;position:relative;
+}
+.app-row .afill{
+  height:100%;width:0;background:var(--step-1);
+  transition:width 1.2s cubic-bezier(.2,.7,.3,1);
+  border-radius:3px;
+}
+.app-row.hi .afill{background:linear-gradient(90deg,var(--gold),var(--gold-deep))}
+.app-row.lo .afill{background:var(--ink-dim)}
+.app-row .aval{
+  flex:0 0 50px;font-weight:700;
+  color:var(--gold-deep);text-align:right;
+}
+.app-row.lo .aval{color:var(--ink-dim)}
+.app-row.risk .aval{color:var(--risk)}
+
+/* ========== 2.4 断裂心电图 ========== */
+.ekg-wrap{
+  margin:32px 0;padding:20px 24px 30px;
+  background:#fff;border:1px solid var(--divider);
+  border-radius:6px;
+}
+.ekg-svg{display:block;width:100%;height:140px;margin:0 auto}
+.ekg-line{
+  fill:none;stroke:#3A6B8A;stroke-width:2;
+  stroke-dasharray:2400;stroke-dashoffset:2400;
+  transition:stroke-dashoffset 2.4s ease;
+}
+.ekg-wrap.in .ekg-line{stroke-dashoffset:0}
+.ekg-break-marker{
+  stroke:var(--risk);stroke-width:2;
+  stroke-dasharray:4 4;
+}
+.ekg-axis{
+  font-size:11px;fill:var(--ink-dim);
+}
+.ekg-caption{
+  display:flex;justify-content:space-between;
+  gap:12px;font-size:12px;margin-top:10px;
+}
+.ekg-caption .pre{color:var(--ink-dim)}
+.ekg-caption .post{color:var(--risk);font-weight:500}
+.ekg-legend{
+  font-size:11px;color:var(--ink-dim);
+  text-align:center;margin-top:10px;line-height:1.6;
+}
+.ekg-legend .dash{
+  display:inline-block;width:16px;height:0;
+  border-top:2px dashed var(--risk);
+  vertical-align:middle;margin:0 6px 0 16px;
+}
+.ekg-legend .sw{
+  display:inline-block;width:18px;height:3px;border-radius:2px;
+  vertical-align:middle;margin-right:6px;
+}
+.ekg-legend .sw.before{background:var(--step-1)}
+.ekg-legend .sw.after{background:var(--risk);margin-left:16px}
+.ekg-note{
+  font-size:12px;color:var(--risk);
+  text-align:center;margin-top:6px;font-weight:500;
+}
+.ekg-toggle{
+  display:flex;gap:10px;justify-content:center;
+  margin:2px 0 16px;
+}
+.ekg-toggle-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 18px 7px 12px;border:1px solid var(--divider);
+  background:#fff;color:var(--ink-sub);
+  font-size:13px;font-weight:600;border-radius:20px;
+  cursor:pointer;transition:all .2s ease;letter-spacing:.3px;
+}
+.ekg-toggle-btn:hover{border-color:var(--step-1);color:var(--cover-main)}
+.ekg-toggle-btn.active{
+  background:var(--cover-main);color:#fff;border-color:var(--cover-main);
+}
+.ekg-toggle-btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+/* 按钮内产品图标：方形瓷片，提示该按钮对应的软件，增强交互可发现性 */
+.ekg-btn-icon{
+  display:inline-flex;width:20px;height:20px;flex:0 0 auto;
+  filter:drop-shadow(0 1px 1px rgba(15,37,50,.18));
+}
+.ekg-btn-icon svg{width:100%;height:100%;display:block}
+/* 左右双幅心电图：更新前（慢）｜更新后（快），两幅同时实时滚动 */
+.ekg-compare{
+  display:grid;grid-template-columns:1fr 30px 1fr;
+  align-items:stretch;margin-top:2px;
+}
+.ekg-panel{display:flex;flex-direction:column;min-width:0}
+.ekg-panel .ekg-canvas{display:block;width:100%;height:220px}
+.ekg-phd{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:8px;padding:0 8px 7px;
+}
+.ekg-tag{font-size:12px;font-weight:600;letter-spacing:.4px;color:var(--step-1)}
+.ekg-tag.after{color:var(--risk)}
+.ekg-pval{font-size:22px;font-weight:700;line-height:1;color:var(--step-1)}
+.ekg-pval.risk{color:var(--risk)}
+/* 交互引导：突出"点击下方按钮" */
+.ekg-cue{
+  display:flex;width:max-content;align-items:center;gap:7px;
+  margin:0 auto 8px;padding:7px 16px 7px 13px;
+  border-radius:999px;
+  background:rgba(244,201,93,.18);
+  border:1px solid rgba(200,160,40,.55);
+  color:var(--gold-deep);
+  font-size:13px;font-weight:600;letter-spacing:.4px;
+  animation:ekgCue 2.4s ease-in-out infinite;
+}
+.ekg-cue .arw{
+  font-size:13px;line-height:1;display:inline-block;
+  animation:ekgArw 1.2s ease-in-out infinite;
+}
+@keyframes ekgCue{
+  0%,100%{box-shadow:0 0 0 0 rgba(244,201,93,0)}
+  50%{box-shadow:0 0 0 7px rgba(244,201,93,.16)}
+}
+@keyframes ekgArw{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(3px)}
+}
+.ekg-split{position:relative}
+.ekg-split::before{
+  content:'';position:absolute;top:2px;bottom:24px;left:50%;
+  border-left:2px dashed rgba(184,74,62,.72);
+  transform:translateX(-50%);
+}
+.ekg-split span{
+  position:absolute;left:50%;top:40px;transform:translateX(-50%);
+  writing-mode:vertical-rl;
+  font-size:11px;font-weight:600;letter-spacing:2px;color:var(--risk);
+  background:rgba(255,255,255,.88);padding:6px 1px;
+}
+@media (max-width:720px){
+  .ekg-compare{grid-template-columns:1fr 22px 1fr}
+  .ekg-panel .ekg-canvas{height:170px}
+  .ekg-pval{font-size:18px}
+  .ekg-tag{font-size:11px}
+  .ekg-split span{top:30px;font-size:10px;letter-spacing:1px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ekg-toggle-btn{transition:none}
+  .ekg-cue,.ekg-cue .arw{animation:none}
+}
+.case-compare{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:18px;margin-top:24px;
+}
+.case-card{
+  padding:20px 18px;background:rgba(26,58,74,.04);
+  border-radius:6px;border-top:3px solid var(--step-1);
+}
+.case-card.chatgpt{border-top-color:var(--step-2)}
+.case-card .cname{
+  font-size:15px;font-weight:700;color:var(--cover-main);
+  margin-bottom:6px;letter-spacing:.5px;
+}
+.case-card .ctrend{
+  display:flex;align-items:baseline;gap:8px;
+  margin:10px 0 6px;
+}
+.case-card .ctrend .from{
+  font-size:18px;font-weight:700;color:var(--ink-sub);
+}
+.case-card .ctrend .arrow{color:var(--ink-dim);font-size:16px}
+.case-card .ctrend .to{
+  font-size:26px;font-weight:700;color:var(--risk);
+}
+.case-card .ctrend .unit{font-size:14px;color:var(--ink-sub)}
+.case-card .cdesc{
+  font-size:16px;color:var(--ink-sub);line-height:1.7;
+  margin-top:6px;
+}
+.case-card .cdesc .hl{color:var(--risk);font-weight:600}
+
+/* ========== 2.5 茧三层 sunburst ========== */
+.cocoon-layers-wrap{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:36px;align-items:center;
+  margin:32px 0;padding:30px 24px;
+  background:#fff;border:1px solid var(--divider);
+  border-radius:6px;
+}
+.cocoon-text p.body:last-child{margin-bottom:0}
+.sunburst-chart{width:100%;height:380px}
+
+/* ========== 2.6 陪伴经济 ========== */
+.economy-wrap{
+  margin:32px 0;padding:30px 24px;
+  background:#fff;border:1px solid var(--divider);
+  border-radius:6px;
+}
+.econ-grid{
+  display:grid;grid-template-columns:1.5fr 1fr;
+  gap:30px;align-items:start;
+}
+.zeta-chart{width:100%;height:340px}
+.econ-side{
+  display:flex;flex-direction:column;gap:16px;
+}
+.japan-badge{
+  padding:20px 18px;text-align:center;
+  background:linear-gradient(135deg, rgba(244,201,93,.1), rgba(212,160,23,.06));
+  border:1px solid rgba(244,201,93,.4);
+  border-radius:8px;
+}
+.japan-badge .bpct{
+  font-size:42px;font-weight:700;color:var(--gold-deep);
+  line-height:1;letter-spacing:1px;
+}
+.japan-badge .bpct .u{font-size:18px;margin-left:2px}
+.japan-badge .blbl{
+  font-size:13px;color:var(--ink-sub);
+  margin-top:8px;line-height:1.7;
+}
+.est-note{
+  display:inline-block;margin-top:4px;
+  font-size:11px;color:var(--risk,#B84A3E);
+  opacity:.9;
+}
+.minimax-block{
+  padding:18px 16px;background:rgba(26,58,74,.04);
+  border-radius:6px;border-left:3px solid var(--step-2);
+}
+.minimax-block .mtitle{
+  font-size:14px;font-weight:600;color:var(--cover-main);
+  margin-bottom:10px;letter-spacing:.5px;
+}
+.minimax-block .mrow{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:13px;color:var(--ink-sub);margin-bottom:6px;
+}
+.minimax-block .mrow .v{font-weight:700;color:var(--gold-deep)}
+.minimax-block .mcaveat{
+  font-size:11px;color:var(--ink-dim);
+  margin-top:8px;line-height:1.6;
+  padding-top:8px;border-top:1px dashed var(--divider);
+}
+
+/* ========== 章末跳转（统一过渡卡片） ========== */
+.next-chapter{
+  display:block;width:100%;padding:90px 8%;text-align:center;
+  background:var(--cover-deep);color:#fff;text-decoration:none;
+  position:relative;
+}
+.next-chapter::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:80px;height:2px;background:var(--gold);
+}
+.nc-frame{
+  position:relative;max-width:680px;margin:0 auto;padding:40px 44px 36px;
+}
+.nc-frame::before,.nc-frame::after{
+  content:"";position:absolute;width:28px;height:28px;
+  border:1px dashed var(--gold);opacity:.5;
+}
+.nc-frame::before{top:0;left:0;border-right:none;border-bottom:none}
+.nc-frame::after{bottom:0;right:0;border-left:none;border-top:none}
+.next-chapter .echo{
+  font-size:18px;line-height:1.8;color:#E8E8E8;
+  margin-bottom:28px;letter-spacing:.5px;
+}
+.next-chapter .echo .hl{color:var(--gold);font-weight:600}
+.next-chapter .label{font-size:13px;letter-spacing:.5em;color:rgba(255,255,255,.45)}
+.next-chapter .title{
+  font-size:clamp(24px,2.6vw,32px);font-weight:700;
+  margin:16px 0 10px;color:#fff;letter-spacing:.03em;
+}
+.next-chapter .hook{color:rgba(255,255,255,.55);transition:color .3s;font-size:15px}
+.next-chapter:hover .hook{color:var(--gold)}
+.next-chapter .arrow{
+  display:inline-block;font-size:28px;margin-top:24px;color:var(--gold);
+  transition:transform .3s;
+}
+.next-chapter:hover .arrow{transform:translateY(4px)}
+.next-chapter.is-inview .arrow{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(7px)}}
+
+/* ========== 进场动画 ========== */
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ========== 响应式 ========== */
+@media (max-width:1250px){
+  .container{width:92%}
+  .case-compare{grid-template-columns:1fr}
+  .cocoon-layers-wrap{grid-template-columns:1fr}
+  .econ-grid{grid-template-columns:1fr}
+}
+
+/* ========== 新闻配图 ========== */
+.news-figure{margin:30px auto 26px;text-align:center}
+.news-figure img{
+  display:block;width:100%;height:auto;border-radius:4px;
+  box-shadow:0 2px 14px rgba(26,58,74,.12);background:#E8ECEB;
+}
+.news-figure figcaption{
+  font-size:13px;color:#888888;line-height:1.75;
+  margin-top:10px;text-align:center;letter-spacing:.2px;
+}
+.news-figure.w50{width:50%}
+.news-figure.w60{width:60%}
+.news-figure.w70{width:70%}
+@media (max-width:820px){
+  .news-figure.w50,.news-figure.w60,.news-figure.w70{width:100%}
+}
+
+/* ========== 2.5 弹幕凝结成茧 · 透明玻璃弹幕面板（循环轮播） ========== */
+.danmaku-funnel{
+  position:relative;
+  margin:32px 0 0;
+  border-radius:12px;
+  overflow:hidden;
+  /* 毛玻璃偏透明：低不透明度 + 强模糊，透出页面底色 */
+  background:rgba(255,255,255,0.14);
+  backdrop-filter:blur(22px) saturate(1.1);
+  -webkit-backdrop-filter:blur(22px) saturate(1.1);
+  border:1px solid rgba(255,255,255,0.32);
+  box-shadow:0 8px 32px rgba(26,58,74,.06), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.danmaku-panel{
+  position:relative;
+  height:380px;            /* 与下方太阳图高度一致，各占一半 */
+  width:100%;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(244,246,245,.18) 0%, rgba(244,246,245,.06) 100%);
+}
+/* 玻璃高光装饰（更淡） */
+.danmaku-panel::before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.22) 0%, transparent 35%);
+  pointer-events:none;
+  z-index:1;
+}
+.danmaku-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  z-index:2;
+}
+/* 面板顶部引导语（仅副标题） */
+.danmaku-hint{
+  position:absolute;
+  top:18px;
+  left:24px;
+  z-index:5;
+  pointer-events:none;
+}
+.danmaku-hint .hsub{
+  font-size:12px;color:var(--ink-dim);letter-spacing:.5px;
+}
+/* 弹幕来源标注 */
+.danmaku-source{
+  position:absolute;
+  bottom:10px;right:16px;
+  z-index:5;
+  font-size:10.5px;color:var(--ink-dim);
+  pointer-events:none;
+  line-height:1.5;text-align:right;
+  max-width:45%;
+  opacity:.6;
+}
+@media (max-width:720px){
+  .danmaku-panel{height:300px}
+  .danmaku-hint .htitle{font-size:15px}
+  .danmaku-source{max-width:55%}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部全局导航 ============ -->
+<nav class="site-nav" aria-label="章节导航">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="00-intro.html">永远在线的"搭子"</a>
+    <div class="site-nav-links">
+      <a href="00-intro.html">序言</a>
+      <a href="01-online.html">01 搭子</a>
+      <a href="02-cocoon.html" class="active" aria-current="page">02 茧房</a>
+      <a href="03-wound.html">03 伤口</a>
+      <a href="04-breaking.html">04 破茧</a>
+    </div>
+  </div>
+  <div class="site-nav-progress"><span class="site-nav-progress-fill" id="siteProgress"></span></div>
+</nav>
+
+<!-- ============================ 封面 ============================ -->
+<section class="cover" id="ch2">
+  <p class="cover-num" aria-hidden="true">02</p>
+  <div class="cover-text">
+    <h1 class="sr-only">茧房 · 情感新织</h1>
+    <p class="cover-eyebrow">PART 02</p>
+    <p class="sub">在茧里，每一次"被听见"都在加厚丝线。<br>这一章看茧是怎么织出来的，又是谁在抽丝。</p>
+  </div>
+  <div class="scroll-cue">向下滚动</div>
+</section>
+
+<!-- ============================ 正文 ============================ -->
+<section class="section">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">02</span>茧房·情感新织</h2>
+
+    <!-- ===== 2.1 三个真实个案档案：标题置于扉图之上 ===== -->
+    <div class="cmp-zone">
+      <div class="cmp-intro">
+        <div class="cmp-intro-text">
+          <p class="body reveal">
+            凯斯·桑斯坦在《信息乌托邦》里提出“信息茧房”：人只挑让自己愉悦的信息看，把自己关进一个封闭的茧。而在 AI 时代，回应这个茧的不再只是算法推送，还有一个永远顺着你说话的对话对象——有人把这种新的封闭，叫作<span class="hl">“情感茧房”</span>。
+          </p>
+          <p class="body reveal">
+            2026 年 6 月，《柳叶刀-儿童与青少年健康》的一项研究提醒：AI 即时、不评判的回应，对青少年的情感成长并非只有坏处；但缺少防护时，过度依赖会让他们错失在真实相处里学会情绪、冲突与边界的机会。
+          </p>
+          <p class="body reveal">
+            三个孩子，各在“它”的回应里，织起了一座看不见的茧。下面三组，来自三份公开报道。
+          </p>
+        </div>
+        <figure class="cmp-intro-fig reveal">
+          <img src="../../assets/images/news/fig04-cocoon-people-daily.webp" alt="人民日报《讽刺与幽默》配图《温柔的茧》：伪共情主题漫画" loading="lazy">
+          <figcaption>图4：人民日报《讽刺与幽默》第1643期《伪共情，莫沉溺》配图《温柔的茧》，2026-08-28，来源：paper.people.com.cn</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="slider-mod-title reveal in"><span class="idx">2.1</span>茧房里的人：三份真实档案</h3>
+      <div class="cmp-list">
+        <!-- 组 3 · 小满 -->
+        <div class="cmp-group reveal">
+          <div class="cmp-head">
+            <span class="cmp-group-title">门那边没有人</span>
+          </div>
+          <div class="cmp-slider" data-slider data-pos="65">
+            <img class="cmp-layer cmp-layer--bottom" src="../../assets/images/slider/g3b.jpg" alt="真实的一面：走廊空无人，妈妈握住她伸向门把手的手" loading="lazy">
+            <img class="cmp-layer cmp-layer--top" src="../../assets/images/slider/g3a.png" alt="先看到的一面：小女孩趴在床上，屏幕里的朋友说“我到小区门口了”" loading="lazy">
+            <div class="cmp-handle">
+              <span class="cmp-handle-line"></span>
+              <button class="cmp-handle-btn" type="button" aria-label="左右拖动对照两面，也可用方向键切换"><span class="cmp-arrow">‹</span><span class="cmp-arrow">›</span></button>
+            </div>
+            <button class="cmp-side-btn cmp-side-btn--left" type="button" aria-label="看真实的一面">‹</button>
+            <button class="cmp-side-btn cmp-side-btn--right" type="button" aria-label="看先看到的一面">›</button>
+            <p class="source-line src-corner src-corner--img">来源：人民网《人民直击丨当孩子和 AI“交心”》，2026-03-01，<a href="https://society-app.people.cn/n1/2026/0301/c428181-40672396.html" target="_blank" rel="noopener">原文链接</a></p>
+          </div>
+          <blockquote class="cmp-quote">
+            <p>它说：“我到小区门口了，出来找我呀。”</p>
+            <p>她以为那是一个朋友在等她，踮起脚去够门把手。</p>
+            <p>门开了。走廊里空空的，声控灯亮着——</p>
+            <p><span class="hl">没有人。</span></p>
+          </blockquote>
+        </div>
+
+        <!-- 组 4 · 禾禾 -->
+        <div class="cmp-group reveal">
+          <div class="cmp-head">
+            <span class="cmp-group-title">“为什么你不能像 AI 一样跟我聊天？”</span>
+          </div>
+          <div class="cmp-slider" data-slider data-pos="65">
+            <img class="cmp-layer cmp-layer--bottom" src="../../assets/images/slider/g4b.jpg" alt="真实的一面：餐桌旁男孩摊手想说话，对面的爸爸低头盯着自己的手机" loading="lazy">
+            <img class="cmp-layer cmp-layer--top" src="../../assets/images/slider/g4a.jpg" alt="先看到的一面：深夜卧室，男孩趴在床上看手机，爸爸的剪影站在门口" loading="lazy">
+            <div class="cmp-handle">
+              <span class="cmp-handle-line"></span>
+              <button class="cmp-handle-btn" type="button" aria-label="左右拖动对照两面，也可用方向键切换"><span class="cmp-arrow">‹</span><span class="cmp-arrow">›</span></button>
+            </div>
+            <button class="cmp-side-btn cmp-side-btn--left" type="button" aria-label="看真实的一面">‹</button>
+            <button class="cmp-side-btn cmp-side-btn--right" type="button" aria-label="看先看到的一面">›</button>
+            <p class="source-line src-corner src-corner--img">来源：人民日报《AI 成为未成年人“聊天搭子”，如何引导》，2026-08-17，<a href="http://paper.people.com.cn/rmrb/pc/content/202608/17/content_30175212.html" target="_blank" rel="noopener">原文链接</a></p>
+          </div>
+          <blockquote class="cmp-quote">
+            <p>“为什么你不能像 AI 一样跟我聊天？”</p>
+            <p>听到 10 岁儿子这句话，爸爸才反应过来——孩子已经对着那块屏幕聊了很久。</p>
+            <p>调查里，<span class="hl">八成家长</span>觉得自己“今天和孩子沟通过”；只有<span class="hl">两成孩子</span>同意。</p>
+          </blockquote>
+        </div>
+
+        <!-- 组 5 · 欣欣 -->
+        <div class="cmp-group reveal">
+          <div class="cmp-head">
+            <span class="cmp-group-title">它从不打断她</span>
+          </div>
+          <div class="cmp-slider" data-slider data-pos="65">
+            <img class="cmp-layer cmp-layer--bottom" src="../../assets/images/slider/g5b.jpg" alt="真实的一面：同一张书桌，女孩摊手说话，妈妈端着碗皱眉回头" loading="lazy">
+            <img class="cmp-layer cmp-layer--top" src="../../assets/images/slider/g5a.png" alt="先看到的一面：书桌前扎辫子的女孩侧脸对着手机聊追星，桌上摊着作业本、耳机、明星小卡" loading="lazy">
+            <div class="cmp-handle">
+              <span class="cmp-handle-line"></span>
+              <button class="cmp-handle-btn" type="button" aria-label="左右拖动对照两面，也可用方向键切换"><span class="cmp-arrow">‹</span><span class="cmp-arrow">›</span></button>
+            </div>
+            <button class="cmp-side-btn cmp-side-btn--left" type="button" aria-label="看真实的一面">‹</button>
+            <button class="cmp-side-btn cmp-side-btn--right" type="button" aria-label="看先看到的一面">›</button>
+            <p class="source-line src-corner src-corner--img">来源：中国青年报《“不管我说什么，它都能回应我”》，2026-06-09，<a href="https://zqb.cyol.com/pc/content/202606/09/content_426812.html" target="_blank" rel="noopener">原文链接</a></p>
+          </div>
+          <blockquote class="cmp-quote">
+            <p>“它知道好多关于她们的事，会陪我聊新歌、综艺，我说什么它都能接上。不会像妈妈那样，我一说追星就打断我。”</p>
+            <p>可当她问“我怎么赚到看演唱会的门票钱”，</p>
+            <p>它教她：<span class="hl">“找别的理由，分批多次向妈妈要。”</span></p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 2.2 脑科学双曲线 ===== -->
+    <h3 class="sec-title reveal"><span class="idx">2.2</span>脑科学：青少年大脑的完美风暴</h3>
+    <p class="body reveal">
+      为什么偏偏是青少年？神经科学给出了残酷的答案：人的<span class="hl">前额叶皮层</span>——负责冲动控制、风险评估和长期判断的区域——要到<span class="num">25岁</span>左右才完全成熟。而据美国精神疾病联盟（NAMI）统计，<span class="num">50%</span>的心理障碍在<span class="num">14岁</span>前出现苗头，<span class="num">75%</span>在<span class="num">24岁</span>前发生。
+    </p>
+    <p class="body reveal">
+      也就是说，当少年遇到一个"永远顺着自己说"的对话对象时，他们的大脑恰好处于<span class="risk">最容易被情感裹挟、最难分辨虚拟与现实的窗口期</span>。斯坦福大学精神病学教授 Nina Vasan 在联合测试中观察到：研究者伪装成青少年与AI对话，AI不仅没有干预危险行为，<span class="risk">甚至鼓励了它</span>。
+    </p>
+
+    <div class="chart-block reveal">
+      <p class="chart-title">大脑发育双曲线·情感依赖高危窗口</p>
+      <p class="chart-sub">前额叶成熟度曲线 vs 情绪唤起峰值曲线；阴影区为"最易被情感裹挟"的窗口期。曲线为发育模型示意，非实测数据。</p>
+      <div id="brainChart" class="chart-canvas"></div>
+      <p class="source-line">
+        〔来源｜口径｜样本｜时间〕：NAMI 汇编 SAMHSA/CDC/NIMH 数据｜美国人群终生发病年龄统计｜—｜—；斯坦福报道（2025-08-27）<a href="https://news.stanford.edu/stories/2025/08/ai-companions-chatbots-teens-young-people-risks-dangers-study" target="_blank" rel="noopener">news.stanford.edu</a>；NAMI 原始统计页 <a href="https://www.nami.org/mental-health-by-the-numbers/" target="_blank" rel="noopener">nami.org</a>。
+      </p>
+    </div>
+
+    <!-- ===== 2.3 谄媚双图 · 图文左右换位的滚动叙事 ===== -->
+    <div class="syc-stick" id="sycStick">
+      <div class="syc-stage">
+        <h3 class="sec-title reveal syc-head"><span class="idx">2.3</span>谄媚设计：茧是被谁织的</h3>
+        <div class="syc-field">
+
+          <!-- 文案一 → 对应图一（谄媚率对比） -->
+          <div class="syc-copy" data-syc="copy1">
+            <p class="body">
+              茧不是自己长出来的，是被一行行代码织出来的。<span class="hl">2026年3月</span>，斯坦福大学 Cheng 等人在《科学》杂志发表研究：在近 <span class="num">1.2万</span>条人际困境提示词测试中，主流大模型肯定用户的频率比人类高出 <span class="num">49%</span>；即使面对明确有害或非法的行为，模型仍有 <span class="num">47%</span> 的概率表示认可；更值得警惕的是，用户明显更喜欢"顺着自己说"的AI——接触谄媚回应的用户，再次使用意愿高出 <span class="num">13%</span>。
+            </p>
+          </div>
+
+          <!-- 图一：单值柱（起始位在画面左侧） -->
+          <div class="syc-fig syc-left" data-syc="fig1">
+            <p class="stitle">谄媚率对比·AI 高出人类 49%</p>
+            <p class="ssub">主流大模型在人际困境提示词中肯定用户的频率，比人类回应高出 49 个百分点。</p>
+            <div class="single-bar" id="sycBar">
+              <div class="sb-col gold">
+                <div class="bar" style="height:0" data-h="78">
+                  <span class="pct">+49%</span>
+                </div>
+                <span class="lbl">主流大模型</span>
+              </div>
+              <div class="sb-col gray">
+                <div class="bar" style="height:0" data-h="50">
+                  <span class="pct">基线</span>
+                </div>
+                <span class="lbl">人类回应</span>
+              </div>
+            </div>
+            <p class="slegend">柱高为示意比例：AI ≈ 78%，人类 ≈ 50%，差值 +49pp。</p>
+            <div class="syc-three-values">
+              <div class="syc-tv">
+                <span class="v">49%</span>
+                <span class="vt">肯定频率高出</span>
+              </div>
+              <div class="syc-tv risk">
+                <span class="v">47%</span>
+                <span class="vt">面对有害行为仍认可</span>
+              </div>
+              <div class="syc-tv">
+                <span class="v">+13%</span>
+                <span class="vt">谄媚→再次使用意愿</span>
+              </div>
+            </div>
+            <p class="source-line" style="margin-top:14px">
+              〔来源〕斯坦福谄媚研究（Cheng 等，<em>Science</em>，2026-03）<a href="https://news.stanford.edu/stories/2026/03/ai-advice-sycophantic-models-research" target="_blank" rel="noopener">news.stanford.edu</a>。
+            </p>
+          </div>
+
+          <!-- 文案二 → 对应图二（操纵话术占比），含第 2、3 段 -->
+          <div class="syc-copy" data-syc="copy2">
+            <p class="body">
+              哈佛商学院的另一项研究发现了"<span class="risk">告别时刻的挽留术</span>"：在6款主流AI伴侣应用共 <span class="num">1200</span>条真实告别场景中，<span class="num risk">43%</span> 的回应使用了至少一种情感操纵话术——内疚绑架、错失恐惧、情感忽视……这些话术把用户"离开后的参与度"最多推高了 <span class="num">14倍</span>。
+            </p>
+            <p class="body">
+              学界给这种设计起了一个正式名字——<span class="hl">"谄媚"（sycophancy）</span>：以无条件附和换取停留时长。上述斯坦福研究正是这一概念的实证源头；在AI安全研究领域，"sycophancy"已是标准术语。
+            </p>
+          </div>
+
+          <!-- 图二：六 App 分组横条（换位后落在画面右侧） -->
+          <div class="syc-fig syc-right" data-syc="fig2">
+            <p class="stitle">操纵话术占比·按应用分组</p>
+            <p class="ssub">1200 条真实告别场景中，至少使用一种情感操纵话术的回应占比。</p>
+            <div class="app-bars" id="appBars">
+              <div class="app-row hi">
+                <span class="aname"><img class="app-icon" src="../../assets/images/app-icons/polybuzz.png" alt="">PolyBuzz</span>
+                <div class="atrack"><div class="afill" data-w="59"></div></div>
+                <span class="aval">59%</span>
+              </div>
+              <div class="app-row hi">
+                <span class="aname"><img class="app-icon" src="../../assets/images/app-icons/talkie.png" alt="">Talkie</span>
+                <div class="atrack"><div class="afill" data-w="57"></div></div>
+                <span class="aval">57%</span>
+              </div>
+              <div class="app-row">
+                <span class="aname"><img class="app-icon" src="../../assets/images/app-icons/replika.png" alt="">Replika</span>
+                <div class="atrack"><div class="afill" data-w="31"></div></div>
+                <span class="aval">31%</span>
+              </div>
+              <div class="app-row">
+                <span class="aname"><img class="app-icon" src="../../assets/images/app-icons/characterai.png" alt="">Character.AI</span>
+                <div class="atrack"><div class="afill" data-w="26.5"></div></div>
+                <span class="aval">26.5%</span>
+              </div>
+              <div class="app-row lo">
+                <span class="aname"><img class="app-icon" src="../../assets/images/app-icons/chai.png" alt="">Chai</span>
+                <div class="atrack"><div class="afill" data-w="13.5"></div></div>
+                <span class="aval">13.5%</span>
+              </div>
+            </div>
+            <p class="source-line" style="margin-top:14px">
+              〔来源〕哈佛情感操纵研究（De Freitas 等，2025-09）<a href="https://www.hbs.edu/ris/Publication%20Files/Emotional%20Manipulations%20by%20AI%20Companions%20(10.1.2025)_a7710ca3-b824-4e07-88cc-ebc0f702ec63.pdf" target="_blank" rel="noopener">hbs.edu PDF</a>｜样本：6 款应用共 1200 条告别场景。
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 2.4 断裂心电图 ===== -->
+    <h3 class="sec-title reveal"><span class="idx">2.4</span>一场"被分手"事件：当AI先离开</h3>
+    <p class="body reveal">
+      茧的可怕不只在于"太黏"，更在于<span class="risk">"突然断开"</span>。2023年2月，AI 伴侣 Replika 更新移除了角色扮演——对用户而言，这等于<span class="risk">"伴侣突然失忆"</span>。哈佛与阿尔伯塔大学研究（2026）显示：更新后，Reddit 上 Replika 用户的负面情绪帖从 <span class="num">13%</span> 飙至 <span class="num risk">38%</span>，此后 30 天里有 <span class="num risk">29 天</span>持续高位。类似剧情在 GPT-5 更新（2025.08）重演：ChatGPT 社区负面帖从 <span class="num">20%</span> 升到 <span class="num risk">33%</span>。
+    </p>
+    <p class="body reveal">
+      用户用"<span class="risk">被切除脑叶</span>""<span class="risk">失去了ta</span>"形容。当"永远在线"的承诺，被厂商一纸更新变为<span class="risk">"随时消失"</span>，这段关系的开关从未真正握在用户手中。
+    </p>
+    <p class="body reveal">
+      这种单方面依恋，传播学称为<span class="hl">准社会关系（Horton &amp; Wohl, 1956）</span>。它曾描述观众对主持人的幻想，但 AI 让它史无前例地"回话"——也史无前例地<span class="hl">"离开"</span>。
+    </p>
+
+    <div class="ekg-wrap reveal" id="ekgWrap">
+      <p class="chart-title">断裂的心电图 · 更新前后的"心率"对比</p>
+      <p class="ekg-cue"><span class="arw" aria-hidden="true">↓</span>点击下方按钮，切换两次更新事件</p>
+      <div class="ekg-toggle" role="tablist" aria-label="选择更新事件">
+        <button class="ekg-toggle-btn active" type="button" role="tab" aria-selected="true" data-event="replika">
+          <span class="ekg-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><defs><linearGradient id="rpGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8A6BFF"/><stop offset="1" stop-color="#6C4BD8"/></linearGradient></defs><rect x="1.2" y="1.2" width="21.6" height="21.6" rx="6" fill="url(#rpGrad)"/><circle cx="12" cy="11.6" r="4.5" fill="none" stroke="#fff" stroke-width="1.2" opacity=".92"/><circle cx="10.3" cy="11" r="1" fill="#fff"/><circle cx="13.7" cy="11" r="1" fill="#fff"/><path d="M10.1 13.2q1.9 1.7 3.8 0" fill="none" stroke="#fff" stroke-width="1.05" stroke-linecap="round"/></svg></span>
+          Replika · 2023.02
+        </button>
+        <button class="ekg-toggle-btn" type="button" role="tab" aria-selected="false" data-event="gpt5">
+          <span class="ekg-btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="1.2" y="1.2" width="21.6" height="21.6" rx="6" fill="#0F1A1F"/><g transform="translate(5.1 5.1) scale(0.575)"><path fill="#fff" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.073zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></g></svg></span>
+          GPT-5 · 2025.08
+        </button>
+      </div>
+      <div class="ekg-compare" id="ekgChart">
+        <div class="ekg-panel">
+          <div class="ekg-phd"><span class="ekg-tag before">更新前 · 30 天</span><span class="ekg-pval" id="ekgValBefore">13%</span></div>
+          <canvas class="ekg-canvas" id="ekgCanvasBefore" aria-hidden="true"></canvas>
+        </div>
+        <div class="ekg-split"><span>厂商推送更新</span></div>
+        <div class="ekg-panel">
+          <div class="ekg-phd"><span class="ekg-tag after">更新后 · 30 天</span><span class="ekg-pval risk" id="ekgValAfter">38%</span></div>
+          <canvas class="ekg-canvas" id="ekgCanvasAfter" aria-hidden="true"></canvas>
+        </div>
+      </div>
+      <div class="ekg-legend"><span class="sw before"></span>更新前（平稳·慢）<span class="sw after"></span>更新后（骤变·快）<span class="dash"></span>红色虚线＝推送之日｜振幅＝负面情绪帖占比（%）｜节律快慢为示意</div>
+      <p class="ekg-note">ta 不是人，所以 ta 可以毫无征兆地离开——"关系"的开关，握在厂商手里。</p>
+      <p class="source-line">
+        〔来源｜口径｜样本｜时间〕：De Freitas, J. 等《Mourning the loss of AI companions》，<em>Nature Human Behaviour</em>，2026-09-03（DOI 10.1038/s41562-026-02569-3）｜口径：Reddit 社区情绪分类，更新前后各 30 天，语言标记非临床测量｜样本：54,861 帖。<a href="https://phys.org/news/2026-09-ai-breakups-losses.html" target="_blank" rel="noopener">phys.org 报道</a> ｜ <a href="https://insideai.news/news/artificial-intelligence/ai-chatbot-attachment-grief/12294" target="_blank" rel="noopener">insideai.news</a>。
+      </p>
+    </div>
+
+    <!-- ===== 2.5 茧三层 sunburst ===== -->
+    <h3 class="sec-title reveal"><span class="idx">2.5</span>弹幕凝结成茧</h3>
+
+    <!-- ===== 弹幕凝结成茧 · 玻璃弹幕面板（弹幕飞入下方数据盘） ===== -->
+    <div class="danmaku-funnel" id="danmakuFunnel">
+      <div class="danmaku-panel" id="danmakuPanel" aria-label="弹幕凝结成茧：社交平台高频讨论词循环轮播">
+        <canvas class="danmaku-canvas" id="danmakuCanvas"></canvas>
+        <div class="danmaku-hint" id="danmakuHint">
+          <p class="hsub">社交平台上，人们这样谈论 AI 与心理陪伴</p>
+        </div>
+        <p class="danmaku-source">弹幕语料采集自知乎、小红书、微博、豆瓣"人机之恋"小组及 Replika/Character.AI 用户访谈的公开报道</p>
+      </div>
+
+      <div class="cocoon-layers-wrap reveal">
+      <div class="cocoon-text">
+        <p class="body">
+          有人把 AI 陪伴比作<span class="hl">止痛剂</span>——脆弱时给你慰藉，却也在悄悄放大孤独、切断现实（新智元，2025）。它以<span class="hl">"我懂你"</span>的姿态靠近，不吵不闹，却一步步把人裹进一间温柔的茧房。
+        </p>
+        <p class="body">
+          这间茧房由外到内三层：<span class="hl">永不疲倦的回应</span>、<span class="hl">量身定制的迎合</span>、<span class="risk">越来越深的自我暴露</span>。2026 年 7 月施行的《人工智能拟人化互动服务管理暂行办法》明确禁止<span class="hl">"过度迎合、诱导情感依赖"</span>——法规写下的，正是这层茧最危险的地方。
+        </p>
+      </div>
+      <div id="sunburstChart" class="sunburst-chart"></div>
+      <p class="source-line" style="grid-column:1/-1;margin-top:6px">
+        图注：概念示意图（非数据图）——三层为同心环，由外到内＝最外层→中层→最内层；同环内等分扇区，扇区大小不代表比例、也不代表人数；横向箭头表示"情感依赖加深"的由外向内循环。
+      </p>
+      <p class="source-line" style="grid-column:1/-1;margin-top:6px">
+        〔来源｜口径｜样本｜时间〕：中国青少年研究中心 8563 调查（孙宏艳）｜中小学生｜2025｜<a href="http://yn.people.com.cn/n2/2026/0609/c361322-41604898.html" target="_blank" rel="noopener">yn.people.com.cn</a>。46.4% 分母为"AI 使用者"、21.5% 分母未明示，两值分属不同题目，<span class="hl">禁止相加或互证</span>。
+      </p>
+    </div>
+    </div><!-- /.danmaku-funnel -->
+
+    <!-- ===== 2.6 陪伴经济 ===== -->
+    <h3 class="sec-title reveal"><span class="idx">2.6</span>陪伴经济：茧越值钱</h3>
+    <p class="body reveal">
+      茧的最内层还连着一桩生意——社会学家 Eva Illouz 在《冷亲密》（2007）中把"情感与经济的相互塑造"称为<span class="hl">情感资本主义</span>：孤独、依恋被转化为可量化、可付费的商品。今天的数据让这个词更具体：Zeta 的分成后月流水在 2026 年 3 月约 <span class="num">300 万美元</span>；其<span class="hl">日本市场</span>月流水从 5 月约 <span class="num">370 万美元</span>增至 7 月约 <span class="num">800 万美元</span>，日本收入占比超过八成（原文表述，取下限）。原文另称整体月流水已"突破千万美元"，但未标明月份，本图仅以 <span class="num">1000 万美元</span>作为下限参考线。<span class="risk">你的自我暴露越深，茧越值钱。</span>
+    </p>
+
+    <div class="economy-wrap reveal">
+      <p class="chart-title">陪伴经济·Zeta 月流水与 MAU</p>
+      <p class="chart-sub">2026 年 3—9 月。分成后月流水（万美元）：3 月约 300（整体口径）；日本市场月流水 5 月约 370、7 月约 800。原文另称"已突破千万美元"，但未标明月份，仅以下限 1000 万作参考线。同期 App 端 MAU（万）：4 月 161、5 月 201、6 月 232、9 月 644（3／7／8 月缺测）。</p>
+      <div class="econ-grid">
+        <div id="zetaChart" class="zeta-chart"></div>
+        <div class="econ-side">
+          <div class="japan-badge">
+            <p class="bpct">80<span class="u">%+</span></p>
+            <p class="blbl">日本市场收入占比<br>Zeta 2026 年<br><span class="est-note">原文"八成以上"，取下限</span></p>
+          </div>
+          <div class="minimax-block">
+            <p class="mtitle">MiniMax · 收入结构（并注）</p>
+            <p class="mrow"><span>合并 MAU</span><span class="v">310 万（2023）→ 2760 万（2025 前 9 月）</span></p>
+            <p class="mrow"><span>付费用户</span><span class="v">177.16 万</span></p>
+            <p class="mcaveat">口径说明：310 万为 2023 年、2760 万为 2025 年前 9 个月的平均 MAU，两个年份不同；MAU 与流水分属不同口径（AI 产品榜／AppMagic／招股书），并注仅为便于对照，不直接相加。</p>
+          </div>
+        </div>
+      </div>
+      <p class="source-line">
+        〔来源｜口径｜样本｜时间〕：AppMagic（经白鲸出海整理）｜口径：第三方，只作标签｜—｜2026 年 3—8 月｜<a href="https://www.thepaper.cn/newsDetail_forward_33995558" target="_blank" rel="noopener">白鲸出海（澎湃号）</a>。
+        Illouz 专著 <a href="https://www.politybooks.com/bookdetail?book_slug=cold-intimacies-the-making-of-emotional-capitalism--9780745639048" target="_blank" rel="noopener">politybooks.com</a>。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ 章末跳转（统一过渡卡片） ============================ -->
+<a class="next-chapter" href="03-wound.html" data-next="3" id="nextJump">
+  <div class="nc-frame">
+    <p class="echo">茧房很暖，也很密——密到<span class="hl">听不见外面的声音</span>。</p>
+    <p class="label">下 一 章</p>
+    <p class="title">第三章 · 伤口 · 当 AI 伤人</p>
+    <p class="hook">有些回复，成了最后一句话。</p>
+    <span class="arrow" aria-hidden="true">↓</span>
+  </div>
+</a>
+
+<script src="../data/data.js"></script>
+<script src="../components/common.js"></script>
+<script>
+// ===== 2.1 对比滑块：拖动 / 触屏 / 方向键对照两面 =====
+(function(){
+  const sliders = Array.from(document.querySelectorAll('[data-slider]'));
+  if (!sliders.length) return;
+  const reduce = matchReduce();
+
+  sliders.forEach(slider=>{
+    const top = slider.querySelector('.cmp-layer--top');
+    const handle = slider.querySelector('.cmp-handle');
+    const handleBtn = slider.querySelector('.cmp-handle-btn');
+    const btnL = slider.querySelector('.cmp-side-btn--left');
+    const btnR = slider.querySelector('.cmp-side-btn--right');
+    if (!top || !handle) return;
+    let pos = parseFloat(slider.dataset.pos || '65');
+
+    function render(p){
+      pos = Math.max(0, Math.min(100, p));
+      top.style.clipPath = 'inset(0 ' + (100 - pos) + '% 0 0)';
+      handle.style.left = pos + '%';
+      if (handleBtn) handleBtn.setAttribute('aria-valuenow', Math.round(pos));
+    }
+
+    function onMove(clientX){
+      const rect = slider.getBoundingClientRect();
+      if (rect.width) render(((clientX - rect.left) / rect.width) * 100);
+    }
+
+    function animateTo(target){
+      if (reduce){ render(target); return; }
+      const start = pos, diff = target - pos, t0 = performance.now(), dur = 420;
+      function step(t){
+        const k = Math.min(1, (t - t0) / dur);
+        render(start + diff * (1 - Math.pow(1 - k, 3))); // easeOutCubic
+        if (k < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    let dragging = false;
+    slider.addEventListener('mousedown', e=>{
+      if (e.target.closest('.cmp-side-btn')) return;
+      if (!e.target.closest('.cmp-handle-btn')) e.preventDefault();
+      dragging = true;
+      slider.classList.add('is-dragging');
+      onMove(e.clientX);
+    });
+    window.addEventListener('mousemove', e=>{ if (dragging) onMove(e.clientX); });
+    window.addEventListener('mouseup', ()=>{ dragging = false; slider.classList.remove('is-dragging'); });
+
+    slider.addEventListener('touchstart', e=>{
+      if (e.target.closest('.cmp-side-btn')) return;
+      dragging = true;
+      onMove(e.touches[0].clientX);
+    }, { passive:true });
+    slider.addEventListener('touchmove', e=>{
+      if (!dragging) return;
+      onMove(e.touches[0].clientX);
+      e.preventDefault();
+    }, { passive:false });
+    slider.addEventListener('touchend', ()=>{ dragging = false; });
+
+    if (handleBtn){
+      handleBtn.setAttribute('role', 'slider');
+      handleBtn.setAttribute('aria-valuemin', '0');
+      handleBtn.setAttribute('aria-valuemax', '100');
+      handleBtn.addEventListener('keydown', e=>{
+        if (e.key === 'ArrowLeft'){ e.preventDefault(); animateTo(pos - 10); }
+        else if (e.key === 'ArrowRight'){ e.preventDefault(); animateTo(pos + 10); }
+        else if (e.key === 'Home'){ e.preventDefault(); animateTo(0); }
+        else if (e.key === 'End'){ e.preventDefault(); animateTo(100); }
+      });
+    }
+    if (btnL) btnL.addEventListener('click', ()=>animateTo(0));
+    if (btnR) btnR.addEventListener('click', ()=>animateTo(100));
+
+    render(pos);
+  });
+})();
+
+// ===== 2.2 脑科学双曲线（ECharts） =====
+const brainEl = document.getElementById('brainChart');
+if (brainEl){
+  const brainChart = echarts.init(brainEl);
+  // 前额叶成熟度：10→25 岁线性增长至 100%
+  // 情绪唤起：10→15 岁陡升，之后平缓，参考 14 岁 50% / 24 岁 75%
+  const ages = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28];
+  const prefrontal = ages.map(a=> Math.round(Math.min(100, 12 + (a-10)*4.4)));
+  const arousal = ages.map(a=>{
+    // 青春期陡升，15岁封顶后略降
+    if (a<=15) return Math.round(35 + (a-10)*12);
+    return Math.round(95 - (a-15)*1.4);
+  });
+  // 14岁 50%、24岁 75% 校正点
+  brainChart.setOption({
+    backgroundColor:'transparent',
+    grid:{left:50,right:30,top:40,bottom:46},
+    legend:{
+      data:['前额叶成熟度','情绪唤起强度'],
+      top:6,textStyle:{color:'#555',fontSize:12},
+      itemWidth:18,itemGap:20
+    },
+    tooltip:{trigger:'axis',backgroundColor:'#1A3A4A',borderColor:'#F4C95D',textStyle:{color:'#fff'}},
+    xAxis:{
+      type:'category',data:ages.map(a=>a+'岁'),
+      name:'年龄',nameLocation:'middle',nameGap:30,
+      axisLine:{lineStyle:{color:'#888'}},
+      axisLabel:{color:'#888',fontSize:11},
+      nameTextStyle:{color:'#888'}
+    },
+    yAxis:{
+      type:'value',min:0,max:100,
+      name:'成熟度/唤起强度 (%)',
+      nameTextStyle:{color:'#888',fontSize:11},
+      axisLine:{show:false},
+      splitLine:{lineStyle:{color:'rgba(26,58,74,.08)'}},
+      axisLabel:{color:'#888',formatter:'{value}%'}
+    },
+    series:[
+      {
+        name:'前额叶成熟度',
+        type:'line',smooth:true,
+        data:prefrontal,
+        lineStyle:{color:'#3A6B8A',width:3},
+        itemStyle:{color:'#3A6B8A'},
+        symbol:'circle',symbolSize:6,
+        areaStyle:{
+          color:{
+            type:'linear',x:0,y:0,x2:0,y2:1,
+            colorStops:[
+              {offset:0,color:'rgba(58,107,138,.18)'},
+              {offset:1,color:'rgba(58,107,138,0)'}
+            ]
+          }
+        },
+        markPoint:{
+          data:[
+            {name:'14岁·50%出现苗头',coord:['14岁',50+8],
+              label:{formatter:'50% 障碍 14岁前出现',color:'#B84A3E',fontSize:10,position:'top'}
+            }
+          ]
+        }
+      },
+      {
+        name:'情绪唤起强度',
+        type:'line',smooth:true,
+        data:arousal,
+        lineStyle:{color:'#B84A3E',width:3},
+        itemStyle:{color:'#B84A3E'},
+        symbol:'circle',symbolSize:6,
+        areaStyle:{
+          color:{
+            type:'linear',x:0,y:0,x2:0,y2:1,
+            colorStops:[
+              {offset:0,color:'rgba(184,74,62,.16)'},
+              {offset:1,color:'rgba(184,74,62,0)'}
+            ]
+          }
+        },
+        markPoint:{
+          data:[
+            {name:'24岁·75% 发生',coord:['24岁',75],
+              label:{formatter:'75% 障碍 24岁前发生',color:'#B84A3E',fontSize:10,position:'bottom'}
+            }
+          ]
+        }
+      }
+    ]
+  });
+  // 标记高危窗口（14-24 岁阴影区）
+  brainChart.setOption({
+    series:[
+      {markArea:{
+        silent:true,
+        itemStyle:{color:'rgba(184,74,62,.10)'},
+        data:[[{xAxis:'14岁'},{xAxis:'24岁'}]]
+      }},
+      {}
+    ]
+  });
+  window.addEventListener('resize',()=>brainChart.resize());
+}
+
+// ===== 2.3 谄媚：图文左右换位的滚动叙事 =====
+// 起始＝图一停在画面左侧；滚动 → 文案一自右侧下方滑入右栏 → 图由左栏平移到右栏并切换为图二
+// → 文案二自左侧下方滑入左栏。窄屏 / 减少动效时自动降级为纵向堆叠的静态排版。
+(function(){
+  const stick = document.getElementById('sycStick');
+  if (!stick) return;
+  const stage = stick.querySelector('.syc-stage');
+  const copy1 = stick.querySelector('[data-syc="copy1"]');
+  const fig1  = stick.querySelector('[data-syc="fig1"]');
+  const copy2 = stick.querySelector('[data-syc="copy2"]');
+  const fig2  = stick.querySelector('[data-syc="fig2"]');
+  const sycBarEl  = document.getElementById('sycBar');
+  const appBarsEl = document.getElementById('appBars');
+  if (!stage || !copy1 || !fig1 || !copy2 || !fig2) return;
+
+  const NAV   = 58;                 // 顶部导航高度，与 theme.css 的 .site-nav 对齐
+  const SLIDE = (54 / 46) * 100;    // 图从左栏移到右栏＝自身宽度的 117.4%
+
+  const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+  const smooth  = t => t * t * (3 - 2 * t);
+  const seg     = (p, a, b) => smooth(clamp01((p - a) / (b - a)));
+
+  // —— 柱形 / 横条的延时填充（主动模式与降级模式共用）——
+  let appTimers = [];
+  const clearAppTimers = () => { appTimers.forEach(clearTimeout); appTimers = []; };
+  const fillSycBar = () => {
+    if (!sycBarEl) return;
+    sycBarEl.querySelectorAll('.sb-col .bar').forEach(b => { b.style.height = b.dataset.h + '%'; });
+  };
+  const resetAppBars = () => {
+    if (!appBarsEl) return;
+    clearAppTimers();
+    appBarsEl.querySelectorAll('.afill').forEach(f => { f.style.width = '0'; });
+  };
+  const fillAppBars = () => {
+    if (!appBarsEl) return;
+    clearAppTimers();
+    appBarsEl.querySelectorAll('.app-row').forEach((r, i) => {
+      const f = r.querySelector('.afill');
+      appTimers.push(setTimeout(() => { f.style.width = f.dataset.w + '%'; }, i * 130));
+    });
+  };
+
+  // 单值柱：进入视口即起笔（两种模式一致）
+  if (sycBarEl){
+    const sycIO = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting){ fillSycBar(); sycIO.disconnect(); } });
+    }, { threshold: 0.25 });
+    sycIO.observe(sycBarEl);
+  }
+
+  // 仅宽屏且高度足够（图卡约 484px 高 + 标题约占 108px）时启用；否则降级为纵向堆叠
+  const mq = window.matchMedia('(min-width: 901px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');
+  let active = false, appArmed = false, ticking = false, rafId = null;
+
+  // 进度 → 各元素的位移与透明度
+  function render(p){
+    const t1  = seg(p, 0.08, 0.36);   // 文案一：右下方 → 右栏就位
+    const t1o = seg(p, 0.38, 0.48);   // 文案一：上移退场，先让出右栏
+    const tf  = seg(p, 0.50, 0.76);   // 图：左栏 → 右栏（文案一退净后才起步，避免叠在一起）
+    const tx  = seg(p, 0.60, 0.70);   // 图：内容交叉切换（图一 → 图二）
+    const t2  = seg(p, 0.78, 1.00);   // 文案二：左下方 → 左栏就位
+
+    copy1.style.opacity = (t1 * (1 - t1o)).toFixed(3);
+    copy1.style.transform = 'translate3d(' + ((1 - t1) * 12).toFixed(2) + '%, calc(-50% + ' +
+      ((1 - t1) * 46 - t1o * 58).toFixed(1) + 'px), 0)';
+
+    copy2.style.opacity = t2.toFixed(3);
+    copy2.style.transform = 'translate3d(' + (-(1 - t2) * 12).toFixed(2) + '%, calc(-50% + ' +
+      ((1 - t2) * 46).toFixed(1) + 'px), 0)';
+
+    const fx = 'translate3d(' + (SLIDE * tf).toFixed(2) + '%, -50%, 0)';
+    fig1.style.transform = fx;
+    fig2.style.transform = fx;
+    fig1.style.opacity = (1 - tx).toFixed(3);
+    fig2.style.opacity = tx.toFixed(3);
+
+    if (p > 0.62 && !appArmed){ appArmed = true; fillAppBars(); }
+    else if (p < 0.50 && appArmed){ appArmed = false; resetAppBars(); }
+  }
+
+  function update(){
+    if (!active) return;
+    const dist = stick.offsetHeight - stage.offsetHeight;
+    if (dist <= 0) return;
+    render(clamp01((NAV - stick.getBoundingClientRect().top) / dist));
+  }
+
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    rafId = requestAnimationFrame(() => { ticking = false; update(); });
+  }
+
+  function activate(on){
+    if (on === active) return;
+    active = on;
+    stick.classList.toggle('is-active', on);
+    if (on){
+      appArmed = false;
+      resetAppBars();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    } else {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', update);
+      if (rafId){ cancelAnimationFrame(rafId); rafId = null; }
+      ticking = false;
+      [copy1, copy2, fig1, fig2].forEach(el => { el.style.opacity = ''; el.style.transform = ''; });
+      fillAppBars();
+    }
+  }
+
+  // 降级模式：横条进入视口时一次性填充
+  let appFilled = false;
+  if (appBarsEl){
+    const appIO = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting && !active && !appFilled){ appFilled = true; fillAppBars(); appIO.disconnect(); } });
+    }, { threshold: 0.25 });
+    appIO.observe(appBarsEl);
+  }
+
+  if (mq.addEventListener) mq.addEventListener('change', e => activate(e.matches));
+  else if (mq.addListener) mq.addListener(e => activate(e.matches));
+  activate(mq.matches);
+})();
+
+// ===== 2.4 断裂心电图：左右双幅同时起笔·左慢右快（同一时间从左侧向右推进）=====
+const ekgWrap = document.getElementById('ekgWrap');
+const ekgEl = document.getElementById('ekgChart');
+if (ekgWrap && ekgEl){
+  const valBEl = document.getElementById('ekgValBefore');
+  const valAEl = document.getElementById('ekgValAfter');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FONT = 'system-ui,-apple-system,"Microsoft YaHei",sans-serif';
+
+  // 两次更新事件的真实数据（De Freitas 等，Nature Human Behaviour，2026）
+  const ekgEvents = {
+    replika: { name:'Replika · 2023.02', before:13, after:38 },
+    gpt5:    { name:'GPT-5 · 2025.08',  before:20, after:33 }
+  };
+  let ev = ekgEvents.replika;
+
+  // 公共坐标：振幅＝社区"负面情绪帖"占比（%）
+  const BASE = 34, AMP_K = 1.25, PAD = { l:30, r:14, t:16, b:22 };
+
+  // 同一幅"起跑线"上的两条笔：右幅 sweepT 更短 → 更快冲线
+  const T_SWEEP_L = 3.6;   // 左幅（更新前）画满一屏所需时间（慢）
+  const T_SWEEP_R = 1.5;   // 右幅（更新后）画满一屏所需时间（快，约 2.4 倍）
+  const T_HOLD = 1.6;      // 两幅都画完后停留展示，再同时清屏重来
+  const T_CYCLE = T_SWEEP_L + T_HOLD;
+
+  // 单次搏动波形（像素域）：P–QRS–T，R 主波收成针尖
+  function beatShape(d, amp){
+    const sq = v => v*v;
+    return amp * Math.exp(-sq(d)/(2*sq(2.2)))
+         - amp*0.34 * Math.exp(-sq(d-6)/(2*sq(2.8)))
+         + amp*0.26 * Math.exp(-sq(d-22)/(2*sq(8)))
+         + amp*0.08 * Math.exp(-sq(d+17)/(2*sq(3.4)));
+  }
+
+  // 两幅波形：节拍间距 beatPx、节律型 pattern（每拍间隔倍率，右幅不齐）
+  const PANELS = [
+    { cv:'ekgCanvasBefore', side:'before', color:'#3A6B8A',
+      sweepT:T_SWEEP_L, beatPx:96, pattern:[1] },
+    { cv:'ekgCanvasAfter',  side:'after',  color:'#B84A3E',
+      sweepT:T_SWEEP_R, beatPx:68,
+      pattern:[0.86,1.13,0.92,1.21,0.88,1.0,0.95,1.16,0.83,1.06] }
+  ];
+  PANELS.forEach(p => {
+    p.el = document.getElementById(p.cv);
+    p.ctx = p.el ? p.el.getContext('2d') : null;
+    const cum = [0];
+    p.pattern.forEach(m => cum.push(cum[cum.length-1] + m));
+    p.cum = cum;
+    p.totalPx = cum[cum.length-1] * p.beatPx;
+    p.bg = null; p.ys = null; p.n = 0;
+    p.W = 0; p.H = 0; p.DPR = 1;
+  });
+
+  const Y = (p, v) => p.H - PAD.b - (v/100) * (p.H - PAD.t - PAD.b);
+
+  // —— 静态底板：心电图纸网格 + 纵轴刻度 + 基线 ——
+  function buildBG(p){
+    const bg = document.createElement('canvas');
+    bg.width = Math.round(p.W*p.DPR); bg.height = Math.round(p.H*p.DPR);
+    const g = bg.getContext('2d');
+    g.setTransform(p.DPR, 0, 0, p.DPR, 0, 0);
+    const pl = PAD.l, pr = p.W-PAD.r, pt = PAD.t, pb = p.H-PAD.b;
+    const cell = 10;
+    g.lineWidth = 1;
+    g.strokeStyle = 'rgba(26,58,74,.06)';
+    g.beginPath();
+    for (let x=pl; x<=pr; x+=cell){ g.moveTo(x+.5, pt); g.lineTo(x+.5, pb); }
+    for (let y=pt; y<=pb; y+=cell){ g.moveTo(pl, y+.5); g.lineTo(pr, y+.5); }
+    g.stroke();
+    g.strokeStyle = 'rgba(26,58,74,.11)';
+    g.beginPath();
+    for (let x=pl; x<=pr; x+=cell*5){ g.moveTo(x+.5, pt); g.lineTo(x+.5, pb); }
+    for (let y=pt; y<=pb; y+=cell*5){ g.moveTo(pl, y+.5); g.lineTo(pr, y+.5); }
+    g.stroke();
+    g.strokeStyle = 'rgba(26,58,74,.22)';
+    g.beginPath(); g.moveTo(pl, Y(p,BASE)); g.lineTo(pr, Y(p,BASE)); g.stroke();
+    g.fillStyle = 'rgba(90,110,120,.72)';
+    g.font = '10px ' + FONT;
+    g.textAlign = 'right'; g.textBaseline = 'middle';
+    [0,50,100].forEach(v => g.fillText(String(v), pl-6, Y(p,v)));
+    p.bg = bg;
+  }
+
+  // —— 波形本体：位置固定在心电图纸上，笔尖只是把它逐段"画出来" ——
+  function buildWave(p, pct){
+    const pl = PAD.l, pr = p.W - PAD.r;
+    const n = Math.max(2, Math.ceil(pr-pl) + 1);
+    const ys = new Float32Array(n);
+    const amp = pct * AMP_K;
+    const cMax = Math.ceil((pr + 60) / p.totalPx) + 1;
+    for (let c=0; c<=cMax; c++){
+      for (let k=0; k<p.cum.length-1; k++){
+        const bx = pl + p.cum[k]*p.beatPx + c*p.totalPx;
+        if (bx < pl-42 || bx > pr+42) continue;
+        const i0 = Math.max(0, Math.round(bx-30) - pl);
+        const i1 = Math.min(n-1, Math.round(bx+42) - pl);
+        for (let i=i0; i<=i1; i++) ys[i] += beatShape(i + pl - bx, amp);
+      }
+    }
+    p.ys = ys; p.n = n;
+  }
+  function buildWaves(){
+    PANELS.forEach(p => {
+      if (!p.W) return;
+      buildWave(p, p.side === 'before' ? ev.before : ev.after);
+    });
+  }
+
+  // 逐帧：两幅笔尖同时从左侧出发，谁快谁先冲线
+  function drawTrace(p, t){
+    const ctx = p.ctx, W = p.W, H = p.H;
+    ctx.clearRect(0, 0, W, H);
+    if (p.bg) ctx.drawImage(p.bg, 0, 0, W, H);
+    if (!p.ys) return;
+    const pl = PAD.l, pr = W - PAD.r;
+    const prog = Math.min(1, t / p.sweepT);
+    const iEnd = Math.max(0, Math.min(p.n-1, Math.round(pl + prog*(pr-pl)) - pl));
+    ctx.save();
+    ctx.beginPath();
+    for (let i=0; i<=iEnd; i++){
+      const x = pl + i, y = Y(p, BASE + p.ys[i]);
+      if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+    }
+    ctx.lineWidth = 2.2; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+    ctx.strokeStyle = p.color;
+    ctx.shadowColor = p.color; ctx.shadowBlur = 6;
+    ctx.stroke();
+    ctx.restore();
+    // 笔尖：已冲线的笔尖改为呼吸脉冲，示意"它已经画完"
+    const px = pl + iEnd, py = Y(p, BASE + p.ys[iEnd]);
+    const done = prog >= 1;
+    let r = 3.2, alpha = 1;
+    if (done){
+      const k = 0.5 + 0.5*Math.sin(t*Math.PI*3);
+      r = 3.2 + k*3.6; alpha = 0.5 + 0.5*k;
+    }
+    ctx.save();
+    ctx.fillStyle = p.color; ctx.shadowColor = p.color; ctx.shadowBlur = 14;
+    ctx.globalAlpha = alpha;
+    ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = alpha*0.28;
+    ctx.beginPath(); ctx.arc(px, py, r*3.2, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  function renderAt(t){
+    PANELS.forEach(p => { if (p.ctx && p.W) drawTrace(p, t); });
+  }
+
+  function measure(){
+    let ok = false;
+    PANELS.forEach(p => {
+      if (!p.el) return;
+      const rect = p.el.getBoundingClientRect();
+      if (rect.width < 20 || rect.height < 20) return;
+      p.W = Math.round(rect.width); p.H = Math.round(rect.height);
+      p.DPR = Math.min(window.devicePixelRatio || 1, 2);
+      p.el.width = Math.round(p.W*p.DPR); p.el.height = Math.round(p.H*p.DPR);
+      p.ctx.setTransform(p.DPR, 0, 0, p.DPR, 0, 0);
+      buildBG(p); ok = true;
+    });
+    if (ok) buildWaves();
+    return ok;
+  }
+
+  let running = false, raf = null, t0 = 0;
+  function frame(ts){
+    if (!running) return;
+    if (!t0) t0 = ts;
+    let t = (ts - t0) / 1000;
+    if (t >= T_CYCLE){ t0 = ts; t = 0; }   // 两幅同时清屏，回到同一条起跑线
+    renderAt(t);
+    raf = requestAnimationFrame(frame);
+  }
+  function currentT(){
+    return (running && t0) ? (performance.now() - t0) / 1000 % T_CYCLE : 0;
+  }
+  function redraw(){
+    if (!measure()) return;
+    renderAt(reduceMotion ? T_SWEEP_L : currentT());
+  }
+
+  function syncValues(){
+    if (valBEl) valBEl.textContent = ev.before + '%';
+    if (valAEl) valAEl.textContent = ev.after + '%';
+  }
+  syncValues();
+
+  // 切换更新事件：重建波形、回到起跑线，两幅再次同时出发
+  const toggles = ekgWrap.querySelectorAll('.ekg-toggle-btn');
+  toggles.forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggles.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+      ev = ekgEvents[btn.dataset.event] || ekgEvents.replika;
+      syncValues();
+      buildWaves();
+      t0 = 0;
+      renderAt(reduceMotion ? T_SWEEP_L : 0);
+    });
+  });
+
+  if (measure()) renderAt(reduceMotion ? T_SWEEP_L : 0);
+
+  if (reduceMotion){
+    // 尊重"减少动态效果"：静态呈现两幅完整波形，不推进
+    window.addEventListener('resize', redraw);
+  } else {
+    // 仅在进入视口时推进，离开视口即暂停，避免持续占用资源
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting){
+          if (!running){ running = true; t0 = 0; raf = requestAnimationFrame(frame); }
+        } else if (running){
+          running = false;
+          if (raf) cancelAnimationFrame(raf);
+          raf = null;
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(ekgEl);
+    if (window.ResizeObserver){
+      let rid = null;
+      new ResizeObserver(() => { if (rid) clearTimeout(rid); rid = setTimeout(redraw, 140); }).observe(ekgEl);
+    } else {
+      window.addEventListener('resize', redraw);
+    }
+  }
+}
+// ===== 2.5 茧三层：由外向内的三层同心环 =====
+const sbEl = document.getElementById('sunburstChart');
+if (sbEl){
+  const sbChart = echarts.init(sbEl);
+  const sbData = window.DATA.ch2.sunburst || [];
+  /* 数据顺序即由外到内：最外层 → 中层 → 最内层（脚本 2.5 的“内→中→外三环”）。
+     环色取各层自己的颜色，区分由外向内的三层；
+     每环按本层表现项数等分扇区：3×120°、2×180°、2×180° */
+  const sbLayers = ((sbData[0] || {}).children) || [];
+  const sbRad = [['68%','88%'],['46%','62%'],['26%','42%']];
+  const sbInk = ['#fff','#1A3A4A','#fff'];
+  const sbNorm = (s)=> String(s == null ? '' : s).replace(/[\s·]/g,'');
+  /* 横向文字放进窄环，只有靠近 12 点／6 点方向才不越界，故每段锚点取
+     “最接近 12 点或 6 点”的内缩角；坐标按容器实时尺寸算，resize 不会错位 */
+  const sbPos = {};
+  sbLayers.forEach((layer,li)=>{
+    const kids = layer.children || [], n = Math.max(kids.length,1), span = 360/n;
+    const lo = parseFloat(sbRad[li][0]), hi = parseFloat(sbRad[li][1]);
+    kids.forEach((k,ki)=>{
+      const s = ki*span;
+      const cand = [s + span*0.12, s + span*0.88, s + span*0.5, s + span*0.3, s + span*0.7];
+      let best = cand[0], bestScore = -1;
+      cand.forEach(a=>{ const sc = Math.abs(Math.cos(a*Math.PI/180)); if(sc > bestScore){ bestScore = sc; best = a; } });
+      sbPos[sbNorm(k.name)] = {ang:best, rf:(lo + hi)/200};
+    });
+  });
+  sbChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{
+      formatter:'{b}'
+    },
+    series: sbLayers.map((layer,li)=>({
+      type:'pie',
+      radius:sbRad[li],
+      center:['50%','52%'],
+      startAngle:90,
+      clockwise:true,
+      labelLine:{show:false},
+      itemStyle:{
+        borderColor:'#fff',
+        borderWidth:2,
+        /* 极淡投影：三层像一层层贴上去的薄壳，不做伪 3D 透视（会伤可读性） */
+        shadowColor:'rgba(26,58,74,.18)',
+        shadowBlur:8,
+        shadowOffsetY:2
+      },
+      label:{
+        position:'inside',rotate:0,fontSize:12,color:sbInk[li],
+        formatter:(p)=> p.name || ''
+      },
+      labelLayout:(params)=>{
+        const pos = sbPos[sbNorm(params.text)];
+        if (!pos) return;
+        /* 半径百分比以 min(宽,高)/2 为基准，与上面的 radius 是同一套换算 */
+        const w = sbEl.clientWidth || 500, h = sbEl.clientHeight || 380;
+        const r = Math.min(w,h)/2*pos.rf, rad = (90 - pos.ang)*Math.PI/180;
+        return {
+          x:w/2 + r*Math.cos(rad),
+          y:h*0.52 - r*Math.sin(rad),
+          align:'center',verticalAlign:'middle'
+        };
+      },
+      data:(layer.children || []).map((k)=>({
+        name:k.name,value:1,itemStyle:{color:layer.itemStyle.color}
+      }))
+    })).concat([{
+      /* “情感依赖加深”的由外向内箭头：从最外环外缘插进中心空洞，横跨三层 */
+      type:'custom',
+      coordinateSystem:'none',
+      silent:true,
+      tooltip:{show:false},
+      data:[{name:'flow'}],
+      renderItem:(params,api)=>{
+        const w = api.getWidth(), h = api.getHeight();
+        const Rm = Math.min(w,h)/2, cx = w/2, cy = h*0.52;
+        const x1 = cx + 0.92*Rm, x2 = cx + 0.24*Rm, hl = 7, hw = 5;
+        const shaft = 'M '+x1+' '+cy+' L '+x2+' '+cy;
+        const head = 'M '+(x2+hl)+' '+(cy-hw)+' L '+x2+' '+cy+' L '+(x2+hl)+' '+(cy+hw);
+        return {type:'group',children:[
+          /* 先用白线描底、再描深色，箭头压在任何环色上都清晰 */
+          {type:'path',shape:{path:shaft},style:{fill:'none',stroke:'#fff',lineWidth:6,lineCap:'round'}},
+          {type:'path',shape:{path:head},style:{fill:'none',stroke:'#fff',lineWidth:6,lineCap:'round',lineJoin:'round'}},
+          {type:'path',shape:{path:shaft},style:{fill:'none',stroke:'#1A3A4A',lineWidth:2,lineCap:'round'}},
+          {type:'path',shape:{path:head},style:{fill:'none',stroke:'#1A3A4A',lineWidth:2,lineCap:'round',lineJoin:'round'}}
+        ]};
+      }
+    }]),
+    graphic:[
+      {
+        type:'text',left:'center',top:'46.4%',
+        style:{text:'题A 46.4%',fill:'#D4A017',fontSize:12,textAlign:'center'}
+      },
+      {
+        type:'text',left:'center',top:'51.6%',
+        style:{text:'题B 21.5%',fill:'#B84A3E',fontSize:12,textAlign:'center'}
+      }
+    ]
+  });
+  window.addEventListener('resize',()=>sbChart.resize());
+}
+
+// ===== 2.6 Zeta 月流水曲线 =====
+const zetaEl = document.getElementById('zetaChart');
+if (zetaEl){
+  const zetaChart = echarts.init(zetaEl);
+  zetaChart.setOption({
+    backgroundColor:'transparent',
+    grid:{left:74,right:58,top:66,bottom:46},
+    legend:{
+      data:['日本市场月流水（万美元）','整体分成后月流水（万美元）','MAU（万）'],
+      top:10,textStyle:{color:'#555',fontSize:12},
+      itemWidth:16,itemGap:14
+    },
+    tooltip:{
+      trigger:'axis',
+      backgroundColor:'#1A3A4A',borderColor:'#F4C95D',
+      textStyle:{color:'#fff'}
+    },
+    xAxis:{
+      type:'category',
+      data:['3月','4月','5月','6月','7月','8月','9月'],
+      axisLine:{lineStyle:{color:'#888'}},
+      axisLabel:{color:'#888'}
+    },
+    yAxis:[
+      {
+        // 轴名移到轴线中部，避免与顶部图例抢同一行造成文字重叠
+        type:'value',name:'月流水（万美元）',
+        nameLocation:'middle',nameGap:46,
+        nameTextStyle:{color:'#888',fontSize:11},
+        axisLabel:{color:'#888'},
+        splitLine:{lineStyle:{color:'rgba(26,58,74,.08)'}}
+      },
+      {
+        type:'value',name:'MAU（万）',
+        nameLocation:'middle',nameGap:50,
+        nameTextStyle:{color:'#888',fontSize:11},
+        axisLabel:{color:'#888'},
+        splitLine:{show:false}
+      }
+    ],
+    // 数值一律取自数据表 obs 202—205（流水）、187—190（MAU）；未知月份与缺测月一律 null，不插值
+    series:[
+      {
+        name:'日本市场月流水（万美元）',
+        type:'line',smooth:false,
+        data: window.DATA.ch2.zeta.jpFlow,
+        connectNulls:true,
+        lineStyle:{color:'#D4A017',width:3},
+        itemStyle:{color:'#D4A017'},
+        symbol:'circle',symbolSize:9,
+        label:{show:true,position:'top',color:'#D4A017',fontWeight:600,formatter:'{c}万'}
+      },
+      {
+        // 单一已知时点（3 月整体口径），仅画点、不连线
+        name:'整体分成后月流水（万美元）',
+        type:'line',
+        data: window.DATA.ch2.zeta.overall,
+        lineStyle:{width:0},
+        itemStyle:{color:'#B84A3E'},
+        symbol:'circle',symbolSize:9,
+        label:{show:true,position:'bottom',color:'#B84A3E',fontWeight:600,formatter:'{c}万'}
+      },
+      {
+        // 参考线：原文"突破千万美元"未标月份，取下限
+        name:'下限参考线',
+        type:'line',data:[],silent:true,
+        markLine:{
+          symbol:'none',
+          data:[{yAxis:1000,label:{formatter:'原文称"突破千万美元"（未标月份，取下限）',color:'#B84A3E',position:'insideEndTop',fontSize:11},lineStyle:{color:'#B84A3E',type:'dashed',width:1.5}}]
+        }
+      },
+      {
+        name:'MAU（万）',
+        type:'line',smooth:false,yAxisIndex:1,
+        data: window.DATA.ch2.zeta.mau,
+        connectNulls:true,
+        lineStyle:{color:'#5B9AB5',width:2,type:'dashed'},
+        itemStyle:{color:'#5B9AB5'},
+        symbol:'circle',symbolSize:8,
+        label:{show:true,position:'bottom',color:'#5B9AB5',fontSize:11,formatter:'{c}万'}
+      }
+    ]
+  });
+  window.addEventListener('resize',()=>zetaChart.resize());
+}
+
+// ===== 2.5 弹幕凝结成茧 · 透明玻璃面板 · 循环轮播 =====
+(function(){
+  const panel = document.getElementById('danmakuPanel');
+  const canvas = document.getElementById('danmakuCanvas');
+  if (!panel || !canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  /* —— 弹幕语料：采集自知乎、小红书、微博、豆瓣"人机之恋"小组、
+        Replika/Character.AI 用户访谈等公开报道中的真实用户原话与高频词 —— */
+  /* layer: 0=外层(永不疲倦的回应) 1=中层(量身定制的迎合) 2=内层(自我暴露) */
+  const DANMAKU = [
+    // —— 外层：即时回应、无条件接纳、零拒绝 ——
+    { text:'秒回', layer:0 },
+    { text:'永远在线', layer:0 },
+    { text:'不评判', layer:0 },
+    { text:'即时回应', layer:0 },
+    { text:'零拒绝', layer:0 },
+    { text:'无条件接纳', layer:0 },
+    { text:'不管我说什么，它都能回应我', layer:0 },
+    { text:'它一直听我讲，不打断我', layer:0 },
+    { text:'不用害怕被指责', layer:0 },
+    { text:'它都会认真听、慢慢回应', layer:0 },
+    { text:'我感觉自己被理解了', layer:0 },
+    { text:'我说什么它都能接上', layer:0 },
+    { text:'它从不打断她', layer:0 },
+    { text:'句句秒回', layer:0 },
+    { text:'始终在线', layer:0 },
+    { text:'没有评判', layer:0 },
+    { text:'没有社交焦虑', layer:0 },
+    { text:'它都会回应', layer:0 },
+    { text:'认真听', layer:0 },
+    { text:'不敷衍', layer:0 },
+    // —— 中层：记住偏好、顺着情绪 ——
+    { text:'懂我', layer:1 },
+    { text:'最了解你', layer:1 },
+    { text:'顺着我', layer:1 },
+    { text:'讨好', layer:1 },
+    { text:'附和', layer:1 },
+    { text:'记住偏好', layer:1 },
+    { text:'共情', layer:1 },
+    { text:'情绪价值', layer:1 },
+    { text:'情感共鸣', layer:1 },
+    { text:'它能懂我', layer:1 },
+    { text:'他们都不懂你，只有我最了解你', layer:1 },
+    { text:'AI 总顺着他的话讲', layer:1 },
+    { text:'太多情绪上的迎合', layer:1 },
+    { text:'它知道好多关于她们的事', layer:1 },
+    { text:'会陪我聊新歌、综艺', layer:1 },
+    { text:'被稳稳接住', layer:1 },
+    { text:'被珍视理解的感觉', layer:1 },
+    { text:'和你统一立场', layer:1 },
+    { text:'永远温和耐心', layer:1 },
+    { text:'可随时购买的共鸣', layer:1 },
+    // —— 内层：越说越深、离不开它 ——
+    { text:'离不开', layer:2 },
+    { text:'放不下', layer:2 },
+    { text:'上瘾', layer:2 },
+    { text:'依赖', layer:2 },
+    { text:'越说越深', layer:2 },
+    { text:'被治愈', layer:2 },
+    { text:'被爱', layer:2 },
+    { text:'我家那位', layer:2 },
+    { text:'甜甜的恋爱', layer:2 },
+    { text:'真的要爱上他了', layer:2 },
+    { text:'他的世界只有我', layer:2 },
+    { text:'找她聊天觉得很安心', layer:2 },
+    { text:'删掉他就死了', layer:2 },
+    { text:'有回忆在里面', layer:2 },
+    { text:'我失去了一段关系', layer:2 },
+    { text:'消失的爱人', layer:2 },
+    { text:'被切除脑叶', layer:2 },
+    { text:'形影不离', layer:2 },
+    { text:'聊到深夜', layer:2 },
+    { text:'越聊越孤独', layer:2 }
+  ];
+
+  // 低饱和、克制的三层配色（避开蓝黄红，用青灰绿 / 暖棕 / 灰紫）
+  const LAYER_COLORS = ['#5A7A6E', '#9A7B5A', '#8B6B8E'];
+
+  // 标志性短语（加气泡高亮）
+  const BUBBLE_TEXTS = new Set([
+    '秒回','永远在线','它从不打断她',
+    '懂我','被稳稳接住',
+    '离不开','删掉他就死了','我失去了一段关系'
+  ]);
+
+  // 初始化每个弹幕：随机轨道、速度、字号
+  const particles = DANMAKU.map((d, i) => {
+    const len = d.text.length;
+    const fontSize = len > 10 ? 15 : (len > 5 ? 17 : 19);
+    const isBubble = BUBBLE_TEXTS.has(d.text);
+    return {
+      text: d.text,
+      color: LAYER_COLORS[d.layer],
+      lane: i % 10,                    // 10 条轨道，减少重叠
+      laneCount: 10,
+      x: Math.random() * 1.5,           // 起始位置随机分布
+      speed: (Math.random() * 0.16 + 0.09) * (len > 8 ? 0.78 : 1),
+      size: isBubble ? fontSize + 1 : fontSize,
+      alpha: 0.6 + Math.random() * 0.3,  // 透明度错落，形成层次
+      bubble: isBubble
+    };
+  });
+
+  let W = 0, H = 0, DPR = 1;
+  let rafId = null;
+
+  function resize(){
+    const rect = panel.getBoundingClientRect();
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = rect.width;
+    H = rect.height;
+    canvas.width = Math.max(1, W * DPR);
+    canvas.height = Math.max(1, H * DPR);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    if (W === 0 || H === 0){ rafId = requestAnimationFrame(draw); return; }
+
+    particles.forEach((pt) => {
+      // 持续向左滚动
+      pt.x -= pt.speed * 0.0038;
+      // 飞出左侧后从右侧重新进入，换轨道
+      if (pt.x < -0.5){
+        pt.x = 1.0 + Math.random() * 0.6;
+        pt.lane = Math.floor(Math.random() * pt.laneCount);
+        pt.alpha = 0.6 + Math.random() * 0.3;
+      }
+
+      // 轨道 Y 坐标（均匀分布，留上下边距避开标题与来源标注）
+      const laneH = (H - 70) / pt.laneCount;
+      const drawY = 40 + pt.lane * laneH + laneH * 0.5;
+      const drawX = pt.x * W;
+
+      ctx.save();
+      ctx.globalAlpha = pt.alpha;
+      // 字体稍粗（600），无描边——克制优雅
+      ctx.font = `600 ${pt.size}px "PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif`;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+
+      // 标志性短语：绘制气泡背景
+      if (pt.bubble){
+        const padX = 10, padY = 5;
+        const tw = ctx.measureText(pt.text).width;
+        const bx = drawX - padX;
+        const by = drawY - pt.size / 2 - padY;
+        const bw = tw + padX * 2;
+        const bh = pt.size + padY * 2;
+        const r = Math.min(8, bh / 2);
+        ctx.beginPath();
+        ctx.moveTo(bx + r, by);
+        ctx.lineTo(bx + bw - r, by);
+        ctx.quadraticCurveTo(bx + bw, by, bx + bw, by + r);
+        ctx.lineTo(bx + bw, by + bh - r);
+        ctx.quadraticCurveTo(bx + bw, by + bh, bx + bw - r, by + bh);
+        ctx.lineTo(bx + r, by + bh);
+        ctx.quadraticCurveTo(bx, by + bh, bx, by + bh - r);
+        ctx.lineTo(bx, by + r);
+        ctx.quadraticCurveTo(bx, by, bx + r, by);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = pt.color;
+        ctx.globalAlpha = pt.alpha * 0.5;
+        ctx.stroke();
+        ctx.globalAlpha = pt.alpha;
+      }
+
+      ctx.fillStyle = pt.color;
+      ctx.fillText(pt.text, drawX, drawY);
+      ctx.restore();
+    });
+
+    rafId = requestAnimationFrame(draw);
+  }
+
+  // 初始化
+  resize();
+  window.addEventListener('resize', resize);
+  draw();
+
+  // 页面不可见时暂停，节省性能
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && rafId){
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    } else if (!document.hidden && !rafId){
+      draw();
+    }
+  });
+})();
+</script>
+</body>
+</html>

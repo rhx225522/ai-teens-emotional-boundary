@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>序言 · 一份问卷里的少年 | 永远在线的"搭子"</title>
+<!-- ECharts（图表规范要求）+ 中国地图 geojson 由 DataV 公开服务提供 -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- D3.js v7：滚动粒子封面的 GeoJSON 底图 + geoMercator 投影 -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<!-- 全站主题（12 token + reset）已抽离到 ../styles/theme.css -->
+<link rel="stylesheet" href="../styles/theme.css">
+<style>
+/* 序言采用正文配色（浅底深字），与其余章节统一 */
+:root{
+  --divider:rgba(26,58,74,.12);
+}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+.section{
+  width:100%;
+  padding:90px 8%;
+  position:relative;
+}
+.section.cover{
+  height:100vh;
+  min-height:680px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:60px 8%;
+  background:var(--bg);
+}
+
+/* ===== 卡片层：封面之后的所有内容，以「卡片上滑」方式覆盖钉住的封面 ===== */
+.page-card{
+  position:relative;
+  z-index:2;                     /* 高于封面(z-index:0)、低于导航(z-index:1000) */
+  background:var(--bg);          /* 不透明底色，防止钉住的封面从缝里透出 */
+  border-radius:28px 28px 0 0;   /* 仅上方两角 */
+  box-shadow:0 -22px 60px rgba(15,37,50,.34);
+  padding-top:28px;              /* ≥ 圆角半径，避免首块内容把圆角填平（不用 overflow:hidden，否则内部 sticky 失效） */
+}
+
+/* ===== 滚动驱动粒子封面（替代原封面 + 引言样本段） ===== */
+.scroll-stage{
+  height:520vh;            /* 约 5.2 屏滚动距离，承载 4 阶段重组 */
+  position:relative;
+  background:var(--bg);
+}
+.scroll-viewport{
+  position:sticky;
+  top:0;
+  height:100vh;
+  width:100%;
+  overflow:hidden;
+  background:var(--bg);
+}
+.map-chart{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:1;
+  transition:opacity .3s linear;
+}
+#particleCanvas{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:2;
+  pointer-events:none;
+}
+/* 顶部调查背景说明 */
+.stage-top-text{
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  padding:3vh 9% 0;
+  z-index:3;
+  pointer-events:none;
+  transition:opacity .3s linear;
+  text-align:center;
+}
+.stage-top-text .st-meta{
+  font-size:.75rem;
+  letter-spacing:5px;
+  color:var(--gold-deep);
+  margin-bottom:10px;
+}
+.stage-top-text .st-paragraph{
+  font-size:16px;
+  line-height:1.7;
+  color:var(--ink);
+  letter-spacing:.3px;
+  margin:0 auto 6px;
+  max-width:760px;
+}
+.stage-top-text .st-paragraph .hl{
+  color:var(--gold-deep);
+  font-weight:700;
+}
+.stage-top-text .st-paragraph.st-think{
+  color:var(--gold-deep);
+  font-size:16px;
+  margin-top:4px;
+  margin-bottom:8px;
+}
+.stage-top-text .st-paragraph.st-survey{
+  color:var(--ink-sub);
+  font-size:16px;
+}
+.stage-top-text .st-paragraph .num{
+  color:var(--gold-deep);
+  font-weight:700;
+  font-size:1.2em;
+}
+.stage-top-text .st-cue{
+  font-size:.78rem;
+  color:var(--ink-dim);
+  letter-spacing:.5px;
+  margin-top:6px;
+  animation:cueLine 2s infinite;
+}
+@keyframes cueLine{
+  0%,100%{opacity:.4}
+  50%{opacity:1}
+}
+/* 阶段标签（左下方，随滚动切换） */
+.stage-label{
+  position:absolute;
+  left:5%;
+  bottom:6%;
+  z-index:4;
+  font-size:13px;
+  letter-spacing:2px;
+  color:var(--gold-deep);
+  pointer-events:none;
+  transition:opacity .3s;
+}
+.stage-label::before{
+  content:"";display:inline-block;width:24px;height:1px;background:var(--gold);
+  vertical-align:middle;margin-right:10px;
+}
+/* 右侧固定说明（三组光点柱图变化时保持不动） */
+.stage-side-text{
+  position:absolute;
+  right:4%;
+  top:50%;
+  transform:translateY(-50%);
+  width:29%;
+  max-width:350px;
+  z-index:5;
+  opacity:0;
+  pointer-events:none;
+}
+.stage-side-text .ss-quote{
+  font-size:clamp(14px,1.05vw,17px);
+  line-height:1.95;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:.3px;
+  margin:0 0 16px;
+  padding-left:14px;
+  border-left:2px solid var(--gold);
+}
+.stage-side-text .ss-note{
+  font-size:clamp(11.5px,.82vw,13px);
+  line-height:1.9;
+  color:var(--ink-sub);
+  margin:0;
+  padding-left:14px;
+}
+.stage-side-text .ss-note b{color:var(--gold-deep);font-weight:700;font-size:1.15em}
+
+/* ===== 开场视频封面（置于序言之前）===== */
+/* 封面：钉在导航条下方不动，后续「卡片层」从下往上滑入覆盖 */
+.section.video-hero{
+  position:sticky;
+  top:56px;                /* 顶到顶部导航下沿 */
+  z-index:0;
+  height:calc(100vh - 56px);
+  min-height:520px;
+  padding:0 8%;
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:flex-start;
+  background:var(--cover-deep);
+}
+.video-hero .vh-bg{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;z-index:0;
+}
+/* 视频缺失/解码失败时，退回首帧静图 */
+.video-hero.no-video{background:var(--cover-deep) url("../../assets/videos/opening-cover-poster.jpg") center/cover no-repeat}
+.video-hero.no-video .vh-bg{display:none}
+/* 中性暗色蒙层：仅覆盖左侧约 62%（非全屏），自左向右由深到浅；用户点击/滚动后自左向右缓慢铺开 */
+.video-hero .vh-veil{
+  position:absolute;top:0;bottom:0;left:0;width:62%;z-index:1;pointer-events:none;
+  background:linear-gradient(to right,
+    rgba(8,24,32,.90) 0%, rgba(8,24,32,.64) 36%, rgba(8,24,32,.28) 66%, rgba(8,24,32,0) 100%);
+  clip-path:inset(0 100% 0 0);
+  transition:clip-path 1.9s cubic-bezier(.33,.7,.4,1);
+}
+.video-hero.play .vh-veil{clip-path:inset(0 0 0 0)}
+.video-hero .vh-text{
+  position:relative;z-index:2;text-align:left;
+  max-width:660px;
+}
+.video-hero h1{
+  font-size:clamp(40px,7vw,88px);
+  font-weight:800;line-height:1.14;letter-spacing:3px;
+  color:#fff;
+  text-shadow:0 3px 44px rgba(8,24,32,.85),0 1px 4px rgba(8,24,32,.7),0 0 60px rgba(244,201,93,.3);
+  margin-bottom:24px;
+  opacity:0;transform:translateX(-26px);
+  transition:opacity 1.05s var(--ease-out),transform 1.05s var(--ease-out);
+}
+.video-hero h1 .q{color:var(--gold)}
+.video-hero .vh-sub{
+  font-size:clamp(16px,2vw,24px);
+  font-weight:500;color:rgba(255,255,255,.94);
+  letter-spacing:1px;line-height:1.6;
+  text-shadow:0 1px 16px rgba(8,24,32,.7);
+  opacity:0;transform:translateX(-20px);
+  transition:opacity 1s var(--ease-out),transform 1s var(--ease-out);
+}
+.video-hero .vh-sub .dash{color:var(--gold);font-weight:700;margin-right:6px}
+.video-hero.play h1{opacity:1;transform:none;transition-delay:1.9s}
+.video-hero.play .vh-sub{opacity:1;transform:none;transition-delay:2.4s}
+.video-hero .vh-cue{
+  position:absolute;bottom:30px;left:8%;
+  z-index:2;font-size:12px;letter-spacing:.24em;color:rgba(255,255,255,.7);
+  opacity:1;transition:opacity .8s ease;
+  text-shadow:0 1px 8px rgba(8,24,32,.8);
+  animation:cuePulse 2.2s ease-in-out infinite;
+}
+.video-hero.play .vh-cue{opacity:1;transition-delay:2.7s;animation:none}
+@keyframes cuePulse{
+  0%,100%{opacity:.55}
+  50%{opacity:1}
+}
+.video-hero .vh-cue::after{
+  content:"";display:block;width:1px;height:28px;margin:10px 0 0;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+  animation:drop 2s infinite;
+}
+@keyframes drop{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* 引言段 */
+.intro-text{
+  background:var(--bg);
+  text-align:center;
+  /* 钉住：作为底图，让下一节「第一题」作为卡片从下往上滑过来覆盖。
+     注意 z-index 只能为 0：后续各节（q1~q4）是 z-index:auto 的同级元素，
+     若这里给正值会把它们压在下面导致内容被遮住；靠文档顺序让它们盖住本块即可 */
+  position:sticky;
+  top:56px;
+  z-index:0;
+  min-height:calc(100vh - 56px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.intro-text .lead{
+  max-width:780px;
+  margin:0 auto;
+  font-size:16px;
+  color:var(--ink);
+  font-weight:500;
+  line-height:1.7;
+  position:relative;
+  z-index:1;                /* 压在气泡装饰层之上 */
+}
+/* 方案C：上浮对话气泡装饰层 —— 绝对定位铺满本屏，纯装饰、不接收指针事件 */
+.intro-text .bubble-layer{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+.intro-text p.body{
+  max-width:780px;
+  margin:0 auto 40px;
+  color:var(--ink);
+  font-size:16px;
+  text-align:justify;
+}
+.intro-text p.body .hl{color:var(--gold-deep);font-weight:600}
+.sample-chart{
+  max-width:780px;
+  margin:30px auto 0;
+  padding:24px 30px;
+  background:rgba(26,58,74,.04);
+  border-left:3px solid var(--gold);
+  border-radius:6px;
+}
+.sample-chart h4{
+  color:var(--gold-deep);
+  font-size:15px;
+  margin-bottom:16px;
+  font-weight:600;
+  letter-spacing:1px;
+}
+.bar-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:10px;
+  font-size:13px;
+  color:var(--ink-sub);
+}
+.bar-row .label{width:80px;text-align:right;color:var(--ink-sub)}
+.bar-row .bar-bg{
+  flex:1;height:18px;background:rgba(26,58,74,.08);border-radius:3px;overflow:hidden;
+}
+.bar-row .bar-fill{
+  height:100%;background:linear-gradient(90deg,var(--step-1),var(--step-2));
+  width:0;transition:width 1.4s cubic-bezier(.2,.7,.3,1);
+}
+.bar-row .val{width:60px;color:var(--gold-deep)}
+.source-line{
+  font-size:12px;
+  color:var(--ink-meta);
+  margin-top:16px;
+  line-height:1.5;
+}
+
+/* 四题互动段 */
+.q-section{
+  background:var(--bg);
+  padding:80px 8% 60px;
+  border-top:1px solid var(--divider);
+}
+/* 第一题作为卡片：从下往上滑过来覆盖钉住的「引言正文」 */
+#q1{
+  z-index:3;
+  border-top:none;
+  border-radius:28px 28px 0 0;
+  box-shadow:0 -22px 60px rgba(15,37,50,.34);
+}
+.q-wrap{
+  max-width:1100px;
+  margin:0 auto;
+}
+.q-title{
+  text-align:center;
+  margin-bottom:50px;
+}
+.q-title .step{
+  font-size:14px;
+  color:var(--gold-deep);
+  letter-spacing:3px;
+  margin-bottom:10px;
+}
+.q-title h3{
+  font-size:32px;
+  color:var(--cover-main);
+  font-weight:700;
+  letter-spacing:1px;
+}
+.q-body{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+.q-left{padding:20px 0}
+.q-prompt{
+  font-size:18px;
+  color:var(--ink);
+  margin-bottom:24px;
+  font-weight:500;
+}
+.q-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:20px;
+}
+.q-btn{
+  background:transparent;
+  border:1.5px solid rgba(212,160,23,.5);
+  color:var(--ink);
+  padding:12px 26px;
+  border-radius:30px;
+  font-size:15px;
+  font-family:inherit;
+  cursor:pointer;
+  transition:all .25s;
+  min-height:44px;
+}
+.q-btn:hover{background:rgba(212,160,23,.12);border-color:var(--gold-deep)}
+.q-btn.selected{background:var(--gold);color:var(--cover-deep);border-color:var(--gold);font-weight:600}
+.q-btn:disabled{opacity:.5;cursor:not-allowed}
+.q-skip{
+  display:inline-block;
+  font-size:13px;
+  color:var(--ink-sub);
+  margin-top:8px;
+  text-decoration:underline;
+  text-decoration-color:var(--gold-deep);
+  text-underline-offset:3px;
+  cursor:pointer;
+}
+.q-skip:hover{color:var(--gold-deep)}
+.q-feedback{
+  margin-top:22px;
+  padding:18px 22px;
+  background:rgba(244,201,93,.08);
+  border-left:3px solid var(--gold);
+  border-radius:4px;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .6s,transform .6s;
+}
+.q-feedback.show{opacity:1;transform:translateY(0)}
+.q-feedback .reveal{
+  font-size:16px;
+  color:var(--ink);
+  line-height:1.7;
+  margin-bottom:8px;
+}
+.q-feedback .reveal .num{color:var(--gold-deep);font-weight:700;font-size:1.1em}
+.q-feedback .notes{
+  font-size:13px;
+  color:var(--ink-sub);
+  line-height:1.7;
+}
+.q-feedback .notes .sep{color:var(--ink-dim);margin:0 6px}
+
+/* 可视化区（在左） */
+.q-right{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 0;
+}
+.canvas-stage{
+  position:relative;
+  width:340px;
+  height:260px;
+}
+.dot-canvas{
+  width:340px;
+  height:260px;
+  display:block;
+}
+.big-num-overlay{
+  position:absolute;
+  left:265px;
+  top:50%;
+  transform:translateY(-50%) translateX(8px);
+  text-align:center;
+  opacity:0;
+  transition:opacity .7s ease,transform .7s ease;
+  pointer-events:none;
+  white-space:nowrap;
+  z-index:2;
+}
+.big-num-overlay.show{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+}
+.big-num-overlay .bn-val{
+  font-size:38px;
+  font-weight:700;
+  color:var(--gold-deep);
+  line-height:1;
+  letter-spacing:1px;
+}
+.big-num-overlay.risk .bn-val{
+  color:var(--risk);
+}
+.dot-caption{
+  margin-top:14px;
+  font-size:12px;
+  color:var(--ink-sub);
+  text-align:center;
+}
+.dot-caption .approx{color:var(--ink-dim)}
+
+/* ===== 全屏人群题（pudding.cool 风格：人群铺满全屏，问题浮层居中） ===== */
+.q-crowd{
+  min-height:100vh;
+  position:relative;
+  padding:0;
+  background:var(--bg);
+}
+.crowd-bg{
+  position:sticky;
+  top:22vh;
+  height:70vh;
+  width:780px;
+  max-width:100%;
+  margin:0 auto;
+  z-index:1;
+}
+.crowd-bg .dot-canvas{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+/* 人群上下各留一条暗带，让浮层卡片可读 */
+.crowd-bg::before,
+.crowd-bg::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;
+  height:10vh;
+  z-index:2;
+  pointer-events:none;
+}
+.crowd-bg::before{
+  top:0;
+  background:linear-gradient(to bottom, rgba(244,246,245,.92), rgba(244,246,245,0));
+}
+.crowd-bg::after{
+  bottom:0;
+  background:linear-gradient(to top, rgba(244,246,245,.92), rgba(244,246,245,0));
+}
+.crowd-overlay{
+  position:relative;
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:5vh 24px 10vh;
+  margin-top:-70vh;
+  box-sizing:border-box;
+}
+.crowd-overlay .q-title{
+  margin-bottom:28px;
+}
+.crowd-overlay .q-title .step{
+  color:var(--gold-deep);
+}
+.crowd-overlay .q-title h3{
+  color:var(--cover-main);
+}
+.q-card{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-radius:18px;
+  padding:38px 44px;
+  border:1px solid var(--divider);
+  box-shadow:0 24px 70px rgba(15,37,50,.12);
+  max-width:560px;
+  width:100%;
+  text-align:center;
+}
+.q-card .q-prompt{
+  margin-bottom:20px;
+  font-size:16px;
+}
+.q-card .q-options{
+  justify-content:center;
+  margin-bottom:18px;
+}
+.q-card .q-feedback{
+  text-align:left;
+  margin-top:24px;
+  background:rgba(244,201,93,.08);
+}
+
+/* ===== 滚动叙事：答题框 + 解释框（分离） ===== */
+.answer-card{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-radius:16px;
+  padding:22px 30px;
+  border:1px solid var(--divider);
+  box-shadow:0 16px 50px rgba(15,37,50,.1);
+  max-width:460px;
+  width:100%;
+  text-align:center;
+  margin-bottom:52vh;
+}
+.answer-card .q-prompt{ margin-bottom:14px; font-size:16px; }
+.answer-card .q-options{ justify-content:center; margin-bottom:12px; }
+.explain-card{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-radius:16px;
+  padding:24px 32px;
+  border:1px solid var(--divider);
+  box-shadow:0 16px 50px rgba(15,37,50,.1);
+  max-width:520px;
+  width:100%;
+  text-align:left;
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.explain-card.show{ opacity:1; transform:translateY(0); }
+.explain-card .reveal{ font-size:16px; color:var(--ink); line-height:1.7; margin-bottom:8px; }
+.explain-card .notes{ font-size:13px; color:var(--ink-sub); line-height:1.7; }
+.explain-card .big-num-overlay{ margin-top:18px; text-align:center; }
+/* Q3 两阶段卡片：拉大间距，确保第二张出现时第一张已滚出视野 */
+#explain-q3-s1{ margin-bottom:90vh; }
+/* 大数字浮层：放在卡片下方居中 */
+.q-crowd .big-num-overlay{
+  position:static;
+  transform:none;
+  margin-top:26px;
+  opacity:0;
+  transition:opacity .7s ease;
+  text-align:center;
+  pointer-events:none;
+}
+.q-crowd .big-num-overlay.show{
+  opacity:1;
+  transform:none;
+}
+.q-crowd .big-num-overlay .bn-val{
+  font-size:52px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:1px;
+}
+.q-crowd .dot-caption{
+  margin-top:20px;
+  color:var(--ink-sub);
+}
+
+/* 第二题横条 */
+.q2-bars{
+  width:100%;
+  max-width:420px;
+  margin-top:10px;
+}
+.q2-bar{
+  margin-bottom:18px;
+  position:relative;
+}
+.q2-bar .row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+}
+.q2-bar .name{flex:0 0 130px;color:var(--ink-sub)}
+.q2-bar .track{
+  flex:1;height:22px;background:rgba(26,58,74,.06);border-radius:3px;overflow:hidden;position:relative;
+}
+.q2-bar .fill{
+  height:100%;width:0;background:var(--step-1);transition:width 1.2s cubic-bezier(.2,.7,.3,1);
+}
+.q2-bar.gold .fill{background:linear-gradient(90deg,var(--gold),var(--gold-deep))}
+.q2-bar .pct{
+  flex:0 0 56px;color:var(--gold-deep);font-weight:600;text-align:right;
+}
+.q2-bar.you::after{
+  content:"你选";
+  position:absolute;right:-44px;top:0;
+  font-size:11px;color:var(--gold-deep);background:rgba(244,201,93,.15);
+  padding:2px 8px;border-radius:10px;
+}
+.q2-divider{
+  height:1px;
+  border-top:1px dashed rgba(212,160,23,.4);
+  margin:6px 0 14px;
+  position:relative;
+}
+.q2-divider .lbl{
+  position:absolute;left:50%;top:-9px;transform:translateX(-50%);
+  font-size:11px;color:var(--gold-deep);background:var(--bg);padding:0 10px;letter-spacing:1px;
+}
+
+/* 第三题两段式 */
+.q3-stage2{
+  margin-top:30px;
+  padding-top:24px;
+  border-top:1px dashed rgba(184,74,62,.4);
+  display:none;
+}
+.q3-stage2.active{display:block;animation:fadeUp .8s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.q3-stage2 .stage-prompt{
+  font-size:14px;color:var(--risk);margin-bottom:14px;font-weight:500;
+}
+
+/* 收束暗场 */
+.closing{
+  background:var(--bg);
+  padding:120px 8% 80px;
+  text-align:center;
+}
+.closing .lead-in{
+  font-size:16px;
+  color:var(--ink);
+  max-width:760px;
+  margin:0 auto;
+  line-height:1.85;
+}
+.closing .lead-in .hl{color:var(--gold-deep);font-weight:600}
+.final-q{
+  margin-top:50px;
+  font-size:30px;
+  font-weight:600;
+  color:var(--gold-deep);
+  letter-spacing:2px;
+  line-height:1.6;
+}
+
+/* ========== 章末跳转（统一过渡卡片） ========== */
+.next-chapter{
+  display:block;width:100%;padding:90px 8%;text-align:center;
+  background:var(--bg);color:var(--ink);text-decoration:none;
+  position:relative;
+}
+.next-chapter::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:80px;height:2px;background:var(--gold);
+}
+.nc-frame{
+  position:relative;max-width:680px;margin:0 auto;padding:40px 44px 36px;
+}
+.nc-frame::before,.nc-frame::after{
+  content:"";position:absolute;width:28px;height:28px;
+  border:1px dashed var(--gold);opacity:.5;
+}
+.nc-frame::before{top:0;left:0;border-right:none;border-bottom:none}
+.nc-frame::after{bottom:0;right:0;border-left:none;border-top:none}
+.next-chapter .echo{
+  font-size:18px;line-height:1.8;color:var(--ink);
+  margin-bottom:28px;letter-spacing:.5px;
+}
+.next-chapter .echo .hl{color:var(--gold-deep);font-weight:600}
+.next-chapter .label{font-size:13px;letter-spacing:.5em;color:var(--ink-sub)}
+.next-chapter .title{
+  font-size:clamp(24px,2.6vw,32px);font-weight:700;
+  margin:16px 0 10px;color:var(--cover-main);letter-spacing:.03em;
+}
+.next-chapter .hook{color:var(--ink-sub);transition:color .3s;font-size:15px}
+.next-chapter:hover .hook{color:var(--gold-deep)}
+.next-chapter .arrow{
+  display:inline-block;font-size:28px;margin-top:24px;color:var(--gold-deep);
+  transition:transform .3s;
+}
+.next-chapter:hover .arrow{transform:translateY(4px)}
+.next-chapter.is-inview .arrow{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(7px)}}
+
+@media (max-width:900px){
+  .q-body{grid-template-columns:1fr;gap:30px}
+  .canvas-stage,.dot-canvas{width:300px;height:230px}
+  .big-num-overlay{left:230px}
+  .q-crowd .q-card{padding:28px 22px}
+  .q-crowd .big-num-overlay .bn-val{font-size:42px}
+  .q-crowd .q-title h3{font-size:24px}
+}
+
+@media (max-width:900px){
+  /* 窄屏放不下右侧分栏：说明文字改为置顶横排，避免压住柱图与数据标签 */
+  .stage-side-text{
+    right:5%;left:5%;top:4%;
+    width:auto;max-width:none;
+    transform:none;
+  }
+  .stage-side-text .ss-quote{font-size:13.5px;line-height:1.85;margin-bottom:10px}
+  .stage-side-text .ss-note{font-size:11px;line-height:1.8}
+}
+
+@media (max-width:640px){
+  .intro-text{top:50px;min-height:calc(100vh - 50px)}
+  .section.video-hero{top:50px;height:calc(100vh - 50px);min-height:440px}
+  .video-hero .vh-cue{bottom:22px}
+  .scroll-stage{height:600vh}
+  .stage-top-text{padding:2.5vh 5% 0}
+  .stage-top-text .st-paragraph{max-width:100%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部全局导航 ============ -->
+<nav class="site-nav" aria-label="章节导航">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="00-intro.html">永远在线的"搭子"</a>
+    <div class="site-nav-links">
+      <a href="00-intro.html" class="active" aria-current="page">序言</a>
+      <a href="01-online.html">01 搭子</a>
+      <a href="02-cocoon.html">02 茧房</a>
+      <a href="03-wound.html">03 伤口</a>
+      <a href="04-breaking.html">04 破茧</a>
+    </div>
+  </div>
+  <div class="site-nav-progress"><span class="site-nav-progress-fill" id="siteProgress" style="width: 41.5571%;"></span></div>
+</nav>
+
+<!-- ============ 开场视频封面（置于序言之前） ============ -->
+<section class="section video-hero play" id="opening">
+  <video class="vh-bg" autoplay="" muted="" loop="" playsinline="" preload="auto" poster="../../assets/videos/opening-cover-poster.jpg" aria-hidden="true" tabindex="-1">
+    <source src="../../assets/videos/opening-cover.mp4" type="video/mp4">
+  </video>
+  <div class="vh-veil" aria-hidden="true"></div>
+  <div class="vh-text">
+    <h1>永远<span class="q">“在线”</span><br>的AI搭子</h1>
+    <p class="vh-sub"><span class="dash">——</span>数说少年与AI的情感边界</p>
+  </div>
+  <div class="vh-cue" aria-hidden="true">向下滚动</div>
+</section>
+
+<!-- ============ 卡片层：上滑覆盖钉住的封面；内含滚动粒子封面（替代原封面 + 引言样本段） ============ -->
+<div class="page-card">
+
+<section class="scroll-stage" id="scrollStage">
+  <div class="scroll-viewport" id="scrollViewport">
+    <div class="stage-top-text" id="stageTopText" style="opacity: 0.1;">
+      <div class="st-meta">序言 · PROLOGUE</div>
+      <p class="st-paragraph">每一个青春时期的心事，似乎都需要一个安全的出口。</p>
+      <p class="st-paragraph">曾经，它是带锁的日记本，是街角那棵沉默的老树，或是无话不谈的挚友。</p>
+      <p class="st-paragraph">而现在，越来越多的孩子将心事敲进对话框，交给了 AI。</p>
+      <p class="st-paragraph">于是我们试图看清这种新型陪伴背后的全貌。</p>
+      <div class="st-cue">每粒光点 ≈ 10 份问卷　↓ 向下滚动</div>
+    </div>
+    <div id="mapChart" class="map-chart" aria-hidden="true" _echarts_instance_="ec_1792395296418" style="opacity: 0.08; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><div style="position: relative; width: 590px; height: 650px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="1180" height="1300" style="position: absolute; left: 0px; top: 0px; width: 590px; height: 650px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+    <canvas id="particleCanvas" aria-hidden="true" width="1180" height="1300" style="width: 590px; height: 650px;"></canvas>
+    <div class="stage-label" id="stageLabel">样本构成 · 性别</div>
+    <!-- 右侧固定说明：三组光点柱图随滚动变化时，此段文字保持不动 -->
+    <div class="stage-side-text" id="stageSideText">
+      <p class="ss-quote">它永远在线，绝不打断，也绝不评判。但当真实的社交摩擦被代码抹平，这种“无懈可击”的陪伴，究竟是在治愈孤独，还是让孩子陷入了另一种封闭？</p>
+      <p class="ss-note">中国青少年研究中心于 2025 年 6—8 月，覆盖 7 省（市）回收了 <b>8563</b> 份中小学生问卷。样本涵盖小初高各学段，交错分布于城乡之间，男女比例基本持平。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 引言正文（样本说明文字） ============ -->
+<section class="section intro-text" id="introText">
+  <!-- 方案C：低对比度「上浮对话气泡」装饰层（纯视觉填补留白，不承载信息） -->
+  <canvas class="bubble-layer" id="bubbleCanvas" aria-hidden="true"></canvas>
+  <p class="lead">在真正走进这份问卷之前，我们不想直接给你一个个冰冷的数字。<br>而是想邀请你，先代入一个普通青少年的视角，回想一下你的日常。<br>AI 在你的生活中扮演一个何种模样的角色？你又如何理解当代青年与 AI 互动的边界？</p>
+</section>
+
+<!-- ============ 第一题（滚动叙事：sticky小人 + 答题框/解释框分离） ============ -->
+<section class="section q-section q-crowd" id="q1" style="min-height:200vh">
+  <div class="crowd-bg">
+    <canvas class="dot-canvas" id="canvas-q1" width="1180" height="910"></canvas>
+  </div>
+  <div class="crowd-overlay">
+    <div class="q-title">
+      <div class="step">第一题 / 01</div>
+      <h3>你跟 AI 聊过天吗？</h3>
+    </div>
+    <div class="answer-card" id="answer-q1">
+      <div class="q-prompt">请作答：</div>
+      <div class="q-options" data-q="q1">
+        <button class="q-btn" data-ans="often">经常</button>
+        <button class="q-btn" data-ans="sometimes">偶尔</button>
+        <button class="q-btn" data-ans="never">从不</button>
+      </div>
+      <span class="q-skip" data-skip="q1">跳过作答，直接看数据 →</span>
+    </div>
+    <div class="explain-card" id="explain-q1">
+      <div class="reveal" id="reveal-q1">超过六成（<span class="num">61.7%</span>）受访中小学生用过 AI，其中近两成（<span class="num">18.3%</span>）经常使用。</div>
+      <div class="big-num-overlay show" id="bignum-q1">
+        <div class="bn-val">61.7%</div>
+      </div>
+    </div>
+    <div class="dot-caption">每 1 个小人 ≈ 34 个孩子　<span class="approx">*点阵为近似示意</span></div>
+  </div>
+</section>
+
+<!-- ============ 第二题（横条在左，问题在右） ============ -->
+<section class="section q-section" id="q2">
+  <div class="q-wrap">
+    <div class="q-title">
+      <div class="step">第二题 / 02</div>
+      <h3>你用 AI 做什么？（可多选）</h3>
+    </div>
+    <div class="q-body">
+      <div class="q-right">
+        <div class="q2-bars" id="bars-q2">
+          <div class="q2-bar" data-pct="71.0"><div class="row"><span class="name">辅助作业</span><div class="track"><div class="fill"></div></div><span class="pct">71.0%</span></div></div>
+          <div class="q2-bar" data-pct="43.5"><div class="row"><span class="name">学习知识</span><div class="track"><div class="fill"></div></div><span class="pct">43.5%</span></div></div>
+          <div class="q2-bar" data-pct="43.0"><div class="row"><span class="name">创作</span><div class="track"><div class="fill"></div></div><span class="pct">43.0%</span></div></div>
+          <div class="q2-divider"><span class="lbl">"工具用途" 与 "情感用途" 的分界线</span></div>
+          <div class="q2-bar gold" data-pct="35.2"><div class="row"><span class="name">聊天说心里话</span><div class="track"><div class="fill"></div></div><span class="pct">35.2%</span></div></div>
+          <div class="q2-bar gold" data-pct="32.5"><div class="row"><span class="name">娱乐（虚拟角色）</span><div class="track"><div class="fill"></div></div><span class="pct">32.5%</span></div></div>
+        </div>
+      </div>
+      <div class="q-left">
+        <div class="q-prompt">请选择（可多选）：</div>
+        <div class="q-options" data-q="q2">
+          <button class="q-btn" data-ans="homework">辅助作业</button>
+          <button class="q-btn" data-ans="learn">学习知识</button>
+          <button class="q-btn" data-ans="create">创作</button>
+          <button class="q-btn" data-ans="talk">聊天说心里话</button>
+          <button class="q-btn" data-ans="fun">娱乐（虚拟角色）</button>
+        </div>
+        <span class="q-skip" data-skip="q2">查看结果 →</span>
+        <div class="q-feedback" id="fb-q2">
+          <div class="reveal" id="reveal-q2">超七成（<span class="num">71.0%</span>）用它辅助完成作业——查资料、要思路。</div>
+          <div class="notes" id="notes-q2">但再往下看，两个数字变了味道：<span style="color:var(--gold)">35.2%</span> 会和 AI "聊天或说心里话"；<span style="color:var(--gold)">32.5%</span> 用它和虚拟角色对话娱乐。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第三题（全屏人群 + 浮层卡片，两段式） ============ -->
+<section class="section q-section q-crowd" id="q3" style="min-height:340vh">
+  <div class="crowd-bg">
+    <canvas class="dot-canvas" id="canvas-q3" width="1180" height="910"></canvas>
+  </div>
+  <div class="crowd-overlay">
+    <div class="q-title">
+      <div class="step">第三题 / 03</div>
+      <h3>你会向 AI 倾注烦心事吗？</h3>
+    </div>
+    <div class="answer-card" id="answer-q3">
+      <div class="q-prompt">请作答：</div>
+      <div class="q-options" data-q="q3">
+        <button class="q-btn" data-ans="yes">会</button>
+        <button class="q-btn" data-ans="no">不会</button>
+      </div>
+      <span class="q-skip" data-skip="q3">跳过作答，直接看数据 →</span>
+    </div>
+    <div class="explain-card" id="explain-q3-s1">
+      <div class="reveal" id="reveal-q3-stage1">遇烦恼时，<span class="num">46.4%</span> 的受访中小学生选择向 AI 倾诉，而非身边的人。</div>
+      <div class="big-num-overlay" id="bignum-q3">
+        <div class="bn-val">46.4%</div>
+      </div>
+    </div>
+    <div class="explain-card" id="explain-q3-s2">
+      <div class="stage-prompt">↓ 同一份调查里的另一道题 ↓</div>
+      <div class="reveal" style="color:var(--ink);margin-top:14px"><span class="num" style="color:var(--risk)">21.5%</span> 直言 "只想和 AI 聊天，不想和真人聊天"——这个比例在小学生中最高，超过 <span class="num" style="color:var(--risk)">24%</span>。</div>
+      <div class="big-num-overlay risk" id="bignum-q3-s2">
+        <div class="bn-val">21.5%</div>
+      </div>
+    </div>
+    <div class="dot-caption">46.4% 遇烦恼向 AI 倾诉 ／ 21.5% 只想和 AI 聊天　<span class="approx">*点阵为近似示意</span></div>
+  </div>
+</section>
+
+<!-- ============ 第四题（滚动叙事：sticky小人 + 答题框/解释框分离） ============ -->
+<section class="section q-section q-crowd" id="q4" style="min-height:200vh">
+  <div class="crowd-bg">
+    <canvas class="dot-canvas" id="canvas-q4" width="1180" height="910"></canvas>
+  </div>
+  <div class="crowd-overlay">
+    <div class="q-title">
+      <div class="step">第四题 / 04</div>
+      <h3>你家里管这件事吗？</h3>
+    </div>
+    <div class="answer-card" id="answer-q4">
+      <div class="q-prompt">请作答：</div>
+      <div class="q-options" data-q="q4">
+        <button class="q-btn" data-ans="yes">有明确规则</button>
+        <button class="q-btn" data-ans="no">没有规则</button>
+        <button class="q-btn" data-ans="unclear">不清楚</button>
+      </div>
+      <span class="q-skip" data-skip="q4">跳过作答，直接看数据 →</span>
+    </div>
+    <div class="explain-card" id="explain-q4">
+      <div class="reveal" id="reveal-q4"><span class="num" style="color:var(--risk)">67.9%</span> 的家庭没有制定任何 AI 使用规则。</div>
+      <div class="big-num-overlay risk" id="bignum-q4">
+        <div class="bn-val">67.9%</div>
+      </div>
+    </div>
+    <div class="dot-caption">250 小人 · 170 个转警示红　<span class="approx">*点阵为近似示意</span></div>
+  </div>
+</section>
+
+<!-- ============ 收束：成人世界的迟到 ============ -->
+<section class="section closing" id="closing">
+  <p class="lead-in">而大人们甚至还没意识到这件事的规模——中国教育科学研究院在 2025 年暑期覆盖 <span class="hl">31 个省份</span>、面向 <span class="hl">32 万多名</span>中小学生的大规模调查显示：中西部 <span class="hl">99.7%</span> 的中小学生已经接触 AI，但只有 <span class="hl">13.8%</span> 的教师、<span class="hl">17.8%</span> 的家长，认为学生在普遍使用它。孩子和 AI 之间的相处，早已悄然蔓延，却尚未被成人世界真正看见。</p>
+  <p class="final-q">你有多久没和真人说心里话了？</p>
+</section>
+
+<!-- ============ 章末跳转（统一过渡卡片） ============ -->
+<a class="next-chapter" href="01-online.html" data-next="1" id="nextJump">
+  <div class="nc-frame">
+    <p class="echo">当现实迟到，<span class="hl">代码接住</span>——</p>
+    <p class="label">进 入 第 一 章</p>
+    <p class="title">第一章 · 搭子 · 永远在线</p>
+    <p class="hook">看 AI 如何走进青少年的世界。</p>
+    <span class="arrow" aria-hidden="true">↓</span>
+  </div>
+</a>
+
+</div><!-- /page-card -->
+
+<script src="../data/data.js"></script>
+<script src="../components/common.js"></script>
+<script src="../components/people-sprites.js"></script>
+<script src="../components/crowd.js"></script>
+<script>
+// ===== 滚动驱动粒子系统（ECharts 中国地图 + Canvas 2D 粒子） =====
+// 856 个粒子（每粒 ≈ 10 份问卷，8563÷856≈10），4 阶段重组：地图 → 学段 → 城乡 → 性别
+// 粒子从各省份版图内部飞出（ECharts convertToPixel 对齐），条形宽度按样本占比成比例
+// 颜色随分组变化，大小不一，带呼吸感与荧光发光；条形数据标签在粒子右侧
+(function(){
+  const TOTAL = 856;
+  const provs = window.DATA.intro.mapProvs;   // 7 调研省份
+  const sample = window.DATA.intro.sample;     // 样本构成比例
+
+  const canvas = document.getElementById('particleCanvas');
+  const mapChartEl = document.getElementById('mapChart');
+  const viewport = document.getElementById('scrollViewport');
+  const stageLabel = document.getElementById('stageLabel');
+  const topText = document.getElementById('stageTopText');
+  const sideText = document.getElementById('stageSideText');
+  let sideAlpha = -1;
+  const stageEl = document.getElementById('scrollStage');
+  if (!canvas || !mapChartEl || !viewport || !stageEl) return;
+
+  const ctx = canvas.getContext('2d');
+  let chart = null;   // ECharts 实例
+
+  // 省份主题色（7 色，高饱和金蓝红系，荧光感）
+  const PROV_COLORS = ['#FFD66B','#6FC3E0','#4A8FB0','#E8B73A','#E06B5E','#8FD0E8','#F0B088'];
+  // 各阶段分组色（高饱和、带荧光倾向）
+  const STAGE_GROUP_COLORS = [
+    [],                                          // stage 0: 用省份色
+    ['#4A8FB0','#6FC3E0','#FFD66B'],             // stage 1 学段：小学/初中/高中
+    ['#6FC3E0','#E8B73A'],                        // stage 2 城乡：城市/农村
+    ['#6FC3E0','#FFD66B']                         // stage 3 性别：男/女
+  ];
+  // GeoJSON 名称 → 省份短名 映射
+  const PROV_NAME_MAP = {
+    '北京市':'北京','天津市':'天津','河北省':'河北','山西省':'山西','内蒙古自治区':'内蒙古',
+    '辽宁省':'辽宁','吉林省':'吉林','黑龙江省':'黑龙江','上海市':'上海','江苏省':'江苏',
+    '浙江省':'浙江','安徽省':'安徽','福建省':'福建','江西省':'江西','山东省':'山东',
+    '河南省':'河南','湖北省':'湖北','湖南省':'湖南','广东省':'广东','广西壮族自治区':'广西',
+    '海南省':'海南','重庆市':'重庆','四川省':'四川','贵州省':'贵州','云南省':'云南',
+    '西藏自治区':'西藏','陕西省':'陕西','甘肃省':'甘肃','青海省':'青海','宁夏回族自治区':'宁夏',
+    '新疆维吾尔自治区':'新疆','台湾省':'台湾','香港特别行政区':'香港','澳门特别行政区':'澳门'
+  };
+  const surveyedShort = provs.map(p=>p.name);
+
+  // 颜色工具：hex → [r,g,b]
+  function hexToRgb(hex){
+    const h = hex.replace('#','');
+    return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)];
+  }
+  // 颜色插值
+  function lerpRgb(c1, c2, t){
+    return [
+      Math.round(c1[0] + (c2[0]-c1[0])*t),
+      Math.round(c1[1] + (c2[1]-c1[1])*t),
+      Math.round(c1[2] + (c2[2]-c1[2])*t)
+    ];
+  }
+  // 加深 hex 色（factor 0~1，越小越深），保证浅色粒子色在浅底上可读
+  function darkenHex(hex, factor){
+    const [r,g,b] = hexToRgb(hex);
+    const f = Math.max(0, Math.min(1, factor));
+    return `rgb(${Math.round(r*f)},${Math.round(g*f)},${Math.round(b*f)})`;
+  }
+
+  // 布局尺寸
+  let W = 0, H = 0, DPR = 1;
+  let mapArea = {x:0,y:0,w:0,h:0};
+
+  // GeoJSON 数据（用于 ECharts 注册地图 + 提取省界）
+  let geoJson = null;
+  // 各调研省份的像素坐标 ring 数组（用于 point-in-polygon）
+  let provinceRings = {};  // shortName -> [ring, ring, ...] 每个 ring 是 [[x,y],...]
+
+  // 粒子数据
+  const attrs = new Array(TOTAL);
+  const targets = new Float32Array(TOTAL * 8);          // 4 阶段 x/y
+  const stageColors = new Float32Array(TOTAL * 12);     // 4 阶段 × 3 (r,g,b)
+  const baseSizes = new Float32Array(TOTAL);            // 基础半径
+  const phases = new Float32Array(TOTAL);               // 呼吸相位
+  const stageBarLabels = [null, [], [], []];            // 各阶段条形标签 {x,y,text,color}
+
+  // 悬停状态
+  let hoveredProv = -1;
+  let scrollP = 0;
+
+  // ---- 计算布局 ----
+  function computeLayout(){
+    W = viewport.clientWidth;
+    H = viewport.clientHeight;
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.floor(W * DPR);
+    canvas.height = Math.floor(H * DPR);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    if (chart) chart.resize();
+    // 地图区域：全宽，顶部留给文字说明
+    mapArea = { x: W*0.04, y: H*0.22, w: W*0.92, h: H*0.74 };
+  }
+
+  // ---- 提取省份像素坐标 ring（用 ECharts convertToPixel，保证与地图对齐） ----
+  function buildProvinceRings(){
+    if (!geoJson || !chart) return;
+    provinceRings = {};
+    geoJson.features.forEach(f => {
+      const shortName = PROV_NAME_MAP[f.properties.name] || f.properties.name;
+      if (!surveyedShort.includes(shortName)) return;
+      const rings = [];
+      const geom = f.geometry;
+      const polys = geom.type === 'MultiPolygon' ? geom.coordinates : [geom.coordinates];
+      polys.forEach(poly => {
+        poly.forEach(ring => {
+          const projected = ring.map(pt => {
+            const px = chart.convertToPixel({seriesIndex: 0}, pt);
+            return px ? [px[0], px[1]] : null;
+          }).filter(p => p !== null);
+          if (projected.length > 0) rings.push(projected);
+        });
+      });
+      provinceRings[shortName] = rings;
+    });
+  }
+
+  // ---- 点在多边形内（射线法） ----
+  function pointInRings(x, y, rings){
+    for (const ring of rings){
+      if (d3.polygonContains(ring, [x, y])) return true;
+    }
+    return false;
+  }
+
+  // ---- 在省份版图内生成随机点 ----
+  function randomPointInProvince(shortName){
+    const rings = provinceRings[shortName];
+    if (!rings || rings.length === 0) return null;
+    // 计算 bbox
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    rings.forEach(ring => ring.forEach(pt => {
+      if (pt[0] < minX) minX = pt[0];
+      if (pt[1] < minY) minY = pt[1];
+      if (pt[0] > maxX) maxX = pt[0];
+      if (pt[1] > maxY) maxY = pt[1];
+    }));
+    // 在 bbox 内随机采样，直到落在版图内
+    for (let attempt = 0; attempt < 200; attempt++){
+      const x = minX + Math.random() * (maxX - minX);
+      const y = minY + Math.random() * (maxY - minY);
+      if (pointInRings(x, y, rings)) return [x, y];
+    }
+    return null;
+  }
+
+  // ---- 分配粒子属性 ----
+  function assignAttrs(){
+    const sCut1 = sample.primary, sCut2 = sample.primary + sample.junior;
+    for (let i = 0; i < TOTAL; i++){
+      const r = Math.random() * 100;
+      let school = 0;
+      if (r < sCut1) school = 0;
+      else if (r < sCut2) school = 1;
+      else school = 2;
+      const urban = Math.random() * 100 < sample.urban ? 0 : 1;
+      const gender = Math.random() * 100 < sample.male ? 0 : 1;
+      const provIdx = i % 7;
+      attrs[i] = {provIdx, school, urban, gender};
+
+      // 基础半径：1.5 ~ 4.0，不均匀分布
+      baseSizes[i] = 1.5 + Math.random() * 2.5;
+      // 呼吸相位：0 ~ 2π
+      phases[i] = Math.random() * Math.PI * 2;
+
+      // 各阶段颜色 RGB
+      const off = i * 12;
+      // stage 0：省份色
+      const c0 = hexToRgb(PROV_COLORS[provIdx]);
+      stageColors[off] = c0[0]; stageColors[off+1] = c0[1]; stageColors[off+2] = c0[2];
+      // stage 1：学段色
+      const c1 = hexToRgb(STAGE_GROUP_COLORS[1][school]);
+      stageColors[off+3] = c1[0]; stageColors[off+4] = c1[1]; stageColors[off+5] = c1[2];
+      // stage 2：城乡色
+      const c2 = hexToRgb(STAGE_GROUP_COLORS[2][urban]);
+      stageColors[off+6] = c2[0]; stageColors[off+7] = c2[1]; stageColors[off+8] = c2[2];
+      // stage 3：性别色
+      const c3 = hexToRgb(STAGE_GROUP_COLORS[3][gender]);
+      stageColors[off+9] = c3[0]; stageColors[off+10] = c3[1]; stageColors[off+11] = c3[2];
+    }
+  }
+
+  // ---- 阶段 0：地图目标位置（省份版图内部随机点） ----
+  function computeMapTargets(){
+    if (!chart) return;
+    buildProvinceRings();
+    for (let i = 0; i < TOTAL; i++){
+      const prov = provs[attrs[i].provIdx];
+      const pt = randomPointInProvince(prov.name);
+      if (pt){
+        targets[i*8]   = pt[0];
+        targets[i*8+1] = pt[1];
+      } else {
+        // 降级：省份省会像素坐标
+        const c = chart.convertToPixel({seriesIndex: 0}, prov.value);
+        if (c){
+          targets[i*8]   = c[0] + (Math.random()-0.5)*20;
+          targets[i*8+1] = c[1] + (Math.random()-0.5)*20;
+        }
+      }
+    }
+  }
+
+  // ---- 阶段 1~3：条形目标位置（条形宽度按样本数量成比例，标签在条形右侧） ----
+  function computeBarTargets(stageIdx, bars){
+    const barLeft = W * 0.06;
+    const barRight = W * 0.50;
+    const maxW = barRight - barLeft;
+    const totalH = H * 0.56;
+    const top = H * 0.32;
+    const gap = H * 0.04;
+    const barH = (totalH - gap * (bars.length - 1)) / bars.length;
+
+    const groups = bars.map(bar => {
+      const idxs = [];
+      for (let i = 0; i < TOTAL; i++){
+        if (attrs[i][bar.key] === bar.value) idxs.push(i);
+      }
+      return { idxs, n: idxs.length, label: bar.label, color: bar.color };
+    });
+
+    const nMax = Math.max(...groups.map(g => g.n), 1);
+    const cell = Math.sqrt(maxW * barH / nMax);
+
+    stageBarLabels[stageIdx] = [];
+    groups.forEach((g, bi)=>{
+      const y0 = top + bi * (barH + gap);
+      const barW = (g.n / nMax) * maxW;
+      const cols = Math.max(1, Math.floor(barW / cell));
+      const cellW = barW / cols;
+      const rows = Math.ceil(g.n / cols);
+      const cellH = barH / rows;
+      g.idxs.forEach((idx, pi)=>{
+        const r = Math.floor(pi / cols);
+        const c = pi % cols;
+        const jitterX = (Math.random() - 0.5) * cellW * 0.3;
+        const jitterY = (Math.random() - 0.5) * cellH * 0.3;
+        targets[idx*8 + stageIdx*2]     = barLeft + c * cellW + cellW / 2 + jitterX;
+        targets[idx*8 + stageIdx*2 + 1] = y0 + r * cellH + cellH / 2 + jitterY;
+      });
+      // 条形数据标签：在条形右侧（组名 + 百分比）
+      stageBarLabels[stageIdx].push({
+        x: barLeft + barW + 18,
+        y: y0 + barH / 2,
+        text: g.label,
+        color: g.color,
+        count: g.n
+      });
+    });
+  }
+
+  function computeAllBarTargets(){
+    const sCounts = [0,0,0];
+    for (let i = 0; i < TOTAL; i++) sCounts[attrs[i].school]++;
+    computeBarTargets(1, [
+      {key:'school', value:0, label:'小学', color:STAGE_GROUP_COLORS[1][0]},
+      {key:'school', value:1, label:'初中', color:STAGE_GROUP_COLORS[1][1]},
+      {key:'school', value:2, label:'高中', color:STAGE_GROUP_COLORS[1][2]}
+    ]);
+    const uCounts = [0,0];
+    for (let i = 0; i < TOTAL; i++) uCounts[attrs[i].urban]++;
+    computeBarTargets(2, [
+      {key:'urban', value:0, label:'城市', color:STAGE_GROUP_COLORS[2][0]},
+      {key:'urban', value:1, label:'农村', color:STAGE_GROUP_COLORS[2][1]}
+    ]);
+    const gCounts = [0,0];
+    for (let i = 0; i < TOTAL; i++) gCounts[attrs[i].gender]++;
+    computeBarTargets(3, [
+      {key:'gender', value:0, label:'男', color:STAGE_GROUP_COLORS[3][0]},
+      {key:'gender', value:1, label:'女', color:STAGE_GROUP_COLORS[3][1]}
+    ]);
+  }
+
+  // ---- 滚动进度 → 阶段混合 ----
+  function getBlend(p){
+    if (p < 0.22) return [0,0,0];
+    if (p < 0.32) return [0,1,(p-0.22)/0.10];
+    if (p < 0.52) return [1,1,0];
+    if (p < 0.60) return [1,2,(p-0.52)/0.08];
+    if (p < 0.78) return [2,2,0];
+    if (p < 0.86) return [2,3,(p-0.78)/0.08];
+    return [3,3,0];
+  }
+
+  const STAGE_NAMES = [
+    '调研省份分布 · 7 省市',
+    '样本构成 · 学段',
+    '样本构成 · 城乡',
+    '样本构成 · 性别'
+  ];
+
+  function updateScroll(){
+    const rect = stageEl.getBoundingClientRect();
+    const total = stageEl.offsetHeight - window.innerHeight;
+    const scrolled = -rect.top;
+    scrollP = total > 0 ? Math.max(0, Math.min(1, scrolled / total)) : 0;
+  }
+
+  // ---- 渲染循环 ----
+  let lastTime = performance.now();
+  function render(now){
+    if (!now) now = performance.now();
+    const dt = now - lastTime;
+    lastTime = now;
+
+    updateScroll();
+    const [sa, sb, t] = getBlend(scrollP);
+    const easeT = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
+
+    ctx.clearRect(0, 0, W, H);
+
+    const hoverEnabled = scrollP < 0.22;
+    const activeProv = hoverEnabled ? hoveredProv : -1;
+    const time = now * 0.001;  // 秒
+
+    for (let i = 0; i < TOTAL; i++){
+      const off = i * 8;
+      const ax = targets[off + sa*2], ay = targets[off + sa*2 + 1];
+      const bx = targets[off + sb*2], by = targets[off + sb*2 + 1];
+      const x = ax + (bx - ax) * easeT;
+      const y = ay + (by - ay) * easeT;
+
+      // 颜色插值（阶段 A → 阶段 B）
+      const coff = i * 12;
+      const aR = stageColors[coff + sa*3], aG = stageColors[coff + sa*3+1], aB = stageColors[coff + sa*3+2];
+      const bR = stageColors[coff + sb*3], bG = stageColors[coff + sb*3+1], bB = stageColors[coff + sb*3+2];
+      const cr = Math.round(aR + (bR - aR) * easeT);
+      const cg = Math.round(aG + (bG - aG) * easeT);
+      const cb = Math.round(aB + (bB - aB) * easeT);
+
+      // 呼吸：半径在基础值上 ±25% 脉动，相位各异
+      const breath = 1 + 0.25 * Math.sin(time * 1.8 + phases[i]);
+      const isHovered = activeProv >= 0 && attrs[i].provIdx === activeProv;
+      let radius = baseSizes[i] * breath;
+      if (isHovered) radius *= 1.6;
+
+      // 荧光发光：外层光晕 + shadowBlur
+      ctx.shadowColor = `rgba(${cr},${cg},${cb},0.9)`;
+      ctx.shadowBlur = isHovered ? 16 : 8;
+
+      // 光晕（更大更透明的圆）
+      ctx.globalAlpha = 0.25;
+      ctx.fillStyle = `rgb(${cr},${cg},${cb})`;
+      ctx.beginPath();
+      ctx.arc(x, y, radius * 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 核心粒子
+      ctx.globalAlpha = 0.95;
+      ctx.fillStyle = `rgb(${cr},${cg},${cb})`;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
+
+    // 条形数据标签（学段/城乡/性别阶段，在条形右侧）
+    const labels = stageBarLabels[sa];
+    if (labels && sa > 0){
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'left';
+      ctx.font = `600 ${Math.round(H * 0.034)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+      labels.forEach(lbl => {
+        const pct = Math.round((lbl.count / TOTAL) * 1000) / 10;
+        // 组名：粒子色加深，保证在浅色背景上可读，保留同色微辉光
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = darkenHex(lbl.color, 0.5);
+        ctx.shadowColor = lbl.color;
+        ctx.shadowBlur = 6;
+        ctx.fillText(lbl.text, lbl.x, lbl.y - 4);
+        // 百分比 + 粒子数：深色文本（替换原白色，浅底上清晰可读）
+        ctx.globalAlpha = 0.85;
+        ctx.fillStyle = '#2A2A2A';
+        ctx.shadowBlur = 0;
+        ctx.font = `400 ${Math.round(H * 0.024)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+        ctx.fillText(pct + '%  ·  ' + lbl.count + ' 粒', lbl.x, lbl.y + H * 0.03);
+        ctx.font = `600 ${Math.round(H * 0.034)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+      });
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+    }
+
+    // 底图与顶部文字淡化
+    const mapOpacity = Math.max(0.08, 1 - scrollP * 1.9);
+    mapChartEl.style.opacity = mapOpacity;
+    if (topText) topText.style.opacity = Math.max(0.10, 1 - scrollP * 2.8);
+    // 右侧固定说明：柱图阶段淡入后保持不变（仅在数值变化时写入，避免逐帧触发样式重算）
+    if (sideText){
+      const a = Math.max(0, Math.min(1, (scrollP - 0.28) / 0.06));
+      if (Math.abs(a - sideAlpha) > 0.01){ sideAlpha = a; sideText.style.opacity = a; }
+    }
+    if (stageLabel) stageLabel.textContent = STAGE_NAMES[sa];
+
+    requestAnimationFrame(render);
+  }
+
+  // ---- ECharts 渲染中国地图底图 ----
+  function renderEChartsMap(){
+    if (!geoJson) return;
+    echarts.registerMap('china', geoJson);
+    if (!chart) chart = echarts.init(mapChartEl);
+
+    // 调研省份 → 高亮样式
+    const regions = [];
+    geoJson.features.forEach(f => {
+      const shortName = PROV_NAME_MAP[f.properties.name] || f.properties.name;
+      if (surveyedShort.includes(shortName)){
+        regions.push({
+          name: f.properties.name,
+          itemStyle: { areaColor: 'rgba(244,201,93,0.20)' },
+          emphasis: {
+            itemStyle: { areaColor: 'rgba(244,201,93,0.45)' },
+            label: { show: true, color: '#fff', fontSize: 12 }
+          }
+        });
+      }
+    });
+
+    chart.setOption({
+      backgroundColor: 'transparent',
+      tooltip: { show: false },
+      series: [{
+        type: 'map',
+        map: 'china',
+        roam: false,
+        // 地图居中偏下，给顶部文字留空间
+        layoutCenter: ['50%', '80%'],
+        layoutSize: '90%',
+        label: { show: false },
+        itemStyle: {
+          areaColor: 'rgba(26,58,74,0.06)',
+          borderColor: 'rgba(212,160,23,0.40)',
+          borderWidth: 0.6
+        },
+        emphasis: {
+          disabled: false,
+          itemStyle: { areaColor: 'rgba(244,201,93,0.30)' },
+          label: { show: false }
+        },
+        select: { disabled: true },
+        regions: regions
+      }]
+    }, true);
+
+    // 悬停：仅地图阶段生效，高亮对应省份粒子
+    chart.on('mouseover', function(params){
+      if (scrollP >= 0.15) return;
+      const shortName = PROV_NAME_MAP[params.name] || params.name;
+      const idx = provs.findIndex(p => p.name === shortName);
+      if (idx >= 0) hoveredProv = idx;
+    });
+    chart.on('mouseout', function(){
+      hoveredProv = -1;
+    });
+
+    // 等待渲染完成后提取像素坐标 ring
+    setTimeout(() => {
+      computeMapTargets();
+    }, 80);
+  }
+
+  // ---- 加载 GeoJSON ----
+  function loadGeo(){
+    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+      .then(r => r.json())
+      .then(geo => {
+        geoJson = geo;
+        renderEChartsMap();
+      })
+      .catch(err => {
+        console.error('中国地图 GeoJSON 加载失败：', err);
+      });
+  }
+
+  function init(){
+    computeLayout();
+    assignAttrs();
+    computeAllBarTargets();
+    loadGeo();
+    requestAnimationFrame(render);
+  }
+
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      computeLayout();
+      if (chart && geoJson){
+        chart.resize();
+        setTimeout(() => {
+          computeMapTargets();
+        }, 100);
+      }
+      computeAllBarTargets();
+    }, 150);
+  });
+
+  init();
+})();
+
+// ===== 小人人群（CrowdField，见 ../components/crowd.js） =====
+// 5 角色 × 4 帧步态精灵图集（people-sprites.js）：奔跑入场 → 散开 → 作答后按比例分上下两群
+// 每块画布 crowdCount 个小人，步态动画、转向、阴影、深度排序；作答后命中比例者转强调色聚上半区
+
+const fields = {};
+
+// ===== 题目交互逻辑 =====
+function setupQuestion(qid, opts){
+  const optionsEl = document.querySelector(`.q-options[data-q="${qid}"]`);
+  if (!optionsEl) return;
+  const btns = optionsEl.querySelectorAll('.q-btn');
+  const skipEl = document.querySelector(`.q-skip[data-skip="${qid}"]`);
+  const fb = document.getElementById('fb-'+qid);
+  let answered = false;
+  const multi = !!opts.multi;
+  const selected = new Set();
+
+  function triggerReveal(userAns){
+    if (answered) return;
+    answered = true;
+    if (multi){
+      btns.forEach(b=>{ b.disabled = true; });
+      opts.onReveal(Array.from(selected));
+    } else {
+      btns.forEach(b=>{ b.disabled = true; if (b.dataset.ans === userAns) b.classList.add('selected'); });
+      opts.onReveal(userAns);
+    }
+    if (fb) fb.classList.add('show');
+  }
+
+  btns.forEach(b=>{
+    b.addEventListener('click', ()=>{
+      if (answered) return;
+      if (multi){
+        const ans = b.dataset.ans;
+        if (selected.has(ans)){ selected.delete(ans); b.classList.remove('selected'); }
+        else { selected.add(ans); b.classList.add('selected'); }
+      } else {
+        triggerReveal(b.dataset.ans);
+      }
+    });
+  });
+  if (skipEl){
+    skipEl.addEventListener('click', ()=>{
+      if (multi){
+        triggerReveal(Array.from(selected));   // 多选：点"查看结果"即揭晓，已选项会被标记
+      } else {
+        triggerReveal('__skip__');
+      }
+    });
+  }
+
+  const section = document.getElementById(qid);
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting && !answered){
+        setTimeout(()=>{
+          if (!answered) triggerReveal(multi ? Array.from(selected) : '__auto__');
+        }, 6000);
+      }
+    });
+  }, {threshold: 0.4});
+  if (section) io.observe(section);
+}
+
+window.addEventListener('load', ()=>{
+  // 小人人群规模：每块画布 crowdCount 人，单个人约代表 8563/crowdCount 份问卷
+  const crowdCount = 250;
+  const atlasSrc = (window.PEOPLE_SPRITE_ATLAS || {}).src;
+
+  // 第一题（滚动叙事：答题分组 → 滚动出现解释框）
+  fields.q1 = new CrowdField('canvas-q1', 'bignum-q1', { count: crowdCount, atlasSrc: atlasSrc });
+  setupQuestion('q1', {
+    onReveal(ans){
+      fields.q1.reveal(61.7, '#D4A017', '61.7%');
+      const numEl = document.querySelector('#reveal-q1');
+      if (ans === 'often'){
+        numEl.innerHTML = '你的答案：经常——近两成（<span class="num">18.3%</span>）受访中小学生经常使用 AI。';
+      } else if (ans === 'sometimes'){
+        numEl.innerHTML = '你的答案：偶尔——超过六成（<span class="num">61.7%</span>）受访中小学生用过 AI，其中近两成（<span class="num">18.3%</span>）经常使用。';
+      } else if (ans === 'never'){
+        numEl.innerHTML = '你的答案：从不——约 <span class="num">38.3%</span> 的孩子和你一样。但超过六成（<span class="num">61.7%</span>）受访中小学生用过 AI。';
+      } else {
+        numEl.innerHTML = '超过六成（<span class="num">61.7%</span>）受访中小学生用过 AI，其中近两成（<span class="num">18.3%</span>）经常使用。';
+      }
+    }
+  });
+  // 滚动到解释框时淡入
+  const explainQ1 = document.getElementById('explain-q1');
+  if (explainQ1){
+    const ioExp = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting){
+          explainQ1.classList.add('show');
+          ioExp.disconnect();
+        }
+      });
+    }, {threshold: 0.25});
+    ioExp.observe(explainQ1);
+  }
+
+  // 第二题（横条不变，只改位置）—— 多选模式
+  setupQuestion('q2', {
+    multi: true,
+    onReveal(ans){
+      const bars = document.querySelectorAll('#bars-q2 .q2-bar');
+      bars.forEach((bar, idx)=>{
+        const pct = parseFloat(bar.dataset.pct);
+        setTimeout(()=>{
+          bar.querySelector('.fill').style.width = pct + '%';
+        }, idx*120);
+      });
+      if (Array.isArray(ans) && ans.length > 0){
+        const ansMap = {homework:0, learn:1, create:2, talk:3, fun:4};
+        ans.forEach(a => {
+          const selIdx = ansMap[a];
+          if (selIdx !== undefined) bars[selIdx]?.classList.add('you');
+        });
+      }
+    }
+  });
+
+  // 第三题：两段式（46.4% 蓝 → 21.5% 红），滚动触发第二阶段
+  fields.q3 = new CrowdField('canvas-q3', 'bignum-q3-s2', { count: crowdCount, atlasSrc: atlasSrc });
+  let q3Stage2Shown = false;
+  setupQuestion('q3', {
+    onReveal(ans){
+      fields.q3.reveal(46.4, '#3A6B8A', '46.4%', false, 1);
+    }
+  });
+  // 第一解释框淡入
+  const expQ3s1 = document.getElementById('explain-q3-s1');
+  if (expQ3s1){
+    const ioS1 = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting){
+          expQ3s1.classList.add('show');
+          const bn1 = document.getElementById('bignum-q3');
+          if (bn1) bn1.classList.add('show');
+          ioS1.disconnect();
+        }
+      });
+    }, {threshold: 0.25});
+    ioS1.observe(expQ3s1);
+  }
+  // 第二解释框：滚入时触发 21.5% 重新分组（在上次分组基础上重分类）
+  const expQ3s2 = document.getElementById('explain-q3-s2');
+  if (expQ3s2){
+    const ioS2 = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting){
+          expQ3s2.classList.add('show');
+          if (!q3Stage2Shown){
+            q3Stage2Shown = true;
+            fields.q3.reveal(21.5, '#B84A3E', '21.5%', false, 1.5);
+          }
+          ioS2.disconnect();
+        }
+      });
+    }, {threshold: 0.3});
+    ioS2.observe(expQ3s2);
+  }
+
+  // 第四题
+  fields.q4 = new CrowdField('canvas-q4', 'bignum-q4', { count: crowdCount, atlasSrc: atlasSrc });
+  setupQuestion('q4', {
+    onReveal(ans){
+      fields.q4.reveal(67.9, '#B84A3E', '67.9%');
+    }
+  });
+  // 解释框淡入
+  const expQ4 = document.getElementById('explain-q4');
+  if (expQ4){
+    const ioQ4 = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting){
+          expQ4.classList.add('show');
+          ioQ4.disconnect();
+        }
+      });
+    }, {threshold: 0.25});
+    ioQ4.observe(expQ4);
+  }
+});
+
+// ===== 开场视频封面：用户点击或滚动即触发——左侧渐变蒙层自左向右缓慢铺开，随即浮现三行左对齐文字 =====
+(function(){
+  const hero = document.getElementById('opening');
+  if (!hero) return;
+  const video = hero.querySelector('.vh-bg');
+  let started = false;
+  const evs = ['pointerdown','click','wheel','touchstart','keydown'];
+  // 任一点击 / 滚动 / 触摸 / 按键即刻开始（不需要等待）
+  const start = ()=>{
+    if (started) return;
+    started = true;
+    hero.classList.add('play');
+    evs.forEach(e=>window.removeEventListener(e, start));
+  };
+  evs.forEach(e=>window.addEventListener(e, start, {passive:true}));
+
+  if (video){
+    // 资源缺失/解码失败 → 去掉视频层（退回首帧静图）
+    video.addEventListener('error', ()=>hero.classList.add('no-video'), true);
+    const p = video.play();
+    if (p && p.catch) p.catch(()=>{});
+  }
+})();
+
+// ===== 方案C：引言屏「上浮对话气泡」装饰层 =====
+// 纯视觉填补留白：低对比度圆角气泡自底部缓慢上浮、轻微横向摇曳，
+// 与全篇的小人 / 点阵粒子视觉语言保持一致；不承载任何信息，不接收指针事件。
+(function(){
+  const canvas = document.getElementById('bubbleCanvas');
+  const host = document.getElementById('introText');
+  if (!canvas || !host) return;
+  const ctx = canvas.getContext('2d');
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W = 0, H = 0, dpr = 1;
+  let bubbles = [];
+  let rafId = null;
+  let running = false;
+  let last = 0;
+
+  // 气泡配色：以墨色为主、金色为辅，均为低对比度
+  const INK = [26, 58, 74];
+  const GOLD = [212, 160, 23];
+
+  // 上下收窄：气泡只在本屏中段铺开，顶部 20% 与底部 22% 留白
+  const BAND_TOP = 0.20;
+  const BAND_BOT = 0.78;
+
+  function rand(a, b){ return a + Math.random() * (b - a); }
+
+  function makeBubble(spawnAtBottom){
+    const gold = Math.random() < 0.22;
+    const w = rand(46, 148);
+    const h = rand(26, 48);
+    return {
+      w: w,
+      h: h,
+      r: rand(10, Math.min(15, h / 2)),
+      x: rand(-10, W - w + 10),
+      y: spawnAtBottom ? H * BAND_BOT + rand(0, H * 0.28) : rand(H * BAND_TOP - h, H * BAND_BOT),
+      vy: rand(8, 20),                        // 上浮速度 px/s
+      swayA: rand(5, 18),                     // 横向摇曳幅度
+      swayF: rand(0.12, 0.4),                 // 摇曳频率
+      phase: rand(0, Math.PI * 2),
+      tail: Math.random() < 0.5 ? 'l' : 'r',  // 气泡小尖角指向
+      rgb: gold ? GOLD : INK,
+      alpha: gold ? rand(0.11, 0.24) : rand(0.10, 0.21),
+      lines: Math.random() < 0.55 ? (Math.random() < 0.5 ? 1 : 2) : 0   // 内部「文字行」
+    };
+  }
+
+  function build(){
+    if (!W || !H) return;
+    const bandH = H * (BAND_BOT - BAND_TOP);
+    const count = Math.max(10, Math.min(26, Math.round((W * bandH) / 34000)));
+    bubbles = [];
+    for (let i = 0; i < count; i++) bubbles.push(makeBubble(false));
+  }
+
+  function resize(){
+    const rect = host.getBoundingClientRect();
+    W = Math.max(1, Math.round(rect.width));
+    H = Math.max(1, Math.round(rect.height));
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+    if (reduceMotion) draw(0, true);
+  }
+
+  // 圆角气泡路径（含朝下的小尖角，形成「对话气泡」轮廓）
+  function bubblePath(b, x, y){
+    const { w, h, r } = b;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.arcTo(x + w, y, x + w, y + r, r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+    if (b.tail === 'r'){
+      ctx.lineTo(x + w - r - 20, y + h);
+      ctx.lineTo(x + w - 6, y + h + 13);
+      ctx.lineTo(x + w - 34, y + h);
+    }
+    ctx.lineTo(x + r, y + h);
+    if (b.tail === 'l'){
+      ctx.lineTo(x + r + 34, y + h);
+      ctx.lineTo(x + 6, y + h + 13);
+      ctx.lineTo(x + r + 20, y + h);
+    }
+    ctx.arcTo(x, y + h, x, y + h - r, r);
+    ctx.lineTo(x, y + r);
+    ctx.arcTo(x, y, x + r, y, r);
+    ctx.closePath();
+  }
+
+  function draw(dt, statics){
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < bubbles.length; i++){
+      const b = bubbles[i];
+      if (!statics){
+        b.y -= b.vy * dt;
+        b.phase += b.swayF * dt;
+        // 浮出中段顶部 → 回到中段底部重新升起
+        if (b.y + b.h < H * BAND_TOP) Object.assign(b, makeBubble(true));
+      }
+      const x = b.x + Math.sin(b.phase) * b.swayA;
+      const y = b.y;
+
+      // 中段上下边缘渐隐，避免突然出现 / 消失
+      const fadeIn = Math.min(1, Math.max(0, (H * BAND_BOT - y) / 90));
+      const fadeOut = Math.min(1, Math.max(0, (y + b.h - H * BAND_TOP) / 90));
+      const a = b.alpha * Math.min(fadeIn, fadeOut);
+      const rgb = b.rgb[0] + ',' + b.rgb[1] + ',' + b.rgb[2];
+
+      bubblePath(b, x, y);
+      ctx.fillStyle = 'rgba(' + rgb + ',' + (a * 0.6).toFixed(3) + ')';
+      ctx.fill();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(' + rgb + ',' + a.toFixed(3) + ')';
+      ctx.stroke();
+
+      // 内部「文字行」：极淡的圆角短横，暗示一段对话
+      if (b.lines > 0){
+        ctx.strokeStyle = 'rgba(' + rgb + ',' + (a * 0.8).toFixed(3) + ')';
+        const pad = 11, lh = 4;
+        for (let k = 0; k < b.lines; k++){
+          const lw = b.w - pad * 2 - (k === 1 ? b.w * 0.28 : 0);
+          const ly = y + b.h / 2 - (b.lines === 2 ? lh + 3 : lh / 2) + k * (lh + 6);
+          ctx.beginPath();
+          ctx.moveTo(x + pad, ly);
+          ctx.lineTo(x + pad + lw, ly);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop(now){
+    if (!running) return;
+    const dt = Math.min(0.05, (now - last) / 1000) || 0;
+    last = now;
+    draw(dt, false);
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function start(){
+    if (running || reduceMotion) return;
+    running = true;
+    last = performance.now();
+    rafId = requestAnimationFrame(loop);
+  }
+  function stop(){
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  resize();
+
+  // 仅在本屏可见时渲染，滚过去后停掉，避免无谓的 CPU 开销
+  if ('IntersectionObserver' in window && !reduceMotion){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e => e.isIntersecting ? start() : stop());
+    }, {rootMargin: '120px'});
+    io.observe(host);
+  } else if (!reduceMotion){
+    start();
+  }
+
+  let rzTimer = null;
+  window.addEventListener('resize', ()=>{
+    clearTimeout(rzTimer);
+    rzTimer = setTimeout(resize, 160);
+  });
+})();
+</script>
+
+
+</body></html>

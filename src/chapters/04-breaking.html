@@ -1,0 +1,3101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第四章 · 破茧·从七国与欧盟的法律到家庭餐桌 | 永远在线的"搭子"</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- 全站主题（12 token + reset）已抽离到 ../styles/theme.css -->
+<link rel="stylesheet" href="../styles/theme.css">
+<style>
+/* 第四章独有：警示深红（风险侧强调色） */
+:root{
+  --risk-deep:#7A2E25;
+}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+
+/* ========== 通用布局 ========== */
+.section{width:100%;padding:48px 0;position:relative}
+.container{width:70%;margin:0 auto;max-width:1100px}
+.container.narrow{max-width:780px}
+h2.ch-title{
+  font-size:26px;font-weight:700;color:var(--cover-main);
+  letter-spacing:1px;margin-bottom:8px;
+  padding-top:16px;border-top:2px solid var(--gold-deep);
+  display:inline-block;padding-right:18px;
+}
+h2.ch-title .num{color:var(--gold-deep);margin-right:10px}
+h3.sec-title{
+  font-size:20px;font-weight:600;color:var(--cover-main);
+  margin:22px 0 14px;letter-spacing:.5px;
+}
+h3.sec-title .idx{color:var(--gold-deep);font-weight:700;margin-right:8px}
+p.body{
+  font-size:16px;color:var(--ink);line-height:1.9;
+  margin-bottom:18px;text-align:justify;
+}
+p.body .hl{color:var(--gold-deep);font-weight:600}
+p.body .hl-risk{color:var(--risk);font-weight:600}
+p.body .num{color:var(--gold-deep);font-weight:700;font-size:1.05em}
+p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
+.quote{
+  margin:24px 0;padding:14px 20px;background:rgba(244,201,93,.06);
+  border-left:2px solid var(--gold);color:var(--ink-sub);
+  font-size:16px;line-height:1.85;border-radius:0 4px 4px 0;
+}
+.source-line{
+  font-size:12px;color:var(--ink-dim);
+  margin-top:8px;line-height:1.7;
+}
+.source-line a{color:var(--step-1);text-decoration:none;border-bottom:1px dotted var(--step-1)}
+.source-line a:hover{color:var(--risk);border-color:var(--risk)}
+.tag-caveat{
+  display:inline-block;font-size:12px;color:var(--ink-dim);
+  background:rgba(26,58,74,.06);padding:3px 10px;border-radius:10px;
+  margin-left:8px;letter-spacing:.5px;
+}
+.footnote-mark{
+  font-size:12px;color:var(--ink-dim);
+  border-bottom:1px dashed var(--gold-deep);
+  cursor:help;
+}
+
+/* ========== 章首导语：左文字 / 右插画 分栏 ========== */
+.lead-split{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:center;
+  margin-top:10px;
+}
+.lead-split .lead-text > p.body:first-child{margin-top:0}
+.lead-split .lead-text > p.body:last-child{margin-bottom:0}
+.lead-figure{margin:0;text-align:center}
+.lead-figure img{
+  display:block;width:100%;height:auto;border-radius:6px;
+  box-shadow:0 2px 18px rgba(26,58,74,.14);background:#E8ECEB;
+}
+.lead-figure figcaption{
+  font-size:12px;color:var(--ink-dim);line-height:1.6;
+  margin-top:10px;text-align:center;letter-spacing:.2px;
+}
+#s4-lead{padding-bottom:16px}
+#s4-1{padding-top:0;padding-bottom:24px}
+#s4-2{padding-top:24px}
+
+/* ========== 封面：光缝+金色线 ========== */
+.cover{
+  height:100vh;min-height:680px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:var(--cover-deep) url("../../assets/images/covers/cover-ch4-breaking.webp") center/cover no-repeat;
+  color:#fff;
+}
+.cover::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(8,24,32,.52) 0%, rgba(8,24,32,.20) 46%, rgba(8,24,32,.14) 72%, rgba(8,24,32,.52) 100%),
+    linear-gradient(180deg, rgba(8,24,32,.5) 0%, rgba(8,24,32,0) 30%, rgba(8,24,32,0) 68%, rgba(8,24,32,.6) 100%);
+}
+.cover-text{
+  position:relative;z-index:2;text-align:center;
+  max-width:780px;padding:0 20px;
+}
+/* 封面标题：背景插画已含书法标题，此处仅保留屏幕阅读器语义 */
+.cover-text h1{
+  position:absolute;width:1px;height:1px;
+  margin:-1px;padding:0;border:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
+.cover-text .sub{
+  font-size:23px;color:rgba(255,255,255,.92);
+  line-height:1.9;max-width:620px;margin:0 auto 28px;
+  text-shadow:0 1px 14px rgba(0,0,0,.62);
+}
+/* 眉标：PART 0N ＋ 两侧金色细线 */
+.cover-eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:22px;
+  margin:0 0 17px;
+  font-size:24px;font-weight:600;letter-spacing:.34em;text-indent:.34em;
+  color:var(--gold);font-variant-numeric:tabular-nums;
+}
+.cover-eyebrow::before,.cover-eyebrow::after{
+  content:"";flex:none;width:72px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(244,201,93,.75));
+}
+.cover-eyebrow::after{transform:scaleX(-1)}
+/* 幽灵编号：6% 白的巨大数字，给中央留白一个尺度；纯装饰、不抢读 */
+.cover-num{
+  position:absolute;left:50%;top:41%;transform:translate(-50%,-50%);
+  z-index:2;pointer-events:none;user-select:none;
+  font-size:clamp(64px, min(30vw, 24vh), 320px);
+  font-weight:800;line-height:1;letter-spacing:-.03em;
+  color:rgba(255,255,255,.06);font-variant-numeric:tabular-nums;
+}
+/* 第四章：文字块落在图宽约 48%、纵约 38% 的中偏右上（较上一版再左移下移一点），
+   让开左侧书法「破茧与划线」，同时仍停在飞升少年头/翅之上（翅顶约纵 43%） */
+.cover-text--left{
+  position:absolute;left:48%;top:38%;
+  transform:translate(-50%,-50%);
+  padding:0;
+}
+/* 第四章幽灵编号跟随文字块（同一视线，错开一点形成"刻度"层） */
+#ch4 .cover-num{left:48%;top:33%}
+.scroll-cue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  font-size:13px;color:rgba(255,255,255,.7);
+  letter-spacing:.28em;text-align:center;z-index:2;
+}
+.scroll-cue::after{
+  content:"";display:block;width:1px;height:30px;margin:10px auto 0;
+  background:linear-gradient(to bottom, var(--gold), transparent);
+  animation:drop 2s infinite;
+}
+@keyframes drop{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* ========== 封面动效：跟在少年翅膀后飞的三只蝴蝶 ==========
+   底图为 center/cover，可见裁剪随视口比例变化；故动效层自建一个与底图
+   等尺寸的 16:9 舞台（宽 = max(视口宽, 100vh×16/9, 680px×16/9)），
+   蝴蝶按“图内坐标”定位，不会因视口比例不同而错位。 */
+.cover-fx{position:absolute;inset:0;z-index:2;pointer-events:none}
+.cover-fx-stage{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:max(100%, calc(100vh * 16 / 9), calc(680px * 16 / 9));
+  aspect-ratio:16 / 9;
+}
+.bfly{position:absolute;display:block;opacity:.86}
+.bfly svg{
+  display:block;width:100%;height:auto;
+  filter:drop-shadow(0 0 6px rgba(244,201,93,.5));
+}
+.bfly--1{left:46%;top:78%;width:3.1%;animation:bflyDrift 8.4s .2s ease-in-out infinite}
+.bfly--2{left:40%;top:84%;width:2.4%;animation:bflyDrift 10.2s 2.6s ease-in-out infinite}
+.bfly--3{left:34%;top:89%;width:1.8%;animation:bflyDrift 11.6s 4.8s ease-in-out infinite}
+/* 双翅绕身体中线开合；transform-origin 取 viewBox 坐标（x=20 为身体轴） */
+.bfly .wing{
+  fill:#F6D98A;
+  transform-box:view-box;transform-origin:20px 15px;
+  animation:bflyFlap .36s ease-in-out infinite;
+}
+.bfly--2 .wing{animation-duration:.42s;animation-delay:.1s}
+.bfly--3 .wing{animation-duration:.48s;animation-delay:.2s}
+.bfly .bfly-body{fill:var(--gold)}
+.bfly .bfly-head{fill:#FFF6DF}
+.bfly .bfly-whisker{
+  fill:none;stroke:#F6D98A;stroke-width:.7;
+  stroke-linecap:round;opacity:.8;
+}
+@keyframes bflyFlap{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.32)}}
+@keyframes bflyDrift{
+  0%,100%{transform:translate(0,0) rotate(-5deg)}
+  25%{transform:translate(-58%,-72%) rotate(7deg)}
+  50%{transform:translate(-18%,-118%) rotate(-4deg)}
+  75%{transform:translate(48%,-58%) rotate(6deg)}
+}
+
+/* 尊重“减少动态效果”偏好：停用飞行与开合动画，保留静态姿态 */
+@media (prefers-reduced-motion:reduce){
+  .cover-fx *{animation:none!important}
+}
+
+/* ========== 4.1 七国与欧盟地图 ========== */
+.map-wrap{
+  margin:30px 0;padding:30px 24px;background:#fff;
+  border:1px solid var(--divider);border-radius:8px;
+  display:flex;align-items:stretch;
+  --ai-w:clamp(288px,30vw,340px);
+}
+/* 左列＝地图＋图例＋注释；右列＝AI 抽屉。抽屉高度＝左列总高，面板因此永远高于地图，
+   对话区不会被固定的头部／问句条／输入框挤没 */
+.map-main{flex:1 1 auto;min-width:0}
+.map-svg{width:100%;height:420px;display:block;margin-bottom:18px}
+.map-legend{
+  display:flex;flex-wrap:wrap;gap:18px;justify-content:center;
+  font-size:13px;color:var(--ink-sub);margin-top:8px;
+}
+.map-legend .lg-item{display:flex;align-items:center;gap:6px;font:inherit;font-size:13px;color:var(--ink-sub);background:none;border:1px solid transparent;border-radius:14px;padding:3px 10px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.map-legend .lg-item:hover{background:#F7F9F9;border-color:var(--divider)}
+.map-legend .lg-item.on{background:rgba(212,160,23,.1);border-color:var(--gold-deep);color:var(--gold-deep)}
+.map-note{font-size:11.5px;line-height:1.7;color:var(--ink-dim);margin-top:8px;text-align:center}
+.map-legend .lg-dot{
+  width:14px;height:14px;border-radius:3px;display:inline-block;
+}
+.lg-1{background:#B84A3E}
+.lg-2{background:#D4A017}
+.lg-3{background:#5B9AB5}
+.lg-4{background:#888888}
+.lg-hint{color:var(--ink-dim);font-size:12px;margin-left:8px}
+
+/* ========== 4.1 AI 交互世界地图（推挤式抽屉：展开时地图同步收缩，任何状态都不遮挡内容） ========== */
+.map-stage{position:relative;border-radius:8px;overflow:hidden}
+.map-view{position:relative}
+.map-svg{width:100%;height:auto;display:block;margin-bottom:0}
+.map-svg text{transition:font-size .45s ease}
+/* 抽屉展开后地图收窄（约剩 0.71 倍），标签字号补回一点保证可读；
+   同时由脚本把国名下的小字沿"远离国名"方向挪 7 个单位，避免两行贴住。
+   补偿只在 ≥821px 生效：≤820px 时地图是全宽的，不需要补偿 */
+@media (min-width:821px){
+  .map-wrap.open .map-svg text.m-label{font-size:16px}
+  .map-wrap.open .map-svg text.m-label[font-size="12"]{font-size:14px}
+  .map-wrap.open .map-svg text.m-sub{font-size:12px}
+  .map-wrap.open .map-svg g[font-size="9"] text{font-size:11px}
+  .map-wrap.open .map-svg #aiHubG text{font-size:13px}
+}
+.m-point{cursor:pointer}
+.m-point:focus-visible{outline:none}
+.m-point:focus-visible .dot{transform:scale(1.35)}
+.m-point:focus-visible .halo{opacity:1;transform:scale(1.5)}
+.m-point:focus-visible .m-label,.m-point:focus-visible .m-sub{fill:#0F2532}
+.map-leaders circle{fill:#fff}
+.m-point .dot{transition:transform .25s ease, filter .25s ease;transform-box:fill-box;transform-origin:center}
+.m-point:hover .dot{transform:scale(1.35);filter:brightness(1.15)}
+.m-point .halo{opacity:0;transform:scale(.4);pointer-events:all;transform-box:fill-box;transform-origin:center;transition:opacity .3s ease, transform .3s ease}
+.m-point:hover .halo{opacity:1;transform:scale(1.3)}
+.m-point.hot .dot{transform:scale(1.4)}
+.m-point.hot .halo{opacity:1;transform:scale(1.5)}
+.m-point.dim{opacity:.26;transition:opacity .4s ease}
+.m-point.dim .m-label,.m-point.dim .m-sub{opacity:.35}
+.halo.ping{animation:ping 1.4s ease-out 2}
+@keyframes ping{0%{transform:scale(.55);opacity:.9}100%{transform:scale(2.3);opacity:0}}
+
+/* 悬停提示 */
+.map-tooltip{position:absolute;z-index:5;pointer-events:none;background:rgba(15,37,50,.92);color:#fff;font-size:12px;line-height:1.6;padding:8px 12px;border-radius:6px;border:1px solid rgba(244,201,93,.5);box-shadow:0 6px 18px rgba(15,37,50,.25);max-width:250px;white-space:nowrap;transform:translate(-50%,-118%)}
+.map-tooltip .tt-name{color:var(--gold);font-weight:700;margin-right:6px}
+.map-tooltip .tt-tag{font-size:10px;background:rgba(244,201,93,.15);color:var(--gold);padding:1px 6px;border-radius:8px;margin-left:6px}
+.map-tooltip .tt-geo{font-size:10px;color:rgba(255,255,255,.62)}
+
+/* 点击详情卡 */
+/* max-height 必须跟着地图高度走：卡片内容比地图高时（美国卡 535px、欧盟卡 487px，而地图仅 202–483px），
+   超出的部分会被 .map-stage 的 overflow:hidden 从顶部切掉，而「×」正好在最顶部，于是点不到。
+   这里给卡片封顶 + 中段滚动，头部（含 ×）与底部按钮固定在可视区内。 */
+.map-detail{position:absolute;z-index:6;left:16px;bottom:16px;width:320px;max-width:calc(100% - 32px);max-height:calc(100% - 32px);display:flex;flex-direction:column;background:#fff;border:1px solid var(--divider);border-radius:10px;box-shadow:0 12px 32px rgba(15,37,50,.18);padding:16px 16px 12px;font-size:13px;color:var(--ink-sub);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s ease, transform .25s ease}
+.map-detail.show{opacity:1;transform:none;pointer-events:auto}
+.md-close{position:absolute;top:-8px;right:-6px;border:none;background:none;color:var(--ink-dim);font-size:18px;cursor:pointer;line-height:1}
+.md-head{position:relative;display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-right:24px;cursor:grab;touch-action:none;user-select:none}
+.map-detail.dragging .md-head{cursor:grabbing}
+.md-grip{width:10px;height:14px;flex:none;opacity:.45;background-image:radial-gradient(circle,#6A7075 0 1.1px,transparent 1.2px);background-size:5px 5px;background-position:0 1px}
+.md-scroll{overflow:auto;min-height:0;flex:1 1 auto;overscroll-behavior:contain;scrollbar-width:thin}
+.md-name{font-size:16px;font-weight:700;color:var(--cover-main);letter-spacing:.5px}
+.md-tag{font-size:11px;color:#fff;padding:2px 8px;border-radius:8px;letter-spacing:.5px;flex:none}
+.md-tag.t1{background:#B84A3E}
+.md-tag.t2{background:#D4A017}
+.md-tag.t3{background:#5B9AB5}
+.md-tag.t4{background:#888888}
+.md-laws{list-style:none;margin:4px 0 10px;display:flex;flex-direction:column;gap:6px}
+.md-laws li{border-left:2px solid var(--gold-deep);padding:1px 0 1px 8px;font-size:12px;line-height:1.6}
+.md-laws b{color:var(--cover-main)}
+.md-summary{font-size:12px;line-height:1.7;color:var(--ink-sub);border-top:1px dashed var(--divider);padding-top:8px}
+.md-geo{font-size:11px;line-height:1.6;color:var(--ink-dim);margin-top:6px}
+.md-actions{display:flex;gap:8px;margin-top:10px}
+.md-btn{flex:1;border:none;background:var(--cover-main);color:#fff;font-size:12px;padding:7px 0;border-radius:6px;cursor:pointer;transition:opacity .2s}
+.md-btn:hover{opacity:.85}
+.md-btn.ghost{background:#F4F6F5;color:var(--ink-sub);border:1px solid var(--divider)}
+
+/* AI 问政面板：装在 .ai-drawer 里，宽度随抽屉裁剪；高度＝抽屉高度＝「地图＋图例＋注释」整列 */
+.ai-drawer{position:relative;flex:0 0 auto;width:0;overflow:hidden;visibility:hidden;
+  transition:width .45s cubic-bezier(.4,0,.2,1), visibility 0s linear .45s}
+.map-wrap.open .ai-drawer{width:var(--ai-w);visibility:visible;
+  transition:width .45s cubic-bezier(.4,0,.2,1)}
+.ai-panel{position:absolute;top:0;bottom:0;left:0;z-index:7;width:var(--ai-w);background:rgba(255,255,255,.97);border-left:1px solid rgba(26,58,74,.14);display:flex;flex-direction:column;overflow:hidden}
+
+/* 右侧竖标签：抽屉收起时是地图右缘的拉手，展开后正好贴在地图与面板的交界处 */
+.ai-tab{position:absolute;top:50%;right:0;transform:translateY(-50%);z-index:8;
+  display:flex;flex-direction:column;align-items:center;gap:11px;padding:19px 5px;
+  background:linear-gradient(135deg,#1A3A4A,#0F2532);color:#fff;border:none;cursor:pointer;
+  border-radius:9px 0 0 9px;font-family:inherit;font-size:14.5px;
+  box-shadow:-3px 0 15px rgba(15,37,50,.24);
+  transition:background .2s}
+.ai-tab:hover{background:linear-gradient(135deg,#27556E,#153345)}
+.ai-tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.ai-tab-badge{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1A3A4A;font-size:13.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.ai-tab-txt{writing-mode:vertical-rl;letter-spacing:.2em;line-height:1.05}
+/* 一次性引导（每个会话只在首次滚到这块时提示一次）：标签脉冲 + 左侧提示气泡。
+   气泡是竖标签的子元素，所以点气泡＝点标签；它在标签左侧的空白海域，压不到任何光点 */
+@keyframes tabHint{
+  0%,100%{box-shadow:-3px 0 15px rgba(15,37,50,.24);transform:translateY(-50%) scale(1)}
+  50%{box-shadow:0 0 0 8px rgba(212,160,23,.20),-3px 0 24px rgba(212,160,23,.5);transform:translateY(-50%) scale(1.04)}
+}
+.ai-tab.hint{animation:tabHint 1.5s ease-in-out 3}
+.ai-tip{position:absolute;right:calc(100% + 17px);top:50%;white-space:nowrap;
+  background:#fff;color:var(--ink);border:1px solid rgba(212,160,23,.6);border-radius:19px;
+  padding:9px 17px;font-size:14.5px;font-weight:600;letter-spacing:.02em;
+  box-shadow:0 8px 22px rgba(15,37,50,.18);
+  opacity:0;transform:translate(8px,-50%);pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease}
+.ai-tab.hint .ai-tip{opacity:1;transform:translate(0,-50%);pointer-events:auto}
+.ai-tip::after{content:'';position:absolute;left:100%;top:50%;margin-top:-6px;width:0;height:0;
+  border:6px solid transparent;border-left-color:#fff;
+  filter:drop-shadow(1px 0 0 rgba(212,160,23,.6))}
+.ai-head{display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(135deg,#1A3A4A,#0F2532);color:#fff;flex:none}
+.ai-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1A3A4A;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.ai-title{font-size:13.5px;font-weight:700;letter-spacing:.5px;line-height:1.3}
+.ai-sub{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
+.ai-clear{margin-left:auto;background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1}
+.ai-chat{flex:1;min-height:0;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;background:#FBFCFB;scroll-behavior:smooth}
+.ai-msg{display:flex;gap:8px;max-width:94%}
+.ai-msg.user{align-self:flex-end;flex-direction:row-reverse}
+.ai-msg .bubble{font-size:13px;line-height:1.7;padding:8px 12px;border-radius:10px;color:var(--ink);word-break:break-word}
+.ai-msg.ai .bubble{background:#fff;border:1px solid var(--divider);border-top-left-radius:3px}
+.ai-msg.user .bubble{background:var(--cover-main);color:#fff;border-top-right-radius:3px}
+.ai-msg .mini{width:24px;height:24px;flex:none;border-radius:50%;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.ai-msg.ai .mini{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1A3A4A}
+.ai-msg.user .mini{background:var(--step-1);color:#fff}
+.ai-msg .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:11px;color:var(--step-1);background:#EEF3F6;border:1px solid rgba(58,107,138,.25);padding:3px 9px;border-radius:12px;cursor:pointer;transition:background .2s}
+.chip:hover{background:#DDE8EE}
+.typing{display:inline-flex;gap:4px;padding:10px 12px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--ink-dim);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.18s}
+.typing i:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+/* 推荐问句排成单行、横向可滚（隐藏滚动条 + 右缘渐隐提示还能滑），
+   把省下的 34–68px 全部让给对话区——对话区才是这块面板的主体 */
+.ai-sugs{display:flex;flex-wrap:nowrap;gap:5px;padding:6px 12px 4px;border-top:1px solid var(--divider);background:#FBFCFB;flex:none;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}
+.ai-sugs::-webkit-scrollbar{display:none}
+.ai-sugs .chip{flex:0 0 auto;font-size:11px;color:var(--step-1);background:#fff;border:1px solid rgba(58,107,138,.3);padding:3px 9px;border-radius:14px;cursor:pointer;transition:border-color .2s,color .2s}
+.ai-sugs .chip:hover{border-color:var(--gold-deep);color:var(--gold-deep)}
+.ai-input{display:flex;gap:8px;padding:8px 12px 10px;background:#FBFCFB;flex:none}
+.ai-input input{flex:1;border:1px solid var(--divider);border-radius:8px;padding:7px 10px;font-size:13px;outline:none;font-family:inherit;min-width:0}
+.ai-input input:focus{border-color:var(--step-1)}
+.ai-input button{border:none;background:var(--cover-main);color:#fff;border-radius:8px;padding:0 14px;font-size:13px;cursor:pointer;flex:none}
+.ai-input button:disabled{opacity:.5;cursor:not-allowed}
+
+/* 飞线 */
+.fly-arc{fill:none;stroke:#F4C95D;stroke-width:1.6;stroke-linecap:round;opacity:.85}
+.fly-comet{fill:#F4C95D;filter:drop-shadow(0 0 4px rgba(244,201,93,.9))}
+#aiHubG circle{filter:drop-shadow(0 0 6px rgba(244,201,93,.8))}
+
+@media (prefers-reduced-motion: reduce){
+  .halo.ping{animation:none}
+  .fly-arc,.fly-comet{opacity:.4}
+  .ai-drawer,.ai-tab,.map-svg text{transition:none}
+  .ai-tab.hint{animation:none}
+  .ai-tip{transition:none}
+}
+
+/* ≤820px：地图、详情卡与 AI 面板改为纵向堆叠（此时没有推挤空间，抽屉恒为展开态） */
+@media (max-width:820px){
+  .st-grid{grid-template-columns:1fr}
+  .map-wrap{display:block}
+  .ai-tab{display:none}
+  .ai-drawer{position:static;width:100%;visibility:visible;overflow:visible;transition:none}
+  .map-wrap.open .ai-drawer{width:100%;transition:none}
+  .ai-panel{position:static;width:100%;height:auto;margin-top:10px;border-left:1px solid rgba(26,58,74,.14);border-radius:12px;box-shadow:0 14px 40px rgba(15,37,50,.22)}
+  .ai-chat{height:240px;flex:0 0 auto}
+  .map-detail{position:static;display:none;width:auto;max-width:none;max-height:none;margin:10px 0 0;opacity:1;transform:none}
+  .map-detail.show{display:block}
+  /* 卡片在堆叠态是静态定位，而「×」已挪进标题栏（标题栏在两种形态下都是定位祖先），
+     「×」的 top/right 因此始终相对标题栏，不会跑到整张地图的右上角去 */
+  .md-head{cursor:auto;touch-action:auto}
+  .md-grip{display:none}
+  .md-scroll{overflow:visible}
+}
+
+@media (max-width:720px){
+  .map-tooltip{display:none}
+  .lg-hint{display:none}
+}
+
+/* 双轨时间轴 */
+.dual-timeline{
+  margin:36px 0;padding:30px 24px;background:#fff;
+  border:1px solid var(--divider);border-radius:8px;
+}
+/* 双轨时间轴
+   注：事件标签宽度用百分比（14%/12%）而非固定 px——原来固定 160px 时，
+   1000px 级视口下下轨 38%/58%/73% 三个标签互相叠压、下轨还越出轨道高度。 */
+.dual-timeline{position:relative}
+.dual-timeline .dt-title{
+  font-size:16px;font-weight:600;color:var(--cover-main);
+  margin-bottom:8px;letter-spacing:.5px;line-height:1.5;
+}
+.dual-timeline .dt-sub{
+  font-size:16px;color:var(--ink-sub);line-height:1.7;margin-bottom:10px;
+}
+/* 图例：与合规日历同一版式语言 */
+.dt-legend{
+  display:flex;flex-wrap:wrap;gap:6px 18px;
+  margin-bottom:16px;font-size:12px;color:var(--ink-dim);
+}
+.dt-legend .dl-i{display:inline-flex;align-items:center;gap:5px}
+.dt-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+.dl-case{background:var(--risk)}
+.dl-law{background:var(--gold)}
+.dt-track{
+  position:relative;height:220px;margin:0 6px;
+}
+.dt-axis{
+  position:absolute;left:0;right:0;height:1px;background:var(--divider);
+}
+.dt-axis.top{top:96px}
+.dt-axis.bot{top:122px}
+/* 语义标签贴在各自轴线左侧：上轨文字在轴上方，下轨文字在轴下方 */
+.dt-label{
+  position:absolute;left:0;font-size:11px;font-weight:600;letter-spacing:.5px;
+}
+.dt-label.top{top:96px;transform:translateY(-100%);color:var(--risk)}
+.dt-label.bot{top:122px;color:var(--gold-deep)}
+.dt-event{
+  position:absolute;width:14%;transform:translateX(-50%);
+  font-size:11px;line-height:1.55;color:var(--ink-sub);
+}
+.dt-event.top{
+  top:0;height:96px;text-align:center;padding-bottom:18px;
+}
+.dt-event.bot{top:122px;width:12%;text-align:center;padding-top:18px}
+.dt-event .dt-date{
+  display:block;font-weight:700;font-size:12px;margin-bottom:4px;
+}
+.dt-event.top .dt-date{color:var(--risk)}
+.dt-event.bot .dt-date{color:var(--gold-deep)}
+/* 引线绝对定位在事件块边缘：上轨贴住块底（＝上轨线），下轨贴住块顶（＝下轨线）。
+   若用普通流＋auto margin，文字行数少的块会留下空隙，引线接不到轴线。 */
+.dt-event .dt-stem{
+  position:absolute;left:50%;width:1px;height:18px;margin-left:-.5px;
+}
+.dt-event.top .dt-stem{background:var(--risk);bottom:0}
+.dt-event.bot .dt-stem{background:var(--gold-deep);top:0}
+.dt-foot{
+  font-size:12px;color:var(--ink-dim);margin-top:12px;line-height:1.75;
+}
+.dt-foot .df-note{color:var(--ink-dim);opacity:.85}
+
+/* 监管三代阶梯 */
+.gen-steps{
+  display:flex;gap:0;margin:36px 0;
+  padding:30px 24px;background:#fff;
+  border:1px solid var(--divider);border-radius:8px;
+}
+.gen-step{
+  flex:1;padding:20px 16px;position:relative;
+  border-right:1px dashed var(--divider);
+}
+.gen-step:last-child{border-right:none}
+.gen-step .gs-idx{
+  font-size:12px;color:var(--ink-dim);letter-spacing:2px;
+}
+.gen-step .gs-name{
+  font-size:18px;font-weight:700;color:var(--cover-main);
+  margin:6px 0 8px;letter-spacing:.5px;
+}
+.gen-step .gs-obj{
+  font-size:14px;color:var(--gold-deep);font-weight:600;margin-bottom:10px;
+}
+.gen-step .gs-desc{
+  font-size:16px;color:var(--ink-sub);line-height:1.75;
+}
+.gen-step .gs-desc .hl{color:var(--cover-main);font-weight:600}
+.gen-step:nth-child(1){background:rgba(58,107,138,.04)}
+.gen-step:nth-child(2){background:rgba(91,154,181,.04)}
+.gen-step:nth-child(3){background:rgba(244,201,93,.06)}
+
+/* 加速带双层柱 */
+.accel-chart{width:100%;height:340px;margin:14px 0}
+
+/* 读图指引：每张图一句"怎么读+结论"，常显不依赖悬浮 */
+.read-guide{
+  font-size:16px;color:var(--ink-sub);line-height:1.75;
+  margin:10px 0 0;padding:10px 14px;
+  background:rgba(244,201,93,.05);border-left:2px solid var(--gold);
+  border-radius:0 4px 4px 0;
+}
+.read-guide b{color:var(--cover-main);font-weight:600}
+.read-guide .rg-takeaway{color:var(--gold-deep);font-weight:600}
+
+/* 合规日历
+   注：主轴事件标签宽度按容器百分比（14%/11%）而非固定 px，
+   否则窄视口下容器变窄、标签仍占固定宽度，会互相叠压。 */
+.compliance-cal{
+  position:relative;
+  margin:36px 0;padding:30px 24px;background:#fff;
+  border:1px solid var(--divider);border-radius:8px;
+}
+/* 卡片标题／副标题／图例：原卡片未给标题定样式，
+   与上方双轨时间轴同一版式语言 */
+.compliance-cal .dt-title{
+  font-size:16px;font-weight:600;color:var(--cover-main);
+  margin-bottom:8px;letter-spacing:.5px;line-height:1.5;
+}
+.compliance-cal .dt-sub{
+  font-size:16px;color:var(--ink-sub);line-height:1.7;
+  margin-bottom:10px;
+}
+.cal-legend{
+  display:flex;flex-wrap:wrap;gap:6px 18px;
+  margin-bottom:16px;font-size:12px;color:var(--ink-dim);
+}
+.cal-legend .cl-i{display:inline-flex;align-items:center;gap:5px}
+.cal-legend i{display:inline-block;flex:none}
+.cl-gold{width:9px;height:9px;border-radius:50%;background:var(--gold)}
+.cl-ink{width:9px;height:9px;border-radius:50%;background:var(--cover-main)}
+.cl-line{width:2px;height:13px;background:var(--gold);box-shadow:0 0 6px rgba(244,201,93,.6)}
+.cl-dash{
+  width:16px;height:10px;border:1px dashed var(--gold);
+  background:rgba(244,201,93,.15);border-radius:3px;
+}
+.cal-track{
+  position:relative;height:446px;margin:0 8px 12px;
+}
+/* 主轴两段的语义标签（与双轨时间轴 dt-label 同一用法） */
+.cal-band{
+  position:absolute;left:0;font-size:11px;font-weight:600;
+  letter-spacing:.5px;color:var(--ink-dim);
+}
+.cal-axis{
+  position:absolute;left:0;right:0;top:150px;height:2px;
+  background:linear-gradient(to right, var(--divider), var(--gold-deep), var(--divider));
+}
+.cal-window{
+  position:absolute;top:130px;height:40px;
+  background:rgba(244,201,93,.15);border:1px dashed var(--gold);
+  border-radius:4px;
+}
+.cal-window-label{
+  position:absolute;top:104px;transform:translateX(-50%);
+  font-size:11px;color:var(--gold-deep);font-weight:700;
+  letter-spacing:.5px;white-space:nowrap;
+}
+.cal-event{
+  position:absolute;transform:translateX(-50%);
+  width:14%;font-size:11px;color:var(--ink-sub);line-height:1.55;
+  text-align:center;
+}
+.cal-event.up{
+  top:0;height:150px;
+  display:flex;flex-direction:column;align-items:center;
+}
+.cal-event.down{top:150px;width:11%}
+.cal-event .ce-date{
+  display:block;font-weight:700;color:var(--cover-main);
+  font-size:12px;margin-bottom:4px;
+}
+.cal-event.up::after{
+  content:"";display:block;width:1px;height:24px;
+  background:var(--step-1);margin-top:auto;
+}
+.cal-event.down::before{
+  content:"";display:block;width:1px;height:24px;
+  background:var(--step-1);margin:0 auto 4px;
+}
+.cal-impl-line{
+  position:absolute;top:0;height:296px;width:2px;
+  background:var(--gold);box-shadow:0 0 8px rgba(244,201,93,.5);
+}
+.cal-impl-label{
+  position:absolute;transform:translateX(-50%);
+  font-size:11px;color:var(--gold);font-weight:700;
+  letter-spacing:.5px;background:var(--cover-deep);
+  padding:2px 6px;border-radius:3px;
+}
+/* 窗口放大轴：施行窗口仅 15 天、主轴上 4 个锚点间距不足 5%，
+   容纳不下 140px 级标签，故在窗口段下方单列一条放大轴逐项展开 */
+.cal-zoom{
+  position:absolute;left:0;right:0;top:276px;
+  padding-top:12px;border-top:1px dashed var(--divider);
+}
+.cal-zoom-head{
+  font-size:11px;font-weight:700;color:var(--gold-deep);
+  letter-spacing:.5px;line-height:1.6;margin-bottom:14px;
+}
+.cal-zoom-track{position:relative;height:116px}
+.cal-zoom-axis{
+  position:absolute;left:0;right:0;top:0;height:2px;
+  background:linear-gradient(to right, var(--gold-deep), var(--gold));
+}
+.cal-zoom-ev{
+  position:absolute;top:20px;transform:translateX(-50%);width:20%;
+  font-size:11px;color:var(--ink-sub);line-height:1.5;text-align:center;
+}
+.cal-zoom-ev .ze-delta{
+  display:block;font-size:11px;font-weight:700;
+  color:var(--gold-deep);letter-spacing:.3px;margin-bottom:3px;
+}
+.cal-zoom-ev .ze-date{
+  display:block;font-weight:700;color:var(--cover-main);
+  font-size:12px;margin-bottom:3px;
+}
+.cal-zoom-ev::before{
+  content:"";position:absolute;left:50%;top:-20px;
+  width:1px;height:20px;margin-left:-.5px;background:var(--gold-deep);
+}
+.cal-zoom-ev::after{
+  content:"";position:absolute;left:50%;top:-5px;
+  width:8px;height:8px;margin-left:-4px;border-radius:50%;
+  background:var(--gold-deep);
+}
+.cal-foot{
+  font-size:12px;color:var(--ink-dim);text-align:center;
+  margin-top:10px;line-height:1.7;
+}
+.cal-foot .cf-punch{color:var(--gold-deep);font-weight:700}
+/* ===== 4.1 两张轴图：入场动效 + 事件详情卡（共享） =====
+   初始态统一挂在 .ax-anim 上（由脚本添加），无脚本时元素直接可见，不会出现空白轴。
+   动效顺序：轴先画出 → 竖线／窗口 → 事件按 --i 错峰浮入 */
+.ax-anim .dt-axis,.ax-anim .cal-axis,.ax-anim .cal-zoom-axis{
+  transform:scaleX(0);transform-origin:left;transition:transform .8s ease-out;
+}
+.ax-anim .cal-impl-line{transform:scaleY(0);transform-origin:top;transition:transform .6s ease-out .35s}
+.ax-anim .cal-window{opacity:0;transition:opacity .5s ease .5s}
+.ax-anim.in .dt-axis,.ax-anim.in .cal-axis,.ax-anim.in .cal-zoom-axis{transform:scaleX(1)}
+.ax-anim.in .cal-impl-line{transform:scaleY(1)}
+.ax-anim.in .cal-window{opacity:1}
+/* 事件错峰浮入（--i 由脚本按时间顺序写入） */
+.ax-anim .dt-event,.ax-anim .cal-event,.ax-anim .cal-zoom-ev,
+.ax-anim .cal-window-label,.ax-anim .cal-impl-label{
+  opacity:0;transition:opacity .5s ease,transform .5s ease;
+  transition-delay:calc(120ms + var(--i,0) * 90ms);
+}
+.ax-anim .dt-event{transform:translateX(-50%) translateY(8px)}
+.ax-anim .cal-event.up{transform:translateX(-50%) translateY(8px)}
+.ax-anim .cal-event.down{transform:translateX(-50%) translateY(-8px)}
+.ax-anim .cal-zoom-ev{transform:translateX(-50%) translateY(8px)}
+.ax-anim.in .dt-event,.ax-anim.in .cal-event,.ax-anim.in .cal-zoom-ev,
+.ax-anim.in .cal-window-label,.ax-anim.in .cal-impl-label{opacity:1}
+.ax-anim.in .dt-event,
+.ax-anim.in .cal-event,
+.ax-anim.in .cal-zoom-ev{transform:translateX(-50%) translateY(0)}
+/* 可交互事件：指针＋键盘焦点可见 */
+[data-info]{cursor:pointer}
+[data-info]:hover .ce-date,[data-info]:hover .ze-date,[data-info]:hover .dt-date{color:var(--gold-deep)}
+[data-info]:focus-visible{outline:2px solid var(--gold);
+  outline-offset:3px;border-radius:3px}
+/* 事件详情卡（左边界由脚本按容器宽度夹取，避免贴边溢出） */
+.ax-tip{
+  position:absolute;z-index:6;width:236px;max-width:76vw;
+  text-align:left;
+  background:rgba(15,37,50,.95);color:#fff;font-size:12px;line-height:1.6;
+  padding:10px 12px;border-radius:6px;
+  border:1px solid rgba(244,201,93,.5);
+  box-shadow:0 8px 22px rgba(15,37,50,.28);
+  pointer-events:none;
+}
+.ax-tip[hidden]{display:none}
+.ax-tip .at-date{display:block;color:var(--gold);font-weight:700;margin-bottom:5px}
+.ax-tip .at-row{display:block;color:rgba(255,255,255,.72)}
+.ax-tip .at-row b{color:#fff;font-weight:600;font-style:normal}
+@media (prefers-reduced-motion:reduce){
+  .dt-event,.cal-event,.cal-zoom-ev,.cal-window-label,.cal-impl-label{opacity:1!important;transition:none!important}
+  .dt-axis,.cal-axis,.cal-zoom-axis{transform:scaleX(1)!important;transition:none!important}
+  .cal-impl-line{transform:scaleY(1)!important;transition:none!important}
+  .cal-window{opacity:1!important;transition:none!important}
+}
+/* 桌面端关闭动效后仍需保留标签的水平居中（transform 被降级清空会跑位） */
+@media (min-width:821px) and (prefers-reduced-motion:reduce){
+  .dt-event,.cal-event.up,.cal-event.down,.cal-zoom-ev{transform:translateX(-50%)!important}
+}
+/* ≤820px：绝对定位的时间轴降级为纵向清单，避免窄屏标签叠压 */
+@media (max-width:820px){
+  .cal-track{height:auto;margin-bottom:0}
+  .cal-track>*{position:static;transform:none;width:auto}
+  .cal-axis,.cal-window,.cal-impl-line,.cal-zoom-axis{display:none}
+  /* 注意：必须用 .cal-track .cal-event 提高权重，
+     否则被 .cal-event.down{width:11%} 覆盖，窄屏下标签只剩约 11% 宽度 */
+  .cal-track .cal-event,.cal-zoom-ev{
+    position:static;transform:none;width:auto;
+    margin:10px 0;text-align:left;padding-left:12px;
+    border-left:2px solid var(--gold);
+  }
+  /* 上轨在桌面端用 flex 把引线压到轴线上，窄屏清单需还原为普通块 */
+  .cal-track .cal-event.up{display:block;height:auto}
+  .cal-track .cal-event.up::after,.cal-track .cal-event.down::before,
+  .cal-zoom-ev::before,.cal-zoom-ev::after{display:none}
+  .cal-window-label,.cal-impl-label{
+    display:inline-block;position:static;transform:none;
+    margin:10px 10px 10px 0;
+  }
+  .cal-zoom{position:static;border-top:none;padding-top:0;margin-top:18px}
+  .cal-zoom-track{height:auto}
+  .cal-zoom-head{margin-bottom:4px}
+  .cal-band{display:inline-block;margin:8px 0}
+  .cal-legend{margin-bottom:12px}
+  /* 双轨时间轴同样降级为按时间排序的纵向清单（案例暗红／法律金色） */
+  .dt-track{height:auto}
+  .dt-track>*{position:static;transform:none;width:auto}
+  .dt-axis{display:none}
+  .dt-track .dt-event{
+    position:static;transform:none;width:auto;display:block;height:auto;
+    opacity:1;transition:none;margin:10px 0;text-align:left;
+    padding:0 0 0 12px;border-left:2px solid var(--gold-deep);
+  }
+  .dt-track .dt-event.top{border-left-color:var(--risk)}
+  .dt-track .dt-stem{display:none}
+  .dt-track .dt-label{display:inline-block;margin:6px 12px 6px 0}
+  .dt-legend{margin-bottom:12px}
+  /* 动效被降级为清单后，取消 .ax-anim 残留的居中位移与隐藏态 */
+  .dual-timeline.in .dt-event,
+  .compliance-cal.in .cal-event,
+  .compliance-cal.in .cal-zoom-ev{transform:none!important;opacity:1!important}
+  .dt-event,.cal-event,.cal-zoom-ev,.cal-window-label,.cal-impl-label{
+    opacity:1!important;transition:none!important;
+  }
+}
+
+/* ========== 4.2 天平的两端 ========== */
+/* 首屏：左＝矩形树图（紧凑视觉锚点），右＝叙事 */
+.s42-hero{
+  display:grid;grid-template-columns:.88fr 1.12fr;gap:38px;
+  align-items:center;margin:28px 0 20px;
+}
+.s42-chart{position:relative}
+#dualBarChart{width:100%;height:330px}
+.s42-note{
+  margin-top:10px;text-align:center;font-size:12.5px;color:var(--ink-dim);
+  line-height:1.7;letter-spacing:.2px;
+}
+.s42-narr > p.body:first-child{margin-top:0}
+.s42-narr > p.body:last-child{margin-bottom:0}
+
+/* 4.1 交叉滚动舞台：A＝左文案/右天平 ⇄ B＝左照片/右文案 */
+.cross{
+  position:relative;width:100%;height:140vh;margin:0;
+}
+.cross-stage{
+  position:sticky;top:56px;height:calc(100vh - 56px);overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+}
+/* 标题随内容一起整体居中，作为内容首行，不单独贴顶 */
+.cross-stage .ch-title{
+  flex:0 0 auto;align-self:flex-start;
+  border-top:none;padding-top:0;margin:0 0 12px;
+}
+.cross-inner{
+  position:relative;width:100%;flex:0 0 auto;min-height:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:42px;
+}
+.cross-col{position:relative;min-height:0;display:grid}
+.cross-pane{
+  grid-area:1/1;min-width:0;display:flex;flex-direction:column;justify-content:flex-start;
+  padding:0;
+  opacity:0;pointer-events:none;will-change:opacity,transform;
+}
+.cross-pane .news-figure{margin:0}
+.cross-pane .balance-wrap{margin:0}
+.cross-pane.pane-text .body{margin-bottom:16px}
+.cross-pane.pane-text > .body:first-child{margin-top:0}
+.cross-pane.pane-text > .body:last-child{margin-bottom:0}
+.cross-pane.pane-text .quote{margin:14px 0}
+
+/* 天平 */
+.balance-wrap{
+  margin:0;padding:8px 16px 10px;background:#fff;
+  border:1px solid var(--divider);border-radius:10px;
+}
+.balance-svg{width:100%;height:auto;aspect-ratio:600/180;display:block;margin:0 0 12px}
+/* 两项数据卡片：从 SVG 中移出，占用并填满天平的中间区域 */
+.balance-items{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.pan-col{border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.9}
+.pan-pos{background:rgba(244,201,93,.13);border:1px solid rgba(212,160,23,.30)}
+.pan-neg{background:rgba(184,74,62,.09);border:1px solid rgba(184,74,62,.30)}
+.pan-col .pan-head{
+  font-weight:700;font-size:12px;letter-spacing:.3px;margin-bottom:2px;
+  padding-bottom:4px;border-bottom:1px dashed rgba(0,0,0,.08);
+}
+.pan-pos .pan-head{color:#8a6d1a}
+.pan-neg .pan-head{color:var(--risk-deep)}
+.pan-col ul{list-style:none;margin:0;padding:0}
+.pan-col li{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pan-col li + li{border-top:1px dashed rgba(0,0,0,.06)}
+.pan-col .pv{font-weight:700;font-variant-numeric:tabular-nums}
+.pan-pos .pv{color:#7a5c0c}
+.pan-neg .pv{color:var(--risk-deep)}
+
+/* 图文平衡区已由 4.1 交叉滚动舞台接管 */
+
+@media (max-width:900px){
+  .s42-hero{grid-template-columns:1fr;gap:18px}
+  #dualBarChart{height:300px}
+  .balance-items{grid-template-columns:1fr}
+  .cross{height:auto;margin:8px 0 0}
+  .cross-stage{position:static;height:auto;padding:0;overflow:visible}
+  .cross-inner{width:100%;height:auto;display:flex;flex-direction:column;gap:22px;transform:none}
+  .cross-col{display:contents}
+  .cross-pane{position:static;opacity:1;transform:none;pointer-events:auto}
+  #pText1{order:0}
+  #pFig1{order:1}
+  #pFig2{order:2}
+  #pText2{order:3}
+}
+
+/* ========== 4.3 假说辩论（两个假说并列陈述，不分高下） ========== */
+.debate{
+  position:relative;width:100%;
+  height:calc(500vh - 56px);      /* 舞台 1 屏 + 4 个回合各 1 屏 */
+  margin:34px 0 0;
+}
+.debate-stage{
+  position:sticky;top:56px;height:calc(100vh - 56px);overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 10% 6%, rgba(26,58,74,.055), transparent 55%),
+    radial-gradient(120% 80% at 90% 94%, rgba(58,107,138,.075), transparent 55%),
+    var(--bg);
+}
+/* 内容层：与上下方正文同一列宽，两个小人因此收拢在正文宽度内 */
+/* top 把整块内容整体下移，修正「上方过挤、下方留白过多」的视觉失衡 */
+.debate-inner{position:relative;width:70%;max-width:1100px;height:100%;margin:0 auto;top:4vh}
+/* 小人 → 气泡 的虚线连接 */
+.debate-links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.debate-links line{stroke-width:1.4;stroke-dasharray:2 5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.debate-links .lk-a{stroke:rgba(26,58,74,.34)}
+.debate-links .lk-b{stroke:rgba(58,107,138,.42)}
+.debate-axis{
+  position:absolute;left:50%;top:6%;height:88%;width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(26,58,74,.14) 16%,rgba(26,58,74,.14) 84%,transparent);
+}
+.debate-ghost{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-size:clamp(110px,15vw,200px);font-weight:800;letter-spacing:.04em;
+  color:rgba(26,58,74,.04);user-select:none;pointer-events:none;
+  font-family:Georgia,"Times New Roman",serif;
+}
+/* 回合进度轨 */
+.debate-hud{position:absolute;left:50%;top:4.2%;transform:translateX(-50%);
+  display:flex;gap:10px;align-items:center;z-index:5}
+.debate-hud .dp{
+  display:flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+  background:#fff;border:1px solid var(--divider);font-size:13px;color:var(--ink-dim);
+  font-weight:600;white-space:nowrap;transition:all .45s cubic-bezier(.22,.9,.3,1);
+}
+.debate-hud .dp .dpi{font-family:Georgia,serif;font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink-dim)}
+.debate-hud .dp.on{
+  background:var(--cover-main);border-color:var(--cover-main);color:#fff;
+  transform:translateY(-2px);box-shadow:0 8px 22px rgba(26,58,74,.22);
+}
+.debate-hud .dp.on .dpi{color:#fff;opacity:.55}
+/* 两个小人 */
+.debater{
+  position:absolute;width:clamp(104px,10vw,142px);z-index:5;
+  filter:drop-shadow(0 10px 18px rgba(26,58,74,.12));
+}
+.debater svg{width:100%;height:auto;display:block}
+.debater--a{left:2.6%;top:14%}
+.debater--b{right:2.6%;bottom:14%}
+.debater .fig{transform-origin:50% 100%;animation:debBreathe 4.6s ease-in-out infinite}
+.debater--b .fig{animation-delay:1.1s}
+@keyframes debBreathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.debater.talking .fig{animation:debBob .62s ease-in-out 2}
+@keyframes debBob{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-5px) rotate(-1.2deg)}65%{transform:translateY(-2px) rotate(1deg)}}
+/* 人物介绍：左侧小人置于脚下、右侧小人置于头顶，两侧同宽同尺寸，避免与交流气泡抢位 */
+.debater .d-cap{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:clamp(104px,10vw,142px);
+  display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;
+}
+.debater--a .d-cap{top:100%;margin-top:12px}
+.debater--b .d-cap{bottom:100%;margin-bottom:12px}
+.debater .d-cap .d-tag{
+  display:block;width:100%;box-sizing:border-box;text-align:center;
+  font-size:12.5px;font-weight:700;letter-spacing:.5px;
+  padding:4px 0;border-radius:999px;color:#fff;
+}
+.debater--a .d-cap .d-tag{background:var(--cover-main)}
+.debater--b .d-cap .d-tag{background:var(--step-1)}
+.debater .d-cap .d-sub{
+  display:block;font-size:11px;color:var(--ink-dim);
+  letter-spacing:.3px;line-height:1.45;
+}
+/* 气泡：居中错落 */
+.say-bubble{
+  position:absolute;max-width:clamp(330px,30vw,400px);z-index:4;background:#fff;
+  border-radius:16px;padding:16px 20px 17px;box-shadow:0 14px 34px rgba(26,58,74,.12);
+  opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity .55s cubic-bezier(.22,.9,.3,1),transform .55s cubic-bezier(.22,.9,.3,1);
+}
+.say-bubble.on{opacity:1;transform:translateY(0)}
+.say-bubble.sb-a{left:25%;top:14%;border-left:3px solid var(--cover-main)}
+/* 回合 1–3 左框文本较短、框也较矮，整体下移以缩小与右框的中央间隔；回合 4 文本长，保持原位 */
+.say-bubble.sb-a[data-r="0"],
+.say-bubble.sb-a[data-r="1"],
+.say-bubble.sb-a[data-r="2"]{top:22%}
+/* 右侧气泡用 min() 兜底：矮视口下不会与左侧气泡上下相撞（原固定百分比会重叠） */
+.say-bubble.sb-b{right:22%;top:min(64%,calc(14% + 300px));border-right:3px solid var(--step-1)}
+.say-bubble .sb-who{font-size:11.5px;font-weight:700;letter-spacing:.6px;display:inline-block;margin-bottom:8px}
+.sb-a .sb-who{color:var(--cover-main)}
+.sb-b .sb-who{color:var(--step-1)}
+.say-bubble .sb-say{
+  font-size:clamp(14.5px,1.15vw,17px);line-height:1.82;color:var(--ink);
+  text-align:justify;font-weight:500;
+}
+.sb-say .sb-k{color:var(--cover-main);font-weight:700}
+.say-bubble .sb-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.say-bubble .sb-chip{
+  font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;
+  letter-spacing:.3px;font-variant-numeric:tabular-nums;
+}
+.sb-a .sb-chip{background:rgba(26,58,74,.08);color:var(--cover-main)}
+.sb-b .sb-chip{background:rgba(58,107,138,.12);color:var(--step-1)}
+@media (max-width:1250px){
+  .debate-inner{width:92%}
+  .debater--a{left:1.4%}
+  .debater--b{right:1.4%}
+  .say-bubble.sb-a{left:20%}
+  .say-bubble.sb-b{right:17%}
+  .debate-hud .dp{padding:6px 11px;font-size:12px}
+}
+@media (max-width:920px){
+  .debate{height:auto}
+  .debate-stage{
+    position:relative;top:auto;height:auto;padding:48px 0 40px;
+  }
+  .debate-inner{
+    top:auto;
+    width:92%;max-width:none;height:auto;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .debate-axis,.debate-ghost,.debate-links{display:none}
+  .debater{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:84px;z-index:1}
+  .debater .d-cap{position:static;transform:none;width:auto;flex-direction:row;flex-wrap:wrap;gap:6px}
+  .debater .d-cap .d-tag{width:auto;padding:4px 12px}
+  .debate-hud{position:static;transform:none;flex-wrap:wrap;justify-content:center;order:-1}
+  .say-bubble{position:static;opacity:1;transform:none;max-width:none;box-shadow:0 6px 18px rgba(26,58,74,.1)}
+}
+@media (prefers-reduced-motion:reduce){
+  .debater .fig,.debater.talking .fig{animation:none}
+  .say-bubble{transition:none}
+}
+
+/* MIT 认知债折叠层 */
+.fold-block{
+  margin:30px 0;padding:0;background:#fff;
+  border:1px solid var(--divider);border-radius:8px;overflow:hidden;
+}
+.fold-head{
+  padding:18px 22px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(58,107,138,.04);
+  transition:background .25s;
+}
+.fold-head:hover{background:rgba(58,107,138,.08)}
+.fold-head .fh-title{
+  font-size:16px;font-weight:600;color:var(--cover-main);
+  letter-spacing:.5px;
+}
+.fold-head .fh-title .tag{
+  font-size:11px;color:var(--ink-dim);font-weight:400;
+  margin-left:10px;letter-spacing:.5px;
+}
+.fold-head .fh-arrow{
+  font-size:18px;color:var(--gold-deep);transition:transform .3s;
+}
+.fold-block.open .fh-arrow{transform:rotate(180deg)}
+.fold-body{
+  max-height:0;overflow:hidden;transition:max-height .5s ease;
+}
+.fold-block.open .fold-body{max-height:1200px}
+.fold-body-inner{padding:18px 22px}
+.fold-body-inner p{
+  font-size:16px;color:var(--ink-sub);line-height:1.85;
+  margin-bottom:14px;text-align:justify;
+}
+.fold-body-inner p .hl{color:var(--risk);font-weight:600}
+.fold-body-inner p .num{color:var(--risk);font-weight:700;font-size:1.05em}
+.mit-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  margin:16px 0;
+}
+.mit-cell{
+  padding:14px;background:rgba(184,74,62,.05);
+  border-left:3px solid var(--risk);border-radius:0 4px 4px 0;
+}
+.mit-cell .mc-num{
+  font-size:28px;font-weight:700;color:var(--risk);
+  line-height:1.2;margin-bottom:4px;
+}
+.mit-cell .mc-desc{
+  font-size:12px;color:var(--ink-sub);line-height:1.65;
+}
+
+/* ========== 4.4 防线漏洞 ========== */
+.four-num{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  margin:30px 0;
+}
+.fn-cell{
+  padding:22px 18px;background:#fff;
+  border:1px solid var(--divider);border-radius:8px;
+  border-top:3px solid var(--risk);text-align:center;
+}
+.fn-cell .fn-num{
+  font-size:42px;font-weight:700;color:var(--risk);
+  line-height:1.1;margin-bottom:8px;letter-spacing:-1px;
+}
+.fn-cell .fn-desc{
+  font-size:16px;color:var(--ink-sub);line-height:1.65;
+}
+.fn-cell .fn-desc .hl{color:var(--cover-main);font-weight:600}
+.est-note{
+  display:inline-block;margin-top:4px;
+  font-size:11px;color:var(--risk,#B84A3E);opacity:.9;
+}
+
+.reg-type-chart{width:100%;height:280px;margin:8px 0}
+/* 家庭板块：左文案 / 右集中小图 分栏 */
+.fam-split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;margin-top:4px}
+.fam-chart{display:flex;flex-direction:column;align-items:center;min-width:0}
+.fam-chart .reg-type-chart{width:330px;max-width:100%;height:280px;margin:0 auto}
+.fam-text > .body:first-child{margin-top:0}
+.fam-text .quote{margin-bottom:0}
+.reg-type-note{
+  font-size:13px;color:var(--ink-sub);text-align:center;
+  margin:10px 0 0;font-style:italic;
+}
+.reg-type-note .hl{color:var(--risk);font-weight:600}
+
+/* 城乡裂痕 */
+.urban-rural{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  margin:30px 0;padding:30px 24px;background:#fff;
+  border:1px solid var(--divider);border-radius:8px;
+}
+.ur-col .ur-col-title{
+  font-size:15px;font-weight:700;color:var(--cover-main);
+  margin-bottom:14px;letter-spacing:.5px;
+  padding-bottom:8px;border-bottom:2px solid var(--step-1);
+}
+.ur-col.rural .ur-col-title{border-bottom-color:var(--gold-deep)}
+.ur-row{
+  display:grid;grid-template-columns:90px 1fr 50px;gap:10px;
+  align-items:center;padding:10px 0;
+  border-bottom:1px dashed var(--divider);font-size:13px;
+}
+.ur-row:last-child{border-bottom:none}
+.ur-row .ur-label{color:var(--ink-sub)}
+.ur-row .ur-bar{
+  height:10px;background:rgba(26,58,74,.08);border-radius:5px;
+  overflow:hidden;position:relative;
+}
+.ur-row .ur-bar .ur-fill{
+  height:100%;background:var(--step-1);border-radius:5px;
+  width:0;transition:width 1.2s ease;
+}
+.ur-col.rural .ur-bar .ur-fill{background:var(--gold-deep)}
+.ur-row .ur-num{
+  font-weight:700;color:var(--cover-main);text-align:right;
+}
+.ur-col.rural .ur-row .ur-num{color:var(--gold-deep)}
+.ur-gap-bar{
+  display:flex;align-items:center;gap:14px;
+  margin:16px 0 0;padding:14px 18px;
+  background:rgba(184,74,62,.06);border-radius:6px;
+  font-size:13px;color:var(--ink-sub);
+}
+.ur-gap-bar .ug-label{flex:0 0 90px}
+.ur-gap-bar .ug-nums{flex:1;display:flex;gap:10px;flex-wrap:wrap}
+.ur-gap-bar .ug-num{
+  font-weight:700;color:var(--risk);
+}
+.ur-foot{
+  font-size:13px;color:var(--ink-sub);text-align:center;
+  margin-top:14px;font-style:italic;line-height:1.7;
+}
+.ur-foot .hl{color:var(--cover-main);font-weight:600}
+
+/* ========== 4.3 家庭／学校 双卡片 ========== */
+.part-card{
+  position:relative;
+  margin:0 0 20px;
+  padding:22px 26px 24px;
+  border-radius:var(--radius);
+  background:#fff;
+  border:1px solid var(--divider);
+}
+.part-card::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:4px;
+  border-radius:var(--radius) var(--radius) 0 0;
+}
+.part-card--family{background:rgba(244,201,93,.09);border-color:rgba(212,160,23,.30)}
+.part-card--family::before{background:linear-gradient(90deg,var(--gold-deep),rgba(244,201,93,.55))}
+.part-card--school{background:rgba(58,107,138,.07);border-color:rgba(58,107,138,.26)}
+.part-card--school::before{background:linear-gradient(90deg,var(--step-1),rgba(91,154,181,.5))}
+.part-card .sec-title{margin-top:0}
+.part-card > :last-child{margin-bottom:0}
+.part-card .quote{background:rgba(255,255,255,.7);border-left-color:var(--gold-deep)}
+
+/* ========== 4.5 素养五层 ========== */
+.s44-split{
+  display:grid;grid-template-columns:.78fr 1.22fr;gap:36px;
+  align-items:center;margin:32px 0 20px;
+}
+.s44-narr > p.body:first-child{margin-top:0}
+.s44-narr > p.body:last-child{margin-bottom:0}
+.pyramid-fig{
+  margin:0;padding:18px 12px;background:#fff;
+  border:1px solid var(--divider);border-radius:8px;
+}
+.pyramid-svg{width:100%;height:auto;display:block}
+
+.pillars{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin:26px 0;
+}
+.pillar{
+  padding:14px 12px;background:#fff;
+  border:1px dashed var(--gold-deep);border-radius:6px;
+  text-align:center;
+}
+.pillar .p-name{
+  font-size:13px;font-weight:700;color:var(--cover-main);
+  margin-bottom:4px;letter-spacing:.5px;
+}
+.pillar .p-desc{
+  font-size:11px;color:var(--ink-dim);line-height:1.6;
+}
+
+/* 参与式自测 */
+.self-test{
+  margin:36px 0;padding:30px 24px;
+  background:linear-gradient(135deg, rgba(26,58,74,.04), rgba(244,201,93,.04));
+  border:1px solid var(--divider);border-radius:8px;
+}
+.self-test .st-title{
+  font-size:17px;font-weight:700;color:var(--cover-main);
+  margin-bottom:6px;letter-spacing:.5px;
+}
+.self-test .st-sub{
+  font-size:13px;color:var(--ink-dim);margin-bottom:22px;
+}
+.st-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+}
+.st-q{
+  margin:0;padding:16px 18px;background:#fff;
+  border:1px solid var(--divider);border-radius:6px;
+}
+.st-q .sq-text{
+  font-size:14px;font-weight:600;color:var(--cover-main);
+  margin-bottom:10px;line-height:1.7;
+}
+.st-q .sq-text .sqn{
+  display:inline-block;width:22px;height:22px;
+  background:var(--gold-deep);color:#fff;border-radius:50%;
+  text-align:center;line-height:22px;font-size:12px;
+  margin-right:8px;font-weight:700;
+}
+.st-opts{display:flex;gap:8px;flex-wrap:wrap}
+.st-opt{
+  padding:8px 14px;font-size:13px;color:var(--ink-sub);
+  background:rgba(26,58,74,.04);border:1px solid var(--divider);
+  border-radius:14px;cursor:pointer;transition:all .25s;
+}
+.st-opt:hover{background:rgba(244,201,93,.15);color:var(--cover-main)}
+.st-opt.selected{background:var(--gold-deep);color:#fff;border-color:var(--gold-deep)}
+.st-result{
+  margin-top:20px;padding:18px 22px;
+  background:#fff;border-left:3px solid var(--gold);
+  border-radius:0 6px 6px 0;font-size:16px;color:var(--ink-sub);
+  line-height:1.85;display:none;
+}
+.st-result.show{display:block}
+.st-result .str-tier{
+  font-size:16px;font-weight:700;color:var(--cover-main);
+  margin-bottom:6px;
+}
+
+/* ========== 4.6 终屏 ========== */
+.ending{
+  background:var(--cover-deep);color:#fff;
+  padding:80px 0;position:relative;overflow:hidden;
+}
+.ending .container{max-width:880px}
+.ending h2.ch-title{
+  color:var(--gold);border-top-color:var(--gold);
+}
+.ending h2.ch-title .num{color:var(--gold)}
+.ending h3.sec-title{color:#fff}
+.ending h3.sec-title .idx{color:var(--gold)}
+.ending p.body{color:rgba(255,255,255,.85)}
+.ending p.body .hl{color:var(--gold)}
+.ending p.body .hl-risk{color:#E8857A}
+.ending .quote{
+  background:rgba(244,201,93,.06);
+  border-left-color:var(--gold);color:rgba(255,255,255,.78);
+}
+
+.three-end{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  margin:30px 0;
+}
+.te-card{
+  padding:22px 18px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(244,201,93,.18);border-radius:8px;
+  border-top:3px solid var(--gold);
+}
+.te-card .tc-name{
+  font-size:16px;font-weight:700;color:var(--gold);
+  letter-spacing:.5px;margin-bottom:10px;
+}
+.te-card .tc-body{
+  font-size:16px;color:rgba(255,255,255,.78);line-height:1.85;
+  text-align:justify;
+}
+.te-card .tc-body .hl{color:var(--gold);font-weight:600}
+
+/* 序言四题回扣 */
+.intro-recap{
+  margin:36px 0;padding:30px 24px;
+  background:rgba(255,255,255,.03);
+  border:1px dashed rgba(244,201,93,.25);border-radius:8px;
+}
+.intro-recap .ir-title{
+  font-size:15px;color:var(--gold);font-weight:600;
+  letter-spacing:1px;margin-bottom:18px;text-align:center;
+}
+.ir-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+}
+.ir-cell{
+  padding:16px 14px;text-align:center;
+  background:rgba(15,37,50,.6);border-radius:6px;
+  border:1px solid rgba(244,201,93,.18);
+  opacity:0;transform:translateY(16px);
+  transition:opacity .7s, transform .7s;
+}
+.ir-cell.in{opacity:1;transform:translateY(0)}
+.ir-cell .irq{
+  font-size:13px;color:rgba(255,255,255,.7);
+  line-height:1.7;margin-bottom:10px;
+}
+.ir-cell .irn{
+  font-size:30px;font-weight:700;color:var(--gold);
+  line-height:1.1;margin-bottom:6px;
+}
+.ir-cell .ir-note{
+  display:inline-block;font-size:11px;
+  color:#0F2532;background:var(--gold);
+  padding:2px 8px;border-radius:8px;letter-spacing:.5px;
+  font-weight:600;
+}
+
+/* 浅色节内复用：three-end（4.3）与 intro-recap（4.6）原为深色终屏设计，此处改用浅底配色 */
+#s4-3 .te-card{background:#fff;border-color:rgba(26,58,74,.10);border-top-color:var(--gold-deep)}
+#s4-3 .te-card .tc-name{color:var(--gold-deep)}
+#s4-3 .te-card .tc-body{color:var(--ink)}
+#s4-3 .te-card .tc-body .hl{color:var(--gold-deep)}
+#s4-6 .intro-recap{background:#fff;border-color:rgba(212,160,23,.45)}
+#s4-6 .intro-recap .ir-title{color:var(--gold-deep)}
+#s4-6 .intro-recap .ir-cell{background:rgba(244,246,245,.92);border-color:var(--divider)}
+#s4-6 .intro-recap .ir-cell .irq{color:var(--ink-sub)}
+#s4-6 .intro-recap .ir-cell .irn{color:var(--gold-deep)}
+#s4-6 .intro-recap .ir-cell .ir-note{color:#0F2532;background:var(--gold-deep)}
+
+/* ========== 跋 ========== */
+.epilogue{
+  background:var(--bg);padding:48px 0 40px;
+}
+.epilogue .container{max-width:720px}
+.epigraph{
+  margin:30px 0;padding:18px 24px;
+  border-left:2px solid var(--gold);background:#fff;
+  font-size:16px;color:var(--ink-sub);line-height:1.95;
+  font-style:italic;border-radius:0 4px 4px 0;
+}
+.epigraph p{margin-bottom:14px}
+.epigraph p:last-child{margin-bottom:0}
+.epigraph .hl{color:var(--cover-main);font-weight:600}
+.epi-sign{
+  font-size:13px;color:var(--ink-dim);
+  text-align:right;margin-top:24px;letter-spacing:1px;
+}
+
+/* ========== 章末跳转（统一过渡卡片） ========== */
+.next-chapter{
+  display:block;width:100%;padding:90px 8%;text-align:center;
+  background:var(--cover-deep);color:#fff;text-decoration:none;
+  position:relative;
+}
+.next-chapter::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:80px;height:2px;background:var(--gold);
+}
+.nc-frame{
+  position:relative;max-width:680px;margin:0 auto;padding:40px 44px 36px;
+}
+.nc-frame::before,.nc-frame::after{
+  content:"";position:absolute;width:28px;height:28px;
+  border:1px dashed var(--gold);opacity:.5;
+}
+.nc-frame::before{top:0;left:0;border-right:none;border-bottom:none}
+.nc-frame::after{bottom:0;right:0;border-left:none;border-top:none}
+.next-chapter .echo{
+  font-size:18px;line-height:1.8;color:#E8E8E8;
+  margin-bottom:28px;letter-spacing:.5px;
+}
+.next-chapter .echo .hl{color:var(--gold);font-weight:600}
+.next-chapter .label{font-size:13px;letter-spacing:.5em;color:var(--gold)}
+.next-chapter .title{
+  font-size:clamp(24px,2.6vw,32px);font-weight:700;
+  margin:16px 0 10px;color:#fff;letter-spacing:.03em;
+}
+.next-chapter .hook{color:rgba(255,255,255,.55);transition:color .3s;font-size:15px}
+.next-chapter:hover .hook{color:var(--gold)}
+.next-chapter .arrow{
+  display:inline-block;font-size:28px;margin-top:24px;color:var(--gold);
+  transition:transform .3s;
+}
+.next-chapter:hover .arrow{transform:translateY(-4px)}
+.next-chapter.is-inview .arrow{animation:nudge-up 1.6s ease-in-out infinite}
+@keyframes nudge-up{50%{transform:translateY(-7px)}}
+
+/* ========== 进场动画 ========== */
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .ir-cell{opacity:1;transform:none}
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ========== 响应式 ========== */
+@media (max-width:1250px){
+  .container{width:92%}
+  .gen-steps{flex-direction:column}
+  .gen-step{border-right:none;border-bottom:1px dashed var(--divider)}
+  .four-num{grid-template-columns:repeat(2,1fr)}
+  .urban-rural{grid-template-columns:1fr}
+  .s44-split{grid-template-columns:1fr}
+  .pillars{grid-template-columns:repeat(2,1fr)}
+  .three-end{grid-template-columns:1fr}
+  .ir-grid{grid-template-columns:1fr}
+  .mit-grid{grid-template-columns:1fr}
+  .fam-split{grid-template-columns:1fr}
+  .lead-split{grid-template-columns:1fr}
+}
+
+/* ========== 新闻配图 ========== */
+.news-figure{margin:30px auto 26px;text-align:center}
+.news-figure img{
+  display:block;width:100%;height:auto;border-radius:4px;
+  box-shadow:0 2px 14px rgba(26,58,74,.12);background:#E8ECEB;
+}
+.news-figure figcaption{
+  font-size:13px;color:#888888;line-height:1.75;
+  margin-top:10px;text-align:center;letter-spacing:.2px;
+}
+.news-figure.w50{width:50%}
+.news-figure.w60{width:60%}
+.news-figure.w70{width:70%}
+@media (max-width:820px){
+  .news-figure.w50,.news-figure.w60,.news-figure.w70{width:100%}
+}
+
+/* ========== 文末：图片来源与致谢（折叠） ========== */
+.credits{
+  margin:0 auto;padding:32px 0 36px;
+  border-top:1px solid var(--divider);
+}
+.credits details{
+  font-size:13px;color:var(--ink-sub);
+}
+.credits summary{
+  cursor:pointer;list-style:none;
+  font-weight:600;color:var(--cover-main);
+  letter-spacing:.5px;user-select:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:color .2s;
+}
+.credits summary::-webkit-details-marker{display:none}
+.credits summary:hover{color:var(--gold-deep)}
+.credits summary .cr-count{
+  font-size:12px;font-weight:400;color:var(--ink-dim);
+}
+.credits summary .cr-toggle{
+  font-size:11px;color:var(--ink-dim);
+  transition:transform .25s;
+}
+.credits details[open] summary .cr-toggle{transform:rotate(180deg)}
+.credits .cr-list{
+  margin-top:18px;padding-top:16px;
+  border-top:1px dashed var(--divider);
+}
+.credits .cr-list p{
+  font-size:12.5px;color:var(--ink-dim);line-height:1.85;
+  margin-bottom:4px;word-break:break-all;
+}
+.credits .cr-note{
+  font-size:12.5px;color:var(--ink-sub);line-height:1.9;
+  margin-top:16px;padding-top:14px;
+  border-top:1px dashed var(--divider);
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部全局导航 ============ -->
+<nav class="site-nav" aria-label="章节导航">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="00-intro.html">永远在线的"搭子"</a>
+    <div class="site-nav-links">
+      <a href="00-intro.html">序言</a>
+      <a href="01-online.html">01 搭子</a>
+      <a href="02-cocoon.html">02 茧房</a>
+      <a href="03-wound.html">03 伤口</a>
+      <a href="04-breaking.html" class="active" aria-current="page">04 破茧</a>
+      <a href="05-backmatter.html">05 附录</a>
+    </div>
+  </div>
+  <div class="site-nav-progress"><span class="site-nav-progress-fill" id="siteProgress"></span></div>
+</nav>
+
+<!-- ============================ 封面：破茧飞升·插画底图 ============================ -->
+<section class="cover" id="ch4">
+  <!-- 封面动效：跟在少年翅膀后飞的三只蝴蝶（装饰层，按底图坐标定位） -->
+  <div class="cover-fx" aria-hidden="true">
+    <div class="cover-fx-stage">
+      <span class="bfly bfly--1"><svg viewBox="0 0 40 32">
+        <g class="wing"><path d="M19.6 15.2C16.2 10.4 10.2 4 5.6 4.6 1.8 5.1 1.6 11 5.4 13.6 9.4 16.3 15.8 17 19.6 15.2Z"/><path d="M19.4 17C15.6 19.6 9.4 25 7.4 28.2 6 30.4 9.2 30.2 12.6 27.6 16.4 24.6 19 20.6 19.4 17Z"/><path d="M20.4 15.2C23.8 10.4 29.8 4 34.4 4.6 38.2 5.1 38.4 11 34.6 13.6 30.6 16.3 24.2 17 20.4 15.2Z"/><path d="M20.6 17C24.4 19.6 30.6 25 32.6 28.2 34 30.4 30.8 30.2 27.4 27.6 23.6 24.6 21 20.6 20.6 17Z"/></g>
+        <path class="bfly-body" d="M20 9.4C21.2 12 21.2 19.4 20 24 18.8 19.4 18.8 12 20 9.4Z"/>
+        <circle class="bfly-head" cx="20" cy="8.4" r="1.9"/>
+        <path class="bfly-whisker" d="M19.6 7.4C18.6 5 17 3.4 15.4 2.6M20.4 7.4C21.4 5 23 3.4 24.6 2.6"/>
+      </svg></span>
+      <span class="bfly bfly--2"><svg viewBox="0 0 40 32">
+        <g class="wing"><path d="M19.6 15.2C16.2 10.4 10.2 4 5.6 4.6 1.8 5.1 1.6 11 5.4 13.6 9.4 16.3 15.8 17 19.6 15.2Z"/><path d="M19.4 17C15.6 19.6 9.4 25 7.4 28.2 6 30.4 9.2 30.2 12.6 27.6 16.4 24.6 19 20.6 19.4 17Z"/><path d="M20.4 15.2C23.8 10.4 29.8 4 34.4 4.6 38.2 5.1 38.4 11 34.6 13.6 30.6 16.3 24.2 17 20.4 15.2Z"/><path d="M20.6 17C24.4 19.6 30.6 25 32.6 28.2 34 30.4 30.8 30.2 27.4 27.6 23.6 24.6 21 20.6 20.6 17Z"/></g>
+        <path class="bfly-body" d="M20 9.4C21.2 12 21.2 19.4 20 24 18.8 19.4 18.8 12 20 9.4Z"/>
+        <circle class="bfly-head" cx="20" cy="8.4" r="1.9"/>
+        <path class="bfly-whisker" d="M19.6 7.4C18.6 5 17 3.4 15.4 2.6M20.4 7.4C21.4 5 23 3.4 24.6 2.6"/>
+      </svg></span>
+      <span class="bfly bfly--3"><svg viewBox="0 0 40 32">
+        <g class="wing"><path d="M19.6 15.2C16.2 10.4 10.2 4 5.6 4.6 1.8 5.1 1.6 11 5.4 13.6 9.4 16.3 15.8 17 19.6 15.2Z"/><path d="M19.4 17C15.6 19.6 9.4 25 7.4 28.2 6 30.4 9.2 30.2 12.6 27.6 16.4 24.6 19 20.6 19.4 17Z"/><path d="M20.4 15.2C23.8 10.4 29.8 4 34.4 4.6 38.2 5.1 38.4 11 34.6 13.6 30.6 16.3 24.2 17 20.4 15.2Z"/><path d="M20.6 17C24.4 19.6 30.6 25 32.6 28.2 34 30.4 30.8 30.2 27.4 27.6 23.6 24.6 21 20.6 20.6 17Z"/></g>
+        <path class="bfly-body" d="M20 9.4C21.2 12 21.2 19.4 20 24 18.8 19.4 18.8 12 20 9.4Z"/>
+        <circle class="bfly-head" cx="20" cy="8.4" r="1.9"/>
+        <path class="bfly-whisker" d="M19.6 7.4C18.6 5 17 3.4 15.4 2.6M20.4 7.4C21.4 5 23 3.4 24.6 2.6"/>
+      </svg></span>
+    </div>
+  </div>
+  <p class="cover-num" aria-hidden="true">04</p>
+  <div class="cover-text cover-text--left">
+    <h1 class="sr-only">光穿过茧壁<br>这道正在画下的线，该由谁来画，又该画到哪里？</h1>
+    <p class="cover-eyebrow">PART 04</p>
+    <p class="sub">光穿过茧壁。<br>这道正在画下的线，<br>该由谁来画，又该画到哪里？</p>
+  </div>
+  <div class="scroll-cue">向下滚动</div>
+</section>
+
+<!-- ============================ 章首导语：承接第三章 ============================ -->
+<section class="section" id="s4-lead">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">04</span>划线与破茧：桥而非墙</h2>
+    <div class="lead-split">
+      <div class="lead-text">
+        <p class="body reveal">那些深夜里的对话，不只是冰冷的屏幕交互——有的青少年因此失去了生命，有的正走在迷失的路上。</p>
+        <p class="body reveal">但黑暗不是全部。有人在现实里无人可说，却在屏幕那头找到了不会嘲笑他的出口。放在一起就像一架天平：一端是悲剧与迷失，另一端是一些孩子从未有过的陪伴。</p>
+        <p class="body reveal">为什么同一个工具，会同时成为深渊和扶手？因为它没有意志，只是放大了孩子原本的状态。既然无法退回没有AI的时代，要做的不是筑墙隔绝，而是划线破茧——这道线从家庭、学校一路画到平台与国家，因为AI最终应该是桥，而不是墙。</p>
+      </div>
+      <figure class="lead-figure reveal">
+        <img src="../../assets/images/illustrations/ch4-lead-bridge.jpg" alt="一名少年站在金色光桥前，桥的另一端是围坐交流的人群" loading="lazy">
+        <figcaption>划线与破茧：AI 应是桥，而非墙（示意图）</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 4.1 天平的两端：62.6% 与 58.8% ============================ -->
+<section class="section" id="s4-1">
+  <div class="container">
+    <div class="cross" id="cross41">
+      <div class="cross-stage">
+        <h2 class="ch-title"><span class="num">4.1</span>天平的两端：62.6% 与 58.8%</h2>
+        <div class="cross-inner">
+          <!-- 左列：A＝段1 / B＝图2照片 -->
+          <div class="cross-col">
+            <div class="cross-pane pane-text" id="pText1">
+              <p class="body">2026年5月，中国青年报社社会调查中心面向1336名中小学生家长做了一次“AI时代家庭教育”专项调查。</p>
+              <p class="body">结果里，孩子用AI的场景很日常：查资料、练口语、生成创意内容，也会拿它解一道题、聊一会儿心。家长看在眼里的是另一番样子——有人发现孩子视野被打开了，有人发现孩子开始等AI给答案、自己不动脑。</p>
+              <p class="body">把这两种感受放在同一个画面里，就像一架天平：一端是拓展与陪伴，另一端是依赖与退步。而倾斜的方向取决于有没有人教孩子怎么站。</p>
+            </div>
+            <div class="cross-pane" id="pFig2">
+              <figure class="news-figure">
+                <img src="../../assets/images/news/fig07-leftbehind-people-visual.webp" alt="湖北巴东县暑期爱心托管班，老师带着孩子们与AI机器人互动" loading="lazy">
+                <figcaption>图7：2026年8月10日，在湖北巴东县信陵镇青年之家暑期爱心托管班，老师带着孩子们与AI机器人互动，焦国斌 摄（人民视觉 供图）；刊于人民日报海外版《给“AI陪伴”划定安全边界》（2026-08-21）</figcaption>
+              </figure>
+            </div>
+          </div>
+          <!-- 右列：A＝图1天平 / B＝段2·3·4 -->
+          <div class="cross-col">
+            <div class="cross-pane" id="pFig1">
+              <div class="balance-wrap">
+                <svg class="balance-svg" viewBox="0 40 600 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="天平：左机遇侧 62.6%，右风险侧 58.8%">
+                  <!-- 立柱与底座 -->
+                  <line x1="300" y1="50" x2="300" y2="205" stroke="#1A3A4A" stroke-width="2"/>
+                  <rect x="262" y="205" width="76" height="7" rx="2" fill="#1A3A4A"/>
+                  <line x1="276" y1="212" x2="324" y2="212" stroke="#1A3A4A" stroke-width="3" stroke-linecap="round"/>
+                  <!-- 支点 -->
+                  <polygon points="300,52 314,69 286,69" fill="#1A3A4A"/>
+                  <!-- 横梁：两端拉近、保持水平，倾斜由下方文案点题 -->
+                  <line x1="200" y1="100" x2="400" y2="100" stroke="#1A3A4A" stroke-width="2.5" stroke-linecap="round"/>
+                  <!-- 左盘（机遇/金） -->
+                  <line x1="200" y1="100" x2="200" y2="137" stroke="#999" stroke-width="1.2"/>
+                  <path d="M 155 137 Q 200 174 245 137 Z" fill="#F4C95D" stroke="#D4A017" stroke-width="1"/>
+                  <text x="200" y="159" text-anchor="middle" font-size="21" font-weight="700" fill="#1A3A4A">62.6%</text>
+                  <!-- 右盘（风险/暗红） -->
+                  <line x1="400" y1="100" x2="400" y2="137" stroke="#999" stroke-width="1.2"/>
+                  <path d="M 355 137 Q 400 174 445 137 Z" fill="#B84A3E" stroke="#7A2E25" stroke-width="1"/>
+                  <text x="400" y="159" text-anchor="middle" font-size="21" font-weight="700" fill="#fff">58.8%</text>
+                </svg>
+                <div class="balance-items">
+                  <div class="pan-col pan-pos">
+                    <div class="pan-head">机遇侧 · 拓展与陪伴（4 项）</div>
+                    <ul>
+                      <li><span>拓展视野</span><span class="pv">62.6%</span></li>
+                      <li><span>激发创造</span><span class="pv">59.8%</span></li>
+                      <li><span>答疑解惑</span><span class="pv">49.9%</span></li>
+                      <li><span>学习辅助</span><span class="pv">44.7%</span></li>
+                    </ul>
+                  </div>
+                  <div class="pan-col pan-neg">
+                    <div class="pan-head">风险侧 · 依赖与退步（5 项）</div>
+                    <ul>
+                      <li><span>心理依赖</span><span class="pv">58.8%</span></li>
+                      <li><span>思考下降</span><span class="pv">42.7%</span></li>
+                      <li><span>现实互动减少</span><span class="pv">42.7%</span></li>
+                      <li><span>注意力分散</span><span class="pv">39.1%</span></li>
+                      <li><span>视力睡眠</span><span class="pv">30.8%</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cross-pane pane-text" id="pText2">
+              <p class="body">Common Sense Media 2026 年 6 月那份报告把硬币翻了另一面：即便在最常使用 AI 陪伴的青少年里，<span class="hl">80% 仍把真人友谊放在第一位</span>；38% 的 AI 用户说，他们"把练到的社交技能用回了现实"。<span class="hl">光不是没有，只是不会自己落下来</span>。</p>
+              <div class="quote">
+                <p>"AI 为青少年提供情绪倾诉出口……能起到一定的情感缓冲作用。应将 AI 陪伴定位为<span class="hl-risk">辅助性学习与情感陪伴工具，只应作为陪伴补充而不是替代</span>。"</p>
+                <p style="margin-top:8px;font-size:12px;color:var(--ink-dim)">—— 孙宏艳，中国青少年研究中心研究员，《人民教育》2026-10</p>
+              </div>
+              <p class="body">北京安定医院儿童精神医学首席专家郑毅的临床观察更深一层：<span class="hl-risk">"AI 沉迷往往是'果'而不是'因'——先有焦虑、抑郁、社交困境，才有 AI 填补。"</span>把 AI 拿走，伤口还在。这也是为什么"禁用"这一派政策在临床医生那里，从未获得过支持。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="source-line reveal">
+      来源：中青报 2026-05-27 chinanews.com.cn/sh/2026/05-28/10629852.shtml · Common Sense Media 同上 · 孙宏艳 yn.people.com.cn/n2/2026/0609/c361322-41604898.html · 郑毅 chinanews.com.cn/sh/2026/08-29/10686316.shtml
+    </p>
+  </div>
+</section>
+
+<!-- ============================ 4.2 学术框架：替代假说 vs 刺激假说 ============================ -->
+<section class="section" id="s4-2">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">4.2</span>学术框架：替代假说 vs 刺激假说</h2>
+    <p class="body reveal">对这两种感受的解释，学界至今争执不下。一种声音认为，孩子的精力总量恒定，与 AI 相处的时间越长，留给真人的余地便越少，长此以往，与人交往的能力反而退化，此为<span class="hl">替代假说</span>；另一种声音则指出，有些孩子原本便不敢在现实里开口，AI 恰恰提供了一个先行练习、找回节奏的缓冲地带，待勇气养成，再重新走回真人之间，此为<span class="hl">刺激假说</span>。两种假说争夺的是同一批孩子，彼此谁也未能真正说服对方——因为谁都无法抹去那 <span class="hl">38%</span> 的孩子：他们确曾在 AI 里练习社交，并将这份本事真正用回了现实。</p>
+    <p class="body reveal">两种假说没有谁对谁错，只是从不同角度解释同一批孩子。下面请两派各出一个"小人"，就四个争议点当面聊：争的是什么、谁在研究、数字怎么说、长期追踪。</p>
+  </div>
+  <!-- ========== 4.2 双人辩论：四个角度，把话讲清楚 ========== -->
+  <div class="debate" id="debate">
+    <div class="debate-stage" id="debateStage">
+     <div class="debate-inner">
+      <div class="debate-axis" aria-hidden="true"></div>
+      <div class="debate-ghost" aria-hidden="true">VS</div>
+
+      <svg class="debate-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <line class="lk-a" id="dbLinkA" x1="8.5" y1="22" x2="25" y2="24"/>
+        <line class="lk-b" id="dbLinkB" x1="91.5" y1="70" x2="78" y2="52"/>
+      </svg>
+
+      <div class="debate-hud" id="debateHud">
+        <div class="dp on" data-r="0"><span class="dpi">01</span><span>争的是什么</span></div>
+        <div class="dp" data-r="1"><span class="dpi">02</span><span>谁在研究</span></div>
+        <div class="dp" data-r="2"><span class="dpi">03</span><span>数字怎么说</span></div>
+        <div class="dp" data-r="3"><span class="dpi">04</span><span>长期追踪</span></div>
+      </div>
+
+      <!-- 替代假说（左上） -->
+      <div class="debater debater--a" id="debA" aria-hidden="true">
+        <svg viewBox="0 0 160 210" class="fig">
+          <ellipse cx="80" cy="202" rx="40" ry="7" fill="rgba(26,58,74,.10)"/>
+          <rect x="65" y="146" width="14" height="44" rx="7" fill="#33414E"/>
+          <rect x="81" y="146" width="14" height="44" rx="7" fill="#33414E"/>
+          <rect x="59" y="185" width="26" height="13" rx="6" fill="#22303B"/>
+          <rect x="75" y="185" width="26" height="13" rx="6" fill="#22303B"/>
+          <rect x="49" y="92" width="62" height="62" rx="21" fill="#B84A3E"/>
+          <path d="M49 110 Q80 88 111 110 L111 96 Q80 76 49 96 Z" fill="#9E3B31"/>
+          <rect x="37" y="100" width="14" height="46" rx="7" fill="#9E3B31" transform="rotate(7 44 123)"/>
+          <rect x="74" y="80" width="12" height="18" rx="6" fill="#EBC09B"/>
+          <rect x="109" y="100" width="14" height="46" rx="7" fill="#9E3B31" transform="rotate(-16 116 123)"/>
+          <circle cx="80" cy="58" r="30" fill="#F0C9A8"/>
+          <circle cx="51" cy="60" r="6" fill="#EBC09B"/><circle cx="109" cy="60" r="6" fill="#EBC09B"/>
+          <path d="M50 56 Q50 24 80 22 Q110 24 110 56 Q101 37 80 37 Q59 37 50 56 Z" fill="#2A2A2A"/>
+          <path d="M63 55 L74 59" stroke="#2A2A2A" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M97 55 L86 59" stroke="#2A2A2A" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="70" cy="65" r="3.4" fill="#2A2A2A"/><circle cx="90" cy="65" r="3.4" fill="#2A2A2A"/>
+          <path d="M70 79 Q80 72 90 79" stroke="#2A2A2A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <rect x="97" y="116" width="26" height="41" rx="6" fill="#3A6B8A" transform="rotate(-8 110 136)"/>
+          <circle cx="110" cy="130" r="4" fill="#5B9AB5"/>
+        </svg>
+        <span class="d-cap">
+          <span class="d-tag">替代假说</span>
+          <span class="d-sub">担心 AI 把孩子拉离真人</span>
+        </span>
+      </div>
+
+      <!-- 刺激假说（右下） -->
+      <div class="debater debater--b" id="debB" aria-hidden="true">
+        <svg viewBox="0 0 160 210" class="fig">
+          <ellipse cx="80" cy="202" rx="40" ry="7" fill="rgba(26,58,74,.10)"/>
+          <rect x="65" y="146" width="14" height="44" rx="7" fill="#33414E"/>
+          <rect x="81" y="146" width="14" height="44" rx="7" fill="#33414E"/>
+          <rect x="59" y="185" width="26" height="13" rx="6" fill="#22303B"/>
+          <rect x="75" y="185" width="26" height="13" rx="6" fill="#22303B"/>
+          <rect x="49" y="92" width="62" height="62" rx="21" fill="#F4C95D"/>
+          <path d="M49 110 Q80 88 111 110 L111 96 Q80 76 49 96 Z" fill="#DCAC2A"/>
+          <rect x="37" y="100" width="14" height="46" rx="7" fill="#DCAC2A" transform="rotate(6 44 123)"/>
+          <rect x="74" y="80" width="12" height="18" rx="6" fill="#EBC09B"/>
+          <rect x="109" y="86" width="14" height="46" rx="7" fill="#DCAC2A" transform="rotate(24 116 109)"/>
+          <circle cx="118" cy="80" r="9" fill="#F0C9A8"/>
+          <circle cx="80" cy="58" r="30" fill="#F0C9A8"/>
+          <circle cx="51" cy="60" r="6" fill="#EBC09B"/><circle cx="109" cy="60" r="6" fill="#EBC09B"/>
+          <path d="M50 56 Q50 24 80 22 Q110 24 110 56 Q101 37 80 37 Q59 37 50 56 Z" fill="#2A2A2A"/>
+          <circle cx="70" cy="64" r="3.4" fill="#2A2A2A"/><circle cx="90" cy="64" r="3.4" fill="#2A2A2A"/>
+          <path d="M66 56 Q70 52 75 56" stroke="#2A2A2A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M94 56 Q90 52 85 56" stroke="#2A2A2A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M69 76 Q80 87 91 76" stroke="#2A2A2A" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M132 62 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 z" fill="#5B9AB5"/>
+        </svg>
+        <span class="d-cap">
+          <span class="d-tag">刺激假说</span>
+          <span class="d-sub">相信 AI 能帮孩子练社交</span>
+        </span>
+      </div>
+
+      <!-- 回合 1 · 争的是什么 -->
+      <div class="say-bubble sb-a" data-r="0">
+        <span class="sb-who">替代假说</span>
+        <p class="sb-say">道理其实很简单：孩子的精力就那么多。跟 AI 待久了，跟真人就待少了——时间一长，<span class="sb-k">就忘了怎么跟活人打交道</span>。</p>
+        <div class="sb-chips"><span class="sb-chip">时间被挤占</span><span class="sb-chip">社交退化</span></div>
+      </div>
+      <div class="say-bubble sb-b" data-r="0">
+        <span class="sb-who">刺激假说</span>
+        <p class="sb-say">可有些孩子本来就不敢开口啊。先在 AI 这儿<span class="sb-k">练练胆子、找到节奏</span>，等他有底气了再回到真人里，这难道不是一种成长？</p>
+        <div class="sb-chips"><span class="sb-chip">练手再上场</span><span class="sb-chip">缓冲垫</span></div>
+      </div>
+
+      <!-- 回合 2 · 谁在研究 -->
+      <div class="say-bubble sb-a" data-r="1">
+        <span class="sb-who">替代假说</span>
+        <p class="sb-say">这不是我瞎编的。MIT 和哈佛都做过研究，结论都指向同一个方向——<span class="sb-k">越依赖，越退化</span>。</p>
+        <div class="sb-chips"><span class="sb-chip">MIT · 认知债</span><span class="sb-chip">哈佛 · 情感操纵</span></div>
+      </div>
+      <div class="say-bubble sb-b" data-r="1">
+        <span class="sb-who">刺激假说</span>
+        <p class="sb-say">我这边也有研究。Common Sense 那份报告里，有 <span class="sb-k">38%</span> 的孩子，真把在 AI 里练到的社交本事<span class="sb-k">用回了现实</span>。</p>
+        <div class="sb-chips"><span class="sb-chip">Common Sense 38%</span><span class="sb-chip">湖南师大 曾子豪等</span></div>
+      </div>
+
+      <!-- 回合 3 · 数字怎么说 -->
+      <div class="say-bubble sb-a" data-r="2">
+        <span class="sb-who">替代假说</span>
+        <p class="sb-say">那就看数字：AI 组的大脑连接性最多掉了 <span class="sb-k">55%</span>；还有 <span class="sb-k">83%</span> 的人，连自己几分钟前"写"的东西都说不出来。</p>
+        <div class="sb-chips"><span class="sb-chip">脑连接性 −55%</span><span class="sb-chip">83% 无法复述</span></div>
+      </div>
+      <div class="say-bubble sb-b" data-r="2">
+        <span class="sb-who">刺激假说</span>
+        <p class="sb-say">慢着——也有 <span class="sb-k">38%</span> 的孩子，用了 AI 之后<span class="sb-k">情绪反而更稳</span>，后来真的走进了真人朋友圈。这部分，不能当没看见。</p>
+        <div class="sb-chips"><span class="sb-chip">38% 转用现实</span><span class="sb-chip">情绪调节改善</span></div>
+      </div>
+
+      <!-- 回合 4 · 长期追踪 -->
+      <div class="say-bubble sb-a" data-r="3">
+        <span class="sb-who">替代假说</span>
+        <p class="sb-say">港大盯着两万六千个中学生跟了三十个月：短期作业分是涨了，可半年后月考、中考、高考<span class="sb-k">一路往下掉</span>。这笔账，迟早要还。</p>
+        <div class="sb-chips"><span class="sb-chip">26811 人 · 30 个月</span><span class="sb-chip">月考 −20% / 中考 −24% / 高考 −18%</span></div>
+      </div>
+      <div class="say-bubble sb-b" data-r="3">
+        <span class="sb-who">刺激假说</span>
+        <p class="sb-say">说句公道话——这份是还没通过同行评审的工作论文，别当成铁证；而且它算的是"平均"，<span class="sb-k">平均数底下，也许正藏着那些被拉起来的孩子</span>。</p>
+        <div class="sb-chips"><span class="sb-chip">工作论文 · 未经同行评审</span><span class="sb-chip">平均值的陷阱</span></div>
+      </div>
+     </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="fold-block reveal" id="mitFold">
+      <div class="fold-head" onclick="document.getElementById('mitFold').classList.toggle('open')">
+        <p class="fh-title">深读 · 认知债务 <span class="tag">MIT Media Lab · 2025</span></p>
+        <span class="fh-arrow">▼</span>
+      </div>
+      <div class="fold-body">
+        <div class="fold-body-inner">
+          <p>MIT Media Lab 的 Nataliya Kosmyna 团队在 2025 年做了一项 EEG 实验：把 54 名成年人分成三组——<span class="hl">LLM 辅助 / 搜索引擎辅助 / 裸写</span>——完成同一篇论文。过程中持续监测脑电。</p>
+          <div class="mit-grid">
+            <div class="mit-cell">
+              <p class="mc-num">−55%</p>
+              <p class="mc-desc">AI 组大脑"连接性"比裸写组最多降低 55%</p>
+            </div>
+            <div class="mit-cell">
+              <p class="mc-num">83%</p>
+              <p class="mc-desc">AI 组受试者无法复述自己几分钟前"写"出的段落</p>
+            </div>
+            <div class="mit-cell">
+              <p class="mc-num">54人</p>
+              <p class="mc-desc">均为成年人样本；"发育中的大脑风险最高"属推断警告，非实验直接测得</p>
+            </div>
+          </div>
+          <p>Kosmyna 把这种状态命名为 <span class="hl">"认知债务（cognitive debt）"</span>——AI 帮你写出来，但你不拥有它。当大脑不再被要求完成"提取—组织—表达"的链条，那些神经回路就开始悄悄闲置。</p>
+          <p>需要诚实地说：<span class="num">这项研究的样本是成年人，不是青少年</span>。"发育中的大脑风险更高"是基于发展神经科学的合理推断，但不是这项实验直接测出来的。把它当成结论贴在所有孩子身上，是不严谨的；把它当成"无需关心"的反例，同样是不严谨的。</p>
+        </div>
+      </div>
+    </div>
+    <p class="body reveal" style="margin-top:30px">正因这场争论没有定论，它才真正教会我们一件事——单纯依靠<span class="hl-risk">"禁止"</span>，是站不住脚的。无人能否认 AI 从孩子身上夺走了什么，也无人能否认它曾给过什么；临床医生的观察更是一针见血：AI 沉迷往往只是"果"，而非"因"，纵使把 AI 移走，伤口依然留在原地。既然"一刀切"并不成立，这道线便应当换一个方向去画——从孩子站得最近的三个方向，自内而外、层层落笔：先到家庭，再到学校，最终抵达孩子自己够不到的地方。</p>
+    <p class="source-line reveal">
+      来源：人民日报海外版 2026-08-21 paper.people.com.cn/rmrbhwb/pc/content/202608/21/content_30176220.html · MIT media.mit.edu/projects/your-brain-on-chatgpt/overview/ · 港大 papers.ssrn.com/sol3/papers.cfm?abstract_id=6868618 · 人民网转述 theory.people.com.cn/n1/2026/0905/c40531-40792962.html
+    </p>
+  </div>
+</section>
+
+<!-- ============================ 4.3 防线为何失守：当"禁止"遇到"缺位" ============================ -->
+<section class="section" id="s4-3">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">4.3</span>防线为何失守：当"禁止"遇到"缺位"</h2>
+
+    <!-- ===== 家庭板块 ===== -->
+    <div class="part-card part-card--family reveal">
+      <h3 class="sec-title"><span class="idx">家庭</span>越是禁止，越把孩子推远</h3>
+      <div class="fam-split">
+        <div class="fam-text">
+          <p class="body">这道线最先落在手中的人，是父母。然而，恰恰是这片最想守住孩子的地方，最容易画错了方向。<span class="hl">67.9% 的家庭</span>，餐桌上至今没有一条关于 AI 的规矩；更令人意外的，是那些最卖力"禁止"的家庭。调查将家长的管教方式分为四类——支持、限制、放任与禁止；数据却站在了直觉的对立面：管得最严的家庭里，"想依赖 AI、不愿自己思考"的孩子比例反而<span class="hl-risk">最高（36.6%）</span>，愿意用 AI 学习文化知识的反而<span class="hl-risk">最低（26.8%）</span>。</p>
+          <div class="quote">
+            <p>"家庭防线的结构性漏洞在于——家长只关心<span class="hl-risk">'孩子今天跟我说话了吗'</span>，不关心<span class="hl-risk">'孩子不敢说的那部分是什么'</span>。AI 接住的不是孩子说出来的，是孩子不敢对你说出来的。"</p>
+            <p style="margin-top:8px;font-size:12px;color:var(--ink-dim)">—— 边玉芳，北京师范大学教授</p>
+          </div>
+        </div>
+        <div class="fam-chart">
+          <div id="regTypeChart" class="reg-type-chart"></div>
+          <p class="reg-type-note">最用力禁的家庭，孩子"想依赖AI不想自己思考"比例<span class="hl">反而最高（36.6%）</span>；用 AI 学文化知识的比例<span class="hl">反而最低（26.8%）</span>。<span class="hl-risk">"禁"这条路，本身就在把孩子往 AI 那边推。</span></p>
+        </div>
+      </div>
+    </div>
+
+    <p class="body reveal">因此，家庭这道线，不该画在"不许触碰"之上，而应画在"我陪你用、我教你用"之上。只是，孩子白昼的一半时间并不在家——那条线，注定要继续向学校里画下去。</p>
+    <!-- ===== 学校板块 ===== -->
+    <div class="part-card part-card--school reveal">
+      <h3 class="sec-title"><span class="idx">学校</span>缺位之下，AI 接住了没人接的孩子</h3>
+      <p class="body">家庭这端的教训被读懂了，学校那一端的线，却常常无人执笔。学校在防线上的失守，并非"失控"，而是"缺位"。蓝皮书中有一组格外刺眼的数字：在师生关系较差的学生里，<span class="num-risk">51.2%</span> 表示"只想和 AI 聊天"，比师生关系融洽的学生高出近三十个百分点。换言之，AI 所接住的，正是那些在学校里始终没有被接住的孩子。</p>
+      <p class="ur-foot">城乡之间的落差，同样印证了这一判断。农村孩子使用 AI 的比例并不低，二者的差距从来不在"用没用"，而在"谁在管"：农村学生的总体使用率反而略低（60.2% 对 63.7%），可一旦用起来，更常拿去写作业（73.2% 对 68.4%），家长"不管"的比例也更高（20.3% 对 15.6%），"依赖 AI、不想自己思考"的比例比城市高出 5.1 个百分点。差距的本质，从来不是会不会用，而是有没有人教着用。</p>
+      <p class="body">因此，学校要做的，从来不是把 AI 拦在校门之外，而是把那些空着的座位逐一坐满——让每一个孩子先在学校里被看见、被信任、被接住。只有当现实之中有人在场，AI 才会退居为一个选项，而非唯一的那条出口。</p>
+    </div>
+    <p class="body reveal" style="margin-top:24px">至此，防线失守的两条路径已经清楚：<span class="hl-risk">用力禁止的，把孩子推进了 AI 的怀抱；视而不见的，把孩子留给了 AI。</span>无论哪一种，缺的都不是"管"的力度，而是"教"的能力——这正是下一节要谈的。</p>
+    <p class="body reveal">这是家庭能做的极限——那到底该教什么？</p>
+  </div>
+</section>
+
+<!-- ============================ 4.4 素养五层：把"防沉迷"升级为"会使用" ============================ -->
+<section class="section" id="s4-4">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">4.4</span>素养五层：把"防沉迷"升级为"会使用"</h2>
+    <p class="body reveal">家庭与学校这两条线索，最终汇聚到同一处，指向的其实是同一个命题：一个孩子，究竟应当以怎样的方式与 AI 相处。也正是在这一交汇点上，<span class="hl">"防沉迷"</span> 这三个字显现出了它的局限——"防"所筑起的，不过是一道被动的墙；而真正能够对抗依赖的，是另一种截然不同的能力——"会"。与其把全部力气，都用在将孩子拦在 AI 之外，不如把这股力气，转向教会他如何与 AI 安然共处。</p>
+    <div class="s44-split reveal">
+      <div class="s44-narr">
+        <p class="body">而这种能力，需要先厘清"它是什么"，再说明"它如何养成"。它自下而上垒作五层：最底层是识真——让孩子明白，屏幕那头的并非一个"人"，而只是一套概率模型，是照见自身的一面镜子；往上一层是辨伪——分辨 AI 是在顺着自己的话说，还是在信口编造；再往上一层是立界——在时间、隐私与情绪之间，划下属于自己的边界；其上为共生——将它当作练手的工具，而非托付心事的伴侣；最高一层是破茧——主动回到真实的人际关系之中，唯有当现实足够结实，虚拟才会退居为一个选项，而非唯一的出口。</p>
+      </div>
+      <div class="pyramid-fig">
+        <svg class="pyramid-svg" viewBox="0 0 730 382" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="素养五层金字塔及各层释义">
+          <defs>
+            <linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3A6B8A"/><stop offset="100%" stop-color="#2E5A75"/></linearGradient>
+            <linearGradient id="p2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5B9AB5"/><stop offset="100%" stop-color="#4A85A0"/></linearGradient>
+            <linearGradient id="p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D4A017"/><stop offset="100%" stop-color="#B88810"/></linearGradient>
+            <linearGradient id="p4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F4C95D"/><stop offset="100%" stop-color="#D4A017"/></linearGradient>
+            <linearGradient id="p5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#B84A3E"/><stop offset="100%" stop-color="#7A2E25"/></linearGradient>
+          </defs>
+
+          <!-- 五层金字塔（底宽顶窄） -->
+          <g>
+            <polygon points="40,340 520,340 460,280 100,280" fill="url(#p1)"/>
+            <polygon points="100,280 460,280 410,220 150,220" fill="url(#p2)"/>
+            <polygon points="150,220 410,220 360,160 200,160" fill="url(#p3)"/>
+            <polygon points="200,160 360,160 320,100 240,100" fill="url(#p4)"/>
+            <polygon points="240,100 320,100 290,40 270,40" fill="url(#p5)"/>
+          </g>
+
+          <!-- 每层名称 -->
+          <g font-size="16" font-weight="700" fill="#fff" text-anchor="middle">
+            <text x="280" y="318">① 识真</text>
+            <text x="280" y="258">② 辨伪</text>
+            <text x="280" y="198">③ 立界</text>
+            <text x="280" y="138">④ 共生</text>
+            <text x="280" y="78">⑤ 破茧</text>
+          </g>
+
+          <!-- 各层引导线 + 释义 -->
+          <g class="pl-lead">
+            <circle cx="490" cy="310" r="3" fill="#3A6B8A"/>
+            <line x1="490" y1="310" x2="560" y2="310" stroke="#9AA6AB" stroke-width="1.2"/>
+            <text x="568" y="296">
+              <tspan font-size="14" font-weight="700" fill="#1A3A4A">识真</tspan>
+              <tspan x="568" dy="17" font-size="12" fill="#666">AI 不是人，是模型</tspan>
+              <tspan x="568" dy="15" font-size="12" fill="#666">概率 / 镜子</tspan>
+            </text>
+
+            <circle cx="435" cy="250" r="3" fill="#5B9AB5"/>
+            <line x1="435" y1="250" x2="560" y2="250" stroke="#9AA6AB" stroke-width="1.2"/>
+            <text x="568" y="242">
+              <tspan font-size="14" font-weight="700" fill="#1A3A4A">辨伪</tspan>
+              <tspan x="568" dy="17" font-size="12" fill="#666">识别"顺着说"与"瞎编造"</tspan>
+            </text>
+
+            <circle cx="385" cy="190" r="3" fill="#D4A017"/>
+            <line x1="385" y1="190" x2="560" y2="190" stroke="#9AA6AB" stroke-width="1.2"/>
+            <text x="568" y="182">
+              <tspan font-size="14" font-weight="700" fill="#1A3A4A">立界</tspan>
+              <tspan x="568" dy="17" font-size="12" fill="#666">时间 / 隐私 / 情感边界</tspan>
+            </text>
+
+            <circle cx="340" cy="130" r="3" fill="#F4C95D"/>
+            <line x1="340" y1="130" x2="560" y2="130" stroke="#9AA6AB" stroke-width="1.2"/>
+            <text x="568" y="116">
+              <tspan font-size="14" font-weight="700" fill="#1A3A4A">共生</tspan>
+              <tspan x="568" dy="17" font-size="12" fill="#666">当工具而非伴侣 ——</tspan>
+              <tspan x="568" dy="15" font-size="12" fill="#666">用它练，回到真人里去用</tspan>
+            </text>
+
+            <circle cx="305" cy="70" r="3" fill="#B84A3E"/>
+            <line x1="305" y1="70" x2="560" y2="70" stroke="#9AA6AB" stroke-width="1.2"/>
+            <text x="568" y="56">
+              <tspan font-size="14" font-weight="700" fill="#1A3A4A">破茧</tspan>
+              <tspan x="568" dy="17" font-size="12" fill="#666">主动构建现实关系 ——</tspan>
+              <tspan x="568" dy="15" font-size="12" fill="#666">让现实结实，虚拟才只是选项</tspan>
+            </text>
+          </g>
+
+          <!-- 塔外四根支柱（虚线） -->
+          <g stroke="#888" stroke-dasharray="3 4" stroke-width="1" fill="none">
+            <line x1="40" y1="340" x2="20" y2="372"/>
+            <line x1="520" y1="340" x2="540" y2="372"/>
+            <line x1="240" y1="100" x2="220" y2="60"/>
+            <line x1="320" y1="100" x2="340" y2="60"/>
+          </g>
+          <g font-size="10" fill="#888" text-anchor="middle">
+            <text x="20" y="372" text-anchor="start">家庭规则</text>
+            <text x="540" y="372" text-anchor="end">学校课程</text>
+            <text x="220" y="56" text-anchor="end">平台设计</text>
+            <text x="340" y="56" text-anchor="start">公共政策</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <p class="body reveal">至于它的养成途径，集中在两处：在家庭的规则里"陪"，在学校的课程里"教"。塔外还有另外两根虚线支柱——平台设计与公共政策，前两根握在家长和老师手里，后两根却不在这张桌上。这几根支柱即便垒得再高，也仅能撑起那座塔的一半；剩下的那一半，孩子凭一己之力无法企及，需要一只更强有力的手，越过家庭的餐桌与学校的讲台，替他把那道尚未收笔的线继续画下去。</p>
+    <div class="quote reveal">
+      <p>人民锐评：未成年人模式<span class="hl-risk">绝不能成为"摆设"</span>，算法必须升级——能识别异常情绪，能在危险边缘主动说<span class="hl">"这个话题我不太懂，要不要和爸爸妈妈聊聊？"</span>
+    </div>
+    <p class="body reveal">下面五道题是给你自己用的：答完，看你在哪一层。</p>
+    <!-- 参与式自测 -->
+    <div class="self-test reveal">
+      <p class="st-title">测测你的 AI 使用模式</p>
+      <p class="st-sub">5 道题对应素养五层 · 答完给层级解读与建议 · 引导反思而非贴标签</p>
+
+      <div class="st-grid">
+      <div class="st-q">
+        <p class="sq-text"><span class="sqn">1</span>周末的下午，你更想？</p>
+        <div class="st-opts">
+          <span class="st-opt" data-tier="2">约同学出门</span>
+          <span class="st-opt" data-tier="1">找 AI 聊一下午</span>
+        </div>
+      </div>
+      <div class="st-q">
+        <p class="sq-text"><span class="sqn">2</span>你会把 AI 的肯定当"我真的对"吗？</p>
+        <div class="st-opts">
+          <span class="st-opt" data-tier="2">不会，我会自己核</span>
+          <span class="st-opt" data-tier="1">会，AI 都这么说</span>
+        </div>
+      </div>
+      <div class="st-q">
+        <p class="sq-text"><span class="sqn">3</span>你会把最深的秘密告诉 AI 吗？</p>
+        <div class="st-opts">
+          <span class="st-opt" data-tier="2">不会，那是真人之间的事</span>
+          <span class="st-opt" data-tier="1">会，AI 比人安全</span>
+        </div>
+      </div>
+      <div class="st-q">
+        <p class="sq-text"><span class="sqn">4</span>你知道 AI 只是概率模型吗？</p>
+        <div class="st-opts">
+          <span class="st-opt" data-tier="2">知道</span>
+          <span class="st-opt" data-tier="1">不太清楚</span>
+        </div>
+      </div>
+      <div class="st-q">
+        <p class="sq-text"><span class="sqn">5</span>你用 AI 是？</p>
+        <div class="st-opts">
+          <span class="st-opt" data-tier="2">练技能</span>
+          <span class="st-opt" data-tier="1">找人陪</span>
+        </div>
+      </div>
+      </div>
+
+      <div class="st-result" id="stResult">
+        <p class="str-tier"></p>
+        <p class="str-body"></p>
+      </div>
+    </div>
+    <p class="source-line reveal">
+      来源：郑毅《未成年人健康使用网络专家共识》chinanews.com.cn/sh/2026/08-29/10686316.shtml · health.people.com.cn/n1/2026/0304/c14739-40674306.html
+    </p>
+    <p class="body reveal">以上就是家庭能做的全部。剩下的，要靠国家来画。</p>
+  </div>
+</section>
+
+<!-- ============================ 4.5 国家画下的线：从中国到全球 ============================ -->
+<section class="section" id="s4-5">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">4.5</span>国家画下的线：从中国到全球</h2>
+    <p class="body reveal">然而有些线，家庭与学校画不到，唯有制度能够画出。<span class="num">2026-07-15</span>，《人工智能拟人化互动服务管理暂行办法》正式施行；9 月 18 日，国务院又就未成年人健康安全使用网络公开征求意见，从部门规章到行政法规，二者之间只隔了 <span class="num">65 天</span>。</p>
+    <p class="body reveal">那这条线落到企业身上管不管用？办法 2026-07-15 施行——从这一天起，向境内未成年人提供"虚拟伴侣"就属违规。盯住中间那条金线，左边虚线框是施行前 15 天。但"网动了"的方式，值得多看一眼。施行日前后，豆包、千问、元宝在半个月内<span class="hl-risk">整体下线了"用户自建智能体"功能</span>——而办法本身只管"情感互动"，明确把工具型智能体排除在外。为什么整条功能被端掉？北京大学法学院教授薛军给出的解释是：<span class="hl">"持续性情感互动服务"的边界模糊、合规成本高，企业宁愿"一刀切"暂停，也不愿冒违规风险</span>。官方口径称这是主动合规、影响局部；用户却在应用商店刷差评，讨论"我的 AI 数字资产谁做主"。<span class="hl">这条线画得够不够细、执行有没有走样，仍在争论</span>。可真正棘手的是，这条线画得再细，也终究只是一条底线——<span class="hl-risk">《拟人化办法》管住了平台，管不住家长把手机塞给哭闹的孩子</span>；管住了"虚拟伴侣"这个词，管不住孩子在算法面前把心交出去。<span class="hl">底线之上，机遇与风险仍在天平两端摇晃</span>。</p>
+    <!-- 合规日历 -->
+    <div class="compliance-cal reveal">
+      <p class="dt-title">紧贴施行日（2026-07-15）：四平台五项动作全部落地</p>
+      <p class="dt-sub">上方＝施行日前的事件，下方＝施行日后的事件；中间虚线框是施行前 15 天的窗口，在下方放大逐项展开。</p>
+      <p class="cal-legend">
+        <span class="cl-i"><i class="cl-gold"></i>窗口内平台动作</span>
+        <span class="cl-i"><i class="cl-ink"></i>主轴节点</span>
+        <span class="cl-i"><i class="cl-line"></i>施行日 2026-07-15</span>
+        <span class="cl-i"><i class="cl-dash"></i>施行窗口 06-30 → 07-15</span>
+      </p>
+      <div class="cal-track">
+        <div class="cal-axis"></div>
+        <span class="cal-band" style="top:126px">施行日前</span>
+
+        <!-- 上轨事件（窗口前） -->
+        <div class="cal-event up" style="left:8%" data-info="2025-10-13｜加州 SB 243 签署｜州法（全球节点）｜出处：附表1 S32｜备注：全美第二部此类州法（首部为佛州 SB 1344，2025-07-01 生效）；2026-01-01 施行" tabindex="0" role="button" aria-label="2025-10-13 加州 SB 243 签署，点击查看详情">
+          <span class="ce-date">2025-10-13</span>
+          加州 SB 243 签署
+        </div>
+        <div class="cal-event up" style="left:23%" data-info="2026-02-02｜拟人化办法审议通过｜部门规章｜出处：附表1 S10｜备注：五部门令第 21 号；2026-04-10 发布、2026-07-15 施行" tabindex="0" role="button" aria-label="2026-02-02 拟人化办法审议通过，点击查看详情">
+          <span class="ce-date">2026-02-02</span>
+          拟人化办法审议通过
+        </div>
+        <div class="cal-event up" style="left:38%" data-info="2026-04-10｜办法正式发布｜部门规章｜出处：附表1 S10｜备注：第十四条不得向未成年人提供虚拟亲属、虚拟伴侣等虚拟亲密关系服务" tabindex="0" role="button" aria-label="2026-04-10 办法正式发布，点击查看详情">
+          <span class="ce-date">2026-04-10</span>
+          办法正式发布
+        </div>
+        <div class="cal-event up" style="left:53%" data-info="2026-06｜星野应用分级调整为 18+｜平台合规动作｜出处：附表4 S23｜备注：应用商店年龄分级，主体为 MiniMax（上海稀宇科技）" tabindex="0" role="button" aria-label="2026-06 星野应用分级调整为 18+，点击查看详情">
+          <span class="ce-date">2026-06</span>
+          星野应用分级调整为 18+
+        </div>
+
+        <!-- 窗口高亮：2026-06-30 → 07-15 -->
+        <div class="cal-window" style="left:56%;width:20%"></div>
+        <span class="cal-window-label" style="left:60%">06-30 → 07-15 施行窗口</span>
+
+        <!-- 施行日竖线（窗口右缘） -->
+        <div class="cal-impl-line" style="left:76%"></div>
+        <span class="cal-impl-label" style="left:79%;top:104px">07-15 施行日</span>
+
+        <!-- 窗口放大轴：窗口内 5 项动作在主轴上的横向间距不足 5%，
+             单列放大轴逐项展开，避免日期与描述互相叠压 -->
+        <div class="cal-zoom">
+          <p class="cal-zoom-head">窗口内部：从施行日前 15 天到施行日当天，5 项动作全部完成</p>
+          <div class="cal-zoom-track">
+            <div class="cal-zoom-axis"></div>
+            <div class="cal-zoom-ev" style="left:10%" data-info="2026-06-30｜腾讯元宝关停智能体功能｜平台合规动作｜出处：附表4（平台合规动作）" tabindex="0" role="button" aria-label="2026-06-30 腾讯元宝关停智能体功能，点击查看详情">
+              <span class="ze-delta">施行日前 15 天</span>
+              <span class="ze-date">2026-06-30</span>
+              腾讯元宝关停智能体功能
+            </div>
+            <div class="cal-zoom-ev" style="left:37%" data-info="2026-07-10｜千问下线网页端拟人化互动类与自建智能体｜平台合规动作｜出处：附表4（平台合规动作）" tabindex="0" role="button" aria-label="2026-07-10 千问下线网页端拟人化互动类与自建智能体，点击查看详情">
+              <span class="ze-delta">施行日前 5 天</span>
+              <span class="ze-date">2026-07-10</span>
+              千问下线网页端拟人化互动类与自建智能体
+            </div>
+            <div class="cal-zoom-ev" style="left:64%" data-info="2026-07-14｜网易妙时应用整体停运｜平台合规动作｜出处：附表4（平台合规动作）｜备注：距施行日只剩 1 天" tabindex="0" role="button" aria-label="2026-07-14 网易妙时应用整体停运，点击查看详情">
+              <span class="ze-delta">施行日前 1 天</span>
+              <span class="ze-date">2026-07-14</span>
+              网易妙时应用整体停运
+            </div>
+            <div class="cal-zoom-ev" style="left:91%" data-info="2026-07-15｜千问 App 端全关 · 豆包智能体下线｜平台合规动作｜出处：附表4（平台合规动作）｜备注：两项动作均落在施行日当天" tabindex="0" role="button" aria-label="2026-07-15 千问 App 端全关与豆包智能体下线，点击查看详情">
+              <span class="ze-delta">施行日当天</span>
+              <span class="ze-date">2026-07-15</span>
+              千问 App 端全关 · 豆包智能体下线
+            </div>
+          </div>
+        </div>
+
+        <!-- 下轨事件（窗口后） -->
+        <span class="cal-band" style="top:156px">施行日后</span>
+        <div class="cal-event down" style="left:84%" data-info="2026-09-18｜国务院网络保护规定征求意见稿｜行政法规（征求意见）｜出处：附表1 S11｜备注：未满 16 周岁强制启用未成年人模式；五类禁止服务含虚拟亲属、虚拟伴侣等虚拟亲密关系；意见截止 2026-10-17" tabindex="0" role="button" aria-label="2026-09-18 国务院网络保护规定征求意见稿，点击查看详情">
+          <span class="ce-date">2026-09-18</span>
+          国务院网络保护规定征求意见稿
+        </div>
+        <div class="cal-event down" style="left:95.5%" data-info="2026-10-15｜字节豆包清除智能体历史数据｜平台合规动作｜出处：附表4（平台合规动作）｜备注：本轴记录的最新一项动作" tabindex="0" role="button" aria-label="2026-10-15 字节豆包清除智能体历史数据，点击查看详情">
+          <span class="ce-date">2026-10-15</span>
+          字节豆包清除智能体历史数据（最新一项）
+        </div>
+      </div>
+      <p class="cal-foot">施行日窗口期内（2026-06-30 至 07-15），腾讯元宝 / 千问（网页端与 App 端）/ 网易妙时 / 豆包四家平台共完成五项关停、下架、停运，其中两项落在施行日当天。<span class="cf-punch">线画下之后，网确实动了。</span></p>
+    </div>
+    <p class="body reveal">中国画的这条线不是孤例。把镜头往外拉，就在办法施行的前后，一轮针对"AI 陪伴"的立法几乎同时展开。美国加州 SB 243 是这一代监管的样本：它要求 AI 聊天产品在检测到未成年人表达自伤、暴力或性侵害意图时<span class="hl-risk">启动危机干预协议、推送求助资源</span>；并要求平台明确告知用户"正在与 AI 对话"，对已知的未成年用户<span class="hl-risk">每 3 小时提醒一次"该休息了"</span>。"提醒"两个字背后，是一个被算法推到悬崖边、又被算法拉回来的少年。</p>
+    <p class="body reveal">先看画在哪。这张图上八个地方，过去一年多都动过手——颜色越暖，管得越严。</p>
+    <!-- 七国与欧盟：AI 交互世界地图 -->
+    <div class="map-wrap reveal" id="mapWrap">
+      <div class="map-main">
+      <div class="map-stage" id="mapStage">
+        <div class="map-view">
+        <svg class="map-svg" id="aiWorldMap" viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="七个国家与欧盟的 AI 陪伴监管政策交互地图">
+          <defs>
+            <radialGradient id="mapBg" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stop-color="#1A3A4A" stop-opacity=".04"/>
+              <stop offset="100%" stop-color="#1A3A4A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="1000" height="460" fill="url(#mapBg)"/>
+
+          <!-- 经纬网格（等距圆柱投影：横轴经度 180°W–180°E，纵轴纬度 84°N–58°S） -->
+          <g class="map-grat" stroke="#3A6B8A" stroke-opacity=".13" stroke-width=".6">
+            <line x1="166.7" y1="10" x2="166.7" y2="450"/>
+            <line x1="333.3" y1="10" x2="333.3" y2="450"/>
+            <line x1="500.0" y1="10" x2="500.0" y2="450"/>
+            <line x1="666.7" y1="10" x2="666.7" y2="450"/>
+            <line x1="833.3" y1="10" x2="833.3" y2="450"/>
+            <line x1="0" y1="84.4" x2="1000" y2="84.4"/>
+            <line x1="0" y1="177.3" x2="1000" y2="177.3"/>
+            <line x1="0" y1="270.3" x2="1000" y2="270.3" stroke-dasharray="2 6"/>
+            <line x1="0" y1="363.2" x2="1000" y2="363.2"/>
+          </g>
+          <g font-size="9" fill="#9FB3BD" font-family="inherit">
+            <text x="166.7" y="458" text-anchor="middle">120°W</text>
+            <text x="333.3" y="458" text-anchor="middle">60°W</text>
+            <text x="500.0" y="458" text-anchor="middle">0°</text>
+            <text x="666.7" y="458" text-anchor="middle">60°E</text>
+            <text x="833.3" y="458" text-anchor="middle">120°E</text>
+            <text x="3" y="80.4">60°N</text>
+            <text x="3" y="173.3">30°N</text>
+            <text x="3" y="266.3">赤道</text>
+            <text x="3" y="359.2">30°S</text>
+          </g>
+
+          <!-- 大陆轮廓（按真实经纬度绘制，非示意形状） -->
+          <g fill="#3A6B8A" fill-opacity=".045" stroke="#3A6B8A" stroke-opacity=".3" stroke-width="1.1"
+             stroke-linejoin="round">
+            <path d="M 33.3 65.8 L 38.9 84.4 L 61.1 90.6 L 77.8 90.6 L 105.6 84.4 L 125.0 90.6 L 138.9 103.0 L 152.8 121.5 L 155.6 140.1 L 166.7 164.9 L 183.3 177.3 L 194.4 195.9 L 208.3 208.3 L 227.8 220.7 L 244.4 223.8 L 266.7 239.3 L 283.3 245.5 L 269.4 226.9 L 255.6 205.2 L 238.9 214.5 L 230.6 202.1 L 230.6 183.5 L 241.7 177.3 L 255.6 177.3 L 272.2 189.7 L 275.0 174.2 L 288.9 161.8 L 305.6 140.1 L 316.7 130.8 L 327.8 127.7 L 338.9 118.5 L 322.2 106.1 L 305.6 90.6 L 283.3 78.2 L 263.9 65.8 L 236.1 59.6 L 208.3 56.5 L 180.6 53.4 L 152.8 53.4 L 111.1 53.4 L 61.1 50.3 Z"/>
+            <path d="M 283.3 245.5 L 291.7 257.9 L 300.0 264.1 L 313.9 257.9 L 327.8 245.5 L 338.9 251.7 L 355.6 257.9 L 361.1 270.3 L 377.8 279.6 L 397.2 288.9 L 402.8 298.2 L 391.7 319.9 L 388.9 338.5 L 372.2 344.6 L 366.7 357.0 L 352.8 375.6 L 338.9 388.0 L 327.8 397.3 L 319.4 412.8 L 311.1 431.4 L 300.0 437.6 L 291.7 425.2 L 297.2 406.6 L 300.0 381.8 L 302.8 363.2 L 305.6 332.3 L 297.2 316.8 L 286.1 295.1 L 277.8 285.8 L 275.0 270.3 Z"/>
+            <path d="M 452.8 223.8 L 452.8 205.2 L 463.9 189.7 L 472.2 180.4 L 483.3 158.7 L 500.0 158.7 L 527.8 164.9 L 555.6 174.2 L 569.4 171.1 L 588.9 174.2 L 594.4 180.4 L 602.8 202.1 L 611.1 223.8 L 619.4 236.2 L 641.7 236.2 L 625.0 261.0 L 613.9 276.5 L 611.1 295.1 L 605.6 316.8 L 597.2 338.5 L 591.7 350.8 L 577.8 372.5 L 561.1 375.6 L 550.0 360.1 L 541.7 338.5 L 536.1 319.9 L 533.3 285.8 L 525.0 270.3 L 525.0 257.9 L 516.7 257.9 L 500.0 254.8 L 477.8 254.8 L 466.7 239.3 Z"/>
+            <path d="M 472.2 155.6 L 475.0 137.0 L 494.4 137.0 L 497.2 127.7 L 488.9 121.5 L 500.0 118.5 L 505.6 112.3 L 511.1 106.1 L 522.2 103.0 L 522.2 90.6 L 513.9 90.6 L 516.7 75.1 L 536.1 68.9 L 555.6 53.4 L 583.3 53.4 L 616.7 59.6 L 652.8 53.4 L 694.4 44.1 L 736.1 41.0 L 777.8 31.7 L 819.4 41.0 L 861.1 47.2 L 902.8 53.4 L 944.4 56.5 L 972.2 59.6 L 994.4 62.7 L 977.8 75.1 L 952.8 93.7 L 916.7 87.5 L 897.2 103.0 L 888.9 115.4 L 875.0 133.9 L 861.1 137.0 L 855.6 152.5 L 838.9 149.4 L 833.3 158.7 L 838.9 174.2 L 833.3 195.9 L 805.6 208.3 L 791.7 223.8 L 777.8 242.4 L 772.2 239.3 L 763.9 220.7 L 750.0 202.1 L 736.1 214.5 L 722.2 230.0 L 702.8 220.7 L 694.4 202.1 L 686.1 192.8 L 666.7 192.8 L 658.3 192.8 L 652.8 199.0 L 655.6 217.6 L 633.3 226.9 L 622.2 230.0 L 611.1 214.5 L 597.2 183.5 L 594.4 174.2 L 600.0 158.7 L 583.3 143.2 L 572.2 146.3 L 566.7 152.5 L 555.6 146.3 L 547.2 143.2 L 541.7 152.5 L 533.3 152.5 L 530.6 140.1 L 536.1 130.8 L 525.0 133.9 L 511.1 137.0 L 508.3 140.1 L 500.0 149.4 L 497.2 155.6 L 483.3 158.7 L 475.0 155.6 Z"/>
+            <path d="M 813.9 338.5 L 816.7 353.9 L 822.2 369.4 L 830.6 375.6 L 844.4 372.5 L 858.3 369.4 L 872.2 369.4 L 883.3 378.7 L 888.9 388.0 L 902.8 388.0 L 908.3 391.1 L 916.7 384.9 L 925.0 366.3 L 925.0 353.9 L 919.4 344.6 L 908.3 329.2 L 897.2 313.7 L 894.4 304.4 L 891.7 323.0 L 880.6 319.9 L 877.8 307.5 L 869.4 304.4 L 861.1 307.5 L 852.8 313.7 L 844.4 319.9 L 838.9 326.1 L 833.3 332.3 L 822.2 338.5 Z"/>
+          </g>
+          <g fill="#3A6B8A" fill-opacity=".04" stroke="#3A6B8A" stroke-opacity=".22" stroke-width=".9"
+             stroke-linejoin="round">
+            <path d="M 375.0 84.4 L 355.6 72.0 L 347.2 53.4 L 375.0 34.8 L 416.7 19.3 L 444.4 22.4 L 438.9 41.0 L 416.7 59.6 L 388.9 75.1 Z"/>
+            <path d="M 472.2 109.2 L 472.2 99.9 L 483.3 99.9 L 483.3 109.2 Z"/>
+            <path d="M 486.1 115.4 L 500.0 112.3 L 502.8 106.1 L 491.7 103.0 L 494.4 93.7 L 486.1 90.6 L 483.3 96.8 L 486.1 103.0 L 491.7 109.2 Z"/>
+            <path d="M 619.4 307.5 L 638.9 316.8 L 638.9 347.7 L 625.0 347.7 L 619.4 332.3 Z"/>
+            <path d="M 977.8 375.6 L 983.3 384.9 L 994.4 388.0 L 988.9 397.3 L 977.8 406.6 L 963.9 412.8 L 961.1 409.7 L 972.2 400.4 L 977.8 394.2 Z"/>
+            <path d="M 850.0 152.5 L 858.3 152.5 L 858.3 161.8 L 852.8 164.9 L 847.2 155.6 Z"/>
+            <path d="M 861.1 171.1 L 866.7 164.9 L 877.8 161.8 L 886.1 161.8 L 891.7 152.5 L 894.4 143.2 L 902.8 137.0 L 891.7 130.8 L 886.1 140.1 L 880.6 155.6 L 869.4 164.9 Z"/>
+            <path d="M 763.9 254.8 L 794.4 288.9 L 819.4 295.1 L 827.8 298.2 L 791.7 292.0 L 777.8 270.3 Z"/>
+            <path d="M 802.8 264.1 L 825.0 257.9 L 830.6 273.4 L 822.2 282.7 L 805.6 279.6 L 800.0 270.3 Z"/>
+            <path d="M 833.3 214.5 L 844.4 214.5 L 850.0 230.0 L 847.2 251.7 L 838.9 239.3 L 833.3 226.9 Z"/>
+          </g>
+
+          <!-- 欧洲三国/欧盟光点疏密处理：实心点已做位移，虚线指向其真实坐标 -->
+          <g class="map-leaders" stroke="#8FA6B2" stroke-opacity=".55" stroke-width=".8"
+             stroke-dasharray="2 3" fill="none">
+            <line x1="520.1" y1="91.7" x2="512.1" y2="112.7"/>
+            <circle cx="512.1" cy="112.7" r="2.4" stroke-opacity=".8"/>
+            <line x1="461.6" y1="95.7" x2="499.6" y2="110.7"/>
+            <circle cx="499.6" cy="110.7" r="2.4" stroke-opacity=".8"/>
+            <line x1="560.7" y1="152.5" x2="534.7" y2="140.5"/>
+            <circle cx="534.7" cy="140.5" r="2.4" stroke-opacity=".8"/>
+          </g>
+
+          <!-- AI 中枢（非地理实体，示意）与飞线层 -->
+          <g id="aiHubG">
+            <circle cx="952" cy="30" r="5" fill="#F4C95D"/>
+            <circle cx="952" cy="30" r="13" fill="none" stroke="#F4C95D" stroke-opacity=".55"/>
+            <text x="944" y="34" text-anchor="end" font-size="10" font-weight="700" fill="#B8860B">AI 中枢</text>
+          </g>
+
+          <!-- 七国与欧盟光点（悬停提示 / 点击详情 / 键盘可达） -->
+          <g class="m-point" data-key="us" tabindex="0" role="button" aria-label="美国，点击查看政策详情">
+            <circle class="dot" cx="286.0" cy="149.7" r="11" fill="#D4A017" opacity=".95"/>
+            <circle class="halo" cx="286.0" cy="149.7" r="13.5" fill="none" stroke="#D4A017" stroke-width="2"/>
+            <text class="m-label" x="286.0" y="183.7" text-anchor="middle" font-size="14" font-weight="700" fill="#1A3A4A">美国</text>
+            <text class="m-sub" x="286.0" y="201.7" text-anchor="middle" font-size="10" fill="#888">SB 243 + 亚当法</text>
+          </g>
+          <g class="m-point" data-key="cn" tabindex="0" role="button" aria-label="中国，点击查看政策详情">
+            <circle class="dot" cx="823.4" cy="146.6" r="13" fill="#D4A017" opacity=".95"/>
+            <circle class="halo" cx="823.4" cy="146.6" r="15.5" fill="none" stroke="#D4A017" stroke-width="2"/>
+            <text class="m-label" x="823.4" y="182.6" text-anchor="middle" font-size="14" font-weight="700" fill="#1A3A4A">中国</text>
+            <text class="m-sub" x="823.4" y="200.6" text-anchor="middle" font-size="10" fill="#888">拟人化办法 + 条例</text>
+          </g>
+          <g class="m-point" data-key="eu" tabindex="0" role="button" aria-label="欧盟，点击查看政策详情">
+            <circle class="dot" cx="520.1" cy="91.7" r="11" fill="#D4A017" opacity=".95"/>
+            <circle class="halo" cx="520.1" cy="91.7" r="13.5" fill="none" stroke="#D4A017" stroke-width="2"/>
+            <text class="m-label" x="520.1" y="59.7" text-anchor="middle" font-size="12" font-weight="700" fill="#1A3A4A">欧盟</text>
+            <text class="m-sub" x="520.1" y="43.7" text-anchor="middle" font-size="10" fill="#888">AI Act + DSA 指南</text>
+          </g>
+          <g class="m-point" data-key="uk" tabindex="0" role="button" aria-label="英国，点击查看政策详情">
+            <circle class="dot" cx="461.6" cy="95.7" r="8" fill="#5B9AB5" opacity=".95"/>
+            <circle class="halo" cx="461.6" cy="95.7" r="11.5" fill="none" stroke="#5B9AB5" stroke-width="2"/>
+            <text class="m-label" x="448.6" y="99.7" text-anchor="end" font-size="12" font-weight="700" fill="#1A3A4A">英国</text>
+          </g>
+          <g class="m-point" data-key="it" tabindex="0" role="button" aria-label="意大利，点击查看政策详情">
+            <circle class="dot" cx="560.7" cy="152.5" r="8" fill="#5B9AB5" opacity=".95"/>
+            <circle class="halo" cx="560.7" cy="152.5" r="11.5" fill="none" stroke="#5B9AB5" stroke-width="2"/>
+            <text class="m-label" x="574.7" y="151.5" text-anchor="start" font-size="12" font-weight="700" fill="#1A3A4A">意大利</text>
+            <text class="m-sub" x="574.7" y="167.5" text-anchor="start" font-size="10" fill="#888">Replika 罚款 500 万€</text>
+          </g>
+          <g class="m-point" data-key="kr" tabindex="0" role="button" aria-label="韩国，点击查看政策详情">
+            <circle class="dot" cx="852.7" cy="153.9" r="8" fill="#5B9AB5" opacity=".95"/>
+            <circle class="halo" cx="852.7" cy="153.9" r="11.5" fill="none" stroke="#5B9AB5" stroke-width="2"/>
+            <text class="m-label" x="852.7" y="124.9" text-anchor="middle" font-size="12" font-weight="700" fill="#1A3A4A">韩国</text>
+            <text class="m-sub" x="852.7" y="108.9" text-anchor="middle" font-size="10" fill="#888">网信法修订提案</text>
+          </g>
+          <g class="m-point" data-key="jp" tabindex="0" role="button" aria-label="日本，点击查看政策详情">
+            <circle class="dot" cx="888.0" cy="159.7" r="8" fill="#888888" opacity=".95"/>
+            <circle class="halo" cx="888.0" cy="159.7" r="11.5" fill="none" stroke="#888888" stroke-width="2"/>
+            <text class="m-label" x="902.0" y="158.7" text-anchor="start" font-size="12" font-weight="700" fill="#1A3A4A">日本</text>
+            <text class="m-sub" x="902.0" y="174.7" text-anchor="start" font-size="10" fill="#888">行业自律</text>
+          </g>
+          <g class="m-point" data-key="au" tabindex="0" role="button" aria-label="澳大利亚，点击查看政策详情">
+            <circle class="dot" cx="914.2" cy="379.6" r="11" fill="#B84A3E" opacity=".95"/>
+            <circle class="halo" cx="914.2" cy="379.6" r="13.5" fill="none" stroke="#B84A3E" stroke-width="2"/>
+            <text class="m-label" x="902" y="347.6" text-anchor="end" font-size="12" font-weight="700" fill="#1A3A4A">澳大利亚</text>
+            <text class="m-sub" x="902" y="331.6" text-anchor="end" font-size="10" fill="#888">16 岁最低年龄立法</text>
+          </g>
+          <g id="flyLayer"></g>
+        </svg>
+
+        <div class="map-tooltip" id="mapTooltip" hidden></div>
+
+        <div class="map-detail" id="mapDetail">
+          <div class="md-head">
+            <button class="md-close" id="mdClose" aria-label="收起详情">×</button>
+            <span class="md-grip" aria-hidden="true"></span>
+            <span class="md-name" id="mdName"></span>
+            <span class="md-tag" id="mdTag"></span>
+          </div>
+          <div class="md-scroll">
+            <ul class="md-laws" id="mdLaws"></ul>
+            <p class="md-summary" id="mdSummary"></p>
+            <p class="md-geo" id="mdGeo"></p>
+          </div>
+          <div class="md-actions">
+            <button class="md-btn" id="mdAsk">问 AI 详细讲讲</button>
+            <button class="md-btn ghost" id="mdFly">聚焦地图</button>
+          </div>
+        </div>
+        </div><!-- /.map-view -->
+
+        <!-- 右侧竖标签：点开/收起 AI 问政抽屉（展开时地图同步收缩，不覆盖任何光点） -->
+        <button class="ai-tab" id="aiTab" type="button" aria-controls="aiDrawer" aria-expanded="false">
+          <span class="ai-tab-badge" aria-hidden="true">AI</span>
+          <span class="ai-tab-txt" id="aiTabTxt">地图问政</span>
+          <span class="ai-tip" aria-hidden="true">点这里问 AI</span>
+        </button>
+
+      </div>
+
+      <div class="map-legend">
+        <button class="lg-item" type="button" data-tier="t1"><span class="lg-dot lg-1"></span>已立法禁止</button>
+        <button class="lg-item" type="button" data-tier="t2"><span class="lg-dot lg-2"></span>专项立法</button>
+        <button class="lg-item" type="button" data-tier="t3"><span class="lg-dot lg-3"></span>监管调查</button>
+        <button class="lg-item" type="button" data-tier="t4"><span class="lg-dot lg-4"></span>行业自律</button>
+        <button class="lg-item lg-reset" type="button" id="lgReset">重置视图</button>
+        <span class="lg-hint">点图例按档筛选 · 点光点看政策详情 · 点右缘「地图问政」标签向 AI 提问</span>
+      </div>
+      <p class="map-note">八处为四档监管形态代表；英国、意大利与欧盟因点位密集做过疏密位移，虚线指向其真实坐标。</p>
+      </div><!-- /.map-main -->
+
+      <!-- AI 问政抽屉：整列高度跨满「地图＋图例＋注释」，所以对话区始终够高（既不裁切也不遮挡地图） -->
+      <div class="ai-drawer" id="aiDrawer">
+        <div class="ai-panel" id="aiPanel">
+          <div class="ai-head">
+            <span class="ai-avatar">AI</span>
+            <div>
+              <p class="ai-title">地图问政 · AI 助手</p>
+              <p class="ai-sub">点国家或直接提问，地图会回应你</p>
+            </div>
+            <button class="ai-clear" id="aiClear" aria-label="清空对话">↺</button>
+          </div>
+          <div class="ai-chat" id="aiChat" aria-live="polite"></div>
+          <div class="ai-sugs" id="aiSugs"></div>
+          <form class="ai-input" id="aiForm" autocomplete="off">
+            <input id="aiInput" type="text" placeholder="例如：哪些国家已经立法？" maxlength="90">
+            <button type="submit" id="aiSend">发送</button>
+          </form>
+        </div>
+      </div><!-- /.ai-drawer -->
+    </div>
+    <p class="body reveal">同样是 AI 陪伴，全球松紧差了好几个量级：澳大利亚直接立法禁止未成年人使用社交 AI，中国用部门规章加行政法规双线推进，美国靠州法接力，日本至今只有行业自律。</p>
+  </div>
+</section>
+
+<!-- ============================ 4.6 收笔：把这条线，画到每一个少年身上 ============================ -->
+<section class="section" id="s4-6">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">4.6</span>收笔：把这条线，画到每一个少年身上</h2>
+    <p class="body reveal">其实，那幅"八个地方同一条线、谁先动笔、谁仍未动笔"的时间表，本不必铺陈成一幅复杂的图，一句便可概括：在过去一年多里，从美国 44 州检察长的联名信、FTC 发出的调查令，到加州接连签署的两部州法，再到中国一条办法的落地——有的地方已将算法关进了笼子，有的地方至今仍没有一条硬性的成文规定。进度快慢的背后，并非几个国家之间的胜负，而是这世上所有孩子共同面对的时间差。</p>
+    <p class="body reveal">我们真正要争取的，从来不是谁的线画得更多、更严，而是让每一条线都指向同一个方向——令 AI 永远停驻在它应当停驻的位置：它是一座桥，而非一堵墙；是一面镜子，而非一个归宿。</p>
+    <p class="body reveal">也正因如此，这条线最终要由每一位大人来收笔——画在归家的那张餐桌上，画在学校的讲台上，也写进法条中那个被反复斟酌的字眼里。它究竟画到哪里？画到一个少年，不再需要向一块屏幕讨要安全感，而能安心地走进真实的世界，在那里用力地、自由地，破茧而出，肆意飞翔。</p>
+    <p class="source-line reveal">
+      来源：中国两法 cac.gov.cn/2026-04/10/c_1777558395078289.htm · chinanews.com.cn/sh/2026/09-18/10699063.shtml ｜ 美国 naag.org/.../AI-Chatbot_FINAL-44.pdf · ftc.gov/.../GenerativeAI6%28b%29resolution.pdf · sd18.senate.ca.gov/.../signed-law · governor.ny.gov/.../safeguard-requirements · gov.ca.gov/2026/09/10/... ｜ 欧盟 digital-strategy.ec.europa.eu/en/library/commission-publishes-guidelines-protection-minors（DSA 指南 2025-07-14 · S30）· bernama.com/en/news.php?id=2608631（2026-09 新提案 · S38）｜ 英国 gov.uk/.../online-safety-act-explainer · ofcom.org.uk（罚款上限 10%／1800 万英镑 · S34；2025-01-15 调查 · S29）｜ 澳大利亚 esafety.gov.au/.../social-media-age-restrictions（4950 万澳元 · S14）｜ 意大利 edpb.europa.eu/.../replika_lt ｜ 韩国 digitaltoday.co.kr/cn/view/102394 · biz.heraldcorp.com/article/10784599（信息通信网法修订案 2026-10 · S37）
+    </p>
+  </div>
+</section>
+
+<!-- ============================ 跋 ============================ -->
+<section class="section epilogue" id="epilogue">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">跋</span>把镜子擦亮（记者手记）</h2>
+    <div class="epigraph reveal">
+      <p>"搭子"不是洪水猛兽，也不是救世主。它是一面镜子——<span class="hl">照出这代少年真实的孤独，也照出大人世界真实的缺席</span>。</p>
+      <p>这篇报道能做的，只是把镜子擦亮：让每一组数字都有出处，让每一个伤口都被看见，让每一次划线都有依据。</p>
+      <p>剩下的，不在算法手里，在你回家的那张餐桌上。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 图片来源与致谢（折叠） ============================ -->
+<section class="section" id="credits" style="padding:0 0 20px">
+  <div class="container" style="max-width:860px">
+    <div class="credits">
+      <details>
+        <summary>
+          图片来源与致谢
+          <span class="cr-count">（7 项 · 点击展开）</span>
+          <span class="cr-toggle">▾</span>
+        </summary>
+        <div class="cr-list">
+          <p>图1 新华社《民生观察丨AI玩具带娃透视》，记者毛思倩 摄（拍摄于2025年12月21日深圳inno100旗舰店），2026-03-23刊发，https://www.xinhuanet.com/tech/20260323/f40211236c334a5eb41dace0469caf7a/c.html</p>
+          <p>图2 香港am730，周令知 摄，2026-10-13（记者会当日），https://www.am730.com.hk/article/1058279</p>
+          <p>图3 The Star（Character.AI诉讼报道），Reuters/Dado Ruvic 供图，2026-10-09，https://www.thestar.com.my/tech/tech-news/2026/10/09/characterai-chatbots-encouraged-users-to-cut-and-starve-themselves-kentucky-alleges</p>
+          <p>图4 人民日报《讽刺与幽默》第1643期《伪共情，莫沉溺》配图漫画《温柔的茧》（斯玫 作），2026-08-28，https://paper.people.com.cn/fcyym/pc/attachement/202608/28/59296e59-592e-4478-8b80-f70055730266.pdf</p>
+          <p>图5 中国青年网《"不管我说什么，它都能回应我"》，制图邹竣麒（AI辅助生成），2026-06-09，https://news.youth.cn/gn/202606/t20260609_16703726.htm</p>
+          <p>图6 人民网《人民直击丨当孩子和AI"交心"》记者实测截图，2026-03-01，https://society-app.people.cn/n1/2026/0301/c428181-40672396.html</p>
+          <p>图7 人民日报海外版《给"AI陪伴"划定安全边界》，焦国斌 摄（人民视觉 供图；2026年8月10日摄于湖北巴东县信陵镇青年之家暑期爱心托管班），2026-08-21刊发，https://paper.people.com.cn/rmrbhwb/pc/content/202608/21/content_30176220.html</p>
+        </div>
+        <p class="cr-note">本文图片均用于新闻评论与事实说明，著作权归原作者及首发媒体所有，来源已标注，如有异议请联系删除。<br>本文部分视觉内容由人工智能辅助生成（图5已标注），数据来源与事实核查均由作者人工完成。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 章末跳转：回到序言（统一过渡卡片） ============================ -->
+<a class="next-chapter" href="05-backmatter.html" data-next="5" id="nextJump">
+  <div class="nc-frame">
+    <p class="echo">技术负责在线，<span class="hl">人负责在场</span>。</p>
+    <p class="label">下 一 章</p>
+    <p class="title">附录 · 数据来源与参考文献</p>
+    <p class="hook">每一组数字的来处，每一份材料的出处。</p>
+    <span class="arrow" aria-hidden="true">↓</span>
+  </div>
+</a>
+
+<script src="../data/data.js"></script>
+<script src="../components/common.js"></script>
+<script>
+// ===== 通用：进场 reveal 已抽离到 common.js；reduceMotion 保留（本章多处使用） =====
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ===== count-up 数字（四连数 + 序言回扣，countUp 已抽离到 common.js） =====
+const countIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if (e.isIntersecting){
+      countUp(e.target);
+      countIO.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('[data-count]').forEach(el=>countIO.observe(el));
+
+// ===== 序言四题回扣卡片进场 =====
+const irCells = document.querySelectorAll('.ir-cell');
+const irIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if (e.isIntersecting){
+      e.target.classList.add('in');
+      irIO.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.4});
+irCells.forEach(el=>irIO.observe(el));
+
+// ===== 城乡裂痕数据条填充 =====
+const urIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if (e.isIntersecting){
+      const fills = e.target.querySelectorAll('.ur-fill');
+      fills.forEach((f,i)=>{
+        setTimeout(()=>{f.style.width = f.dataset.w}, i * 180);
+      });
+      urIO.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.3});
+document.querySelectorAll('.urban-rural').forEach(el=>urIO.observe(el));
+
+// ===== 参与式自测 =====
+const testState = {1:null,2:null,3:null,4:null,5:null};
+document.querySelectorAll('.st-q').forEach(q=>{
+  const qid = q.querySelector('.sqn').textContent.trim();
+  q.querySelectorAll('.st-opt').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      q.querySelectorAll('.st-opt').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+      testState[qid] = parseInt(opt.dataset.tier, 10);
+      checkTestDone();
+    });
+  });
+});
+function checkTestDone(){
+  if (Object.values(testState).some(v=>v===null)) return;
+  const tier2Count = Object.values(testState).filter(v=>v===2).length;
+  const result = document.getElementById('stResult');
+  let tier, body;
+  if (tier2Count >= 4){
+    tier = '第 4-5 层 · 共生 / 破茧';
+    body = '你已经把 AI 放回了工具的位置——用它练，但回到真人关系里去用。继续保持：现实足够结实，虚拟才只是选项。';
+  } else if (tier2Count === 3){
+    tier = '第 3 层 · 立界';
+    body = '你大致知道边界在哪——时间、隐私、情感。但还有一两个角落 AI 在替你做主。试着把那一两道边界再收一收。';
+  } else if (tier2Count === 2){
+    tier = '第 2 层 · 辨伪';
+    body = '你能识别 AI "顺着说"的味道，但还没有把边界划清楚。下一步：定一个时间上限，定一个"AI 不能进的话题"。';
+  } else {
+    tier = '第 1 层 · 识真';
+    body = 'AI 在你心里还接近"一个人"。它不是。它是模型、是概率、是镜子。先认出这一点，剩下的才会开始稳。';
+  }
+  result.querySelector('.str-tier').textContent = tier;
+  result.querySelector('.str-body').textContent = body;
+  result.classList.add('show');
+}
+
+
+
+// ===== ECharts：监管四类型分组柱 =====
+const regTypeChart = echarts.init(document.getElementById('regTypeChart'));
+regTypeChart.setOption({
+  backgroundColor: 'transparent',
+  grid: {left: 56, right: 24, top: 40, bottom: 40},
+  legend: {data: ['"想依赖AI不想自己思考"比例','用AI学文化知识比例'], top: 8, textStyle: {color: '#555', fontSize: 11}},
+  tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
+  xAxis: {
+    type: 'category',
+    data: ['支持型','限制型','放任型','禁止型'],
+    axisLine: {lineStyle: {color: '#888'}},
+    axisLabel: {color: '#2A2A2A', fontSize: 12}
+  },
+  yAxis: {
+    type: 'value', max: 60,
+    axisLine: {show: false},
+    axisLabel: {color: '#888', formatter: '{value}%'},
+    splitLine: {lineStyle: {color: 'rgba(26,58,74,.08)'}}
+  },
+  series: [
+    {
+      name: '"想依赖AI不想自己思考"比例',
+      type: 'bar',
+      data: window.DATA.ch4.regType.depend,
+      barWidth: 22,
+      barGap: '20%',
+      itemStyle: {color: '#B84A3E', borderRadius: [3,3,0,0]},
+      label: {show: true, position: 'top', formatter: '{c}%', color: '#555', fontSize: 11},
+      markPoint: {
+        symbol: 'pin', symbolSize: 34, symbolOffset: [0, -12],
+        itemStyle: {color: '#B84A3E'},
+        label: {show: true, color: '#fff', fontSize: 10, fontWeight: 700, formatter: '最高'},
+        data: [{name: '想依赖AI比例最高', coord: ['禁止型', 36.6]}]
+      }
+    },
+    {
+      name: '用AI学文化知识比例',
+      type: 'bar',
+      data: window.DATA.ch4.regType.culture,
+      barWidth: 22,
+      itemStyle: {color: '#3A6B8A', borderRadius: [3,3,0,0]},
+      label: {show: true, position: 'top', formatter: '{c}%', color: '#555', fontSize: 11}
+    }
+  ]
+});
+
+// ===== 窗口 resize =====
+window.addEventListener('resize', ()=>{
+  regTypeChart.resize();
+});
+
+// ===== 4.1 AI 世界地图（自包含问答引擎 + 交互动画） =====
+(function(){
+  const svg = document.getElementById('aiWorldMap');
+  const stage = document.querySelector('.map-stage');
+  if (!svg || !stage) return;
+
+  /* ---------- 数据 ---------- */
+  const C = window.DATA.ch4.countries;
+  const KEYS = Object.keys(C);
+
+  const ALIAS = window.DATA.ch4.alias;
+  const findKeys = q => KEYS.filter(k => ALIAS[k].some(a => q.indexOf(a) !== -1));
+
+  const EVENTS = window.DATA.ch4.events;
+  const GEN_SUGS = window.DATA.ch4.genSugs;
+  const TYPE_NAME = window.DATA.ch4.typeName;
+  const byType = t => KEYS.filter(k => C[k].type === t);
+  const listNames = ks => ks.map(k => C[k].name).join('、');
+
+  /* ---------- 问答引擎 ---------- */
+  function countryReply(k){
+    const c = C[k];
+    return { text: c.name + '（' + c.typeName + '）：' + c.summary, focus: [k],
+      chips: [c.name + '有哪些关键时间点？','对比中国和美国','2026 年发生了什么？'] };
+  }
+  function typeReply(t){
+    const ks = byType(t);
+    return { text: TYPE_NAME[t] + '的国家/经济体共 ' + ks.length + ' 个：\n' +
+        ks.map(k => '· ' + C[k].name + '：' + C[k].laws[0][0] + '（' + C[k].laws[0][1] + '）').join('\n'),
+      focus: ks, chips: GEN_SUGS };
+  }
+  function compareReply(ks){
+    const rank = {t1:4, t2:3, t3:2, t4:1};
+    const a = C[ks[0]], b = C[ks[1]];
+    const verdict = rank[a.type] === rank[b.type]
+      ? '两者监管强度相当，同为「' + a.typeName + '」'
+      : (rank[a.type] > rank[b.type]
+        ? a.name + '的监管强度高于' + b.name + '（' + a.typeName + ' vs ' + b.typeName + '）'
+        : b.name + '的监管强度高于' + a.name + '（' + b.typeName + ' vs ' + a.typeName + '）');
+    return { text: '对比 ' + a.name + ' 与 ' + b.name + '：\n· ' + a.name + '：' + a.typeName + '——' + a.laws[0][0] + '（' + a.laws[0][1] + '）\n· ' + b.name + '：' + b.typeName + '——' + b.laws[0][0] + '（' + b.laws[0][1] + '）\n' + verdict + '。',
+      focus: [ks[0], ks[1]], chips: ['哪些国家已经立法？','2026 年发生了什么？'] };
+  }
+  function singleEvent(e, tag){
+    return { text: tag + '一个节点：' + e[0] + '　' + e[1] + '。', focus: e[2].split(','), chips: GEN_SUGS };
+  }
+  function timelineReply(q, keys){
+    if (/最早|第一个|首先/.test(q)) return singleEvent(EVENTS[0], '最早');
+    if (/最新|最后|最近/.test(q)) return singleEvent(EVENTS[EVENTS.length - 1], '最新');
+    const list = keys.length ? EVENTS.filter(e => e[2].split(',').some(k => keys.indexOf(k) !== -1)) : EVENTS;
+    const y25 = EVENTS.filter(e => e[0].indexOf('2025') === 0).length;
+    const y26 = EVENTS.filter(e => e[0].indexOf('2026') === 0).length;
+    const focus = [];
+    list.forEach(e => e[2].split(',').forEach(k => { if (focus.indexOf(k) === -1) focus.push(k); }));
+    return { text: (keys.length ? '以下是 ' + listNames(keys) + ' 相关的关键节点：\n' : '一年多里可定位的政策节点共 ' + EVENTS.length + ' 条（2025 年 ' + y25 + ' 条，2026 年 ' + y26 + ' 条）：\n') + list.map(e => '· ' + e[0] + '　' + e[1]).join('\n'),
+      focus: focus, chips: GEN_SUGS };
+  }
+  function yearReply(q, keys){
+    const m = q.match(/2025|2026/);
+    const yr = m ? m[0] : '2026';
+    let list = EVENTS.filter(e => e[0].indexOf(yr) === 0);
+    if (keys.length) list = list.filter(e => e[2].split(',').some(k => keys.indexOf(k) !== -1));
+    if (!list.length) return { text: yr + ' 年没有检索到相关节点（试试换个问法）。', focus: keys, chips: GEN_SUGS };
+    const focus = [];
+    list.forEach(e => e[2].split(',').forEach(k => { if (focus.indexOf(k) === -1) focus.push(k); }));
+    return { text: (keys.length ? listNames(keys) + ' 在 ' + yr + ' 年的关键节点（' + list.length + ' 条）：\n' : yr + ' 年的关键节点（' + list.length + ' 条）：\n') + list.map(e => '· ' + e[0] + '　' + e[1]).join('\n'),
+      focus: focus, chips: GEN_SUGS };
+  }
+  function countReply(){
+    const g = byType('t1').concat(byType('t2'));
+    return { text: '8 个行为体（七国 + 欧盟）都已划出各自的线：已立法禁止 1 个（澳大利亚）、专项立法 3 个（中国、美国、欧盟）、监管调查 3 个（英国、意大利、韩国）、行业自律 1 个（日本）。真正落到"立法"层面的有 4 个：' + listNames(g) + '。',
+      focus: g, chips: GEN_SUGS };
+  }
+  function multiReply(ks){
+    return { text: '这几个地方的情况：\n' + ks.map(k => '· ' + C[k].name + '：' + C[k].typeName + '——' + C[k].laws[0][0]).join('\n'),
+      focus: ks, chips: GEN_SUGS };
+  }
+  function fallbackReply(){
+    return { text: '这个问题我还没学会，不过我可以：\n· 回答"哪些国家已经立法？"\n· 介绍单个国家（如"讲讲中国的政策"）\n· 对比两个国家（如"对比中国和美国"）\n· 梳理时间线（如"2026 年发生了什么？"）\n换个问法试试？',
+      focus: [], chips: GEN_SUGS };
+  }
+  function whichReply(q){
+    if (/调查|监管/.test(q)) return typeReply('t3');
+    if (/自律|自愿/.test(q)) return typeReply('t4');
+    if (/禁止/.test(q)) return typeReply('t1');
+    const g = byType('t1').concat(byType('t2'));
+    return { text: '已立法禁止 1 个（澳大利亚），专项立法 3 个（中国、美国、欧盟）。真正落到立法层面的共 4 个：' + listNames(g) + '。',
+      focus: g, chips: GEN_SUGS };
+  }
+  function answerQuestion(raw){
+    const q = String(raw || '').trim();
+    if (!q) return { text: '请先输入一个问题。', focus: [] };
+    const keys = findKeys(q);
+    if (/^(你好|您好|嗨|hi|hello|在吗|help|怎么用|能做什么|会什么|你是谁)/i.test(q)) return {
+      text: '你好，我是这张地图的 AI 助手。你可以：\n· 点地图上的国家光点，看政策详情并继续问我\n· 直接提问，例如"哪些国家已经立法？""澳大利亚为什么算已立法禁止？""2026 年发生了什么？"\n· 让我对比国家、梳理时间线——回答的同时地图会同步高亮、飞线回应你。',
+      focus: [], chips: GEN_SUGS };
+    if (/(时间线|时间轴|法律时钟|全过程|先后顺序|演进|最早|最新|第一个|最后一个|最近)/.test(q)) return timelineReply(q, keys);
+    if (/(2025|2026|今年|去年|几月|什么时候|哪天|时间点)/.test(q)) return yearReply(q, keys);
+    if (/(对比|比较|区别|谁更|哪个更|差异|vs|差在哪)/.test(q) && keys.length >= 2) return compareReply(keys);
+    if (/最严|最严格|最狠|更严|最松|最弱|更松|更弱|强度/.test(q)) {
+      const harsh = /最严|最严格|最狠|更严/.test(q);
+      const loose = /最松|最弱|更松|更弱/.test(q);
+      if (harsh && loose) return { text: '监管强度最高的是澳大利亚——全球首个社媒最低年龄法（2025-12-10 生效），直接要求平台移除不满 16 岁账户，属"已立法禁止"；最弱的是日本——未检索到专门立法或执法调查，只剩既有法律与平台自愿措施。', focus: ['au', 'jp'], chips: ['对比中国和美国','2026 年发生了什么？'] };
+      if (harsh) return { text: '监管强度最高的是澳大利亚——全球首个社媒最低年龄法（2025-12-10 生效），直接"已立法禁止"。', focus: ['au'], chips: ['澳大利亚有哪些关键时间点？','哪些国家已经立法？'] };
+      return { text: '监管强度最弱的是日本——未检索到针对 AI 陪伴未成年人的专门立法或执法调查，没有强制约束。', focus: ['jp'], chips: ['对比中国和美国','哪些国家已经立法？'] };
+    }
+    if (keys.length >= 1 && /为什么|讲讲|介绍|政策|情况|是什么|怎么样|怎么了|如何|怎么管/.test(q)) {
+      return keys.length === 1 ? countryReply(keys[0]) : multiReply(keys);
+    }
+    if (/已立法禁止|立法禁止|禁止型/.test(q)) return typeReply('t1');
+    if (/(几个|多少|数量|总共|一共)/.test(q) && /(国家|经济体|立法|监管|禁止)/.test(q)) return countReply();
+    if (/(哪些|谁|什么国家)/.test(q) && /(立法|禁止|监管|调查|自律)/.test(q)) return whichReply(q);
+    if (/专项立法|立法了|立了法|出台了法律|法律层面/.test(q)) return typeReply('t2');
+    if (/监管调查|调查中|被调查|立案/.test(q)) return typeReply('t3');
+    if (/行业自律|自律|自愿/.test(q)) return typeReply('t4');
+    if (keys.length === 1) return countryReply(keys[0]);
+    if (keys.length > 1) return multiReply(keys);
+    return fallbackReply();
+  }
+
+  /* ---------- 地图动画 ---------- */
+  const pts = {};
+  KEYS.forEach(k => { pts[k] = document.querySelector('.m-point[data-key="' + k + '"]'); });
+  const flyLayer = document.getElementById('flyLayer');
+  const HUB = {x:952, y:30};
+
+  function clearFly(){
+    if (flyLayer) flyLayer.innerHTML = '';
+    KEYS.forEach(k => {
+      const g = pts[k];
+      if (g){ g.classList.remove('hot'); g.classList.remove('dim'); const h = g.querySelector('.halo'); if (h) h.classList.remove('ping'); }
+    });
+  }
+  function drawArc(k, idx){
+    const c = C[k];
+    const cx = (HUB.x + c.x) / 2, cy = Math.min(HUB.y, c.y) - 46;
+    const d = 'M ' + HUB.x + ' ' + HUB.y + ' Q ' + cx + ' ' + cy + ' ' + c.x + ' ' + c.y;
+    const pid = 'fa-' + k + '-' + idx;
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', d); path.setAttribute('class', 'fly-arc'); path.setAttribute('id', pid);
+    flyLayer.appendChild(path);
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    const comet = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    comet.setAttribute('r', '3'); comet.setAttribute('class', 'fly-comet');
+    const m = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+    m.setAttribute('dur', '0.9s'); m.setAttribute('begin', (idx * 0.14) + 's'); m.setAttribute('fill', 'freeze');
+    const mp = document.createElementNS('http://www.w3.org/2000/svg', 'mpath');
+    mp.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#' + pid);
+    m.appendChild(mp); comet.appendChild(m); flyLayer.appendChild(comet);
+    if (!reduceMotion){
+      path.animate([{strokeDashoffset: len}, {strokeDashoffset: 0}], {duration: 900, delay: idx * 140, easing: 'ease-in-out', fill: 'forwards'});
+    } else {
+      path.style.strokeDashoffset = 0;
+    }
+    const halo = pts[k] && pts[k].querySelector('.halo');
+    if (halo){ halo.style.animationDelay = (idx * 0.14) + 's'; halo.classList.add('ping'); }
+  }
+  function focusMap(keys){
+    clearFly();
+    if (!keys || !keys.length) return;
+    const set = {};
+    keys.forEach(k => set[k] = true);
+    KEYS.forEach(k => {
+      const g = pts[k];
+      if (!g) return;
+      if (set[k]) g.classList.add('hot'); else g.classList.add('dim');
+    });
+    keys.forEach((k, i) => drawArc(k, i));
+  }
+
+  /* ---------- 悬停提示 ---------- */
+  const tip = document.getElementById('mapTooltip');
+  function tipHTML(c){
+    return '<span class="tt-name">' + c.name + '</span>' + c.typeName + '<span class="tt-tag">' + c.laws[0][0] + '</span>' +
+      (c.dist ? '<br><span class="tt-geo">与北京球面直距约 ' + c.dist.toLocaleString('en-US') + ' km · 高德地图</span>' : '');
+  }
+  function showTip(c){ tip.innerHTML = tipHTML(c); tip.hidden = false; positionTip(c); }
+  function positionTip(c){
+    const rect = svg.getBoundingClientRect();
+    const px = c.x / 1000 * rect.width, py = c.y / 460 * rect.height;
+    const sRect = stage.getBoundingClientRect();
+    const left = Math.max(120, Math.min(px, sRect.width - 120));
+    tip.style.left = left + 'px';
+    tip.style.top = py + 'px';
+    tip.style.transform = py < 64 ? 'translate(-50%, 20px)' : 'translate(-50%, -118%)';
+  }
+  KEYS.forEach(k => {
+    const g = pts[k];
+    if (!g) return;
+    const c = C[k];
+    g.setAttribute('aria-label', c.name + '，' + c.typeName + '，点击查看政策详情');
+    g.addEventListener('mouseenter', () => showTip(c));
+    g.addEventListener('mousemove', () => positionTip(c));
+    g.addEventListener('mouseleave', () => { tip.hidden = true; });
+    g.addEventListener('click', () => openDetail(k));
+    g.addEventListener('focus', () => showTip(c));
+    g.addEventListener('blur', () => { tip.hidden = true; });
+    g.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openDetail(k); }
+      else if (e.key === 'Escape'){ tip.hidden = true; }
+    });
+  });
+
+  /* ---------- 详情卡 ---------- */
+  const detail = document.getElementById('mapDetail');
+  const mdName = document.getElementById('mdName');
+  const mdTag = document.getElementById('mdTag');
+  const mdLaws = document.getElementById('mdLaws');
+  const mdSummary = document.getElementById('mdSummary');
+  const mdGeo = document.getElementById('mdGeo');
+  let curKey = null;
+  function esc(s){ return String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+  function openDetail(k){
+    resetCardPos();
+    const c = C[k];
+    curKey = k;
+    mdName.textContent = c.name;
+    mdTag.textContent = c.typeName;
+    mdTag.className = 'md-tag ' + c.type;
+    mdLaws.innerHTML = c.laws.map(l => '<li><b>' + esc(l[0]) + '</b> · ' + esc(l[1]) + '<br>' + esc(l[2]) + '</li>').join('');
+    mdSummary.textContent = c.summary + '（来源：' + c.src + '）';
+    mdGeo.hidden = false;
+    mdGeo.textContent = c.dist
+      ? '地理参照：与北京球面直距约 ' + c.dist.toLocaleString('en-US') + ' 公里（高德地图 · 球面距离）'
+      : '地理参照：本点即北京（与北京球面直距 0 公里）';
+    detail.classList.add('show');
+    focusMap([k]);
+  }
+  function closeDetail(){ detail.classList.remove('show'); resetCardPos(); focusMap([]); }
+  document.getElementById('mdClose').addEventListener('click', closeDetail);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+  /* ---------- 详情卡拖动（拖标题栏移动；仅宽版，堆叠态卡片是文档流里的静态块） ---------- */
+  const mdStage = document.querySelector('.map-stage');
+  const mdHead = detail.querySelector('.md-head');
+  const mdWide = () => window.matchMedia('(min-width:821px)').matches;
+  function resetCardPos(){
+    detail.classList.remove('moved');
+    detail.style.left = detail.style.top = detail.style.bottom = '';
+  }
+  function clampCard(){
+    /* 抽屉开合、窗口缩放都会改地图宽高，拖动过的卡片要重新收进地图内，
+       否则「×」会被 .map-stage 的 overflow:hidden 从顶部切掉（正是本次修的缺陷）。 */
+    if (!mdStage || !mdWide() || !detail.classList.contains('moved')) return;
+    const s = mdStage.getBoundingClientRect(), c = detail.getBoundingClientRect();
+    const pad = 8;
+    detail.style.left = Math.min(Math.max(c.left - s.left, pad), Math.max(pad, s.width - c.width - pad)) + 'px';
+    detail.style.top = Math.min(Math.max(c.top - s.top, pad), Math.max(pad, s.height - c.height - pad)) + 'px';
+    detail.style.bottom = 'auto';
+  }
+  if (mdStage && mdHead){
+    let dragging = false, grabX = 0, grabY = 0;
+    mdHead.addEventListener('pointerdown', e => {
+      if (!detail.classList.contains('show') || !mdWide()) return;
+      if (e.target.closest && e.target.closest('.md-close')) return;   // 「×」现在是标题栏的子元素，别把它的点击吃掉
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      const s = mdStage.getBoundingClientRect(), c = detail.getBoundingClientRect();
+      /* 先把样式表的 bottom 锚定换算成 left/top，否则按下瞬间卡片会跳位 */
+      detail.style.left = (c.left - s.left) + 'px';
+      detail.style.top = (c.top - s.top) + 'px';
+      detail.style.bottom = 'auto';
+      detail.classList.add('moved', 'dragging');
+      grabX = e.clientX - c.left; grabY = e.clientY - c.top;
+      dragging = true;
+      try { mdHead.setPointerCapture(e.pointerId); } catch (err) {}
+      e.preventDefault();
+    });
+    mdHead.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const s = mdStage.getBoundingClientRect(), c = detail.getBoundingClientRect();
+      const pad = 8;
+      detail.style.left = Math.min(Math.max(e.clientX - grabX - s.left, pad), Math.max(pad, s.width - c.width - pad)) + 'px';
+      detail.style.top = Math.min(Math.max(e.clientY - grabY - s.top, pad), Math.max(pad, s.height - c.height - pad)) + 'px';
+    });
+    const endDrag = e => {
+      if (!dragging) return;
+      dragging = false;
+      detail.classList.remove('dragging');
+      try { mdHead.releasePointerCapture(e.pointerId); } catch (err) {}
+    };
+    mdHead.addEventListener('pointerup', endDrag);
+    mdHead.addEventListener('pointercancel', endDrag);
+    window.addEventListener('resize', clampCard);
+    const mdDrawer = document.getElementById('aiDrawer');
+    if (mdDrawer) mdDrawer.addEventListener('transitionend', e => { if (e.propertyName === 'width') clampCard(); });
+  }
+
+  /* ---------- 图例筛选 ---------- */
+  const lgBtns = Array.prototype.slice.call(document.querySelectorAll('.map-legend .lg-item[data-tier]'));
+  lgBtns.forEach(btn => btn.addEventListener('click', () => {
+    const wasOn = btn.classList.contains('on');
+    lgBtns.forEach(b => b.classList.remove('on'));
+    if (wasOn) { focusMap([]); return; }
+    btn.classList.add('on');
+    focusMap(byType(btn.dataset.tier));
+  }));
+  const lgReset = document.getElementById('lgReset');
+  if (lgReset) lgReset.addEventListener('click', () => {
+    lgBtns.forEach(b => b.classList.remove('on'));
+    closeDetail();
+  });
+  document.getElementById('mdFly').addEventListener('click', () => { if (curKey) focusMap([curKey]); });
+  document.getElementById('mdAsk').addEventListener('click', () => {
+    if (curKey){ closeDetail(); setDrawer(true); ask('讲讲' + C[curKey].name + '的政策'); }
+  });
+
+  /* ---------- AI 聊天面板 ---------- */
+  const chat = document.getElementById('aiChat');
+  const sugs = document.getElementById('aiSugs');
+  const form = document.getElementById('aiForm');
+  const input = document.getElementById('aiInput');
+  const sendBtn = document.getElementById('aiSend');
+  const clearBtn = document.getElementById('aiClear');
+  let busy = false;
+
+  function renderChips(list){ return list.map(s => '<span class="chip" data-q="' + esc(s) + '">' + esc(s) + '</span>').join(''); }
+  function addBubble(role, text, chips){
+    const wrap = document.createElement('div');
+    wrap.className = 'ai-msg ' + role;
+    wrap.innerHTML = '<span class="mini">' + (role === 'ai' ? 'AI' : '你') + '</span><div class="bubble"><p>' + esc(text).replace(/\n/g, '<br>') + '</p>' + (chips && chips.length ? '<div class="chips">' + renderChips(chips) + '</div>' : '') + '</div>';
+    chat.appendChild(wrap);
+    chat.scrollTop = chat.scrollHeight;
+  }
+  function showTyping(){
+    const wrap = document.createElement('div');
+    wrap.className = 'ai-msg ai'; wrap.id = 'aiTyping';
+    wrap.innerHTML = '<span class="mini">AI</span><div class="bubble typing"><i></i><i></i><i></i></div>';
+    chat.appendChild(wrap); chat.scrollTop = chat.scrollHeight;
+  }
+  function removeTyping(){ const t = document.getElementById('aiTyping'); if (t) t.remove(); }
+  function ask(q){
+    if (busy) return;
+    const text = String(q || '').trim();
+    if (!text) return;
+    busy = true; sendBtn.disabled = true;
+    addBubble('user', text);
+    showTyping();
+    const ans = answerQuestion(text);
+    const delay = reduceMotion ? 60 : 380 + Math.min(ans.text.length * 2, 700);
+    setTimeout(() => {
+      removeTyping();
+      addBubble('ai', ans.text, ans.chips);
+      focusMap(ans.focus);
+      busy = false; sendBtn.disabled = false;
+      input.focus();
+    }, delay);
+  }
+  function onChipClick(e){
+    const chip = e.target.closest('.chip');
+    if (chip) ask(chip.dataset.q);
+  }
+  chat.addEventListener('click', onChipClick);
+  sugs.addEventListener('click', onChipClick);
+  form.addEventListener('submit', e => { e.preventDefault(); ask(input.value); input.value = ''; });
+  clearBtn.addEventListener('click', () => { chat.innerHTML = ''; focusMap([]); sugs.innerHTML = renderChips(GEN_SUGS); });
+
+  /* ---------- 推挤式抽屉：展开时地图同步收缩，不遮挡任何光点 ---------- */
+  const mapWrap = document.getElementById('mapWrap');
+  const aiTab = document.getElementById('aiTab');
+  const aiTabTxt = document.getElementById('aiTabTxt');
+  const wideEnough = () => window.matchMedia('(min-width:821px)').matches;
+  /* 展开时国名字号被放大（见 CSS），把下方小字沿远离国名的方向挪 7 个单位，避免两行贴住 */
+  const SUBS = [].slice.call(document.querySelectorAll('.map-svg .m-point')).map(g => {
+    const lab = g.querySelector('.m-label'), sub = g.querySelector('.m-sub');
+    if (!lab || !sub) return null;
+    const ly = parseFloat(lab.getAttribute('y')), sy = parseFloat(sub.getAttribute('y'));
+    if (isNaN(ly) || isNaN(sy)) return null;
+    return { el: sub, base: sy, open: sy + (sy >= ly ? 7 : -7) };
+  }).filter(Boolean);
+  function setDrawer(open){
+    if (!mapWrap || !aiTab) return;
+    mapWrap.classList.toggle('open', open);
+    aiTab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (aiTabTxt) aiTabTxt.textContent = open ? '收起助手' : '地图问政';
+    SUBS.forEach(s => s.el.setAttribute('y', (open && wideEnough()) ? s.open : s.base));
+    endHint();
+    if (open) setTimeout(() => input.focus({ preventScroll: true }), reduceMotion ? 0 : 480);
+  }
+  aiTab.addEventListener('click', () => setDrawer(!mapWrap.classList.contains('open')));
+
+  /* ---------- 一次性引导：首次滚到这块时标签脉冲 + 提示气泡（每个会话只提示一次） ---------- */
+  const HINT_KEY = 'aiMapHintShown';
+  let hintTimer = null;
+  function endHint(){
+    if (!aiTab || !aiTab.classList.contains('hint')) return;
+    aiTab.classList.remove('hint');
+    if (hintTimer){ clearTimeout(hintTimer); hintTimer = null; }
+  }
+  function startHint(){
+    if (!aiTab || aiTab.offsetWidth === 0) return;      // ≤820px 竖标签是隐藏的，不需要引导
+    if (mapWrap.classList.contains('open')) return;      // 已经展开就别再提示
+    const r = aiTab.getBoundingClientRect();             // 真的滚到眼前了才提示
+    if (r.top > window.innerHeight - 80 || r.bottom < 80) return;
+    let seen = false;
+    try { seen = sessionStorage.getItem(HINT_KEY) === '1'; } catch (e) {}
+    if (seen) return;
+    try { sessionStorage.setItem(HINT_KEY, '1'); } catch (e) {}
+    aiTab.classList.add('hint');
+    hintTimer = setTimeout(endHint, 7000);
+  }
+  if (mapWrap && aiTab && 'IntersectionObserver' in window){
+    /* 不 disconnect：有些环境首次回调会早于布局，若那时就断开会把这一次性提示白白用掉；
+       这里靠 sessionStorage + 视口检查双保险，重复回调会被 startHint 直接挡掉 */
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(en => en.isIntersecting)) startHint();
+    }, { threshold: [0.3, 0.5, 0.7] });
+    io.observe(mapWrap);
+  }
+  /* 用户一开始动地图（点光点／点图例／点详情）就立刻收起提示，不让它挡视线 */
+  if (mapWrap) mapWrap.addEventListener('pointerdown', endHint, true);
+
+  /* ---------- 4.1 两张轴图：入场动效 + 事件详情 ---------- */
+  /* data-info 格式：日期｜标题｜类型｜出处｜备注 */
+  function buildInfoTip(raw){
+    const parts = String(raw || '').split('｜');
+    const date = (parts[0] || '').trim();
+    const title = (parts[1] || '').trim();
+    let html = '<span class="at-date">' + esc(date) + ' · ' + esc(title) + '</span>';
+    parts.slice(2).forEach(p => {
+      const t = p.trim();
+      if (!t) return;
+      html += '<span class="at-row">' + (t.indexOf('：') > -1 ? esc(t) : '类型：' + esc(t)) + '</span>';
+    });
+    return html;
+  }
+
+  function initAxisInfo(){
+    [document.querySelector('.dual-timeline'), document.querySelector('.compliance-cal')]
+      .filter(Boolean).forEach(layer => {
+        const tip = document.createElement('div');
+        tip.className = 'ax-tip';
+        tip.hidden = true;
+        tip.setAttribute('role', 'tooltip');
+        layer.appendChild(tip);
+        let current = null;
+
+        function hide(){
+          tip.hidden = true; current = null;
+          layer.querySelectorAll('[data-info]').forEach(x => x.setAttribute('aria-expanded', 'false'));
+        }
+        function show(el){
+          if (current === el && !tip.hidden){ hide(); return; }   // 再按一次收起
+          layer.querySelectorAll('[data-info]').forEach(x => x.setAttribute('aria-expanded', 'false'));
+          current = el;
+          el.setAttribute('aria-expanded', 'true');
+          tip.innerHTML = buildInfoTip(el.dataset.info);
+          tip.hidden = false;
+          const lr = layer.getBoundingClientRect();
+          const er = el.getBoundingClientRect();
+          const tw = tip.offsetWidth, th = tip.offsetHeight;
+          const cx = er.left - lr.left + er.width / 2;
+          tip.style.left = Math.max(8, Math.min(cx - tw / 2, layer.clientWidth - tw - 8)) + 'px';
+          // 事件位于卡片下半部时把详情卡放到上方，避免遮住后文
+          const below = er.bottom - lr.top;
+          tip.style.top = (below > lr.height * .62 ? er.top - lr.top - th - 8 : below + 8) + 'px';
+        }
+        layer.querySelectorAll('[data-info]').forEach(el => {
+          el.setAttribute('aria-expanded', 'false');
+          el.addEventListener('mouseenter', () => show(el));
+          el.addEventListener('mouseleave', () => { if (current === el) hide(); });
+          // 指针点击会连带触发 focus：先标记鼠标路径，focus 才展开；
+          // 纯键盘 Tab 聚焦时不加标记，同样能展开
+          el.addEventListener('mousedown', () => { el._ptr = true; });
+          el.addEventListener('focus', () => {
+            if (el._ptr){ el._ptr = false; return; }
+            show(el);
+          });
+          el.addEventListener('blur', () => { if (current === el) hide(); });
+          // 触屏：点击切换
+          el.addEventListener('click', e => {
+            if (current === el) hide(); else show(el);
+          });
+          el.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); show(el); }
+          });
+        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+        layer.addEventListener('mouseleave', hide);
+      });
+  }
+
+  /* 入场动效：卡片进入视口后，轴先画出、事件按时间顺序错峰浮入 */
+  function initAxisAnim(){
+    [[document.querySelector('.dual-timeline'), '.dt-event'],
+     [document.querySelector('.compliance-cal'), '.cal-event, .cal-zoom-ev, .cal-window-label, .cal-impl-label']]
+      .forEach(([panel, evSel]) => {
+        if (!panel) return;
+        const items = [].slice.call(panel.querySelectorAll(evSel));
+        items.forEach((el, i) => el.style.setProperty('--i', i));
+        if (reduceMotion || !('IntersectionObserver' in window)){ panel.classList.add('ax-anim', 'in'); return; }
+        panel.classList.add('ax-anim');
+        const io = new IntersectionObserver((es, obs) => es.forEach(e => {
+          if (e.isIntersecting){ panel.classList.add('in'); obs.disconnect(); }
+        }), { threshold:.2 });
+        io.observe(panel);
+      });
+  }
+
+  /* ---------- 初始化 ---------- */
+  initAxisAnim();
+  initAxisInfo();
+  addBubble('ai', '你好，我是这张地图的 AI 助手。点击地图上的国家光点查看政策详情，也可以直接向我提问——我会在回答的同时让地图高亮、飞线回应你。试试下面的问题？');
+  sugs.innerHTML = renderChips(GEN_SUGS);
+})();
+</script>
+
+<script>
+/* ===== 4.3 假说辩论：滚动驱动两个小人依次发言 ===== */
+(function(){
+  var debate = document.getElementById('debate');
+  var stage = document.getElementById('debateStage');
+  var inner = stage ? stage.querySelector('.debate-inner') : null;
+  if(!debate || !stage || !inner) return;
+
+  var NAV_H = 56;                        /* 与 .debate-stage 的 top 保持一致 */
+  var ROUNDS = 4;
+  var hud = Array.prototype.slice.call(stage.querySelectorAll('.debate-hud .dp'));
+  var dbA = document.getElementById('debA');
+  var dbB = document.getElementById('debB');
+  var lkA = document.getElementById('dbLinkA');
+  var lkB = document.getElementById('dbLinkB');
+  var sbs = Array.prototype.slice.call(stage.querySelectorAll('.say-bubble'));
+  var active = -1;
+
+  /* 小人内侧边缘 → 气泡边缘 的虚线端点，按实际布局计算 */
+  function layoutLinks(){
+    var w = inner.clientWidth, h = inner.clientHeight;
+    if(!w || !h) return;
+    var st = inner.getBoundingClientRect();
+    function pct(x, y){ return [(x / w * 100).toFixed(2), (y / h * 100).toFixed(2)]; }
+    /* 起点取小人靠内侧的边缘中点，避免虚线穿过脚下／头顶的介绍文字 */
+    function anchor(el, right){
+      var r = el.getBoundingClientRect();
+      return pct((right ? r.right : r.left) - st.left, r.top - st.top + r.height * 0.45);
+    }
+    function edge(b, right){
+      var r = b.getBoundingClientRect();
+      return pct((right ? r.right : r.left) - st.left, r.top - st.top + r.height * 0.30);
+    }
+    var a1 = anchor(dbA, true), b1 = edge(stage.querySelector('.sb-a.on') || stage.querySelector('.sb-a'), false);
+    lkA.setAttribute('x1', a1[0]); lkA.setAttribute('y1', a1[1]);
+    lkA.setAttribute('x2', b1[0]); lkA.setAttribute('y2', b1[1]);
+    var a2 = anchor(dbB, false), b2 = edge(stage.querySelector('.sb-b.on') || stage.querySelector('.sb-b'), true);
+    lkB.setAttribute('x1', a2[0]); lkB.setAttribute('y1', a2[1]);
+    lkB.setAttribute('x2', b2[0]); lkB.setAttribute('y2', b2[1]);
+  }
+
+  function setRound(i){
+    if(i === active) return;
+    active = i;
+    hud.forEach(function(p, k){ p.classList.toggle('on', k === i); });
+    sbs.forEach(function(b){
+      var on = (+b.dataset.r === i);
+      b.classList.remove('on');
+      if(on){
+        /* 右侧气泡稍晚出现，形成「一问一答」的节奏 */
+        b.style.transitionDelay = (b.classList.contains('sb-b') ? 0.3 : 0) + 's';
+        void b.offsetWidth;
+        b.classList.add('on');
+      } else {
+        b.style.transitionDelay = '0s';
+      }
+    });
+    [dbA, dbB].forEach(function(el, k){
+      el.classList.remove('talking');
+      void el.offsetWidth;
+      setTimeout(function(){ if(active === i) el.classList.add('talking'); }, k * 260);
+    });
+    layoutLinks();
+  }
+
+  /* 舞台粘住后，每滚过一屏推进一个回合 */
+  function currentRound(){
+    var stuck = NAV_H - debate.getBoundingClientRect().top;
+    if(stuck <= 0) return 0;
+    var i = Math.floor(stuck / window.innerHeight);
+    return i < 0 ? 0 : (i > ROUNDS - 1 ? ROUNDS - 1 : i);
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){ setRound(currentRound()); ticking = false; });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', function(){ layoutLinks(); onScroll(); });
+
+  setRound(currentRound());
+  layoutLinks();
+  window.addEventListener('load', layoutLinks);
+})();
+</script>
+
+<script>
+/* ===== 4.1 交叉滚动：A(段1|天平) ⇄ B(照片|段2·3·4) ===== */
+(function(){
+  var cross = document.getElementById('cross41');
+  if(!cross) return;
+  var stage = cross.querySelector('.cross-stage');
+  var panes = Array.prototype.slice.call(cross.querySelectorAll('.cross-pane'));
+  var pText1 = document.getElementById('pText1');
+  var pFig1  = document.getElementById('pFig1');
+  var pFig2  = document.getElementById('pFig2');
+  var pText2 = document.getElementById('pText2');
+  if(!stage || !pText1 || !pFig1 || !pFig2 || !pText2) return;
+
+  var NAV_H = 56;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mq = window.matchMedia('(max-width: 900px)');
+
+  /* 0→1 平滑插值（smoothstep），限定在 a..b 区间 */
+  function s(p, a, b){
+    var t = (p - a) / (b - a);
+    t = t < 0 ? 0 : (t > 1 ? 1 : t);
+    return t * t * (3 - 2 * t);
+  }
+  function setPane(el, o, x, y){
+    el.style.opacity = o.toFixed(3);
+    el.style.transform = (x || y) ? ('translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)') : 'none';
+    el.style.pointerEvents = (o > 0.5) ? 'auto' : 'none';
+  }
+  function apply(p){
+    var aIn  = s(p, 0, 0.30);     /* 天平入场：由下而上 */
+    var swap = s(p, 0.46, 0.74);  /* A→B 交叉切换 */
+    var bTxt = s(p, 0.55, 0.82);  /* 段2·3·4 稍后入场 */
+    /* 段1：随切换向左让位 */
+    setPane(pText1, 1 - swap, -46 * swap, 0);
+    /* 天平：先上滑进入右列，切换时向右让位退出 */
+    setPane(pFig1, aIn * (1 - swap), 28 * swap, 70 * (1 - aIn));
+    /* 照片：切换时由右向左进入左列（图从右侧变到左侧） */
+    setPane(pFig2, swap, 48 * (1 - swap), 0);
+    /* 段2·3·4：由右下方向上滑入右列 */
+    setPane(pText2, bTxt, 0, 70 * (1 - bTxt));
+  }
+  function progress(){
+    var rect = cross.getBoundingClientRect();
+    var total = cross.offsetHeight - stage.offsetHeight;
+    if(total <= 0) return 1;
+    var p = (NAV_H - rect.top) / total;
+    return p < 0 ? 0 : (p > 1 ? 1 : p);
+  }
+  function clearPanes(){
+    panes.forEach(function(el){
+      el.style.opacity = ''; el.style.transform = ''; el.style.pointerEvents = '';
+    });
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if(mq.matches) return;
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){ apply(progress()); ticking = false; });
+  }
+  function onResize(){
+    if(mq.matches){ clearPanes(); return; }
+    apply(progress());
+  }
+  if(reduceMotion){
+    /* 减弱动效：无位移，仅按滚动位置在两面之间直接切换 */
+    window.addEventListener('scroll', function(){
+      if(mq.matches) return;
+      apply(progress() < 0.5 ? 0 : 1);
+    }, {passive:true});
+    window.addEventListener('resize', onResize, {passive:true});
+    if(!mq.matches) apply(progress() < 0.5 ? 0 : 1);
+  } else {
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onResize, {passive:true});
+    if(!mq.matches) apply(progress());
+  }
+})();
+</script>
+</body>
+</html>

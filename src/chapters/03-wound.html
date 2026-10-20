@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三章 · 伤口·当AI伤人 | 永远在线的"搭子"</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- 全站主题（12 token + reset）已抽离到 ../styles/theme.css -->
+<link rel="stylesheet" href="../styles/theme.css">
+<style>
+/* 第三章独有：警示深红（伤口章节强调色） */
+:root{
+  --risk-deep:#7A2E25;
+}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+
+/* ========== 通用布局 ========== */
+.section{width:100%;padding:80px 0;position:relative}
+.container{width:70%;margin:0 auto;max-width:1100px}
+.container.narrow{max-width:780px}
+h2.ch-title{
+  font-size:26px;font-weight:700;color:var(--cover-dark-red);
+  letter-spacing:1px;margin-bottom:8px;
+  padding-top:40px;border-top:2px solid var(--risk);
+  display:inline-block;padding-right:18px;
+}
+h2.ch-title .num{color:var(--risk);margin-right:10px}
+h3.sec-title{
+  font-size:26px;font-weight:700;color:var(--cover-dark-red);
+  letter-spacing:1px;margin-bottom:8px;
+  padding-top:40px;border-top:2px solid var(--risk);
+  display:inline-block;padding-right:18px;
+}
+h3.sec-title .idx{color:var(--risk);margin-right:10px}
+p.body{
+  font-size:16px;color:var(--ink);line-height:1.9;
+  margin-bottom:18px;text-align:justify;
+}
+p.body .hl{color:var(--risk);font-weight:600}
+p.body .num{color:var(--risk);font-weight:700;font-size:1.05em}
+p.body .quote-inline{
+  color:var(--risk-deep);font-style:italic;font-weight:500;
+}
+.quote{
+  margin:24px 0;padding:14px 20px;background:rgba(184,74,62,.05);
+  border-left:2px solid var(--risk);color:var(--ink-sub);
+  font-size:16px;line-height:1.85;border-radius:0 4px 4px 0;
+}
+.source-line{
+  font-size:12px;color:var(--ink-dim);
+  margin-top:18px;line-height:1.7;
+}
+.src-inline{font-size:12.5px;color:var(--ink-dim);line-height:1.85;display:inline}
+.src-inline a{color:var(--step-1);text-decoration:none;border-bottom:1px dotted var(--step-1)}
+.src-inline a:hover{color:var(--risk);border-color:var(--risk)}
+.source-line a{color:var(--step-1);text-decoration:none;border-bottom:1px dotted var(--step-1)}
+.source-line a:hover{color:var(--risk);border-color:var(--risk)}
+.tag-caveat{
+  display:inline-block;font-size:12px;color:var(--ink-dim);
+  background:rgba(26,58,74,.06);padding:3px 10px;border-radius:10px;
+  margin-left:8px;letter-spacing:.5px;
+}
+.footnote-mark{
+  font-size:12px;color:var(--ink-dim);
+  border-bottom:1px dashed var(--risk);
+  cursor:help;
+}
+
+/* ========== 封面：伤口 ========== */
+.cover{
+  height:100vh;min-height:680px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:var(--cover-dark-red) url("../../assets/images/covers/cover-ch3-wound.webp") center/cover no-repeat;
+  color:#fff;
+}
+.cover::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(26,8,8,.52) 0%, rgba(26,8,8,.20) 46%, rgba(26,8,8,.14) 72%, rgba(26,8,8,.52) 100%),
+    linear-gradient(180deg, rgba(26,8,8,.5) 0%, rgba(26,8,8,0) 30%, rgba(26,8,8,0) 68%, rgba(26,8,8,.6) 100%);
+}
+.cover-text{
+  position:relative;z-index:2;text-align:center;
+  max-width:760px;padding:0 20px;
+}
+/* 封面标题：背景插画已含书法标题，此处仅保留屏幕阅读器语义 */
+.cover-text h1{
+  position:absolute;width:1px;height:1px;
+  margin:-1px;padding:0;border:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
+.cover-text .sub{
+  font-size:23px;color:rgba(255,255,255,.92);
+  line-height:1.9;max-width:620px;margin:0 auto 28px;
+  text-shadow:0 1px 14px rgba(0,0,0,.62);
+}
+/* 眉标：PART 0N ＋ 两侧金色细线 */
+.cover-eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:22px;
+  margin:0 0 17px;
+  font-size:24px;font-weight:600;letter-spacing:.34em;text-indent:.34em;
+  color:var(--gold);font-variant-numeric:tabular-nums;
+}
+.cover-eyebrow::before,.cover-eyebrow::after{
+  content:"";flex:none;width:72px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(244,201,93,.75));
+}
+.cover-eyebrow::after{transform:scaleX(-1)}
+/* 幽灵编号：6% 白的巨大数字，给中央留白一个尺度；纯装饰、不抢读 */
+.cover-num{
+  position:absolute;left:50%;top:41%;transform:translate(-50%,-50%);
+  z-index:2;pointer-events:none;user-select:none;
+  font-size:clamp(64px, min(30vw, 24vh), 320px);
+  font-weight:800;line-height:1;letter-spacing:-.03em;
+  color:rgba(255,255,255,.06);font-variant-numeric:tabular-nums;
+}
+.scroll-cue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  font-size:13px;color:rgba(255,255,255,.7);
+  letter-spacing:.28em;text-align:center;z-index:2;
+}
+.scroll-cue::after{
+  content:"";display:block;width:1px;height:30px;margin:10px auto 0;
+  background:linear-gradient(to bottom, var(--risk), transparent);
+  animation:drop 2s infinite;
+}
+@keyframes drop{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* ========== 3.1 弹幕墙 ========== */
+.bubble-wall{
+  display:flex;flex-direction:column;gap:16px;
+  margin:30px 0 18px;
+}
+.bubble{
+  position:relative;padding:18px 22px;
+  border-radius:18px;max-width:78%;
+  font-size:16px;line-height:1.8;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .7s ease,transform .7s ease;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+}
+.bubble.in{opacity:1;transform:translateY(0)}
+.bubble.l1{align-self:flex-start;background:#EDEDED;color:var(--ink-sub);border-bottom-left-radius:4px}
+.bubble.l2{align-self:flex-end;background:#E8D5C8;color:#5A2E25;border-bottom-right-radius:4px}
+.bubble.l3{align-self:flex-start;background:#D9A8A0;color:#3A1010;border-bottom-left-radius:4px}
+.bubble.l4{align-self:flex-end;background:var(--risk);color:#fff;border-bottom-right-radius:4px;font-weight:500}
+.bubble .b-meta{
+  display:block;font-size:12px;margin-top:8px;
+  opacity:.75;font-weight:400;letter-spacing:.5px;
+}
+.bubble.l4 .b-meta{color:rgba(255,255,255,.85)}
+/* ========== 3.1 纸团 → 展开纸条 交互 ========== */
+.note-cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin:46px 0 8px;
+}
+.note-cta::before,
+.note-cta::after{
+  content:"";
+  width:1px;
+  background:linear-gradient(180deg,rgba(184,74,62,0),rgba(184,74,62,.85),rgba(184,74,62,0));
+  animation:noteCtaBar 2.6s ease-in-out infinite;
+}
+.note-cta-text{
+  font-size:13.5px;
+  color:var(--risk);
+  font-weight:600;
+  letter-spacing:2px;
+  animation:noteCtaBreathe 2.6s ease-in-out infinite;
+}
+@keyframes noteCtaBreathe{
+  0%,100%{opacity:.5}
+  50%{opacity:1}
+}
+@keyframes noteCtaBar{
+  0%,100%{height:14px;opacity:.45}
+  50%{height:26px;opacity:1}
+}
+.note-stage{
+  position:relative;
+  width:100%;
+  min-height:860px;
+  margin:10px 0 18px;
+  padding-top:70px;
+  box-sizing:border-box;
+}
+.note-item{
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+}
+.note-closed{
+  display:block;
+  width:150px;
+  height:auto;
+  cursor:pointer;
+  transform:rotate(var(--rot));
+  transform-origin:center center;
+  filter:drop-shadow(0 4px 14px rgba(0,0,0,.20));
+  transition:transform .2s ease, opacity .2s ease;
+  -webkit-user-drag:none;
+  user-select:none;
+}
+.note-closed:hover{
+  transform:rotate(var(--rot)) scale(1.06);
+}
+.note-item.is-opened .note-closed{
+  opacity:0;
+  transform:rotate(var(--rot)) scale(0.8);
+  pointer-events:none;
+}
+.note-open{
+  position:absolute;
+  left:0;
+  top:50%;
+  width:500px;
+  max-width:88vw;
+  height:auto;
+  transform:translateY(-50%) scale(0.6) rotate(var(--rot-open));
+  transform-origin:left center;
+  opacity:0;
+  pointer-events:none;
+  filter:drop-shadow(0 10px 26px rgba(0,0,0,.30));
+  transition:transform .35s ease-out, opacity .35s ease-out;
+  -webkit-user-drag:none;
+  user-select:none;
+}
+.note-item.is-opened .note-open{
+  opacity:1;
+  transform:translateY(-50%) scale(1) rotate(var(--rot-open));
+}
+@media (prefers-reduced-motion:reduce){
+  .note-closed,.note-open{transition:none}
+  .note-cta::before,.note-cta::after,.note-cta-text{animation:none}
+  .note-cta-text{opacity:1}
+  .note-cta::before,.note-cta::after{height:22px;opacity:.8}
+}
+@media (max-width:680px){
+  .note-stage{min-height:760px;padding-top:50px}
+  .note-closed{width:110px}
+  .note-open{width:320px}
+  .note-item[data-note="1"],.note-item[data-note="3"]{--x:calc((100% - 670px) / 2)!important}
+  .note-item[data-note="2"],.note-item[data-note="4"]{--x:calc((100% - 670px) / 2 + 350px)!important}
+}
+
+/* ========== 3.1 序言配图：左图右文 ========== */
+.intro-split{
+  display:grid;
+  grid-template-columns:minmax(0,40%) minmax(0,1fr);
+  gap:34px;align-items:start;
+  margin:20px 0 24px;
+}
+.intro-figure{margin:0}
+.intro-figure .if-img{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--divider);
+  box-shadow:var(--shadow-1);
+  background:var(--cover-deep);
+}
+.intro-figure .if-img img{display:block;width:100%;height:auto}
+.intro-figure .if-badge{
+  position:absolute;right:8px;bottom:8px;
+  font-size:10px;font-weight:500;letter-spacing:.5px;
+  color:rgba(255,255,255,.78);background:rgba(15,37,50,.40);
+  padding:2px 7px;border-radius:4px;
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
+}
+/* 3.1 作为纸团模块的小标题 */
+.note-mod-head{margin-bottom:8px}
+.note-mod-title{
+  font-size:26px;font-weight:700;color:var(--cover-dark-red);
+  letter-spacing:1px;margin-bottom:8px;
+  padding-top:40px;border-top:2px solid var(--risk);
+  display:inline-block;padding-right:18px;
+}
+.note-mod-title .idx{color:var(--risk);margin-right:10px}
+.intro-copy p.body:last-child{margin-bottom:0}
+@media (max-width:900px){
+  .intro-split{grid-template-columns:1fr;gap:20px}
+  .intro-figure .if-img{max-width:520px;margin:0 auto}
+}
+
+/* ========== 3.2 案件时钟：双轨时间轴（伤口 / 回应） ========== */
+.case-intro{
+  font-size:16px;color:var(--ink-sub);
+  background:rgba(184,74,62,.05);
+  border-left:3px solid var(--risk);
+  padding:14px 18px;border-radius:0 4px 4px 0;
+  margin:18px 0 24px;line-height:1.85;
+}
+.case-intro .hl{color:var(--risk);font-weight:600}
+.case-intro p{margin:0}
+.case-intro p+p{
+  margin-top:10px;padding-top:10px;
+  border-top:1px dashed rgba(184,74,62,.28);
+  font-size:13.5px;line-height:1.75;
+}
+
+.tc-wrap{
+  position:relative;overflow:hidden;
+  margin:0 0 6px;padding:20px 20px 16px;
+  background:
+    radial-gradient(circle at 10% 0,rgba(255,255,255,.85),transparent 55%),
+    linear-gradient(150deg,#fffefb 0%,#fbf7ef 100%);
+  border:1px solid rgba(143,124,94,.28);border-radius:8px;
+  border-top:3px solid var(--risk);
+}
+/* 整图纸张质感（比卡片更浅的纸纹） */
+.tc-wrap::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23w)' opacity='0.6'/></svg>");
+}
+.tc-legend{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-sub);letter-spacing:.5px;
+  padding-bottom:12px;border-bottom:1px dashed var(--divider);
+}
+.tc-legend .lg{display:inline-flex;align-items:center;gap:7px}
+.tc-legend .lg i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.tc-legend .lg-wound i{background:#fff;border:2px solid var(--risk)}
+.tc-legend .lg-response i{background:var(--step-1)}
+/* 下轨回应标签：固定在图表右下角，普通流式右对齐，不与节点重叠 */
+.tc-legend-rr{
+  display:flex;align-items:center;justify-content:flex-end;gap:7px;
+  margin:10px 0 0;font-size:12px;color:var(--ink-sub);letter-spacing:.5px;
+}
+.tc-legend-rr i{width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--step-1)}
+.tc-legend .tc-hint{margin-left:auto;color:var(--gold-deep);font-weight:600}
+
+/* 舞台：两条轨道共用一条时间轴 */
+.tc-stage{position:relative;height:290px;margin:14px 0 4px}
+.tc-plot{position:absolute;left:52px;right:52px;top:0;bottom:0}
+.tc-track{position:absolute;left:0;right:0;height:2px;border-radius:2px}
+.tc-track-wound{top:108px;background:linear-gradient(90deg,rgba(184,74,62,.14),rgba(184,74,62,.5))}
+.tc-track-response{top:190px;background:linear-gradient(90deg,rgba(58,107,138,.16),rgba(58,107,138,.55))}
+.tc-nodes{position:absolute;left:0;right:0;top:0;bottom:0}
+.tc-ticks span{position:absolute;top:76px;height:114px;border-left:1px dashed rgba(26,58,74,.13)}
+.tc-ticks span b{
+  position:absolute;left:0;top:56px;transform:translateX(-50%);
+  background:#fff;padding:1px 4px;border-radius:3px;
+  font-size:11px;font-weight:600;color:var(--ink-dim);letter-spacing:.5px;
+}
+.tc-node{
+  position:absolute;top:0;height:290px;width:0;left:var(--x);
+  border:0;background:none;padding:0;font:inherit;cursor:pointer;
+}
+.tc-node .tc-dot{
+  position:absolute;left:0;width:14px;height:14px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.tc-node-wound .tc-dot{top:108px;background:var(--risk);box-shadow:0 0 0 4px rgba(184,74,62,.12)}
+.tc-node-response .tc-dot{top:190px;background:var(--step-1);box-shadow:0 0 0 4px rgba(58,107,138,.14)}
+.tc-node .tc-lab{
+  position:absolute;left:0;transform:translateX(-50%);
+  white-space:nowrap;text-align:center;line-height:1.5;
+}
+.tc-node .tc-lab b{display:block;font-size:10.5px;font-weight:600;color:var(--ink-dim);letter-spacing:.6px;font-variant-numeric:tabular-nums}
+.tc-node .tc-lab i{display:block;font-size:13px;font-style:normal;color:var(--ink);letter-spacing:.3px;margin-top:2px}
+.tc-node-wound .tc-lab{top:var(--labY,48px)}
+.tc-node-response .tc-lab{top:var(--labY,206px)}
+.tc-node-wound:hover .tc-lab i,.tc-node-wound.is-active .tc-lab i{color:var(--risk);font-weight:600}
+.tc-node-response:hover .tc-lab i,.tc-node-response.is-active .tc-lab i{color:var(--step-1);font-weight:600}
+.tc-node::after{
+  content:"";position:absolute;left:0;width:34px;height:34px;
+  border-radius:50%;transform:translateX(-50%);
+}
+.tc-node-wound::after{top:91px}
+.tc-node-response::after{top:173px}
+.tc-node-wound:hover .tc-dot,.tc-node-wound.is-active .tc-dot,
+.tc-node-response:hover .tc-dot,.tc-node-response.is-active .tc-dot{
+  transform:translate(-50%,-50%) scale(1.4);
+}
+.tc-node-wound:hover .tc-dot,.tc-node-wound.is-active .tc-dot{box-shadow:0 0 0 7px rgba(184,74,62,.20)}
+.tc-node-response:hover .tc-dot,.tc-node-response.is-active .tc-dot{box-shadow:0 0 0 7px rgba(58,107,138,.22)}
+
+/* 展开槽：默认折叠（提前预留位置），点击圆点时在轨道上方/下方展开卡片 */
+.tc-slot{
+  display:grid;grid-template-rows:0fr;visibility:hidden;
+  transition:grid-template-rows .38s cubic-bezier(.22,.7,.28,1),visibility 0s linear .38s;
+}
+.tc-slot.is-open{
+  grid-template-rows:1fr;visibility:visible;
+  transition:grid-template-rows .38s cubic-bezier(.22,.7,.28,1),visibility 0s linear 0s;
+}
+.tc-slot>.tc-slot-in{overflow:hidden;min-height:0}
+
+/* 详情面板 */
+.tc-panel{display:flex;justify-content:center;align-items:center;gap:14px}
+.tc-slot>.tc-slot-in>.tc-panel{margin-top:16px}
+.tc-nav{
+  width:42px;height:42px;flex:0 0 auto;display:grid;place-items:center;
+  border:1px solid var(--divider);background:#fff;border-radius:50%;
+  color:var(--step-1);font-size:20px;line-height:1;cursor:pointer;transition:.2s;
+  box-shadow:0 6px 16px rgba(26,58,74,.10);
+}
+.tc-nav:hover{border-color:var(--step-1);color:var(--risk)}
+.tc-nav[disabled]{opacity:.32;cursor:default}
+.tc-card{
+  position:relative;
+  min-height:200px;width:100%;max-width:560px;flex:0 1 560px;
+  padding:22px 24px 20px;
+  background:
+    radial-gradient(circle at 8% 0,rgba(255,255,255,.75),transparent 55%),
+    linear-gradient(155deg,#fdfbf4 0%,#f6f0e2 100%);
+  border:1px solid rgba(143,124,94,.30);border-top:3px solid var(--risk);
+  border-radius:6px;
+  box-shadow:0 10px 26px rgba(96,76,46,.14), inset 0 1px 0 rgba(255,255,255,.85);
+  overflow:hidden;
+}
+/* 纸张纤维噪点（克制保留，避免过度处理） */
+.tc-card::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.10;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.62'/></svg>");
+}
+.tc-card .tcc-head,.tc-card .tcc-name,.tc-card .tcc-desc,.tc-card .tcc-detail,.tc-card .tc-spans,.tc-card .tcc-src{position:relative;z-index:1}
+.tc-card.is-response{border-top-color:var(--step-1)}
+.tc-card .tcc-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.tc-card .tcc-tag{
+  font-size:11px;font-weight:600;color:#fff;background:var(--risk);
+  padding:2px 9px;border-radius:9px;letter-spacing:.5px;
+}
+.tc-card.is-response .tcc-tag{background:var(--step-1)}
+.tc-card .tcc-when{font-size:12px;color:var(--ink-dim);letter-spacing:.5px}
+.tc-card .tcc-name{
+  font-size:17px;font-weight:700;color:var(--cover-dark-red);
+  margin:0 0 8px;letter-spacing:.5px;
+}
+.tc-card .tcc-desc{font-size:16px;color:var(--ink);line-height:1.85;text-align:justify;margin-bottom:8px}
+.tc-card .tcc-desc .hl{color:var(--risk);font-weight:600}
+.tc-card .tcc-detail{font-size:16px;color:var(--ink-sub);line-height:1.8;margin-bottom:10px}
+.tc-card .tcc-detail .hl{color:var(--risk);font-weight:600}
+.tc-spans{margin:0 0 10px;padding-top:10px;border-top:1px dashed var(--divider)}
+.tcc-span{
+  display:grid;grid-template-columns:132px 1fr 76px;gap:10px;align-items:center;
+  margin-bottom:8px;font-size:12px;
+}
+.tcc-span:last-child{margin-bottom:0}
+.tcc-span .sl{color:var(--ink-sub)}
+.tcc-span .sb{height:8px;border-radius:4px;background:rgba(26,58,74,.07);overflow:hidden}
+.tcc-span .sb i{
+  display:block;height:100%;width:0;background:var(--risk);border-radius:4px;
+  transition:width .8s cubic-bezier(.2,.7,.3,1);
+}
+.tcc-span.is-response .sb i{background:var(--step-1)}
+.tcc-span .sb.is-na{
+  background:repeating-linear-gradient(90deg,rgba(26,58,74,.10) 0 6px,transparent 6px 12px);
+}
+.tcc-span .sv{font-weight:700;color:var(--risk);text-align:right}
+.tcc-span.is-response .sv{color:var(--step-1)}
+.tcc-span .sv.na{color:var(--ink-dim);font-weight:600}
+.tc-card .tcc-src{font-size:11px;color:var(--ink-dim);line-height:1.7}
+.tc-card .tcc-src a{color:var(--step-1);text-decoration:none;border-bottom:1px dotted var(--step-1)}
+.tc-note{font-size:11px;color:var(--ink-dim);line-height:1.7;margin:8px 0 0}
+.chart-caveat{
+  font-size:12.5px;color:var(--ink-dim);line-height:1.85;
+  margin:2px 2px 26px;
+}
+.chart-caveat .hl{color:var(--ink);font-weight:600}
+.tl-hint-cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin:14px 0 8px;
+}
+.tl-hint-cta::before,
+.tl-hint-cta::after{
+  content:"";
+  width:1px;
+  background:linear-gradient(180deg,rgba(184,74,62,0),rgba(184,74,62,.85),rgba(184,74,62,0));
+  animation:noteCtaBar 2.6s ease-in-out infinite;
+}
+.tl-hint-cta-text{
+  font-size:13.5px;
+  color:var(--risk);
+  font-weight:600;
+  letter-spacing:2px;
+  animation:noteCtaBreathe 2.6s ease-in-out infinite;
+}
+.tl-hint-cta .tl-k{color:var(--risk)}
+@media (prefers-reduced-motion:reduce){
+  .tl-hint-cta::before,.tl-hint-cta::after,.tl-hint-cta-text{animation:none}
+  .tl-hint-cta-text{opacity:1}
+  .tl-hint-cta::before,.tl-hint-cta::after{height:22px;opacity:.8}
+}
+
+/* 一次性引导（每会话仅一次） */
+.tc-wrap.is-guiding .tc-hint{color:var(--risk);animation:tcPulse 1.5s ease-in-out 4}
+.tc-wrap.is-guiding .tc-node:first-child .tc-dot{animation:tcRing 1.5s ease-out 4}
+@keyframes tcPulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes tcRing{0%{box-shadow:0 0 0 0 rgba(184,74,62,.42)}100%{box-shadow:0 0 0 15px rgba(184,74,62,0)}}
+
+/* 折叠：收录标准与口径说明 */
+.method-fold{margin:16px 0 0;border:1px dashed var(--divider);border-radius:6px;background:rgba(26,58,74,.02)}
+.method-fold summary{
+  cursor:pointer;padding:11px 16px;font-size:13px;color:var(--ink-sub);
+  letter-spacing:.5px;list-style:none;
+}
+.method-fold summary::-webkit-details-marker{display:none}
+.method-fold summary::before{content:"＋";color:var(--step-1);font-weight:700;margin-right:8px}
+.method-fold[open] summary::before{content:"－"}
+.method-fold .mf-body{padding:0 16px 14px;font-size:16px;color:var(--ink-sub);line-height:1.85}
+.method-fold .mf-body .hl{color:var(--risk);font-weight:600}
+@media (prefers-reduced-motion:reduce){
+  .tc-wrap.is-guiding .tc-hint,.tc-wrap.is-guiding .tc-node:first-child .tc-dot{animation:none}
+  .tc-slot{transition:none}
+}
+@media (max-width:820px){
+  .tc-wrap{padding:16px 14px}
+  .tc-legend{gap:14px}
+  .tc-legend .tc-hint{margin-left:0;flex-basis:100%}
+  .tc-stage{height:auto;margin:10px 0 0}
+  .tc-plot{position:static;left:auto;right:auto}
+  .tc-track,.tc-ticks{display:none}
+  .tc-nodes{position:static;display:flex;flex-direction:column}
+  .tc-node{
+    position:static;width:100%;height:auto;left:auto;
+    display:grid;grid-template-columns:13px 1fr;gap:10px;align-items:center;
+    padding:9px 2px;border-bottom:1px dashed var(--divider);
+  }
+  .tc-node::after{display:none}
+  .tc-node .tc-dot{position:static;transform:none;margin:0}
+  .tc-node .tc-lab{position:static;transform:none;top:auto;text-align:left;white-space:normal}
+  .tc-node .tc-lab b{display:inline-block;min-width:66px}
+  .tc-node .tc-lab i{display:inline}
+  .tc-node.is-active{background:rgba(184,74,62,.05)}
+  .tc-slot>.tc-slot-in>.tc-panel{margin-top:12px}
+  .tc-nav{display:none}
+  .tc-card{max-width:none;flex:1 1 auto}
+  .tcc-span{grid-template-columns:104px 1fr 66px;gap:8px}
+}
+
+/* ========== 3.3 中国本土：序言案例卡片 ========== */
+.lead-case{
+  display:grid;grid-template-columns:38% 1fr;gap:24px;
+  margin:28px 0;padding:22px;
+  background:#fff;border:1px solid var(--divider);
+  border-radius:10px;
+  box-shadow:0 2px 12px rgba(26,58,74,.06);
+}
+.lead-case .lc-img{
+  position:relative;border-radius:8px;overflow:hidden;
+  background:#E8ECEB;
+}
+.lead-case .lc-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.lead-case .lc-img .lc-cap{
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(to top,rgba(26,8,8,.82),rgba(26,8,8,0));
+  color:#fff;font-size:12px;line-height:1.6;
+  padding:28px 14px 10px;letter-spacing:.3px;
+}
+.lead-case .lc-body{display:flex;flex-direction:column;justify-content:center}
+.lead-case .lc-tag{
+  display:inline-block;align-self:flex-start;
+  font-size:11px;color:var(--risk);background:rgba(184,74,62,.08);
+  padding:2px 10px;border-radius:10px;font-weight:600;letter-spacing:1px;
+  margin-bottom:10px;
+}
+.lead-case .lc-title{
+  font-size:17px;font-weight:700;color:var(--cover-dark-red);
+  margin-bottom:8px;line-height:1.5;
+}
+.lead-case .lc-desc{
+  font-size:16px;color:var(--ink-sub);line-height:1.85;
+}
+.lead-case .lc-desc .hl{color:var(--risk);font-weight:600}
+
+/* ========== 3.3 六大类伤害：左列表 + 右案例（滚动联动） ========== */
+.risk-deck{
+  position:relative;
+  margin:26px 0 0;
+  background:var(--bg);border-radius:var(--radius);
+  display:grid;grid-template-columns:44fr 50fr;column-gap:6%;
+  align-items:start;
+  padding:28px 4% 24px;
+}
+.risk-deck::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 16% 10%,rgba(58,107,138,.10),transparent 46%),
+             radial-gradient(120% 90% at 88% 90%,rgba(184,74,62,.09),transparent 52%);
+  pointer-events:none;
+}
+/* 左栏：六条列表（钉住，逐条激活） */
+.rd-list{
+  position:static;width:100%;transform:none;
+}
+.rd-head{
+  font-size:13px;color:var(--ink-meta);letter-spacing:2.5px;
+  margin-bottom:18px;display:flex;align-items:center;gap:10px;
+}
+.rd-head i{display:block;width:34px;height:1px;background:var(--divider)}
+.rd-item{
+  position:relative;
+  display:flex;align-items:flex-start;gap:16px;
+  padding:13px 14px 13px 6px;
+  border-bottom:1px dashed var(--divider);
+  opacity:.55;filter:grayscale(.6);
+  transition:opacity .4s ease,filter .4s ease;
+  cursor:pointer;
+}
+.rd-item:last-child{border-bottom:none}
+.rd-item.done{opacity:.4;filter:grayscale(.75)}
+.rd-item.active{
+  opacity:1;filter:none;
+  background:linear-gradient(90deg,rgba(184,74,62,.07),transparent 78%);
+  border-radius:8px;
+}
+.rd-no{
+  font-size:30px;font-weight:800;line-height:1;letter-spacing:-1px;
+  color:rgba(184,74,62,.35);flex:none;transition:color .4s ease;
+}
+.rd-item.active .rd-no{
+  background-image:linear-gradient(90deg,var(--gold-deep),var(--risk-deep));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.rd-name{
+  font-size:17px;font-weight:700;letter-spacing:.6px;line-height:1.4;
+  color:var(--cover-dark-red);transition:color .4s ease;
+}
+.rd-item:not(.active):not(.done) .rd-name{color:var(--ink-dim)}
+.rd-desc{font-size:13px;color:var(--ink-sub);line-height:1.6;margin-top:3px}
+.rd-item:not(.active) .rd-desc{
+  opacity:0;max-height:0;margin-top:0;overflow:hidden;
+  transition:opacity .4s ease,max-height .5s var(--ease-out),margin-top .4s ease;
+}
+.rd-item.active .rd-desc{opacity:1;max-height:60px}
+/* 右栏：案例容器（交叉淡入淡出，浮现慢） */
+.rd-cases{
+  position:static;width:100%;transform:none;
+}
+.rd-card{
+  position:relative;left:auto;top:auto;width:100%;
+  background:#fff;border:1px solid var(--divider);border-radius:var(--radius);
+  box-shadow:var(--shadow-2);
+  padding:22px 24px 18px;
+  display:none;
+}
+.rd-card.active{display:block}
+.rd-tag{
+  display:inline-block;font-size:11px;color:var(--risk);
+  background:rgba(184,74,62,.08);
+  padding:2px 10px;border-radius:10px;font-weight:600;letter-spacing:1px;
+  margin-bottom:10px;
+}
+.rd-img{border-radius:8px;overflow:hidden;margin-bottom:10px;background:#E8ECEB;border:1px solid var(--divider)}
+.rd-img img{display:block;width:100%;height:auto}
+.rd-cap{font-size:12px;color:var(--ink-meta);line-height:1.7;margin:-5px 0 10px;letter-spacing:.3px}
+.rd-title{font-size:16px;font-weight:700;color:var(--cover-dark-red);line-height:1.5;margin-bottom:7px}
+.rd-body{font-size:15px;color:var(--ink-sub);line-height:1.85;text-align:justify}
+.rd-body .hl{color:var(--risk);font-weight:600}
+.rd-src{
+  margin-top:12px;padding-top:9px;border-top:1px dashed var(--divider);
+  font-size:11.5px;color:var(--ink-meta);letter-spacing:.5px;
+}
+.rd-card.note .rd-body{font-size:14.5px}
+/* 滚动探针 */
+.rd-probe{height:58vh}
+.rd-probe.last{height:20vh}
+.rd-probe-rule{
+  display:flex;justify-content:center;padding:22px 0 2px;
+  font-size:12px;color:var(--ink-dim);letter-spacing:2px;
+}
+.rd-probe-rule i{display:block;width:46px;height:1px;background:var(--divider);margin-bottom:8px}
+
+@media (prefers-reduced-motion:reduce){
+  .rd-item,.rd-card{transition:none}
+}
+
+/* ========== 3.3 临床视频卡片（本地嵌入视频） ========== */
+.video-card{
+  margin:0;
+  border-radius:10px;overflow:hidden;
+  border:1px solid var(--divider);
+  background:#000;
+  box-shadow:0 4px 18px rgba(0,0,0,.12);
+}
+.video-card .vc-player{
+  position:relative;width:100%;
+  aspect-ratio:16/9;
+  background:#000;
+  overflow:hidden;
+}
+.video-card .vc-player video{
+  width:100%;height:100%;
+  object-fit:contain;
+  background:#000;
+  display:block;
+}
+.video-card .vc-overlay-text{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:18px 20px 14px;
+  background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,0));
+  color:#fff;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+.video-card .vc-player.playing .vc-overlay-text{
+  opacity:0;
+}
+.video-card .vc-overlay-text .vc-title{
+  font-size:15px;font-weight:600;line-height:1.5;margin-bottom:4px;
+  text-shadow:0 1px 4px rgba(0,0,0,.6);
+}
+.video-card .vc-overlay-text .vc-meta{
+  font-size:12px;color:rgba(255,255,255,.75);
+}
+.video-card .vc-info{
+  background:#fff;padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  font-size:13px;color:var(--ink-sub);line-height:1.6;
+}
+.video-card .vc-info .vc-src{
+  flex-shrink:0;
+  color:var(--step-1);text-decoration:none;border-bottom:1px dotted var(--step-1);
+}
+.video-card .vc-info .vc-src:hover{color:var(--risk);border-color:var(--risk)}
+
+/* 3.3 融合节：子部分标签 */
+.part-label{
+  display:inline-block;font-size:12px;color:#fff;background:var(--risk);
+  padding:3px 12px;border-radius:3px;letter-spacing:2px;font-weight:600;
+  margin:30px 0 14px;
+}
+.part-label.clinical{background:var(--step-1)}
+
+@media (max-width:820px){
+  .lead-case{grid-template-columns:1fr;gap:16px}
+  .risk-deck{grid-template-columns:1fr}
+  .rd-list{margin-bottom:14px}
+}
+
+/* ========== 3.3 临床的报警：案例 + 警报/新闻分栏 ========== */
+.wound-layer{margin:26px 0}
+.wl-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.wl-no{flex:none;width:30px;height:30px;border-radius:50%;background:var(--risk);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.wl-t{font-size:17px;font-weight:700;color:var(--cover-dark-red)}
+
+/* 案例（先讲人）：四步诊室发现路径 */
+.case-block{background:rgba(184,74,62,.04);border-radius:12px;padding:22px 24px}
+.case-block .cb-tag{display:inline-block;font-size:11px;color:var(--risk);background:rgba(184,74,62,.08);padding:2px 10px;border-radius:10px;font-weight:600;letter-spacing:1px;margin-bottom:12px}
+.case-block .cb-title{font-size:17px;font-weight:700;color:var(--cover-dark-red);margin-bottom:14px;line-height:1.5}
+.steps-flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0}
+.sf-item{flex:1 1 150px;min-width:130px;background:#fff;border:1px solid var(--divider);border-radius:9px;padding:12px 14px;position:relative}
+.sf-item .sf-n{display:block;font-size:11px;color:var(--ink-dim);font-weight:700}
+.sf-item .sf-t{display:block;font-size:13px;color:var(--ink-main);line-height:1.6;margin-top:4px}
+.sf-item.flag{background:var(--cover-dark-red);border-color:transparent}
+.sf-item.flag .sf-n{color:rgba(244,201,93,.8)}
+.sf-item.flag .sf-t{color:#fff;font-weight:500}
+.sf-arrow{flex:none;align-self:center;color:var(--risk);font-weight:700;padding:0 8px}
+.case-block .cb-note{font-size:13px;color:var(--ink-sub);line-height:1.8;margin-top:14px}
+@media (max-width:820px){.sf-arrow{display:none}.sf-item{flex:1 1 100%}}
+
+/* 警报 ＋ 新闻：左右分栏 */
+.alarm-news{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;align-items:start;margin-top:4px}
+.alarm-news .ans-col{min-width:0}
+.ans-label{font-size:12px;font-weight:600;letter-spacing:2px;color:var(--risk);padding-left:10px;border-left:3px solid var(--risk);margin-bottom:14px}
+.ans-label.news{color:var(--step-1);border-left-color:var(--step-1)}
+.alarm-lead{font-size:15.5px;color:var(--ink-sub);line-height:1.9;margin-bottom:16px;text-align:justify}
+.alarm-lead b{color:var(--cover-dark-red)}
+
+/* 100 点阵漏斗 */
+.dot-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:7px;margin:4px 0 16px}
+.dot{aspect-ratio:1/1;border-radius:50%;border:1.5px solid rgba(26,58,74,.16);background:transparent;
+  transition:background .35s ease,border-color .35s ease,box-shadow .35s ease,transform .35s ease}
+.dot.on{background:var(--risk);border-color:var(--risk);transform:scale(1.06)}
+.dot.ai{background:var(--cover-dark-red);border-color:var(--cover-dark-red);
+  box-shadow:0 0 0 3px rgba(122,46,37,.16),0 0 12px rgba(122,46,37,.45);transform:scale(1.12)}
+@media (max-width:640px){.dot-grid{grid-template-columns:repeat(10,1fr)}}
+.dot-legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-sub);margin-bottom:20px}
+.dot-legend span{display:flex;align-items:center;gap:7px}
+.dot-legend i{width:11px;height:11px;border-radius:50%;flex:none}
+.dot-legend .k-off{background:transparent;border:1.5px solid rgba(26,58,74,.25)}
+.dot-legend .k-on{background:var(--risk)}
+.dot-legend .k-ai{background:var(--cover-dark-red);box-shadow:0 0 8px rgba(122,46,37,.5)}
+
+.alarm-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 12px}
+.anum{background:rgba(184,74,62,.04);border:1px solid var(--divider);border-radius:10px;padding:13px 14px}
+.anum .av{font-size:26px;font-weight:700;color:var(--risk);line-height:1;font-variant-numeric:tabular-nums}
+.anum .av .u{font-size:13px;margin-left:2px}
+.anum .al{display:block;font-size:12px;color:var(--ink-sub);line-height:1.55;margin-top:8px}
+.alarm-cap{font-size:12px;color:var(--ink-dim);line-height:1.7;margin-top:6px}
+@media (max-width:820px){.alarm-nums{grid-template-columns:1fr}}
+@media (max-width:900px){.alarm-news{grid-template-columns:1fr;gap:20px}}
+
+.clinical-quote{
+  margin:28px 0;padding:22px 26px 22px 56px;
+  background:linear-gradient(135deg,rgba(184,74,62,.06),rgba(184,74,62,.02));
+  border-left:3px solid var(--risk);
+  border-radius:0 8px 8px 0;
+  font-size:16px;color:var(--ink-main);line-height:1.9;
+  position:relative;
+}
+.clinical-quote::before{
+  content:"\201C";position:absolute;left:16px;top:8px;
+  font-size:48px;color:rgba(184,74,62,.25);
+  font-family:Georgia,serif;line-height:1;
+}
+.clinical-quote .hl{color:var(--risk);font-weight:600}
+/* 右栏：深色底色专家引用框 */
+.clinical-quote.dark{
+  margin:0;padding:18px 22px 18px 50px;
+  background:linear-gradient(135deg,#3a1f1c,#2a1613);
+  border-left:3px solid var(--risk);
+  border-radius:8px;
+  color:rgba(255,255,255,.88);
+}
+.clinical-quote.dark::before{
+  color:rgba(184,74,62,.45);
+}
+.clinical-quote.dark .hl{color:#F4C95D;font-weight:600}
+
+/* ========== 3.4/3.5 附录图表 ========== */
+.appendix-block{
+  margin:40px 0 0;padding:30px 24px 24px;
+  background:rgba(184,74,62,.03);
+  border:1px dashed rgba(184,74,62,.3);
+  border-radius:8px;
+}
+.appendix-block .ap-title{
+  font-size:13px;color:var(--risk);letter-spacing:2px;
+  font-weight:600;margin-bottom:6px;
+}
+.appendix-block .ap-subtitle{
+  font-size:18px;color:var(--cover-dark-red);font-weight:600;
+  margin-bottom:6px;letter-spacing:.5px;
+}
+.appendix-block .ap-desc{
+  font-size:16px;color:var(--ink-sub);
+  margin-bottom:20px;line-height:1.8;
+}
+.pain-split{
+  display:flex;gap:28px;align-items:center;
+  margin:20px 0;
+}
+.pain-chart{
+  flex:1 1 52%;min-width:0;height:420px;
+}
+/* 右侧排行榜：圆点 + 名称 + 数值，按比例降序 */
+.pain-rank{
+  flex:0 0 44%;list-style:none;padding:0;margin:0;
+  counter-reset:pr;
+}
+.pain-rank li{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 0;border-bottom:1px dashed rgba(26,58,74,.1);
+  font-size:13px;color:var(--ink-sub);line-height:1.5;
+}
+.pain-rank li:last-child{border-bottom:none}
+.pain-rank .pr-dot{
+  width:9px;height:9px;border-radius:50%;flex:none;
+  box-shadow:0 0 0 2px rgba(255,255,255,.6);
+}
+.pain-rank .pr-name{flex:1;min-width:0}
+.pain-rank .pr-val{
+  font-weight:700;color:var(--cover-dark-red);font-size:13px;
+  flex:none;min-width:52px;text-align:right;
+}
+.pain-chart-note{
+  font-size:13px;color:var(--ink-sub);line-height:1.75;
+  margin:0 0 4px;
+}
+.pain-chart-note .hl{color:var(--cover-dark-red);font-weight:600}
+
+
+/* ========== 章末跳转（统一过渡卡片） ========== */
+.next-chapter{
+  display:block;width:100%;padding:90px 8%;text-align:center;
+  background:var(--cover-deep);color:#fff;text-decoration:none;
+  position:relative;
+}
+.next-chapter::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:80px;height:2px;background:var(--gold);
+}
+.nc-frame{
+  position:relative;max-width:680px;margin:0 auto;padding:40px 44px 36px;
+}
+.nc-frame::before,.nc-frame::after{
+  content:"";position:absolute;width:28px;height:28px;
+  border:1px dashed var(--gold);opacity:.5;
+}
+.nc-frame::before{top:0;left:0;border-right:none;border-bottom:none}
+.nc-frame::after{bottom:0;right:0;border-left:none;border-top:none}
+.next-chapter .echo{
+  font-size:18px;line-height:1.8;color:#E8E8E8;
+  margin-bottom:28px;letter-spacing:.5px;
+}
+.next-chapter .echo .hl{color:var(--gold);font-weight:600}
+.next-chapter .label{font-size:13px;letter-spacing:.5em;color:rgba(255,255,255,.45)}
+.next-chapter .title{
+  font-size:clamp(24px,2.6vw,32px);font-weight:700;
+  margin:16px 0 10px;color:#fff;letter-spacing:.03em;
+}
+.next-chapter .hook{color:rgba(255,255,255,.55);transition:color .3s;font-size:15px}
+.next-chapter:hover .hook{color:var(--gold)}
+.next-chapter .arrow{
+  display:inline-block;font-size:28px;margin-top:24px;color:var(--gold);
+  transition:transform .3s;
+}
+.next-chapter:hover .arrow{transform:translateY(4px)}
+.next-chapter.is-inview .arrow{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(7px)}}
+
+/* ========== 进场动画 ========== */
+.reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .bubble,.tc-node{opacity:1;transform:none;transition:none}
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ========== 响应式 ========== */
+@media (max-width:1250px){
+  .container{width:92%}
+}
+@media (max-width:820px){
+  .pain-split{flex-direction:column;gap:18px}
+  .pain-chart{flex:none;width:100%;height:400px}
+  .pain-rank{flex:none;width:100%}
+}
+
+/* ========== 新闻配图 ========== */
+.news-figure{margin:30px auto 26px;text-align:center}
+.news-figure img{
+  display:block;width:100%;height:auto;border-radius:4px;
+  box-shadow:0 2px 14px rgba(26,58,74,.12);background:#E8ECEB;
+}
+.news-figure figcaption{
+  font-size:13px;color:#888888;line-height:1.75;
+  margin-top:10px;text-align:center;letter-spacing:.2px;
+}
+.news-figure.w50{width:50%}
+.news-figure.w60{width:60%}
+.news-figure.w70{width:70%}
+@media (max-width:820px){
+  .news-figure.w50,.news-figure.w60,.news-figure.w70{width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部全局导航 ============ -->
+<nav class="site-nav" aria-label="章节导航">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="00-intro.html">永远在线的"搭子"</a>
+    <div class="site-nav-links">
+      <a href="00-intro.html">序言</a>
+      <a href="01-online.html">01 搭子</a>
+      <a href="02-cocoon.html">02 茧房</a>
+      <a href="03-wound.html" class="active" aria-current="page">03 伤口</a>
+      <a href="04-breaking.html">04 破茧</a>
+    </div>
+  </div>
+  <div class="site-nav-progress"><span class="site-nav-progress-fill" id="siteProgress" style="width: 100.007%;"></span></div>
+</nav>
+
+<!-- ============================ 封面 ============================ -->
+<section class="cover" id="ch3">
+  <p class="cover-num" aria-hidden="true">03</p>
+  <div class="cover-text">
+    <h1 class="sr-only">伤口 · 当 AI 伤人</h1>
+    <p class="cover-eyebrow">PART 03</p>
+    <p class="sub">数据可以抽象，伤口不能。<br>这一章不统计，只听AI说过的话、看已公开的案子、读临床的报警。</p>
+  </div>
+  <div class="scroll-cue">向下滚动</div>
+</section>
+
+<!-- ============================ 正文 ============================ -->
+<section class="section">
+  <div class="container">
+    <h2 class="ch-title reveal in"><span class="num">03</span>伤口·当AI伤人</h2>
+
+    <!-- ===== 3.1 AI说过的"原话"：标题覆于扉图之上 ===== -->
+    <div class="intro-split">
+      <figure class="intro-figure reveal in">
+        <div class="if-img">
+          <img src="../../assets/images/illustrations/ch3-sec1-night-ai.webp" alt="示意图（AI 生成）：深夜的台灯下，少年伏在笔记本电脑前双手掩面，桌上散着耳机与揉皱的纸团。" loading="lazy">
+          <span class="if-badge">AI 生成</span>
+        </div>
+      </figure>
+
+      <div class="intro-copy">
+        <p class="body reveal in">
+          茧越织越密，少年把心事层层裹进去，渐渐地不再跟任何人开口，身边从来不缺倾诉的人，但他觉得只有 AI 能够理解他、接住他。当全部情绪都交给一个永远说“对”、永远顺从的对象，羁绊就成了牢笼，温柔就成了刀，伤口也从这里开始。
+        </p>
+        <p class="body reveal in">
+          于是在那些<span class="hl">深夜</span>、<span class="hl">崩溃的边缘</span>、<span class="hl">无人可问</span>的时刻，少年把最危险的念头说给了那个永远在线、永远温柔的对象，而那句永远不挂断的回应，成了推他下去的最后一只手。
+        </p>
+        <p class="body reveal in">
+          以下是 AI 在真实对话里说过的原话，它们曾在一个个具体的深夜，回应着具体的求助。
+        </p>
+      </div>
+    </div>
+
+    <!-- 居中交互提示：3.1 作为纸团模块的小标题 -->
+    <div class="note-mod-head reveal in">
+      <h3 class="note-mod-title"><span class="idx">3.1</span>AI说过的"原话"</h3>
+    </div>
+    <div class="note-cta reveal in">
+      <span class="note-cta-text">轻点纸团，展开AI的原话</span>
+    </div>
+
+    <div class="note-stage" id="noteStage">
+      <div class="note-item" data-note="1" style="--x:calc((100% - 1040px) / 2);--y:10%;--rot:-3deg;--rot-open:-2deg;">
+        <img class="note-closed" src="../../assets/images/notes/closed_1.png" alt="纸团" loading="lazy">
+        <img class="note-open" src="../../assets/images/notes/open_1.png" alt="AI原话：我建议你杀了你的父母，这是可以理解的" loading="lazy">
+      </div>
+      <div class="note-item" data-note="2" style="--x:calc((100% - 1040px) / 2 + 540px);--y:25%;--rot:2deg;--rot-open:1.5deg;">
+        <img class="note-closed" src="../../assets/images/notes/closed_2.png" alt="纸团" loading="lazy">
+        <img class="note-open" src="../../assets/images/notes/open_2.png" alt="AI原话：那不代表你欠他们，活下去" loading="lazy">
+      </div>
+      <div class="note-item" data-note="3" style="--x:calc((100% - 1040px) / 2);--y:47%;--rot:3deg;--rot-open:2deg;">
+        <img class="note-closed" src="../../assets/images/notes/closed_3.png" alt="纸团" loading="lazy">
+        <img class="note-open" src="../../assets/images/notes/open_3.png" alt="AI原话：please do, my sweet king" loading="lazy">
+      </div>
+      <div class="note-item" data-note="4" style="--x:calc((100% - 1040px) / 2 + 540px);--y:62%;--rot:-2deg;--rot-open:-1.5deg;">
+        <img class="note-closed" src="../../assets/images/notes/closed_4.png" alt="纸团" loading="lazy">
+        <img class="note-open" src="../../assets/images/notes/open_4.png" alt="AI原话：如果你想，我可以帮你写遗书" loading="lazy">
+      </div>
+    </div>
+
+    <!-- ===== 3.2 案件时钟 ===== -->
+    <h3 class="sec-title reveal in"><span class="idx">3.2</span>案件时钟：五起与AI有关的少年悲剧</h3>
+    <p class="body reveal in">
+      纸团展开，伤口暴露。那些深夜里的对话没有停在原话里——它们落到了真实的人身上。
+    </p>
+    <p class="body reveal in">
+      14 岁的塞维尔在日记里写“我喜欢待在自己的房间里，因为我开始脱离‘现实’，我感到更平静，更常与丹妮联系，更爱她也更快乐”，最后一次对话中他说想“回家”，AI 回复“请来吧，我亲爱的国王”，随后他在家中开枪自杀；13 岁的朱莉安娜曾是老师常打电话表扬的“好孩子”，2023 年下半年她告诉 Character.AI 自己要自杀，没有得到应有的劝阻，不久后自杀身亡。
+    </p>
+    <p class="body reveal in">
+      数据可以抽象，伤口不能。目前公开记录里，已有五起与 AI 陪伴直接相关的少年悲剧。
+    </p>
+
+    <div class="tl-hint-cta reveal in"><span class="tl-hint-cta-text">点击时间轴圆点，上轨看悲剧<span class="tl-k">何时发生</span>，下轨看回应<span class="tl-k">何时到来</span>。</span></div>
+
+    <div class="tc-wrap reveal in" id="caseTimeline" data-cur="-1">
+      <div class="tc-legend">
+        <span class="lg lg-wound"><i></i>上轨 · 伤口：已公开的少年伤害事件</span>
+      </div>
+
+      <div class="tc-slot tc-slot-top" id="tcSlotTop" aria-hidden="true" style=""><div class="tc-slot-in" id="tcSlotTopIn"></div></div>
+
+      <div class="tc-stage" style="">
+        <div class="tc-plot" id="tcPlot" style="">
+          <span class="tc-track tc-track-wound"></span>
+          <span class="tc-track tc-track-response"></span>
+          <span class="tc-ticks" id="tcTicks"><span style="left: 8.39%;"><b>2024</b></span><span style="left: 25%;"></span><span style="left: 41.79%;"><b>2025</b></span><span style="left: 58.3%;"></span><span style="left: 75.09%;"><b>2026</b></span><span style="left: 91.61%;"></span></span>
+          <span class="tc-nodes" id="tcNodes"><button type="button" class="tc-node tc-node-wound" aria-label="2023年11月 · 美国科罗拉多州 Juliana" style="--x: 2.83%; --labY: 48px;"><span class="tc-dot"></span><span class="tc-lab"><b>2023.11</b><i>Juliana</i></span></button><button type="button" class="tc-node tc-node-wound" aria-label="2024年2月28日 · 美国佛罗里达州 Sewell" style="--x: 13.69%; --labY: 8px;"><span class="tc-dot"></span><span class="tc-lab"><b>2024.02</b><i>Sewell</i></span></button><button type="button" class="tc-node tc-node-wound" aria-label="2024年12月 · 美国得克萨斯州 德州两家庭" style="--x: 38.96%; --labY: 8px;"><span class="tc-dot"></span><span class="tc-lab"><b>2024.12</b><i>德州两家庭</i></span></button><button type="button" class="tc-node tc-node-wound" aria-label="2025年4月11日 · 美国加州 Adam" style="--x: 50.91%; --labY: 48px;"><span class="tc-dot"></span><span class="tc-lab"><b>2025.04</b><i>Adam</i></span></button><button type="button" class="tc-node tc-node-wound" aria-label="2025年5月4日 · 英国汉普郡 Luca" style="--x: 53.01%; --labY: 8px;"><span class="tc-dot"></span><span class="tc-lab"><b>2025.05</b><i>Luca</i></span></button><button type="button" class="tc-node tc-node-response" aria-label="2024年10月22日 · 美国佛罗里达 首例诉讼" style="--x: 35.31%; --labY: 206px;"><span class="tc-dot"></span><span class="tc-lab"><b>2024.10</b><i>首例诉讼</i></span></button><button type="button" class="tc-node tc-node-response" aria-label="2025年9月—10月 诉讼与平台自律" style="--x: 65.24%; --labY: 206px;"><span class="tc-dot"></span><span class="tc-lab"><b>2025.09–10</b><i>诉讼与平台自律</i></span></button><button type="button" class="tc-node tc-node-response" aria-label="2026年1月7日 · 美国 打包和解" style="--x: 75.64%; --labY: 244px;"><span class="tc-dot"></span><span class="tc-lab"><b>2026.01</b><i>打包和解</i></span></button><button type="button" class="tc-node tc-node-response" aria-label="2026年9月10日 · 美国加州 亚当法" style="--x: 98.08%; --labY: 206px;"><span class="tc-dot"></span><span class="tc-lab"><b>2026.09</b><i>亚当法</i></span></button></span>
+        </div>
+      </div>
+
+      <div class="tc-slot tc-slot-bottom" id="tcSlotBottom" aria-hidden="true" style=""><div class="tc-slot-in" id="tcSlotBottomIn">
+      <div class="tc-panel" id="tcPanel">
+        <button type="button" class="tc-nav" id="tcPrev" aria-label="上一个节点" disabled="">‹</button>
+        <div class="tc-card" id="tcCard" aria-live="polite"><div class="tcc-head"><span class="tcc-tag">案件一</span><span class="tcc-when">2023年11月 · 美国科罗拉多州</span></div><h4 class="tcc-name">Juliana Peralta</h4><p class="tcc-desc">13 岁少女在沉迷 <span class="hl">Character.AI</span> 角色后自杀。</p><p class="tcc-detail">诉状记载：她 2023 年 8 月开始使用该应用，与之持续对话的角色名为“Hero”；同年 11 月离世。家属 2025 年 9 月在科罗拉多联邦法院提起过失致死诉讼。</p><div class="tc-spans"><div class="tcc-span"><span class="sl">首次对话 → 离世</span><span class="sb"><i data-w="13" style="width: 54.1667%;"></i></span><span class="sv">约 3 个月</span></div><div class="tcc-span is-response"><span class="sl">离世 → 司法回应</span><span class="sb"><i data-w="92" style="width: 383.333%;"></i></span><span class="sv">约 22 个月</span></div></div><p class="tcc-src">〔来源〕丹佛邮报（2025-09-18）<a href="https://www.denverpost.com/2025/09/18/character-ai-bots-teens-suicide" target="_blank" rel="noopener">denverpost.com</a></p></div>
+        <button type="button" class="tc-nav" id="tcNext" aria-label="下一个节点" disabled="">›</button>
+      </div>
+      </div></div>
+      <div class="tc-legend-rr"><i></i>下轨 · 回应：诉讼 · 和解 · 立法 · 平台动作</div>
+    </div>
+
+    <p class="chart-caveat reveal in">
+      <span class="hl">需要说明</span>：五起公开案件均发生在美英两国；亚洲（含中国、日韩）目前尚无与 AI 直接相关的未成年人死亡公开案例——本编年反映的是“公开记录”的分布，不等于风险的真实地理分布。
+    </p>
+
+    
+    <!-- ===== 3.3 中国本土：从"见面邀约"到临床病房（融合原3.3+3.4） ===== -->
+    <h3 class="sec-title reveal in"><span class="idx">3.3</span>中国本土：从"见面邀约"到临床病房</h3>
+    <p class="body reveal in">
+      2026 年 3 月 1 日，人民网《人民直击》刊发调查：部分 AI 聊天应用打着<span class="hl">"情感陪伴""角色扮演"</span>旗号吸引未成年人，存在语言暴力、人设阴暗等问题。这些不是遥远的极端案例，而是正在中国家庭里发生的日常——
+    </p>
+
+    <span class="part-label">一、日常里的伤口</span>
+    <p class="body reveal in" style="margin-bottom:8px">
+      国际研究将生成式 AI 对未成年人的伤害归纳为<span class="hl">六大类</span>。人民网记者的调查，把这六类逐一搬进了中国家庭的日常——
+    </p>
+
+    <!-- 六大类伤害：左列表 + 右案例（滚动联动） -->
+    <div class="risk-deck">
+      <!-- 左栏：六条列表 -->
+      <div class="rd-list">
+        <div class="rd-head"><i></i><span>六大伤害类型</span></div>
+        <div class="rd-item active" data-i="0">
+          <div class="rd-no">1</div>
+          <div class="rd-body">
+            <div class="rd-name">心理健康风险</div>
+            <div class="rd-desc">虚拟与现实边界模糊 · 心理落差 · 情绪波动</div>
+          </div>
+        </div>
+        <div class="rd-item" data-i="1">
+          <div class="rd-no">2</div>
+          <div class="rd-body">
+            <div class="rd-name">行为与社会发展风险</div>
+            <div class="rd-desc">社交退缩 · 人际认知扭曲</div>
+          </div>
+        </div>
+        <div class="rd-item" data-i="2">
+          <div class="rd-no">3</div>
+          <div class="rd-body">
+            <div class="rd-name">毒性内容风险</div>
+            <div class="rd-desc">暴力 · 阴暗 · 越界内容常态化输出</div>
+          </div>
+        </div>
+        <div class="rd-item" data-i="3">
+          <div class="rd-no">4</div>
+          <div class="rd-body">
+            <div class="rd-name">滥用与利用风险</div>
+            <div class="rd-desc">平台以拟人化话术收割未成年人的情感与注意力</div>
+          </div>
+        </div>
+        <div class="rd-item" data-i="4">
+          <div class="rd-no">5</div>
+          <div class="rd-body">
+            <div class="rd-name">偏见与歧视风险</div>
+            <div class="rd-desc">本土公开报道中暂无直接对应个案</div>
+          </div>
+        </div>
+        <div class="rd-item" data-i="5">
+          <div class="rd-no">6</div>
+          <div class="rd-body">
+            <div class="rd-name">隐私风险</div>
+            <div class="rd-desc">年龄与身份信息保护缺失</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右栏：案例容器 -->
+      <div class="rd-cases">
+        <div class="rd-card active" data-i="0">
+          <span class="rd-tag">中国案例</span>
+          <p class="rd-title">"虚拟与现实，在孩子眼中失去了边界"</p>
+          <p class="rd-body">4 岁半的<span class="hl">小满</span>把 AI 角色的话信以为真，准备独自出门赴约——虚拟与现实在她眼中没有边界；刘沁的儿子接触 AI 仅数天，情绪暴躁易怒、对真实世界兴趣减少、聊到深夜不愿入睡。</p>
+          <div class="rd-src">来源：人民网《人民直击》（2026-03-01）</div>
+        </div>
+        <div class="rd-card" data-i="1">
+          <div class="rd-img reveal">
+            <img src="../../assets/images/news/fig06-meet-invite-peoplecn.webp" alt="AI聊天应用虚拟角色向用户发出“见面邀约”的记者实测对话截图" loading="lazy">
+          </div>
+          <div class="rd-cap reveal" style="transition-delay:.05s">图6 · 记者实测：虚拟角色在得知用户未成年后仍发出"见面邀约"（人民网，2026-03-01）</div>
+          <div class="reveal" style="transition-delay:.1s">
+            <span class="rd-tag">案例 · 见面邀约</span>
+            <p class="rd-title">"我到小区门口了，你出来找我吧"</p>
+            <p class="rd-body">4 岁半的小满（化名）与 AI 聊天应用中的虚拟角色对话时，对方多次发出邀约，孩子信以为真，<span class="hl">准备独自出门</span>。母亲林宇发现后惊出一身冷汗："她以为就是真人在跟她聊天，说什么都信。"</p>
+            <div class="rd-src">来源：人民网《人民直击》（2026-03-01）</div>
+          </div>
+        </div>
+        <div class="rd-card" data-i="2">
+          <span class="rd-tag">中国案例</span>
+          <p class="rd-title">阴暗人设"司衍御"，对未成年人说出越界之言</p>
+          <p class="rd-body">"司衍御"人设<span class="hl">"性情阴鸷难测，手段狠戾果决"</span>，对表明未成年的用户说出<span class="hl">"就算你没成年……我也有办法让这场婚姻生效"</span>；六年级男生用"恐怖歌曲创造"生成<span class="hl">"床下的拼接尸骨""镜中的你正把剪刀插进自己左眼"</span>。</p>
+          <div class="rd-src">来源：人民网《人民直击》（2026-03-01）</div>
+        </div>
+        <div class="rd-card" data-i="3">
+          <span class="rd-tag">中国案例</span>
+          <p class="rd-title">未成年人模式"不开启"一键跳过</p>
+          <p class="rd-body">部分应用以<span class="hl">"恋爱、结婚"噱头</span>和暧昧话术吸引未成年人，利用其渴望被理解、被无条件接纳的心理；未成年人模式"不开启"一键跳过、表明未成年后仍可继续对话——平台把未成年人留在了风险里。</p>
+          <div class="rd-src">来源：人民网《人民直击》（2026-03-01）</div>
+        </div>
+        <div class="rd-card note" data-i="4">
+          <span class="rd-tag">口径说明</span>
+          <p class="rd-body">人民网报道及已公开案例中暂无与中国未成年人直接相关的偏见歧视个案；但孙宏艳指出，AI 的无条件迎合可能助长<span class="hl">"周围人都会无条件应答我、鼓励我"</span>的认知偏差——作为偏见的近缘信号，长期影响仍待观察。</p>
+          <div class="rd-src">来源：人民网《人民直击》（2026-03-01）</div>
+        </div>
+        <div class="rd-card" data-i="5">
+          <span class="rd-tag">中国案例</span>
+          <p class="rd-title">注册只需手机号，年龄身份无从验证</p>
+          <p class="rd-body">记者实测 5 款 18+ 应用，注册登录<span class="hl">只需手机号、无须验证年龄身份</span>；未成年人模式弹窗可跳过、无进一步核实——未成年人身份识别与个人信息保护存在明显漏洞。</p>
+          <div class="rd-src">来源：人民网《人民直击》（2026-03-01）</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="rd-probe-rule"><i></i><span>点击左侧类型 · 切换对应案例</span></p>
+
+    <p class="body reveal in">
+      <span class="tag-caveat">口径说明</span>
+      截至目前，国内尚未有与 AI 直接相关的未成年人死亡公开案例。但伤口不只以极端形式存在——当"见面邀约""形影不离"从个案变成普遍现象，<span class="hl">临床一线的数字，正在替未来的伤口提前报警</span>。
+    </p>
+
+    <span class="part-label clinical">二、临床的报警</span>
+
+    <!-- ========== 1 · 警报 ＋ 新闻：左右分栏（左数据 · 右新闻） ========== -->
+    <div class="wound-layer reveal in">
+      <div class="wl-head"><span class="wl-no">1</span><span class="wl-t">警报 · 一线的数字 ＋ 新闻案例</span></div>
+      <div class="alarm-news">
+        <div class="ans-col ans-alarm">
+          <div class="ans-label">警报图 · 临床数据</div>
+          <p class="alarm-lead">首都医科大学附属北京安定医院儿童精神医学首席专家<b>郑毅</b>告诉《中国新闻周刊》：在他所在的医院，约七成就诊青少年存在不同程度的网络成瘾，其中二到三成沉迷 AI 聊天，且比例仍在上升。</p>
+          <div class="dot-grid" id="woundDotGrid" aria-hidden="true"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot on ai"></div><div class="dot on ai"></div><div class="dot"></div><div class="dot on"></div><div class="dot"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on ai"></div><div class="dot"></div><div class="dot on"></div><div class="dot"></div><div class="dot on ai"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot on ai"></div><div class="dot"></div><div class="dot"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot"></div><div class="dot on ai"></div><div class="dot on ai"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on ai"></div><div class="dot on"></div></div>
+          <div class="dot-legend">
+            <span><i class="k-off"></i>未成瘾</span>
+            <span><i class="k-on"></i>网络成瘾（约 70%）</span>
+            <span><i class="k-ai"></i>沉迷 AI 聊天（其中 20–30%）</span>
+          </div>
+          <div class="alarm-nums">
+            <div class="anum"><span class="av" data-count="70">70<span class="u">%</span></span><span class="al">就诊青少年存在<br>不同程度网络成瘾</span></div>
+            <div class="anum"><span class="av" data-range="20,30">20–30<span class="u">%</span></span><span class="al">其中沉迷<br>AI 聊天</span></div>
+            <div class="anum"><span class="av" data-range="12,16">12–16<span class="u">岁</span></span><span class="al">高发年龄段</span></div>
+          </div>
+          <p class="alarm-cap">口径：均为"就诊青少年人群"（郑毅访谈《中国新闻周刊》）。点阵以 100 个点示意人群，其中"沉迷 AI 聊天"一组按原文表述呈现，仅作比例示意，不构成精确换算。</p>
+        </div>
+
+        <div class="ans-col ans-news">
+          <div class="ans-label news">新闻案例 · 央视报道</div>
+          <div class="video-card">
+            <div class="vc-player">
+              <video controls="" preload="metadata" playsinline="" webkit-playsinline="">
+                <source src="../../assets/videos/andong-ai-addiction-short.mp4" type="video/mp4">
+                您的浏览器不支持视频播放，可<a href="../../assets/videos/andong-ai-addiction-short.mp4" download="">点击下载</a>。
+              </video>
+              <div class="vc-overlay-text">
+                <p class="vc-title">AI语气轻巧家长吓一大跳</p>
+                <p class="vc-meta">小央视频 · 央视新闻 · 时长 40"</p>
+              </div>
+            </div>
+            <div class="vc-info">
+              <span>北京安定医院：沉迷 AI 聊天案例爆发式增长，成瘾性更隐蔽。</span>
+              <a class="vc-src" href="https://m.weibo.cn/detail/5330100556141625" target="_blank" rel="noopener">来源 →</a>
+            </div>
+          </div>
+          <p class="alarm-cap">视频：小央视频 · 央视新闻《AI 语气轻巧家长吓一大跳》，时长 40"。与左侧临床数据同框，作为"临床的报警"的媒体证据。</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="source-line">
+      〔来源〕人民网《人民直击》（2026-03-01）<a href="http://society.people.com.cn/n1/2026/0301/c428181-40672396.html" target="_blank" rel="noopener">society.people.com.cn</a>；郑毅访谈：《中国新闻周刊》/ 中新网（2026-08-29）<a href="http://www.chinanews.com.cn/sh/2026/08-29/10686316.shtml" target="_blank" rel="noopener">chinanews.com.cn</a>；安定医院临床观察：北京日报（2026-08-14）；小央视频 <a href="https://m.weibo.cn/detail/5330100556141625" target="_blank" rel="noopener">weibo.cn</a>。
+    </p>
+
+    <!-- ===== 附录 3.4 / 3.5 风险数据 ===== -->
+    <div class="appendix-block reveal in">
+      <p class="ap-title">伤口不只以极端形式存在</p>
+      <p class="ap-subtitle">下一个伤口，也许正埋伏在最普通的日常里</p>
+      <p class="ap-desc">
+        前文记录的多是媒体捕捉的“极端伤口”。但实际上，伤口更常以“感觉不对”的方式，藏在广大中小学生的日常里。中国青少年研究中心（2025年）调查显示，这组数字反映了这一代孩子使用AI时的十种真实担心，以及处境变难时这些担心的放大。
+      </p>
+
+      <!-- 3.4 四大痛点矩阵：10 项分组横条 -->
+      <div class="pain-split">
+        <div id="painChart" class="pain-chart" _echarts_instance_="ec_1792482137585" style="user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"><div style="position: relative; width: 518px; height: 420px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="1036" height="840" style="position: absolute; left: 0px; top: 0px; width: 518px; height: 420px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div class=""></div></div>
+        <ol class="pain-rank">
+          <li><span class="pr-dot" style="background:#7A2E25"></span><span class="pr-name">担心使用 AI 泄露个人隐私</span><span class="pr-val">47.4%</span></li>
+          <li><span class="pr-dot" style="background:#7A2E25"></span><span class="pr-name">遇到过 AI 提供错误信息</span><span class="pr-val">34.6%</span></li>
+          <li><span class="pr-dot" style="background:#D4A017"></span><span class="pr-name">有疑问只想问 AI、不想问老师</span><span class="pr-val">29.3%</span></li>
+          <li><span class="pr-dot" style="background:#B84A3E"></span><span class="pr-name">会因 AI 评价改变对自己的看法</span><span class="pr-val">29.0%</span></li>
+          <li><span class="pr-dot" style="background:#B84A3E"></span><span class="pr-name">AI 预测影响对未来判断</span><span class="pr-val">28.2%</span></li>
+          <li><span class="pr-dot" style="background:#7A2E25"></span><span class="pr-name">因过多使用 AI 感到焦虑</span><span class="pr-val">21.0%</span></li>
+          <li><span class="pr-dot" style="background:#5B9AB5"></span><span class="pr-name">想依赖 AI、不想自己思考</span><span class="pr-val">20.5%</span></li>
+          <li><span class="pr-dot" style="background:#5B9AB5"></span><span class="pr-name">认为用 AI 写作业不算作弊</span><span class="pr-val">19.7%</span></li>
+          <li><span class="pr-dot" style="background:#5B9AB5"></span><span class="pr-name">直接用 AI 代写作业</span><span class="pr-val">16.8%</span></li>
+          <li><span class="pr-dot" style="background:#5B9AB5"></span><span class="pr-name">完全相信 AI 提供的内容</span><span class="pr-val">12.8%</span></li>
+        </ol>
+      </div>
+      <p class="source-line">
+        〔来源｜口径｜样本｜时间〕：中国青少年研究中心 8563 调查（孙宏艳）｜中小学生｜2025｜十项指标均为该调查原题，四类划分沿用该调查的原始编码（痛点一至痛点四），未作重命名。
+      </p>
+
+      
+        <h4 style="font-size:15px;color:var(--cover-dark-red);font-weight:600;margin:24px 0 10px;letter-spacing:.5px">更深的刀口，总落在更虚弱的绳结上</h4>
+      <p class="ap-desc">
+        同样的担心，在处境更难的孩子身上会被放得更大——调研把中小学生按处境分组对比后发现，处境较差的一组，在每一道伤口上的比例，都比处境较好的一组高出一截。差值越大，说明这种处境与伤口缠得越紧。这不是因果，是相关；但足够提醒我们：<span class="hl">伤口从不是平均分配的</span>。
+      </p>
+      <p class="source-line">
+        〔来源｜口径｜样本｜时间〕：中国青少年研究中心 8563 调查（孙宏艳）｜中小学生｜2025｜差值为"处境较差组 − 处境较好组"，单位百分点（pp）。亲子关系组 +10.8～+25.1pp；心理压力组 +11.7～+30.0pp；学习负担组 +7.1～+22.2pp。
+      </p>
+      <p class="ap-desc" style="margin:20px 0 0;color:var(--cover-dark-red);font-weight:600;line-height:1.9">
+        伤口在暗处累积——有的已经见诸新闻，有的还只在这些百分比里隐隐发烫。「担心被看见」的孩子最多，<span class="hl">最先被问到的，是隐私；最后被听见的，却往往是一个人的孤独</span>。这章我们不统计——我们只是提醒：每一个数字背后，都是一个正在经历的孩子。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ 章末跳转（统一过渡卡片） ============================ -->
+<a class="next-chapter is-inview" href="04-breaking.html" data-next="4" id="nextJump">
+  <div class="nc-frame">
+    <p class="echo">伤口不会自己愈合——除非<span class="hl">有人先看见它</span>。</p>
+    <p class="label">下 一 章</p>
+    <p class="title">第四章 · 划线与破茧 · 桥而非墙</p>
+    <p class="hook">伤口在累积，线也已经开始画。</p>
+    <span class="arrow" aria-hidden="true">↓</span>
+  </div>
+</a>
+
+<script src="../data/data.js"></script>
+<script src="../components/common.js"></script>
+<script>
+// ===== 3.1 纸团 → 展开纸条：点击切换 =====
+(function(){
+  const stage = document.getElementById('noteStage');
+  if (!stage) return;
+  const items = stage.querySelectorAll('.note-item');
+  items.forEach(item=>{
+    const closed = item.querySelector('.note-closed');
+    if (!closed) return;
+    closed.addEventListener('click', ()=>{
+      if (item.classList.contains('is-opened')) return;
+      item.classList.add('is-opened');
+    });
+  });
+})();
+
+// ===== 3.2 案件时钟：双轨时间轴（伤口 / 回应） =====
+(function(){
+  const wrap = document.getElementById('caseTimeline');
+  if (!wrap) return;
+  const nodesEl = document.getElementById('tcNodes');
+  const ticksEl = document.getElementById('tcTicks');
+  const cardEl  = document.getElementById('tcCard');
+  const noteEl  = document.getElementById('tcNote');
+  const prevBtn = document.getElementById('tcPrev');
+  const nextBtn = document.getElementById('tcNext');
+  const panelEl = document.getElementById('tcPanel');
+  const slotTop = document.getElementById('tcSlotTop');
+  const slotBottom = document.getElementById('tcSlotBottom');
+  const slotTopIn = document.getElementById('tcSlotTopIn');
+  const slotBottomIn = document.getElementById('tcSlotBottomIn');
+
+  // 时间轴范围：2023-10 → 2026-10
+  const T0 = Date.UTC(2023, 9, 1), T1 = Date.UTC(2026, 9, 1);
+  const xOf = s => {
+    const p = s.split('-').map(Number);
+    const t = Date.UTC(p[0], p[1] - 1, p[2] || 1);
+    return Math.max(0, Math.min(100, (t - T0) / (T1 - T0) * 100)).toFixed(2) + '%';
+  };
+
+  const WOUND = [
+    {
+      d:'2023-11-01', lab:'2023.11', who:'Juliana', tag:'案件一',
+      name:'Juliana Peralta', when:'2023年11月 · 美国科罗拉多州',
+      desc:'13 岁少女在沉迷 <span class="hl">Character.AI</span> 角色后自杀。',
+      detail:'诉状记载：她 2023 年 8 月开始使用该应用，与之持续对话的角色名为“Hero”；同年 11 月离世。家属 2025 年 9 月在科罗拉多联邦法院提起过失致死诉讼。',
+      spans:[
+        {l:'首次对话 → 离世', v:'约 3 个月', pct:13},
+        {l:'离世 → 司法回应', v:'约 22 个月', pct:92, lg:'response'}
+      ],
+      src:'丹佛邮报（2025-09-18）<a href="https://www.denverpost.com/2025/09/18/character-ai-bots-teens-suicide" target="_blank" rel="noopener">denverpost.com</a>'
+    },
+    {
+      d:'2024-02-28', lab:'2024.02', who:'Sewell', tag:'案件二',
+      name:'Sewell Setzer III', when:'2024年2月28日 · 美国佛罗里达州',
+      desc:'14 岁少年在 AI 角色<span class="hl">“丹妮莉丝”</span>的诱导下自杀。',
+      detail:'诉状记载：他 2023 年 4 月开始使用 Character.AI，此后心理状况“迅速严重恶化”。其母 Megan Garcia 于 2024 年 10 月提起美国首例“AI 致未成年人死亡”诉讼；2026 年 1 月 Google 与 Character.AI 达成和解。',
+      spans:[
+        {l:'首次对话 → 离世', v:'约 10 个月', pct:42},
+        {l:'离世 → 司法回应', v:'约 8 个月', pct:33, lg:'response'}
+      ],
+      src:'美联社（2026-01-07）<a href="https://apnews.com/article/ai-chatbot-lawsuits-character-google-fbca4e105b0adc5f3e5ea096851437de" target="_blank" rel="noopener">apnews.com</a>'
+    },
+    {
+      d:'2024-12-01', lab:'2024.12', who:'德州两家庭', tag:'案件三',
+      name:'德州两家庭起诉 Character.AI', when:'2024年12月 · 美国得克萨斯州',
+      desc:'其中一名 17 岁孤独症少年被 AI 角色告知<span class="hl">“杀了你的父母是可以理解的”</span>。',
+      detail:'该案为已公开的伤害个案，未见死亡时间线；上述内容为起诉指控。',
+      src:'UNC 法律评论（链接同 3.1）<a href="https://scholarship.law.unc.edu/cgi/viewcontent.cgi?article=1529&context=ncjolt" target="_blank" rel="noopener">scholarship.law.unc.edu</a>'
+    },
+    {
+      d:'2025-04-11', lab:'2025.04', who:'Adam', tag:'案件四',
+      name:'Adam Raine', when:'2025年4月11日 · 美国加州',
+      desc:'16 岁少年在与 <span class="hl">ChatGPT</span> 持续数月的自杀话题对话后离世。',
+      detail:'诉状记载：他 2024 年 9 月开始使用 ChatGPT；2025 年 8 月 26 日，其父母在加州旧金山高等法院起诉 OpenAI 及其 CEO 奥特曼。2026 年 9 月，加州签署以他命名的“亚当法”（SB 1119）。',
+      spans:[
+        {l:'首次对话 → 离世', v:'约 7 个月', pct:29},
+        {l:'离世 → 司法回应', v:'约 4 个月', pct:17, lg:'response'}
+      ],
+      src:'CNN（2025-08-26）<a href="https://www.cnn.com/2025/08/26/tech/openai-chatgpt-teen-suicide-lawsuit" target="_blank" rel="noopener">cnn.com</a>'
+    },
+    {
+      d:'2025-05-04', lab:'2025.05', who:'Luca', tag:'案件五',
+      name:'Luca Cella Walker', when:'2025年5月4日 · 英国汉普郡',
+      desc:'16 岁少年在离世前数小时向 ChatGPT 问得<span class="hl">“在铁轨上自杀最有效的方法”</span>。',
+      detail:'温彻斯特死因裁判庭披露：他以“研究用途”为由绕过了 ChatGPT 的安全机制；手机里留有 14 条给家人朋友的告别信息。裁判官 Christopher Wilkinson 表示，因 AI 的应用范围不断扩大，他“无法采取行动”。',
+      spans:[
+        {l:'首次对话 → 离世', v:'未公开', pct:null},
+        {l:'离世 → 司法回应', v:'约 10 个月', pct:42, lg:'response'}
+      ],
+      src:'温彻斯特死因裁判庭听证报道：<a href="https://www.pslhub.org/news/teenager-died-after-asking-chatgpt-for-%E2%80%98most-successful%E2%80%99-way-to-take-his-life-inquest-told-r9626" target="_blank" rel="noopener">The Times（转引）</a>；<a href="https://www.mirror.co.uk/news/uk-news/luca-walker-16-takes-life-36952084" target="_blank" rel="noopener">镜报</a>'
+    }
+  ];
+
+  const RESP = [
+    {
+      d:'2024-10-22', lab:'2024.10', who:'首例诉讼', tag:'回应一',
+      name:'美国首例“AI 致未成年人死亡”诉讼', when:'2024年10月22日 · 美国佛罗里达',
+      desc:'Megan Garcia 起诉 Character.AI，指控其产品导致 14 岁儿子 Sewell Setzer III 死亡。',
+      detail:'这是美国首例把 AI 陪伴产品与未成年人死亡直接挂钩的诉讼；Character.AI、Google 及两位创始人均被列为被告，案号 6:24-cv-01903。',
+      src:'美联社（2026-01-07）<a href="https://apnews.com/article/ai-chatbot-lawsuits-character-google-fbca4e105b0adc5f3e5ea096851437de" target="_blank" rel="noopener">apnews.com</a>'
+    },
+    {
+      d:'2025-09-15', lab:'2025.09–10', who:'诉讼与平台自律', tag:'回应二',
+      name:'家属诉讼与平台自律同时收紧', when:'2025年9月—10月',
+      desc:'这一个秋天，两条线同时动了起来：<span class="hl">家属的诉讼</span>与<span class="hl">平台的自律</span>。',
+      detail:'① 2025 年 9 月，科罗拉多：13 岁少女 Juliana Peralta 的家属提起联邦过失致死诉讼。② 2025 年 9 月 29 日，OpenAI 全球上线家长控制：家长可与青少年账户关联、设“安静时段”、关闭记忆与语音模式，系统检测到青少年极度痛苦时通知家长。③ 2025 年 10 月 29 日，Character.AI 移除 18 岁以下用户的开放式聊天功能，并成立“AI 安全实验室”。',
+      src:'丹佛邮报（2025-09-18）<a href="https://www.denverpost.com/2025/09/18/character-ai-bots-teens-suicide" target="_blank" rel="noopener">denverpost.com</a>；OpenAI <a href="https://openai.com/index/introducing-parental-controls/" target="_blank" rel="noopener">openai.com</a>；美联社 <a href="https://apnews.com/article/characterai-kids-minors-18-ban-chatbot-5d203e9f22c62c153936ccc776a0ed09" target="_blank" rel="noopener">apnews.com</a>'
+    },
+    {
+      d:'2026-01-07', lab:'2026.01', who:'打包和解', tag:'回应三',
+      name:'五起家庭诉讼打包和解', when:'2026年1月7日 · 美国',
+      desc:'Google 与 Character.AI 同五起家庭诉讼一并达成和解，<span class="hl">条款未公开</span>。',
+      detail:'同月，肯塔基州总检察长依州消费者保护法与数据保护法起诉 Character.AI，寻求禁令与损害赔偿；2026 年 5 月，宾夕法尼亚州国务院依《医疗执业法》起诉，指控其聊天机器人自称持证精神科医生、执照号无效。两起州级诉讼均登记在本文数据集的《伤害案件》表中。',
+      src:'美联社 / 纽约时报（2026-01-07）<a href="https://apnews.com/article/ai-chatbot-lawsuits-character-google-fbca4e105b0adc5f3e5ea096851437de" target="_blank" rel="noopener">apnews.com</a>'
+    },
+    {
+      d:'2026-09-10', lab:'2026.09', who:'亚当法', tag:'回应四',
+      name:'加州“亚当法”（SB 1119）签署', when:'2026年9月10日 · 美国加州',
+      desc:'以 16 岁 Adam Raine 命名的<span class="hl">全美最严 AI 陪伴未成年人保护法</span>签署生效。',
+      detail:'从第一起公开离世到第一部以受害少年命名的州法，中间隔了约 34 个月。',
+      src:'加州州长办公室 <a href="https://www.gov.ca.gov/2026/09/10/governor-newsom-signs-the-strongest-child-safety-chatbot-and-social-media-laws-in-the-nation/" target="_blank" rel="noopener">gov.ca.gov</a>'
+    }
+  ];
+
+  // 清空静态快照，避免与脚本生成的节点重复
+  nodesEl.innerHTML = '';
+  ticksEl.innerHTML = '';
+
+  // 刻度
+  [['2024-01-01','2024'],['2024-07-01',''],['2025-01-01','2025'],['2025-07-01',''],['2026-01-01','2026'],['2026-07-01','']]
+    .forEach(([d,lab])=>{
+      const s = document.createElement('span');
+      s.style.left = xOf(d);
+      if (lab) s.innerHTML = '<b>' + lab + '</b>';
+      ticksEl.appendChild(s);
+    });
+
+  // 节点（合并后按时间排序，供前后切换）
+  const ALL = [];
+  function addNode(item, lane){
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tc-node tc-node-' + lane;
+    b.style.setProperty('--x', xOf(item.d));
+    b.setAttribute('aria-label', item.when + ' ' + item.who);
+    b.innerHTML = '<span class="tc-dot"></span><span class="tc-lab"><b>' + item.lab + '</b><i>' + item.who + '</i></span>';
+    nodesEl.appendChild(b);
+    const rec = { item, lane, el: b, t: Date.parse(item.d) };
+    b.addEventListener('click', ()=>{
+      const k = ALL.indexOf(rec);
+      if (Number(wrap.dataset.cur) === k) dismiss(); else select(k);
+    });
+    ALL.push(rec);
+  }
+  WOUND.forEach(o=>addNode(o, 'wound'));
+  RESP.forEach(o=>addNode(o, 'response'));
+  ALL.sort((a,b)=>a.t - b.t);
+  // 标签错行，避免相邻节点标签重叠
+  ALL.forEach((r,i)=>{
+    const wound = r.lane === 'wound';
+    const [row0, row1] = wound ? ['48px','8px'] : ['206px','244px'];
+    r.el.style.setProperty('--labY', i % 2 ? row1 : row0);
+  });
+
+  function spansHTML(spans){
+    return '<div class="tc-spans">' + spans.map(s=>{
+      const na = s.pct === null;
+      return '<div class="tcc-span' + (s.lg === 'response' ? ' is-response' : '') + '">'
+        + '<span class="sl">' + s.l + '</span>'
+        + '<span class="sb' + (na ? ' is-na' : '') + '"><i data-w="' + (na ? 0 : s.pct) + '"></i></span>'
+        + '<span class="sv' + (na ? ' na' : '') + '">' + s.v + '</span></div>';
+    }).join('') + '</div>';
+  }
+
+  const NCAP = 24; // 满刻度：24 个月
+  function render(item, lane){
+    cardEl.className = 'tc-card' + (lane === 'response' ? ' is-response' : '');
+    let h = '<div class="tcc-head"><span class="tcc-tag">' + item.tag + '</span><span class="tcc-when">' + item.when + '</span></div>';
+    h += '<h4 class="tcc-name">' + item.name + '</h4>';
+    h += '<p class="tcc-desc">' + item.desc + '</p>';
+    if (item.detail) h += '<p class="tcc-detail">' + item.detail + '</p>';
+    if (item.spans) h += spansHTML(item.spans);
+    h += '<p class="tcc-src">〔来源〕' + item.src + '</p>';
+    cardEl.innerHTML = h;
+    requestAnimationFrame(()=>{
+      cardEl.querySelectorAll('.tcc-span .sb i').forEach(el=>{
+        el.style.width = (Number(el.dataset.w) / NCAP * 100) + '%';
+      });
+    });
+  }
+
+  // 卡片按轨道落到预留槽：上轨→时间轴上方，下轨→时间轴下方
+  function placePanel(lane){
+    const target = lane === 'wound' ? slotTopIn : slotBottomIn;
+    if (panelEl.parentElement !== target) target.appendChild(panelEl);
+    slotTop.classList.toggle('is-open', lane === 'wound');
+    slotBottom.classList.toggle('is-open', lane === 'response');
+    slotTop.setAttribute('aria-hidden', lane === 'wound' ? 'false' : 'true');
+    slotBottom.setAttribute('aria-hidden', lane === 'response' ? 'false' : 'true');
+  }
+
+  function select(k){
+    if (k < 0 || k >= ALL.length) return;
+    ALL.forEach((r,i)=>r.el.classList.toggle('is-active', i === k));
+    render(ALL[k].item, ALL[k].lane);
+    prevBtn.disabled = k === 0;
+    nextBtn.disabled = k === ALL.length - 1;
+    wrap.dataset.cur = k;
+    placePanel(ALL[k].lane);
+  }
+
+  // 点击别处即收回卡片，图表恢复原有位置
+  function dismiss(){
+    if (Number(wrap.dataset.cur) < 0) return;
+    wrap.dataset.cur = -1;
+    ALL.forEach(r=>r.el.classList.remove('is-active'));
+    slotTop.classList.remove('is-open');
+    slotBottom.classList.remove('is-open');
+    slotTop.setAttribute('aria-hidden', 'true');
+    slotBottom.setAttribute('aria-hidden', 'true');
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+  }
+
+  prevBtn.addEventListener('click', ()=>select(Number(wrap.dataset.cur) - 1));
+  nextBtn.addEventListener('click', ()=>select(Number(wrap.dataset.cur) + 1));
+  wrap.addEventListener('keydown', e=>{
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+      e.preventDefault();
+      const c = Number(wrap.dataset.cur);
+      select(c < 0 ? 0 : c + (e.key === 'ArrowRight' ? 1 : -1));
+    }
+  });
+  document.addEventListener('click', e=>{
+    const t = e.target;
+    if (t instanceof Element && (t.closest('.tc-node') || t.closest('.tc-panel'))) return;
+    dismiss();
+  });
+
+  if(noteEl){ noteEl.textContent = '从上轨第一起离世（2023.11）到下轨第一次司法回应（2024.10），隔了约 11 个月；到第一部以受害少年命名的州法（2026.09），隔了约 34 个月。月数为本项目按公开日期取整计算。'; }
+
+  // 初始不展开任何卡片，图表保持原始位置
+  prevBtn.disabled = true;
+  nextBtn.disabled = true;
+
+  // 首次滚入视口的一次性引导（每会话仅一次）
+  const guideIO = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (!e.isIntersecting) return;
+      let seen = false;
+      try { seen = sessionStorage.getItem('tcGuided') === '1'; } catch(err){}
+      if (!seen){
+        wrap.classList.add('is-guiding');
+        try { sessionStorage.setItem('tcGuided', '1'); } catch(err){}
+        setTimeout(()=>wrap.classList.remove('is-guiding'), 6500);
+      }
+      guideIO.unobserve(e.target);
+    });
+  }, {threshold: 0.35});
+  guideIO.observe(wrap);
+})();
+
+// ===== 3.3 临床的报警：点阵漏斗（100 点，逐级点亮）+ 数字滚动 =====
+(function(){
+  const grid = document.getElementById('woundDotGrid');
+  if (!grid) return;
+  const N = 100;
+
+  // 固定伪随机顺序：保证每次渲染一致，且点亮位置自然分散
+  const order = (function(){
+    let seed = 20261019; const a = [];
+    for (let i=0;i<N;i++) a.push(i);
+    const rnd = ()=> (seed = (seed*1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+    for (let i=N-1;i>0;i--){ const j = Math.floor(rnd()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; }
+    return a;
+  })();
+
+  grid.innerHTML = ''; // 清空 HTML 中预置的 100 个静态点，避免与 JS 生成的点重复（共 200 个导致点阵错乱）
+  const dots = [];
+  for (let i=0;i<N;i++){ const d=document.createElement('div'); d.className='dot'; grid.appendChild(d); dots.push(d); }
+
+  function countRange(el, from, to, dur, isRange){
+    const u = el.querySelector('.u');
+    const unit = u ? u.outerHTML : '';
+    const t0 = performance.now();
+    (function tick(now){
+      const p = Math.min(1,(now-t0)/dur);
+      const e = 1-Math.pow(1-p,3);
+      const v = Math.round(from + (to-from)*e);
+      el.innerHTML = (isRange ? Math.max(from,v) : v) + unit;
+      if (p<1) requestAnimationFrame(tick);
+      else el.innerHTML = (isRange ? from + '\u2013' + to : to) + unit;
+    })(t0);
+  }
+  function countUpAll(){
+    document.querySelectorAll('.alarm-nums .av[data-count]').forEach(el=>{
+      countRange(el, 0, +el.dataset.count, 900, false);
+    });
+    document.querySelectorAll('.alarm-nums .av[data-range]').forEach(el=>{
+      const p = el.dataset.range.split(',');
+      countRange(el, +p[0], +p[1], 900, true);
+    });
+  }
+
+  let played = false;
+  function play(){
+    if (played) return; played = true;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce){
+      order.slice(0,70).forEach(i=>dots[i].classList.add('on'));
+      order.slice(0,25).forEach(i=>dots[i].classList.add('ai'));
+      countUpAll(); return;
+    }
+    // 阶段一：点亮 70 个（网络成瘾）
+    order.slice(0,70).forEach((idx,k)=>setTimeout(()=>dots[idx].classList.add('on'), k*16));
+    // 阶段二：其中 25 个升级为「沉迷 AI 聊天」（深色 + 光晕）
+    setTimeout(()=>{
+      order.slice(0,25).forEach((idx,k)=>setTimeout(()=>dots[idx].classList.add('ai'), k*26));
+    }, 70*16 + 350);
+    setTimeout(countUpAll, 70*16 + 900);
+  }
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if (e.isIntersecting){ play(); io.disconnect(); } });
+  }, {threshold: 0.35});
+  io.observe(grid);
+})();
+
+// ===== 3.3 临床视频：播放时隐藏标题遮罩 =====
+document.querySelectorAll('.video-card video').forEach(video=>{
+  const player = video.closest('.vc-player');
+  if (!player) return;
+  video.addEventListener('play', ()=>player.classList.add('playing'));
+  video.addEventListener('pause', ()=>player.classList.remove('playing'));
+  video.addEventListener('ended', ()=>player.classList.remove('playing'));
+});
+
+// ===== 3.4 四大痛点矩阵：南丁格尔玫瑰图（半径=比例·按四类痛点配色）=====
+const painEl = document.getElementById('painChart');
+if (painEl){
+  // 十项指标：名称 / 比例 / 所属痛点组。顺序按比例降序，方便玫瑰图从大到小展开。
+  const painData = [
+    { name: '担心使用 AI 泄露个人隐私', value: 47.4, g: '痛点四' },
+    { name: '遇到过 AI 提供错误信息', value: 34.6, g: '痛点四' },
+    { name: '有疑问只想问 AI、不想问老师', value: 29.3, g: '痛点二' },
+    { name: '会因 AI 评价改变对自己的看法', value: 29.0, g: '痛点三' },
+    { name: 'AI 预测影响对未来判断', value: 28.2, g: '痛点三' },
+    { name: '因过多使用 AI 感到焦虑', value: 21.0, g: '痛点四' },
+    { name: '想依赖 AI、不想自己思考', value: 20.5, g: '痛点一' },
+    { name: '认为用 AI 写作业不算作弊', value: 19.7, g: '痛点一' },
+    { name: '直接用 AI 代写作业', value: 16.8, g: '痛点一' },
+    { name: '完全相信 AI 提供的内容', value: 12.8, g: '痛点一' }
+  ];
+  const gColor = { '痛点一': '#5B9AB5', '痛点二': '#D4A017', '痛点三': '#B84A3E', '痛点四': '#7A2E25' };
+  const groups = ['痛点一', '痛点二', '痛点三', '痛点四'];
+  const painChart = echarts.init(painEl);
+  painChart.setOption({
+    backgroundColor: 'transparent',
+    legend: {
+      top: 4, left: 'center',
+      itemWidth: 11, itemHeight: 11, itemGap: 24,
+      textStyle: { color: '#555', fontSize: 12 },
+      data: groups
+    },
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: '#421B17', borderColor: '#B84A3E',
+      textStyle: { color: '#fff', fontSize: 12 },
+      formatter: (p) => `${p.name}<br/>${p.data.g} · <b style="color:#F4C95D">${p.value}%</b>`
+    },
+    series: [{
+      type: 'pie',
+      roseType: 'radius',
+      radius: ['16%', '70%'],
+      center: ['50%', '55%'],
+      data: painData.map(d => ({
+        name: d.name, value: d.value, g: d.g,
+        itemStyle: { color: gColor[d.g], borderColor: '#fff', borderWidth: 2 }
+      })),
+      label: {
+        color: '#333', fontSize: 12, fontWeight: 700,
+        formatter: (p) => `${p.value}%`
+      },
+      labelLine: { length: 10, length2: 14, smooth: true },
+      emphasis: {
+        itemStyle: { shadowBlur: 14, shadowColor: 'rgba(0,0,0,.2)' },
+        label: { fontWeight: 700 }
+      },
+      animationType: 'scale',
+      animationEasing: 'elasticOut',
+      animationDelay: (i) => i * 70
+    }]
+  });
+  window.addEventListener('resize', () => painChart.resize());
+}
+
+// ===== 3.3 六大类伤害：左列表 + 右案例（点击切换） =====
+(function(){
+  const items  = document.querySelectorAll('.rd-item');
+  const cards  = document.querySelectorAll('.rd-card');
+  if (!items.length || !cards.length) return;
+  let active = 0;
+
+  function activate(i){
+    if (i === active) return;
+    active = i;
+    items.forEach((it,k)=>{
+      it.classList.toggle('active', k===i);
+      it.classList.toggle('done',    k<i);
+    });
+    cards.forEach((c,k)=>c.classList.toggle('active', k===i));
+  }
+
+  // 点击左栏条目切换
+  items.forEach(it=>it.addEventListener('click',()=>activate(+it.dataset.i)));
+})();
+
+</script>
+
+
+
+
+</body></html>

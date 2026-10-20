@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>附录 · 数据来源与参考文献 | 永远在线的"搭子"</title>
+<link rel="stylesheet" href="../styles/theme.css">
+<style>
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--ink);font-size:16px;line-height:1.9;
+}
+
+/* ===== 页首 ===== */
+.masthead{
+  background:var(--cover-deep);color:#fff;text-align:center;
+  padding:72px 0 60px;position:relative;overflow:hidden;
+}
+.masthead::after{
+  content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  width:80px;height:2px;background:var(--gold);
+}
+.masthead .kicker{
+  color:var(--gold);font-size:13px;letter-spacing:.5em;margin-bottom:18px;
+}
+.masthead h1{
+  font-size:var(--fs-display);font-weight:700;letter-spacing:.03em;line-height:1.3;
+}
+.masthead .sub{
+  color:rgba(255,255,255,.62);font-size:var(--fs-lead);margin-top:14px;
+}
+
+/* ===== 正文容器 ===== */
+.section{width:100%;padding:56px 0 0}
+.container{width:70%;margin:0 auto;max-width:900px}
+h2.ch-title{
+  font-size:var(--fs-h2);font-weight:700;color:var(--cover-main);
+  letter-spacing:1px;margin:8px 0 20px;padding-top:16px;
+  border-top:2px solid var(--gold-deep);display:inline-block;padding-right:20px;
+}
+h2.ch-title .num{color:var(--gold-deep);margin-right:10px}
+
+/* ===== 列表 ===== */
+.src-list{list-style:none;margin:0 0 8px}
+.src-list li{
+  position:relative;padding:13px 4px 13px 30px;
+  border-bottom:var(--hair);font-size:var(--fs-body);
+}
+.src-list li::before{
+  content:"";position:absolute;left:2px;top:24px;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;background:var(--gold-deep);
+}
+.src-list li .tag{
+  display:inline-block;margin-left:8px;font-size:var(--fs-cap);color:var(--ink-meta);
+}
+.ref-list{list-style:none;margin:0 0 8px;counter-reset:ref}
+.ref-list li{
+  position:relative;padding:13px 4px 13px 46px;
+  border-bottom:var(--hair);font-size:var(--fs-body);
+  counter-increment:ref;
+}
+.ref-list li::before{
+  content:counter(ref);position:absolute;left:2px;top:24px;transform:translateY(-50%);
+  width:28px;height:28px;border-radius:50%;background:rgba(26,58,74,.08);
+  color:var(--gold-deep);font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+}
+.foot-note{
+  font-size:var(--fs-meta);color:var(--ink-meta);margin:20px 0 8px;line-height:1.8;
+}
+
+/* ===== 进场动画 ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+@media (max-width:640px){
+  .container{width:88%}
+  .masthead{padding:48px 0 42px}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="章节导航">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="00-intro.html">永远在线的"搭子"</a>
+    <div class="site-nav-links">
+      <a href="00-intro.html">序言</a>
+      <a href="01-online.html">01 搭子</a>
+      <a href="02-cocoon.html">02 茧房</a>
+      <a href="03-wound.html">03 伤口</a>
+      <a href="04-breaking.html">04 破茧</a>
+      <a href="05-backmatter.html" class="active" aria-current="page">05 附录</a>
+    </div>
+  </div>
+  <div class="site-nav-progress"><span class="site-nav-progress-fill" id="siteProgress"></span></div>
+</nav>
+
+<header class="masthead">
+  <p class="kicker">附录</p>
+  <h1>数据来源与参考文献</h1>
+  <p class="sub">每一组数字的来处，每一份材料的出处。</p>
+</header>
+
+<main>
+  <section class="section" id="data-sources">
+    <div class="container">
+      <h2 class="ch-title reveal"><span class="num">一</span>数据来源</h2>
+      <ul class="src-list reveal">
+        <li>中国青少年研究中心《8563 名中小学生 AI 使用调查》<span class="tag">2025</span></li>
+        <li>共青团中央、CNNIC《青少年发展蓝皮书》<span class="tag">2026.9</span></li>
+        <li>CNNIC 第 57 次统计报告、《生成式 AI 应用发展报告（2025）》</li>
+        <li>中国教科院 32 万学生暑期调查<span class="tag">经人民日报报道</span></li>
+        <li>《人工智能拟人化互动服务管理暂行办法》<span class="tag">2026</span></li>
+        <li>《未成年人网络保护条例》<span class="tag">2024</span></li>
+        <li>欧盟《人工智能法案》、澳大利亚社媒最低年龄法、加州 SB 243</li>
+        <li>Character.AI 系列诉讼、Raine 诉 OpenAI、Juliana Peralta 个案</li>
+        <li>斯坦福谄媚研究（Science）、De Freitas 放手研究（Nature Human Behaviour）</li>
+        <li>AI 产品榜、MiniMax 招股书等第三方数据<span class="tag">仅作辅证</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="references">
+    <div class="container">
+      <h2 class="ch-title reveal"><span class="num">二</span>参考文献</h2>
+      <ol class="ref-list reveal">
+        <li>共青团中央、CNNIC《青少年发展蓝皮书》，2026.9</li>
+        <li>中国青少年研究中心 8563 问卷调查，2025</li>
+        <li>CNNIC《第 57 次统计报告》《生成式 AI 应用发展报告（2025）》</li>
+        <li>Common Sense Media：Talk, Trust, and Trade-offs，2025</li>
+        <li>《人工智能拟人化互动服务管理暂行办法》，2026</li>
+        <li>《未成年人网络保护条例》，2024</li>
+        <li>欧盟《人工智能法案》、加州 SB 243</li>
+        <li>Cheng 等《Science》，2026</li>
+        <li>De Freitas 等《Nature Human Behaviour》，2026</li>
+        <li>Xiao，Frontiers in Psychology，2026</li>
+        <li>Horton &amp; Wohl，1956</li>
+        <li>人民网《人民直击》：《当孩子和 AI"交心"》，2026.3</li>
+      </ol>
+    </div>
+  </section>
+
+  <div style="height:64px"></div>
+</main>
+
+<a class="next-chapter" href="00-intro.html" id="nextJump">
+  <div class="nc-frame">
+    <p class="echo">技术负责在线，<span class="hl">人负责在场</span>。</p>
+    <p class="label">回 到 序 言</p>
+    <p class="title">序言 · 一份问卷里的少年</p>
+    <p class="hook">那份问卷里的少年，也是你身边的少年。</p>
+    <span class="arrow" aria-hidden="true">↑</span>
+  </div>
+</a>
+
+<script src="../components/common.js"></script>
+</body>
+</html>

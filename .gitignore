@@ -1,0 +1,24 @@
+# ===== 以下为开发/备份/原始素材，非网页运行必需 =====
+.impeccable/
+.workbuddy/
+.trae-html-share-packages/
+docs/
+deliverables/
+launcher/
+assets/raw/
+assets/data/
+assets/images/*/originals/
+assets/images/news/backup/
+assets/videos/originals/
+src/chapters/_backup_20261017/
+src/chapters/*.bak-*.html
+src/chapters/*-demo.html
+src/chapters/_desktop_check.png
+
+# ===== 根目录开发文档与演示页 =====
+*.md
+!README.md
+concept-*.html
+demo-*.html
+design-options-*.html
+prototype-*.html

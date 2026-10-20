@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第一章 · 搭子·永远在线 | 永远在线的"搭子"</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- echarts-gl：1.3 全球图景的 3D 地球仪 + 航线飞行 -->
+<script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js"></script>
+<!-- 全站主题（12 token + reset）已抽离到 ../styles/theme.css -->
+<link rel="stylesheet" href="../styles/theme.css">
+<style>
+html{scrollbar-color:rgba(26,58,74,.28) transparent}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:var(--fs-body);
+  line-height:1.9;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* —— 浏览器原生表面：把没画到的地方也纳入这套设计 —— */
+::selection{background:rgba(244,201,93,.4);color:var(--cover-deep)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:3px}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{
+  background:rgba(26,58,74,.22);border-radius:11px;
+  border:3px solid var(--bg);background-clip:padding-box;
+}
+::-webkit-scrollbar-thumb:hover{background:rgba(26,58,74,.36);background-clip:padding-box}
+
+/* ========== 通用布局 ========== */
+.section{width:100%;padding:var(--sp-9) 0;position:relative}
+.container{width:70%;margin:0 auto;padding:0;max-width:1100px}
+.container.narrow{max-width:780px}
+h2.ch-title{
+  font-size:26px;font-weight:700;color:var(--cover-main);
+  letter-spacing:.5px;line-height:1.22;text-wrap:balance;
+  margin-bottom:var(--sp-5);
+  padding-top:var(--sp-6);border-top:2px solid var(--gold);
+  display:inline-block;padding-right:20px;
+}
+h2.ch-title .num{color:var(--gold-deep);margin-right:10px;font-variant-numeric:tabular-nums}
+h3.sec-title{
+  font-size:var(--fs-h3);font-weight:600;color:var(--cover-main);
+  margin:var(--sp-8) 0 var(--sp-4);letter-spacing:.3px;line-height:1.35;text-wrap:balance;
+}
+h3.sec-title .idx{color:var(--gold-deep);font-weight:700;margin-right:8px;font-variant-numeric:tabular-nums}
+p.body{
+  font-size:var(--fs-body);color:var(--ink);line-height:1.95;
+  margin-bottom:var(--sp-5);text-align:justify;
+}
+p.body .hl{color:var(--gold-deep);font-weight:600}
+p.body .risk{color:var(--risk);font-weight:600}
+p.body .num{color:var(--gold-deep);font-weight:700;font-size:1.06em;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+/* 逐条叙述连成一段：行距按正文行高走，不再叠加段间距 */
+p.body.path-line{margin-bottom:0}
+p.body .num.risk{color:var(--risk)}
+.quote{
+  margin:var(--sp-6) 0;padding:var(--sp-4) var(--sp-5) var(--sp-4) calc(var(--sp-5) - 2px);
+  background:rgba(244,201,93,.07);
+  border-left:2px solid var(--gold);color:var(--ink-sub);
+  font-size:16px;line-height:1.9;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+.source-line{
+  font-size:var(--fs-meta);color:var(--ink-meta);
+  margin-top:var(--sp-5);line-height:1.75;
+}
+.source-line a{color:var(--step-1);text-decoration:none;border-bottom:1px dotted currentColor}
+.source-line a:hover{color:var(--gold-deep)}
+.tag-caveat{
+  display:inline-block;font-size:var(--fs-meta);color:var(--ink-sub);
+  background:rgba(26,58,74,.06);padding:3px 10px;border-radius:10px;
+  margin-left:8px;letter-spacing:.3px;
+}
+
+/* ========== 封面 ========== */
+.cover{
+  height:100vh;min-height:680px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:var(--cover-deep) url("../../assets/images/covers/cover-ch1-partner.webp") center/cover no-repeat;
+  color:#fff;
+}
+.cover::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(8,24,32,.52) 0%, rgba(8,24,32,.20) 46%, rgba(8,24,32,.14) 72%, rgba(8,24,32,.52) 100%),
+    linear-gradient(180deg, rgba(8,24,32,.5) 0%, rgba(8,24,32,0) 30%, rgba(8,24,32,0) 68%, rgba(8,24,32,.6) 100%);
+}
+.cover-text{
+  position:relative;z-index:2;text-align:center;
+  max-width:760px;padding:0 20px;
+  animation:coverRise 1s var(--ease-out) both;
+}
+/* 封面标题：背景插画已含书法标题，此处仅保留屏幕阅读器语义 */
+.cover-text h1{
+  position:absolute;width:1px;height:1px;
+  margin:-1px;padding:0;border:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
+.cover-text .sub{
+  font-size:23px;color:rgba(255,255,255,.92);
+  line-height:1.9;max-width:620px;margin:0 auto 28px;
+  text-shadow:0 1px 14px rgba(0,0,0,.62);
+}
+/* 眉标：PART 0N ＋ 两侧金色细线 */
+.cover-eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:22px;
+  margin:0 0 17px;
+  font-size:24px;font-weight:600;letter-spacing:.34em;text-indent:.34em;
+  color:var(--gold);font-variant-numeric:tabular-nums;
+}
+.cover-eyebrow::before,.cover-eyebrow::after{
+  content:"";flex:none;width:72px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(244,201,93,.75));
+}
+.cover-eyebrow::after{transform:scaleX(-1)}
+/* 幽灵编号：6% 白的巨大数字，给中央留白一个尺度；纯装饰、不抢读 */
+.cover-num{
+  position:absolute;left:50%;top:41%;transform:translate(-50%,-50%);
+  z-index:2;pointer-events:none;user-select:none;
+  font-size:clamp(64px, min(30vw, 24vh), 320px);
+  font-weight:800;line-height:1;letter-spacing:-.03em;
+  color:rgba(255,255,255,.06);font-variant-numeric:tabular-nums;
+}
+.scroll-cue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  font-size:13px;color:rgba(255,255,255,.7);
+  letter-spacing:.28em;text-align:center;z-index:2;
+}
+.scroll-cue::after{
+  content:"";display:block;width:1px;height:30px;margin:10px auto 0;
+  background:linear-gradient(to bottom, var(--gold), transparent);
+  animation:drop 2s infinite;
+}
+@keyframes drop{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+@keyframes coverRise{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:none}
+}
+
+/* ========== 封面动效：机器人头旁的“我在”气泡 ==========
+   底图为 center/cover，可见裁剪随视口比例变化；故动效层自建一个与底图
+   等尺寸的 16:9 舞台（宽 = max(视口宽, 100vh×16/9, 680px×16/9)），
+   气泡按“图内坐标”定位，不会因视口比例不同而错位。 */
+.cover-fx{position:absolute;inset:0;z-index:2;pointer-events:none}
+.cover-fx-stage{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:max(100%, calc(100vh * 16 / 9), calc(680px * 16 / 9));
+  aspect-ratio:16 / 9;
+}
+/* 气泡紧贴小机器人脑袋左侧：用 right/bottom 锚定，气泡变宽时向左展开 */
+.sayhi{
+  position:absolute;right:46%;bottom:31%;
+  animation:sayhiPop .5s .6s cubic-bezier(.22,1.5,.4,1) both;
+}
+/* 方案 A：极简聊天气泡——纯白圆角实体 + 小尖角指向机器人
+   文字“呼吸”：缓慢的缩放＋明暗＋柔光起伏，4.2s 一次；气泡是 AI 的台词，
+   故用干净的无衬线体，与封面书法章名形成机器／手写的对照 */
+.sayhi-bubble{
+  position:relative;display:inline-block;
+  padding:9px 17px;
+  border-radius:15px;
+  background:#FFFDF8;
+  color:#17313D;
+  font-size:clamp(19px, 1.45vw, 27px);
+  font-weight:700;line-height:1.35;
+  letter-spacing:.12em;text-indent:.12em;
+  box-shadow:0 8px 22px rgba(0,0,0,.38);
+  animation:sayhiBreath 4.2s ease-in-out infinite;
+}
+/* 尖角：贴在气泡右缘中线，尖端朝右指向机器人；随气泡一起呼吸缩放 */
+.sayhi-tail{
+  position:absolute;right:-9px;top:50%;transform:translateY(-50%);
+  width:0;height:0;
+  border-top:8px solid transparent;
+  border-bottom:8px solid transparent;
+  border-left:10px solid #FFFDF8;
+}
+@keyframes sayhiBreath{
+  0%,100%{
+    transform:scale(1);opacity:.93;
+    box-shadow:0 8px 22px rgba(0,0,0,.38);
+  }
+  50%{
+    transform:scale(1.04);opacity:1;
+    box-shadow:0 10px 26px rgba(0,0,0,.44), 0 0 24px rgba(255,253,248,.34);
+  }
+}
+@keyframes sayhiPop{
+  from{opacity:0;transform:scale(.55) translateY(8px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* 尊重“减少动态效果”偏好：停用弹出动画，气泡直接静态显示 */
+@media (prefers-reduced-motion:reduce){
+  .cover-fx *{animation:none!important}
+}
+
+/* ========== 1.1 对比表 ========== */
+.cmp-table{
+  width:100%;border-collapse:collapse;margin:var(--sp-5) 0;
+  font-size:14px;background:#fff;
+  box-shadow:var(--shadow-1);
+  border:var(--hair);
+  border-radius:var(--radius);overflow:hidden;
+}
+.cmp-table th,.cmp-table td{
+  padding:var(--sp-4);text-align:left;
+  border-bottom:1px solid var(--divider);
+  vertical-align:top;line-height:1.7;
+}
+.cmp-table tbody tr:last-child th,.cmp-table tbody tr:last-child td{border-bottom:none}
+.cmp-table thead th{
+  background:var(--cover-main);color:#fff;
+  font-weight:600;letter-spacing:.5px;
+  font-size:13px;
+}
+.cmp-table thead th:first-child{background:var(--cover-deep)}
+.cmp-table tbody th{
+  width:130px;color:var(--cover-main);font-weight:600;
+  background:rgba(26,58,74,.04);
+}
+.cmp-table tbody tr:hover td{background:rgba(244,201,93,.05)}
+.cmp-table td.highlight{color:var(--gold-deep);font-weight:600}
+
+/* 右下角机器人动图：已抠掉白底（ch1-cmp-robot-cut.webp），
+   压在表格右下角外沿，透明区域不会遮住表格内容 */
+.cmp-wrap{position:relative}
+.cmp-bot{
+  position:absolute;right:0;bottom:0;z-index:2;
+  width:clamp(110px,13.5vw,178px);height:auto;
+  transform:translate(38%,18%);
+  pointer-events:none;user-select:none;
+  filter:drop-shadow(0 10px 18px rgba(15,37,50,.16));
+}
+
+/* ========== 1.1 大数字 + 时序折线 ========== */
+.big-num-card{
+  margin:var(--sp-7) 0;padding:var(--sp-7) var(--sp-6);
+  background:linear-gradient(135deg, var(--cover-main) 0%, var(--cover-deep) 100%);
+  color:#fff;border-radius:var(--radius);text-align:center;
+  box-shadow:var(--shadow-2);
+}
+.big-num-card .num{
+  font-size:clamp(48px,6vw,68px);font-weight:700;color:var(--gold);
+  line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums;
+  text-shadow:0 0 24px rgba(244,201,93,.3);
+}
+.big-num-card .num .unit{font-size:22px;color:rgba(255,255,255,.72);margin-left:6px;font-weight:400}
+.big-num-card .label{
+  font-size:14px;color:rgba(255,255,255,.8);
+  margin-top:var(--sp-4);letter-spacing:.06em;
+}
+.big-num-card .note{
+  font-size:12.5px;color:rgba(255,255,255,.62);
+  margin-top:var(--sp-2);
+}
+.chart-block{
+  margin:var(--sp-6) 0;padding:var(--sp-5) var(--sp-5) var(--sp-4);
+  background:#fff;border:var(--hair);
+  border-radius:var(--radius);box-shadow:var(--shadow-1);
+}
+.chart-block .chart-title{
+  font-size:15px;color:var(--cover-main);
+  font-weight:600;margin-bottom:6px;letter-spacing:.3px;
+}
+.chart-block .chart-sub{
+  font-size:var(--fs-meta);color:var(--ink-meta);margin-bottom:var(--sp-4);
+}
+.chart-canvas{width:100%;height:340px}
+
+/* ========== 1.2 四国数据卡 ========== */
+.country-cards{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:var(--sp-5);margin:var(--sp-6) 0;
+}
+.country-card{
+  padding:var(--sp-5) var(--sp-4);background:#fff;border-radius:var(--radius);
+  border-top:3px solid var(--step-1);
+  box-shadow:var(--shadow-1);
+  text-align:center;position:relative;
+}
+.country-card.us{border-top-color:var(--gold)}
+.country-card.kr{border-top-color:var(--step-2)}
+.country-card.jp{border-top-color:var(--ink-dim)}
+.country-card .flag{
+  font-size:11px;letter-spacing:.22em;color:var(--ink-meta);
+  margin-bottom:var(--sp-2);
+}
+.country-card .name{
+  font-size:18px;font-weight:700;color:var(--cover-main);
+  margin-bottom:var(--sp-4);letter-spacing:.06em;
+}
+.country-card .core-num{
+  font-size:36px;font-weight:700;color:var(--step-1);
+  line-height:1;margin-bottom:6px;font-variant-numeric:tabular-nums;
+}
+.country-card.us .core-num{color:var(--gold-deep)}
+.country-card.kr .core-num{color:var(--step-2)}
+.country-card.jp .core-num{color:var(--ink-dim)}
+.country-card .core-num .unit{font-size:16px;font-weight:500;margin-left:2px}
+.country-card .core-label{
+  font-size:12px;color:var(--ink-meta);margin-bottom:var(--sp-4);line-height:1.5;
+}
+.country-card .extra{
+  font-size:16px;color:var(--ink-sub);line-height:1.7;
+  text-align:left;border-top:1px dashed var(--divider);padding-top:var(--sp-3);
+}
+.country-card .market-tag{
+  position:absolute;top:var(--sp-3);right:var(--sp-3);
+  font-size:10px;color:var(--ink-meta);
+  background:rgba(26,58,74,.07);padding:2px 8px;border-radius:10px;
+  letter-spacing:.3px;
+}
+/* ========== 1.3 全球图景 · 3D 地球仪 + 航线飞行 ========== */
+.globe-stage{
+  position:relative;width:100%;
+  height:620px;margin:var(--sp-6) 0;
+  background:linear-gradient(160deg,#0F2532 0%,#1A3A4A 100%);
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-2);
+}
+.globe-canvas{position:absolute;inset:0;width:100%;height:100%}
+/* 故事卡片：贴在地球仪右下，玻璃拟态 */
+.globe-story{
+  position:absolute;left:24px;bottom:24px;right:24px;
+  max-width:440px;z-index:5;pointer-events:none;
+}
+.globe-story-card{
+  background:rgba(8,24,32,.78);
+  border:1px solid rgba(244,201,93,.35);
+  border-radius:var(--radius-sm);
+  padding:20px 22px;color:#fff;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  box-shadow:0 8px 32px rgba(0,0,0,.45);
+  opacity:0;transform:translateY(16px);
+  transition:opacity .55s var(--ease-out), transform .55s var(--ease-out);
+}
+.globe-story-card.show{opacity:1;transform:none}
+.globe-story-card .gs-flag{
+  font-size:11px;letter-spacing:.22em;color:var(--gold);
+  margin-bottom:6px;font-weight:600;
+}
+.globe-story-card .gs-name{
+  font-size:20px;font-weight:700;color:#fff;margin-bottom:10px;
+}
+.globe-story-card .gs-core{
+  font-size:40px;font-weight:700;color:var(--gold);line-height:1;
+  margin-bottom:6px;font-variant-numeric:tabular-nums;
+  text-shadow:0 0 18px rgba(244,201,93,.35);
+}
+.globe-story-card .gs-core .unit{font-size:18px;font-weight:500;color:rgba(255,255,255,.7);margin-left:3px}
+.globe-story-card .gs-core-label{font-size:12.5px;color:rgba(255,255,255,.68);margin-bottom:12px;line-height:1.5}
+.globe-story-card .gs-body{
+  font-size:16px;line-height:1.8;color:rgba(255,255,255,.86);text-align:justify;
+}
+.globe-story-card .gs-body .hl{color:var(--gold);font-weight:600}
+.globe-story-card .gs-body .risk{color:#F4A89E;font-weight:600}
+.globe-story-card .gs-extra{
+  margin-top:12px;padding-top:10px;
+  border-top:1px dashed rgba(244,201,93,.2);
+  font-size:12px;color:rgba(255,255,255,.6);line-height:1.65;
+}
+.globe-story-card .gs-src{
+  margin-top:10px;font-size:11px;color:rgba(255,255,255,.42);
+}
+.globe-story-card .gs-src a{color:rgba(244,201,93,.6);text-decoration:none;border-bottom:1px dotted currentColor}
+.globe-story-card .gs-src a:hover{color:var(--gold)}
+
+/* 国家导航点 + 自动播放控制 */
+.globe-nav{
+  position:absolute;top:18px;right:18px;z-index:5;
+  display:flex;flex-direction:column;gap:8px;align-items:flex-end;
+}
+.globe-dots{display:flex;gap:8px}
+.globe-dot{
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(8,24,32,.6);border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.7);font-size:12px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s var(--ease-out);
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+}
+.globe-dot:hover{border-color:var(--gold);color:var(--gold)}
+.globe-dot.active{background:var(--gold);color:var(--cover-deep);border-color:var(--gold);box-shadow:0 0 12px rgba(244,201,93,.5)}
+.globe-ctrl{
+  display:flex;gap:6px;
+}
+
+/* 缩放滑块 */
+.globe-zoom{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:8px 4px;border-radius:14px;
+  background:rgba(8,24,32,.55);border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(6px);
+}
+.gz-plus,.gz-minus{
+  color:rgba(255,255,255,.6);font-size:14px;font-weight:700;
+  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;user-select:none;border-radius:50%;transition:color .2s;
+}
+.gz-plus:hover,.gz-minus:hover{color:var(--gold)}
+#globeZoom{
+  -webkit-appearance:none;appearance:none;
+  width:140px;height:6px;margin:0;
+  background:transparent;cursor:pointer;
+  /* 垂直方向 */
+  transform:rotate(-90deg);transform-origin:center;
+}
+#globeZoom::-webkit-slider-runnable-track{
+  height:4px;border-radius:2px;
+  background:rgba(255,255,255,.18);
+}
+#globeZoom::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--gold);border:2px solid #fff;
+  box-shadow:0 0 8px rgba(244,201,93,.6);
+  margin-top:-6px;cursor:grab;
+}
+#globeZoom::-webkit-slider-thumb:active{cursor:grabbing}
+#globeZoom::-moz-range-track{
+  height:4px;border-radius:2px;background:rgba(255,255,255,.18);
+}
+#globeZoom::-moz-range-thumb{
+  width:16px;height:16px;border-radius:50%;
+  background:var(--gold);border:2px solid #fff;
+  box-shadow:0 0 8px rgba(244,201,93,.6);cursor:grab;
+}
+.globe-btn{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(8,24,32,.6);border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.8);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s var(--ease-out);font-size:14px;
+}
+.globe-btn:hover{border-color:var(--gold);color:var(--gold)}
+.globe-btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* 左上角提示 */
+.globe-hint{
+  position:absolute;top:18px;left:22px;z-index:5;
+  font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.06em;
+  pointer-events:none;
+}
+.globe-hint .gh-title{font-size:13px;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:2px}
+
+@media (max-width:680px){
+  .globe-stage{height:520px}
+  .globe-story{left:14px;right:14px;bottom:14px;max-width:none}
+  .globe-story-card{padding:14px 16px}
+  .globe-story-card .gs-core{font-size:32px}
+  .globe-story-card .gs-name{font-size:17px}
+  .globe-nav{top:12px;right:12px}
+  .globe-dot{width:26px;height:26px;font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){
+  .globe-story-card{transition:none}
+}
+
+/* ========== 1.3 情感代糖天平 ========== */
+.balance-wrap{
+  margin:var(--sp-7) auto;max-width:780px;
+  padding:var(--sp-6) var(--sp-5);background:#fff;
+  border:var(--hair);border-radius:var(--radius);box-shadow:var(--shadow-1);
+}
+.balance-svg{display:block;width:100%;height:200px;margin:0 auto}
+.balance-legend{
+  display:flex;justify-content:space-between;
+  margin-top:var(--sp-4);font-size:13px;
+}
+.balance-legend .left{color:var(--risk);font-weight:600;text-align:left;flex:1}
+.balance-legend .right{color:var(--gold-deep);font-weight:600;text-align:right;flex:1}
+.balance-legend .left small,.balance-legend .right small{
+  display:block;font-weight:400;color:var(--ink-meta);font-size:12px;margin-top:4px;
+}
+/* ========== 1.4 三种缺失 · 缺口圆（非长方形） ==========
+   概念：每个圆有一个向上张开的“缺口”——缺口就是“缺什么”。
+   圆内是解释文字，缺口处用金色虚线勾出“本应在、却缺失”的那一块。 */
+.gap-trio{
+  display:flex;justify-content:center;align-items:flex-start;
+  gap:clamp(12px,2.4vw,32px);flex-wrap:wrap;
+  margin:var(--sp-7) 0 var(--sp-6);
+  position:relative;
+}
+/* 贯穿三圆的“关系支持线”——有缺口，才需要 AI 补位 */
+.gap-trio::before{
+  content:"";position:absolute;left:10%;right:10%;top:50%;
+  height:0;border-top:1.5px dashed rgba(184,74,62,.22);
+  transform:translateY(-50%);z-index:0;
+}
+.gap-circle{
+  position:relative;width:280px;height:280px;flex:none;z-index:1;
+}
+.gap-shape{position:absolute;inset:0;width:100%;height:100%;display:block}
+.gap-solid{fill:var(--risk);filter:drop-shadow(0 8px 20px rgba(184,74,62,.22))}
+.gap-ghost{
+  fill:none;stroke:var(--gold);stroke-width:1.6;
+  stroke-dasharray:5 4;opacity:.55;
+  animation:gapPulse 2.8s ease-in-out infinite;
+}
+.gap-ghost.r2{animation-delay:.35s}
+.gap-ghost.r3{animation-delay:.7s}
+@keyframes gapPulse{0%,100%{opacity:.4}50%{opacity:.82}}
+.gap-label{
+  position:absolute;top:54px;left:50%;transform:translateX(-50%);
+  font-size:15px;font-weight:700;color:#fff;
+  letter-spacing:.14em;z-index:3;white-space:nowrap;
+  background:var(--risk);
+  padding:4px 14px;border-radius:20px;
+  box-shadow:0 2px 8px rgba(184,74,62,.3);
+}
+.gap-watermark{
+  position:absolute;top:62%;left:50%;transform:translate(-50%,-50%);
+  font-size:118px;font-weight:800;line-height:1;
+  color:rgba(255,255,255,.07);pointer-events:none;z-index:1;
+}
+/* 说明文字收进扇形实心区内，避免白色文字落到浅色页面底色上 */
+.gap-body{
+  position:absolute;left:52px;right:52px;top:146px;height:82px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;line-height:1.5;font-weight:600;color:#fff;
+  text-align:center;z-index:2;
+  text-shadow:0 1px 3px rgba(60,10,6,.5);
+}
+/* 文字区下方的柔和暗底，保证任何一行都落在深色上 */
+.gap-body::before{
+  content:"";position:absolute;inset:-8px -10px;z-index:-1;border-radius:50%;
+  background:radial-gradient(ellipse 100% 100% at 50% 50%,
+    rgba(78,16,11,.55) 0%, rgba(78,16,11,.38) 60%, rgba(78,16,11,0) 100%);
+}
+.gap-body p{margin:0}
+@media (max-width:920px){
+  .gap-trio::before{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .gap-ghost{animation:none}
+}
+
+/* ========== 1.4 香港调查 · 2.4 倍对比条 ========== */
+.hk-compare{
+  margin:var(--sp-4) 0 var(--sp-3);padding:var(--sp-4) var(--sp-5);
+  background:#fff;border:var(--hair);border-radius:var(--radius);
+  box-shadow:var(--shadow-1);
+}
+.hk-row{
+  display:flex;align-items:center;gap:var(--sp-3);
+  margin-bottom:var(--sp-3);font-size:13px;
+}
+.hk-row:last-child{margin-bottom:0}
+.hk-label{flex:0 0 150px;color:var(--ink-sub);line-height:1.5}
+.hk-track{flex:1;height:22px;background:rgba(26,58,74,.06);border-radius:3px;overflow:hidden}
+.hk-fill{height:100%;width:0;background:var(--step-1);border-radius:3px;transition:width 1.2s var(--ease-out)}
+.hk-fill.risk{background:var(--risk)}
+.hk-val{flex:0 0 64px;font-weight:700;color:var(--gold-deep);text-align:right;font-variant-numeric:tabular-nums}
+.hk-row .hk-val.risk{color:var(--risk)}
+.hk-x{
+  margin-top:var(--sp-2);font-size:12px;color:var(--ink-meta);
+  text-align:right;letter-spacing:.04em;
+}
+.hk-x b{color:var(--risk);font-size:14px}
+
+/* ========== 1.4 香港调查 · 发布会通栏大图 + 三块警示口号 ========== */
+.hk-hero{
+  position:relative;width:100%;margin:var(--sp-6) 0 var(--sp-3);
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-2);
+}
+.hk-hero img{display:block;width:100%;height:auto}
+/* 底部渐变，保证叠加口号可读 */
+.hk-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top, rgba(15,37,50,.95) 0%, rgba(15,37,50,.58) 36%, rgba(15,37,50,.12) 66%, transparent 100%);
+}
+.hk-hero-tag{
+  position:absolute;top:var(--sp-4);left:var(--sp-5);z-index:3;
+  font-size:11px;letter-spacing:.22em;color:var(--gold);
+  background:rgba(8,24,32,.6);padding:4px 12px;border-radius:3px;
+}
+.hk-slogans{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;
+  padding:var(--sp-5) var(--sp-6);
+  display:flex;gap:var(--sp-4);flex-wrap:wrap;
+}
+.hk-slogan{
+  flex:1;min-width:200px;
+  padding:var(--sp-3) var(--sp-4);
+  background:rgba(8,24,32,.58);
+  border-left:3px solid var(--gold);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);
+}
+.hk-slogan .txt{
+  font-size:16px;font-weight:700;color:#fff;
+  line-height:1.55;letter-spacing:.02em;
+}
+.hk-slogan .sub{
+  font-size:11.5px;color:rgba(244,201,93,.72);
+  margin-top:6px;letter-spacing:.06em;line-height:1.5;
+}
+@media (max-width:720px){
+  .hk-slogan .txt{font-size:14px}
+  .hk-slogans{padding:var(--sp-4) var(--sp-3);gap:var(--sp-3)}
+}
+
+/* ========== 1.4 三种解释 · 翻转卡片 ========== */
+/* 呼吸式交互引导：把"点击卡片翻转"从正文里拉出来，独立成一枚会呼吸的按钮 */
+.flip-hint{display:flex;justify-content:center;margin:var(--sp-6) 0 var(--sp-4)}
+.flip-hint .fh-inner{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:11px 26px;border-radius:999px;
+  font-size:15px;font-weight:600;letter-spacing:.06em;color:var(--gold-deep);
+  background:rgba(244,201,93,.13);
+  border:1px solid rgba(212,160,23,.42);
+  animation:flipHintBreath 2.8s ease-in-out infinite;
+}
+.flip-hint .fh-icon{
+  display:inline-block;font-size:17px;line-height:1;
+  animation:flipHintTurn 2.8s ease-in-out infinite;
+}
+@keyframes flipHintBreath{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 rgba(212,160,23,0)}
+  50%{transform:scale(1.05);box-shadow:0 8px 26px rgba(212,160,23,.3)}
+}
+@keyframes flipHintTurn{
+  0%,100%{transform:rotate(0deg)}
+  50%{transform:rotate(-180deg)}
+}
+.flip-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:var(--sp-5);margin:var(--sp-7) 0;
+}
+.flip-card{
+  perspective:1400px;height:420px;cursor:pointer;outline:none;
+}
+.flip-card:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:var(--radius)}
+.flip-card-inner{
+  position:relative;width:100%;height:100%;
+  transition:transform .7s var(--ease-out);
+  transform-style:preserve-3d;
+}
+.flip-card:hover .flip-card-inner{transform:translateY(-4px)}
+.flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+.flip-card:hover.flipped .flip-card-inner{transform:rotateY(180deg) translateY(-4px)}
+.flip-card-front,.flip-card-back{
+  position:absolute;inset:0;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-1);
+  display:flex;flex-direction:column;
+}
+.flip-card-front{background:#fff;padding:var(--sp-3);align-items:center}
+.flip-card-back{transform:rotateY(180deg);padding:var(--sp-5);overflow-y:auto;color:#fff}
+.fc-gold{border-top:3px solid var(--gold)}
+.fc-blue{border-top:3px solid var(--step-1)}
+.fc-red{border-top:3px solid var(--risk)}
+.fc-gold-back{background:linear-gradient(160deg,var(--cover-main),var(--cover-deep))}
+.fc-blue-back{background:linear-gradient(160deg,#234a5e,#0F2532)}
+.fc-red-back{background:linear-gradient(160deg,#3a1f1c,#0F2532)}
+.fc-num{
+  font-size:clamp(30px,3.6vw,40px);font-weight:700;line-height:1;
+  margin-bottom:var(--sp-1);font-variant-numeric:tabular-nums;
+}
+.fc-gold .fc-num{color:var(--gold-deep)}
+.fc-blue .fc-num{color:var(--step-1)}
+.fc-red .fc-num{color:var(--risk)}
+.fc-title{
+  font-size:16px;font-weight:700;color:var(--cover-main);
+  text-align:center;margin-bottom:var(--sp-2);line-height:1.35;
+}
+.fc-img{
+  width:100%;height:200px;object-fit:cover;border-radius:var(--radius-sm);
+  margin-bottom:var(--sp-2);
+}
+.fc-badge{
+  display:inline-block;font-size:11px;padding:3px 12px;
+  border-radius:10px;letter-spacing:.3px;margin-bottom:var(--sp-2);
+}
+.badge-opinion{background:rgba(26,58,74,.08);color:var(--ink-sub)}
+.badge-empirical{background:rgba(58,107,138,.14);color:var(--step-1)}
+.badge-reviewed{background:rgba(212,160,23,.16);color:var(--gold-deep)}
+.fc-hint{font-size:12px;color:var(--ink-meta);letter-spacing:.3px}
+.fc-back-title{
+  font-size:17px;font-weight:700;color:var(--gold);
+  margin-bottom:var(--sp-3);padding-bottom:var(--sp-2);
+  border-bottom:1px solid rgba(244,201,93,.25);
+}
+.fc-body{
+  font-size:16px;line-height:1.85;color:rgba(255,255,255,.88);
+  margin-bottom:var(--sp-3);text-align:justify;
+}
+.fc-body .risk{color:#F4A89E;font-weight:600}
+.fc-body .hl{color:var(--gold);font-weight:600}
+.fc-source{
+  font-size:11.5px;color:rgba(255,255,255,.55);line-height:1.7;
+  margin-top:auto;padding-top:var(--sp-3);
+  border-top:1px dashed rgba(255,255,255,.15);
+}
+.fc-source a{color:rgba(244,201,93,.7);text-decoration:none;border-bottom:1px dotted currentColor}
+.fc-source a:hover{color:var(--gold)}
+@media (max-width:1100px){
+  .flip-cards{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  .flip-card-inner{transition:none}
+}
+
+/* ========== 1.5 时间轴：蜿蜒路径 + 应用图标 ========== */
+.timeline-wrap{
+  margin:var(--sp-6) 0;padding:var(--sp-5) var(--sp-4) var(--sp-3);
+  background:#fff;border:var(--hair);border-radius:var(--radius);
+  box-shadow:var(--shadow-1);
+  overflow-x:auto;scrollbar-color:rgba(26,58,74,.28) transparent;
+}
+.timeline{
+  position:relative;height:300px;min-width:800px;margin:0 var(--sp-1);
+}
+/* 路径层：viewBox 横向非等比拉伸，描边宽度用 non-scaling-stroke 保持恒定 */
+.timeline .tl-path{
+  position:absolute;inset:0;width:100%;height:100%;
+  overflow:visible;pointer-events:none;
+}
+.timeline .tl-path path{
+  fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+/* 路径随区块入场自左向右生长（pathLength 归一化，不依赖真实路径长度） */
+.reveal.timeline-wrap .tl-path path{
+  stroke-dasharray:1000;stroke-dashoffset:1000;
+  transition:stroke-dashoffset 1.5s var(--ease-out) .15s;
+}
+.reveal.timeline-wrap.in .tl-path path{stroke-dashoffset:0}
+/* 节点：零尺寸定位点，图标与标签相对该点摆放 */
+.timeline .tl-item{position:absolute;width:0;height:0;z-index:2}
+.timeline .tl-tile{
+  position:absolute;left:-23px;top:-23px;width:46px;height:46px;
+  border-radius:13px;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 1px rgba(26,58,74,.06), 0 6px 16px -6px rgba(15,37,50,.28);
+  transition:transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+}
+.timeline .tl-tile img{
+  width:32px;height:32px;border-radius:8px;object-fit:contain;display:block;
+}
+.timeline .tl-tile.risk{
+  background:var(--risk);
+  box-shadow:0 0 0 1px rgba(184,74,62,.28), 0 6px 16px -6px rgba(184,74,62,.5);
+}
+.timeline .tl-tag{
+  position:absolute;width:128px;left:-64px;text-align:center;
+  font-size:11px;line-height:1.5;color:var(--ink-meta);
+}
+.timeline .tl-tag.up{bottom:34px}
+.timeline .tl-tag.down{top:34px}
+.timeline .tl-tag .yr{
+  display:block;font-size:12px;font-weight:700;color:var(--cover-main);
+  font-variant-numeric:tabular-nums;
+}
+.timeline .tl-tag.risk{color:var(--risk)}
+.timeline .tl-tag.risk .yr{color:var(--risk)}
+@media (prefers-reduced-motion:reduce){
+  .reveal.timeline-wrap .tl-path path{stroke-dasharray:none;stroke-dashoffset:0;transition:none}
+  .timeline .tl-tile{transition:none}
+}
+
+/* ========== 1.5c 载体更替·三条曲线（合并总图） ========== */
+.carrier-canvas{width:100%;height:440px}
+
+/* ========== 1.5 章末转折 + 双叙事开关 ========== */
+.turn-end{
+  margin:var(--sp-8) 0;padding:var(--sp-7) var(--sp-6);
+  background:linear-gradient(135deg, var(--cover-main) 0%, var(--cover-deep) 100%);
+  color:#fff;border-radius:var(--radius);text-align:center;
+  box-shadow:var(--shadow-2);
+}
+.turn-end .te-label{
+  font-size:12px;letter-spacing:.4em;text-indent:.4em;color:var(--gold);margin-bottom:var(--sp-4);
+}
+.turn-end p{
+  font-size:16px;line-height:1.95;color:#fff;margin-bottom:var(--sp-5);text-align:justify;
+}
+.turn-end p .hl{color:var(--gold);font-weight:600}
+.turn-end p .risk{color:var(--risk);font-weight:600}
+
+/* ========== 章末跳转（统一过渡卡片） ========== */
+.next-chapter{
+  display:block;width:100%;padding:90px 8%;text-align:center;
+  background:var(--cover-deep);color:#fff;text-decoration:none;
+  position:relative;
+}
+/* 顶部居中金色细线 */
+.next-chapter::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:80px;height:2px;background:var(--gold);
+}
+/* 半开放金色虚线角框 */
+.nc-frame{
+  position:relative;max-width:680px;margin:0 auto;padding:40px 44px 36px;
+}
+.nc-frame::before,.nc-frame::after{
+  content:"";position:absolute;width:28px;height:28px;
+  border:1px dashed var(--gold);opacity:.5;
+}
+.nc-frame::before{top:0;left:0;border-right:none;border-bottom:none}
+.nc-frame::after{bottom:0;right:0;border-left:none;border-top:none}
+/* 章末余韵 */
+.next-chapter .echo{
+  font-size:18px;line-height:1.8;color:#E8E8E8;
+  margin-bottom:28px;letter-spacing:.5px;
+}
+.next-chapter .echo .hl{color:var(--gold);font-weight:600}
+.next-chapter .label{font-size:13px;letter-spacing:.5em;color:rgba(255,255,255,.45)}
+.next-chapter .title{
+  font-size:clamp(24px,2.6vw,32px);font-weight:700;
+  margin:16px 0 10px;color:#fff;letter-spacing:.03em;
+}
+.next-chapter .hook{color:rgba(255,255,255,.55);transition:color .3s;font-size:15px}
+.next-chapter:hover .hook{color:var(--gold)}
+.next-chapter .arrow{
+  display:inline-block;font-size:28px;margin-top:24px;color:var(--gold);
+  transition:transform .3s;
+}
+.next-chapter:hover .arrow{transform:translateY(4px)}
+.next-chapter.is-inview .arrow{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(7px)}}
+
+/* ========== 进场动画：一个作者化的时刻，而不是每块同一段入场 ========== */
+.reveal{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .7s var(--ease-out), transform .7s var(--ease-out), filter .7s var(--ease-out);
+}
+.reveal.in{opacity:1;transform:none;filter:none}
+/* 分组交错：同一组内元素依次推进 */
+.country-cards .reveal:nth-child(2),
+.gap-trio .reveal:nth-child(2){transition-delay:.09s}
+.country-cards .reveal:nth-child(3),
+.gap-trio .reveal:nth-child(3){transition-delay:.18s}
+.country-cards .reveal:nth-child(4){transition-delay:.27s}
+/* 图表与配图：从模糊到清晰，而非同一段位移 */
+.reveal.chart-block,.reveal.news-figure,
+.reveal.balance-wrap,.reveal.timeline-wrap{
+  transform:translateY(16px) scale(.985);filter:blur(6px);
+}
+.reveal.chart-block.in,.reveal.news-figure.in,
+.reveal.balance-wrap.in,.reveal.timeline-wrap.in{
+  transform:none;filter:blur(0);
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;filter:none;transition:none}
+  .country-cards .reveal,.loss-list .reveal{transition-delay:0s}
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ========== 响应式 ========== */
+@media (max-width:1250px){
+  .container{width:92%}
+  .country-cards{grid-template-columns:repeat(2,1fr)}
+  .loss-list{grid-template-columns:1fr}
+  /* 栏宽变宽、右侧留白变窄，机器人收小并减少外探 */
+  .cmp-bot{width:clamp(96px,12vw,148px);transform:translate(14%,16%)}
+}
+@media (max-width:680px){
+  .country-cards{grid-template-columns:1fr}
+  .cmp-table{font-size:12px}
+  .cmp-table th,.cmp-table td{padding:var(--sp-3) var(--sp-2)}
+  /* 窄屏没有外沿可用，机器人改为静态居中排在表格下方 */
+  .cmp-bot{position:static;display:block;width:148px;margin:14px auto 0;transform:none}
+  .section{padding:var(--sp-8) 0}
+}
+
+/* ========== 1.1 文案·配图 左右分栏+图注下沉 ========== */
+.lead-split{
+  display:grid;grid-template-columns:1.7fr 1fr;
+  gap:var(--sp-6);align-items:stretch;
+  margin:var(--sp-6) 0 var(--sp-3);
+}
+.lead-text{display:flex;flex-direction:column;justify-content:flex-start;min-height:210px}
+.lead-figure{
+  position:relative;margin:0;min-height:0;
+}
+.lead-figure .fig-tag{
+  position:absolute;top:-11px;left:14px;
+  background:var(--cover-main);color:var(--gold);
+  font-size:10.5px;letter-spacing:.22em;padding:3px 11px;
+  border-radius:3px;z-index:2;font-weight:600;
+}
+.lead-figure .img-box{
+  height:100%;min-height:0;overflow:hidden;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--divider);
+  box-shadow:var(--shadow-1);
+}
+.lead-figure img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+  transition:transform .4s var(--ease-out);
+}
+.lead-figure:hover img{transform:scale(1.03)}
+.lead-caption{
+  font-size:var(--fs-cap);color:var(--ink-meta);
+  line-height:1.7;margin:var(--sp-3) 0 var(--sp-5);text-align:left;
+}
+/* 章首文案左侧装饰动图（已裁去透明留白，图形本身占满画框；图文混排，略向左溢出栏位） */
+.lead-mark{float:left;width:200px;height:auto;margin:-2px var(--sp-3) var(--sp-2) -36px}
+@media (max-width:720px){
+  .lead-split{grid-template-columns:1fr;gap:var(--sp-4)}
+  .lead-figure .img-box{max-height:280px;height:280px}
+  .lead-mark{width:150px;margin-left:-14px}
+}
+
+/* ========== 新闻配图 ========== */
+.news-figure{margin:var(--sp-6) auto var(--sp-5);text-align:center}
+.news-figure img{
+  display:block;width:100%;height:auto;border-radius:var(--radius-sm);
+  box-shadow:var(--shadow-1);background:#E8ECEB;
+}
+.news-figure figcaption{
+  font-size:var(--fs-cap);color:var(--ink-meta);line-height:1.75;
+  margin-top:var(--sp-3);text-align:center;letter-spacing:.2px;
+}
+.news-figure.w50{width:50%}
+.news-figure.w60{width:60%}
+.news-figure.w70{width:70%}
+@media (max-width:820px){
+  .news-figure.w50,.news-figure.w60,.news-figure.w70{width:100%}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部全局导航 ============ -->
+<nav class="site-nav" aria-label="章节导航">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="00-intro.html">永远在线的"搭子"</a>
+    <div class="site-nav-links">
+      <a href="00-intro.html">序言</a>
+      <a href="01-online.html" class="active" aria-current="page">01 搭子</a>
+      <a href="02-cocoon.html">02 茧房</a>
+      <a href="03-wound.html">03 伤口</a>
+      <a href="04-breaking.html">04 破茧</a>
+    </div>
+  </div>
+  <div class="site-nav-progress"><span class="site-nav-progress-fill" id="siteProgress" style="width: 0%;"></span></div>
+</nav>
+
+<!-- ============ 封面：少年与机器人·插画底图 ============ -->
+<section class="cover" id="ch1">
+  <!-- 封面动效：小机器人头旁的「我在」气泡（装饰层，按底图坐标定位） -->
+  <div class="cover-fx" aria-hidden="true">
+    <div class="cover-fx-stage">
+      <div class="sayhi">
+        <span class="sayhi-bubble">我在<i class="sayhi-tail"></i></span>
+      </div>
+    </div>
+  </div>
+  <p class="cover-num" aria-hidden="true">01</p>
+  <div class="cover-text">
+    <h1 class="sr-only">搭子 · 永远在线</h1>
+    <p class="cover-eyebrow">PART 01</p>
+    <p class="sub">永远在线的"搭子"，<br>随叫随到，从不疲倦；<br>可越聊，为什么越孤独？</p>
+  </div>
+
+  <div class="scroll-cue">SCROLL</div>
+</section>
+
+<!-- ============ 章首开场：从真人搭子到新的搭子（左文右图） ============ -->
+<section class="section" id="s1-lead" style="padding-bottom:var(--sp-6)">
+  <div class="container">
+    <h2 class="ch-title reveal in"><span class="num">01</span>搭子 · 永远在线</h2>
+    <div class="lead-split reveal in">
+      <div class="lead-text" style="justify-content:center">
+        <div class="lead-text-body">
+          <p class="body" style="margin-bottom:var(--sp-3)"><img class="lead-mark" src="../../assets/images/illustrations/ch1-lead-planet-cut.webp" alt="两个少年并肩站在星球上的插画动图">"搭子"原本指向一种轻量的真实连接：饭搭子、球搭子、旅行搭子，是现实里恰好同路的人。</p>
+          <p class="body" style="margin-bottom:var(--sp-3)">但中国青少年研究中心对全国 8563 名中小学生的调查显示，越来越多青少年正在把这一角色交给算法。</p>
+          <p class="body" style="margin-bottom:0">当"搭子"从真人变成算法，问题的关键就不再是"它能不能陪"，而是"它在用什么方式陪，以及这种陪伴把青少年带向了哪里"。</p>
+        </div>
+      </div>
+      <figure class="lead-figure">
+        <div class="img-box">
+          <img src="../../assets/images/news/fig01-fuzozo-xinhua.webp" alt="一名儿童在深圳全球创新旗舰店内与AI玩具“芙崽Fuzozo”互动" loading="lazy">
+        </div>
+      </figure>
+    </div>
+    <p class="lead-caption reveal in">2025年12月21日，深圳全球创新旗舰店inno100，一名儿童与AI玩具"芙崽Fuzozo"互动。新华社记者 毛思倩 摄；刊于新华网《民生观察丨AI玩具带娃透视》（2026-03-23）</p>
+  </div>
+</section>
+
+<!-- ============ 1.1 什么是 AI 情感陪伴 ============ -->
+<section class="section" id="s1-1" style="padding-top:var(--sp-6)">
+  <div class="container">
+    <h2 class="ch-title reveal in"><span class="num">1.1</span>什么是 AI 情感陪伴</h2>
+
+    <p class="body reveal in">AI 情感陪伴，官方表述是"<span class="hl">拟人化互动服务</span>"。它和工具型 AI 的分野不在于技术高低，而在于产品目标：智能客服要解决你的问题，情感陪伴要维持你对这段关系的投入。它通过模拟人格、语气和持续的回应，制造一种"被稳稳接住"的体验。<br>但这种体验的本质是算法对用户情感的顺应性反射。真人的陪伴之所以有意义，恰恰因为它不稳定、有摩擦、需要协商；而 AI 陪伴的"温柔"，是去除了所有这些"麻烦"之后的人工制品。它提供的不是友谊，而是一种没有风险的陪伴模拟。</p>
+    
+
+    <div class="cmp-wrap reveal in">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>对比维度</th>
+            <th>AI 情感陪伴</th>
+            <th>真人朋友</th>
+            <th>助手型 AI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>在线时间</th><td class="highlight">24 小时随时在线</td><td>有作息、会离开</td><td>24 小时在线，但为任务而生</td></tr>
+          <tr><th>回应方式</th><td class="highlight">无条件顺着说</td><td>会分歧、会吵架</td><td>客观但模式化</td></tr>
+          <tr><th>关系性质</th><td class="highlight">以"陪伴"为卖点的付费关系</td><td>平等真实的关系</td><td>工具关系</td></tr>
+          <tr><th>退出成本</th><td class="highlight">厂商可随时改动或关闭</td><td>需要经营与维护</td><td>随时可弃</td></tr>
+          <tr><th>成长价值</th><td>短期情绪缓冲，长期可能削弱社交能力</td><td class="highlight">提供真实反馈与成长</td><td>提升效率，需自行鉴别</td></tr>
+        </tbody>
+      </table>
+      <img class="cmp-bot" src="../../assets/images/illustrations/ch1-cmp-robot-cut.webp" alt="一只挥手打招呼的机器人动图" width="230" height="265" loading="lazy">
+    </div>
+
+    <p class="source-line reveal in" style="margin-top:-6px">〔说明：下表为本文的归纳对比，非实证研究结论，"回应方式""成长价值"两行属编辑部归纳。〕</p>
+  </div>
+</section>
+
+<!-- ============ 1.2 规模与增速：AI 已经进场 ============ -->
+<section class="section" id="s1-2" style="background:rgba(26,58,74,.03)">
+  <div class="container">
+    <h2 class="ch-title reveal in"><span class="num">1.2</span>规模与增速：AI 已经进场</h2>
+
+    <p class="body reveal in">当“搭子”从真人变成算法，这不再是个别孩子的秘密。把镜头从那个深夜向 AI 倾诉的少年身上拉远——<span class="num">78.5%</span> 的未成年网民已在使用 AI，全国生成式 AI 用户达 <span class="num">6.02 亿</span>，其中近三成（约 <span class="num">1.59 亿</span>）是 19 岁以下青少年，占比全年龄段最高。口径提示：78.5%（蓝皮书，未成年网民）与序言的 61.7%（中小学生）来自不同调查，不作相互递推。</p>
+
+    <p class="body reveal in">需求侧只是冰山一角，供给侧早已狂热。2025 年中国 AI 情感陪伴市场规模达 <span class="num">38.7 亿元</span>，同比暴增 <span class="num risk">219%</span>；Glow 上线四个月用户近 500 万，星野与 Talkie 合并月活超 <span class="num">2000 万</span>。<span class="hl">资本与产品正疯狂“造”AI 伴侣，而不只是被动“用”它。</span></p>
+
+    <p class="body reveal in">数字之外，更要看速度。CNNIC 数据显示，这条曲线上最陡的一段出现在 2025 年上半年：从 2024 年 12 月的 <span class="num">2.49 亿</span> 到 2025 年 6 月的 <span class="num">5.15 亿</span>，仅半年净增 <span class="num">2.66 亿</span> 人——<span class="hl">半年里翻了一番</span>。</p>
+
+    <!-- V5-03 四点时序折线 -->
+    <div class="chart-block reveal in">
+      <div class="chart-title">生成式 AI 用户规模 · 四点时序</div>
+      <div class="chart-sub">2024.6 → 2025.12｜标注：2025 上半年半年翻番；年度增幅 141.7%</div>
+      <div class="chart-canvas" id="chart-v5-03"></div>
+      <div class="source-line">〔来源：CNNIC《生成式人工智能应用发展报告》2024／2025＋《统计报告》第 56／57 次｜口径：全国人口／生成式 AI 产品用户规模｜时间：2024.6—2025.12〕<br>数据来源：<a href="https://www.cnnic.net.cn/n4/2024/1216/c88-11196.html" target="_blank" rel="noopener">CNNIC 2024 报告</a>；<a href="https://www2.cnnic.cn/n4/2026/0209/c326-11544.html" target="_blank" rel="noopener">第 57 次统计报告</a>；占比：<a href="http://edu.people.com.cn/n1/2026/0817/c1006-40780711.html" target="_blank" rel="noopener">人民日报</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1.3 全球图景：四个国家的少年 ============ -->
+<section class="section" id="s1-3">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">1.3</span>全球图景：四个国家的少年</h2>
+    <p class="body reveal">这不是中国独有的故事，越过国界线。美国、韩国、日本——三个互联网生态截然不同的国家，少年们几乎在同一窗口期转向了 AI。四国统计口径不一，数据不能直接比高低，但放在一起看，最值得注意的不是渗透率谁高谁低，而是<span class="hl">他们走向 AI 的方式，走了四条完全不同的路</span>：</p>
+
+    <p class="body reveal path-line">韩国是渗透率顶格后的试验场——<span class="num">94.4%</span> 的青少年用过 AI 聊天，其中 <span class="num">75.3%</span> 曾把 AI 的话当真，认真考虑过照做，甚至付诸行动。</p>
+
+    <p class="body reveal path-line">美国是日常化下沉——越严肃的事，越有人先找 AI。<span class="num">33%</span> 的美国青少年在严肃话题上，首选倾诉对象是 AI 而非真人。</p>
+
+    <p class="body reveal path-line">日本是角色经济驱动——一个虚拟角色就能撑起一门生意，情感消费被封装成产品。</p>
+
+    <p class="body reveal path-line">中国则是规模最大、也最低龄的一站——数千万未成年人，从小学阶段就开始接触 AI 陪伴。</p>
+
+    <p class="body reveal">入口各不相同，出口却可能指向同一个地方：一代人正在把情感寄托，从真人身上批量迁移到算法身上。</p>
+
+    <!-- 3D 地球仪：四国少年的 AI 图景 -->
+    <div class="globe-stage reveal" id="globeStage" aria-label="四国少年 AI 使用情况交互地图，可点击国家切换">
+      <div class="globe-canvas" id="globeChart" role="img" aria-label="显示中国、韩国、日本、美国四国位置的 3D 地球仪"></div>
+      <div class="globe-hint">
+        <div class="gh-title">环球图景 · 四国少年的 AI 图景</div>
+        <div>点击右上方圆点或国家标记，切换四个国家的故事</div>
+      </div>
+      <div class="globe-nav">
+        <div class="globe-dots" id="globeDots">
+          <button class="globe-dot active" data-idx="0" aria-label="中国">中</button>
+          <button class="globe-dot" data-idx="1" aria-label="韩国">韩</button>
+          <button class="globe-dot" data-idx="2" aria-label="日本">日</button>
+          <button class="globe-dot" data-idx="3" aria-label="美国">美</button>
+        </div>
+        <div class="globe-ctrl">
+          <button class="globe-btn" id="globePrev" aria-label="上一个国家">‹</button>
+          <button class="globe-btn" id="globePlay" aria-label="自动播放">▶</button>
+          <button class="globe-btn" id="globeNext" aria-label="下一个国家">›</button>
+        </div>
+      </div>
+      <div class="globe-story">
+        <div class="globe-story-card" id="globeStoryCard"></div>
+      </div>
+      <div class="globe-zoom">
+        <span class="gz-plus" title="放大">＋</span>
+        <input type="range" id="globeZoom" min="60" max="800" value="150" orient="vertical" aria-label="缩放地球仪">
+        <span class="gz-minus" title="缩小">－</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 1.4 为什么是这一代少年：三种解释 ============ -->
+<section class="section" id="s1-4" style="background:rgba(26,58,74,.03)">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">1.4</span>AI原住民：为什么是这一代</h2>
+
+    <p class="body reveal">　　四国数据（美国 <span class="num">72%</span>、韩国 <span class="num">94.4%</span>、中国 <span class="num">61.7%</span>）拼出同一幅图景：这不是地域特例，而是一代人的共同处境。镜头停下，追问随之而来：为什么偏偏是这一代，早早把情感寄托交予算法？伴随生成式 AI 长大的"<span class="hl">第一代 AI 原住民</span>"，其处境有三种解释——从"现实关系变贵"到"线下社交让渡"，再到"长期退缩"。视角各异，看透这代人的孤独。</p>
+
+    <div class="flip-hint reveal">
+      <span class="fh-inner"><span class="fh-icon">↻</span>点击卡片翻转查看</span>
+    </div>
+
+    <!-- 三种解释 · 翻转卡片 -->
+    <div class="flip-cards">
+      <!-- 卡片 1 -->
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="解释一：现实关系变贵了，点击翻转">
+        <div class="flip-card-inner">
+          <div class="flip-card-front fc-gold">
+            <div class="fc-num">01</div>
+            <h3 class="fc-title">现实关系，变贵了</h3>
+            <img src="../../assets/images/illustrations/ch1-sec4-exp1.jpg" alt="现实关系成本与AI陪伴的天平示意" class="fc-img" loading="lazy">
+            <span class="fc-badge badge-opinion">评论观点</span>
+            <div class="fc-hint">点击翻转查看 ↻</div>
+          </div>
+          <div class="flip-card-back fc-gold-back">
+            <h3 class="fc-back-title">现实关系，变贵了</h3>
+            <p class="fc-body">中国青年报 2026 年 7 月的评论《从"无他者的亲密"看 AI 情感陪伴的限度》把原因说得很直接：青年转向 AI，"根源在于现实亲密关系日益呈现<span class="risk">高成本、高风险</span>的特征——学业与职业竞争挤压了交往时间，社会流动加剧了人际关系的<span class="risk">原子化</span>，而亲密关系中的误解、拒绝与伤害，又构成了难以回避的情感代价"。相较之下，AI 更低成本、更低风险，也更可控。这是评论观点，不是实证结论——但它描述的那种原子化，许多人认得。</p>
+            <p class="fc-source">来源：中国青年报（2026-07-20）<a href="https://zqb.cyol.com/pc/content/202607/20/content_428368.html" target="_blank" rel="noopener">zqb.cyol.com</a><br>理论框架：Eva Illouz《Cold Intimacies》(Polity, 2007)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 2 -->
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="解释二：互依的人更容易把线下让出去，点击翻转">
+        <div class="flip-card-inner">
+          <div class="flip-card-front fc-blue">
+            <div class="fc-num">02</div>
+            <h3 class="fc-title">互依的人，更容易把线下让出去</h3>
+            <img src="../../assets/images/illustrations/ch1-sec4-exp2.jpg" alt="少年在人群与手机之间选择" class="fc-img" loading="lazy">
+            <span class="fc-badge badge-empirical">实证 · 相关</span>
+            <div class="fc-hint">点击翻转查看 ↻</div>
+          </div>
+          <div class="flip-card-back fc-blue-back">
+            <h3 class="fc-back-title">互依的人，更容易把线下让出去</h3>
+            <p class="fc-body">2026 年一项针对中国 843 名 18—29 岁青年的心理学研究（《Frontiers in Psychology》）发现：AI 陪伴与孤独之间，主要通过使用者<span class="hl">自述的"线下社交让位"</span>传导；而这条链条<span class="risk">只在"关系性互依自我建构"程度中高的人身上显著</span>——互依程度低的人身上并不成立。研究者也提醒：这是初步的、相关性结果，"线下社交让位"来自受访者的自述归因。把关系看得比独立更重，是一种在集体主义文化中更常见的自我建构。这或许是部分少年更早转向 AI 的一个实证线索。</p>
+            <p class="fc-source">来源：Xiao, T. (2026) Frontiers in Psychology 17, n=843<br><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1933530/full" target="_blank" rel="noopener">frontiersin.org</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 3 -->
+      <div class="flip-card reveal" tabindex="0" role="button" aria-label="解释三：长期退缩的年轻人，点击翻转">
+        <div class="flip-card-inner">
+          <div class="flip-card-front fc-red">
+            <div class="fc-num">03</div>
+            <h3 class="fc-title">长期退缩的年轻人</h3>
+            <img src="../../assets/images/illustrations/ch1-sec4-exp3.jpg" alt="半掩的门后蜷缩的人影，象征社交退缩" class="fc-img" loading="lazy">
+            <span class="fc-badge badge-reviewed">同行评议</span>
+            <div class="fc-hint">点击翻转查看 ↻</div>
+          </div>
+          <div class="flip-card-back fc-red-back">
+            <h3 class="fc-back-title">长期退缩的年轻人：一个跨区域现象</h3>
+            <p class="fc-body">医学与社会工作文献里，这类长期退缩在家的年轻人，在不同地区有各自的名称：日本的"<span class="risk">ひきこもり</span>"（蛰居）、中国内地与香港、新加坡的"<span class="risk">hidden youth</span>"、韩国的"<span class="risk">socially withdrawn youth</span>"，欧美也有类似的"social withdrawal"研究。这不是某一国的青春期叛逆，而是一种在多地都被观察到的社会现象。</p>
+            <p class="fc-body">在韩国，"三抛／五抛"（2011 年《京乡新闻》造词，指年轻人放弃恋爱、结婚、生育等）；在日本，"推し文化"（为虚拟角色投入情感与金钱）——这些文化现象常被拿来解释年轻人的退缩倾向，但它们是文化背景，不是量化依据，这里只作背景保留。</p>
+            <p class="fc-source">来源：Wong, J. C. M. et al. (2019) Frontiers in Psychiatry 10:512<br><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6663978" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-title reveal">另一种说法：缺同伴、缺游戏、缺父亲</h3>
+    <p class="body reveal">北京中科普心理健康促进中心常务副主任唐义诚，把沉迷 AI 聊天的孩子归因为"<span class="risk">三种缺失</span>"——缺同伴、缺游戏、缺父亲。但根子只有一个：现实里，没有人在听。<span class="tag-caveat">观点来源</span></p>
+
+    <p class="body reveal">同伴疏离、嬉戏被压、父职缺席，这些空白本该由真实关系填补，却被算法以"永远在线"的温柔接管。寄情虚拟不是新鲜事，但 AI 的"被看见"是此前的网游、动漫都给不了的。也正因如此，它更难戒断。</p>
+
+    <div class="gap-trio">
+      <!-- 共享渐变定义 -->
+      <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+        <defs>
+          <linearGradient id="gapGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#C7574A"></stop>
+            <stop offset="100%" stop-color="#9E3A30"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- 缺同伴 -->
+      <div class="gap-circle reveal" tabindex="0" aria-label="缺同伴">
+        <svg class="gap-shape" viewBox="0 0 280 280" aria-hidden="true">
+          <path class="gap-solid" fill="url(#gapGrad)" d="M 217.1 48.1 A 120 120 0 1 1 62.9 48.1 L 140 140 Z"></path>
+          <path class="gap-ghost" d="M 62.9 48.1 A 120 120 0 0 1 217.1 48.1"></path>
+          <path class="gap-ghost" d="M 62.9 48.1 L 140 140 L 217.1 48.1"></path>
+        </svg>
+        <span class="gap-label">缺同伴</span>
+        <span class="gap-watermark">同</span>
+        <div class="gap-body"><p>独生子女政策遗留的"独自长大"惯性，加上城市化让邻里同伴网络稀薄，少年在现实中"找不到人说话"。</p></div>
+      </div>
+
+      <!-- 缺游戏 -->
+      <div class="gap-circle reveal" tabindex="0" aria-label="缺游戏">
+        <svg class="gap-shape" viewBox="0 0 280 280" aria-hidden="true">
+          <path class="gap-solid" fill="url(#gapGrad)" d="M 217.1 48.1 A 120 120 0 1 1 62.9 48.1 L 140 140 Z"></path>
+          <path class="gap-ghost r2" d="M 62.9 48.1 A 120 120 0 0 1 217.1 48.1"></path>
+          <path class="gap-ghost r2" d="M 62.9 48.1 L 140 140 L 217.1 48.1"></path>
+        </svg>
+        <span class="gap-label">缺游戏</span>
+        <span class="gap-watermark">游</span>
+        <div class="gap-body"><p>学业压力与屏幕化娱乐挤压了线下自由游戏空间，"无所事事一起待着"的同伴时光在减少。</p></div>
+      </div>
+
+      <!-- 缺父亲 -->
+      <div class="gap-circle reveal" tabindex="0" aria-label="缺父亲">
+        <svg class="gap-shape" viewBox="0 0 280 280" aria-hidden="true">
+          <path class="gap-solid" fill="url(#gapGrad)" d="M 217.1 48.1 A 120 120 0 1 1 62.9 48.1 L 140 140 Z"></path>
+          <path class="gap-ghost r3" d="M 62.9 48.1 A 120 120 0 0 1 217.1 48.1"></path>
+          <path class="gap-ghost r3" d="M 62.9 48.1 L 140 140 L 217.1 48.1"></path>
+        </svg>
+        <span class="gap-label">缺父亲</span>
+        <span class="gap-watermark">父</span>
+        <div class="gap-body"><p>父亲在家庭教育中常缺席或仅承担"管教"角色，缺少日常情感陪伴，留出的空白被 AI 填补。</p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 1.5 历史镜像：搭子不是第一次来 ============ -->
+<section class="section" id="s1-5">
+  <div class="container">
+    <h2 class="ch-title reveal"><span class="num">1.5</span>历史镜像：搭子不是第一次来</h2>
+
+    <p class="body reveal">镜头最后一次拉远——这次拉开的是时间。每一代少年都曾把情感寄托在"永远在线"的载体上——笔友、电视、游戏、QQ、短视频。AI 的不同在于：<span class="hl">它是第一个"会回话"的载体，而且回得越来越像人</span>。</p>
+
+    <p class="body reveal">2014 年 5 月，微软（亚洲）互联网工程院发布小冰——第一个以"情感连接"为研发目标的 AI；2017 年 Replika 上线，主打"会倾听的虚拟朋友"；2021 年 Character.AI 上线，"扮演"风靡青少年；2022 年 10 月，MiniMax 在国内上线 Glow，四个月近 500 万用户，2023 年 3 月因合规下架；2022 年 11 月 ChatGPT 发布，"助手"被少年当成"树洞"；2023 年 6 月 Talkie 上线海外，9 月国内版"星野"上线；2025 年 10 月 29 日，Character.AI 宣布移除 18 岁以下用户的开放式聊天功能。</p>
+
+    <!-- 产品演进时间轴：蜿蜒路径 + 应用图标
+         图标取自各应用官方上架商店/官网，仅用于产品指认；Glow 以其母公司 MiniMax 标识指代 -->
+    <div class="timeline-wrap reveal">
+      <div class="timeline">
+        <svg class="tl-path" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="tlGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#3A6B8A"/>
+              <stop offset="45%" stop-color="#F4C95D"/>
+              <stop offset="100%" stop-color="#B84A3E"/>
+            </linearGradient>
+          </defs>
+          <path pathLength="1000" d="M 70 100 C 135 100 135 200 200 200 C 270 200 270 100 340 100 C 405 100 405 200 470 200 C 515 200 525 100 570 100 C 633 100 647 200 710 200 C 795 200 815 100 900 100" stroke="url(#tlGrad)"/>
+        </svg>
+
+        <!-- 节点坐标与上方 viewBox 一致：x = 百分比×10，y = 峰值 100 / 谷值 200 -->
+        <div class="tl-item" style="left:7%;top:100px">
+          <div class="tl-tile"><img src="../../assets/images/app-icons/xiaoice.png" alt="小冰 Xiaoice 图标"></div>
+          <div class="tl-tag up"><span class="yr">2014.5</span>小冰发布</div>
+        </div>
+
+        <div class="tl-item" style="left:20%;top:200px">
+          <div class="tl-tile"><img src="../../assets/images/app-icons/replika.png" alt="Replika 图标"></div>
+          <div class="tl-tag down"><span class="yr">2017</span>Replika 上线</div>
+        </div>
+
+        <div class="tl-item" style="left:34%;top:100px">
+          <div class="tl-tile"><img src="../../assets/images/app-icons/characterai.png" alt="Character.AI 图标"></div>
+          <div class="tl-tag up"><span class="yr">2021</span>Character.AI 上线</div>
+        </div>
+
+        <div class="tl-item" style="left:47%;top:200px">
+          <div class="tl-tile"><img src="../../assets/images/app-icons/minimax.svg" alt="Glow（MiniMax）图标"></div>
+          <div class="tl-tag down"><span class="yr">2022.10</span>Glow 上线（国内）</div>
+        </div>
+
+        <div class="tl-item" style="left:57%;top:100px">
+          <div class="tl-tile"><img src="../../assets/images/app-icons/chatgpt.svg" alt="ChatGPT 图标"></div>
+          <div class="tl-tag up"><span class="yr">2022.11</span>ChatGPT 发布</div>
+        </div>
+
+        <div class="tl-item" style="left:71%;top:200px">
+          <div class="tl-tile"><img src="../../assets/images/app-icons/talkie.png" alt="Talkie·星野 图标"></div>
+          <div class="tl-tag down"><span class="yr">2023.6—9</span>Talkie · 星野</div>
+        </div>
+
+        <div class="tl-item" style="left:90%;top:100px">
+          <div class="tl-tile risk"><img src="../../assets/images/app-icons/ban.svg" alt="禁令图标"></div>
+          <div class="tl-tag risk up"><span class="yr">2025.10.29</span>Character.AI 禁 18 岁以下</div>
+        </div>
+      </div>
+      <div class="source-line">数据来源：小冰：<a href="https://news.youth.cn/kj/201612/t20161201_8903374.htm" target="_blank" rel="noopener">中国青年网</a>；Glow/星野/Talkie：<a href="https://news.qq.com/rain/a/20250613A0895500" target="_blank" rel="noopener">腾讯新闻</a>；Character.AI 禁令：<a href="https://apnews.com/article/characterai-kids-minors-18-ban-chatbot-5d203e9f22c62c153936ccc776a0ed09" target="_blank" rel="noopener">美联社</a></div>
+    </div>
+
+    <!-- 1.5c 载体更替：三条曲线合并为一张总图 -->
+    <h3 class="sec-title reveal"><span class="idx">1.5c</span>载体更替 · 三条曲线</h3>
+    <p class="body reveal">把镜头拉到更长的时间尺度：未成年网民规模、互联网普及率、短视频渗透率——<span class="hl">基础设施已经见顶，增长转移到了新的载体上</span>。三条曲线来自不同调查序列，各自连线、互不混用。</p>
+
+    <div class="chart-block reveal">
+      <div class="chart-title">三条曲线：基础设施见顶，载体仍在爬坡</div>
+      <div class="chart-sub">未成年网民规模（亿人，左轴）／未成年人互联网普及率（%，右轴）／常看短视频的未成年比例（%，右轴）｜三序列来自不同调查，各自连线、互不混用</div>
+      <div class="chart-canvas carrier-canvas" id="carrier-chart"></div>
+      <div class="source-line">〔来源：CNNIC 未成年人互联网使用系列报告（S01／S04／S05／S06）｜口径：未成年网民；2020 年值系 2021 年报告回溯引用｜时间：2018—2025〕</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 章末跳转（统一过渡卡片） ============ -->
+<a class="next-chapter" href="02-cocoon.html" data-next="2" id="nextJump">
+  <div class="nc-frame">
+    <p class="echo"><span class="hl">21.5%</span> 的少年只想和 AI 聊天——是找到了新搭子，还是越聊越孤独的开始？</p>
+    <p class="label">下 一 章</p>
+    <p class="title">第二章 · 茧房 · 情感新织</p>
+    <p class="hook">数据有脸——三个少年的剪影。</p>
+    <span class="arrow" aria-hidden="true">↓</span>
+  </div>
+</a>
+
+<script src="../data/data.js"></script>
+<script src="../components/common.js"></script>
+<script>
+// ===== 1.4 翻转卡片：点击/回车/空格翻转 =====
+document.querySelectorAll('.flip-card').forEach(card=>{
+  const flip = ()=>card.classList.toggle('flipped');
+  card.addEventListener('click', flip);
+  card.addEventListener('keydown', e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();}
+  });
+});
+
+// ===== 1.2 全国生成式 AI 用户规模 6.02 触发 =====
+window.__charts = window.__charts || {};
+
+const cnnicIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if (e.isIntersecting){
+      countUp(document.getElementById('cnnicNum'), 6.02, 1100);
+      cnnicIO.disconnect();
+    }
+  });
+}, {threshold: 0.5});
+const cnnicEl = document.getElementById('cnnicNum');
+if (cnnicEl) cnnicIO.observe(cnnicEl.closest('.big-num-card'));
+
+// ===== ECharts 通用配置：SVG 渲染、Inter 触发 =====
+function makeChart(domId, optionFn){
+  const dom = document.getElementById(domId);
+  if (!dom || typeof echarts === 'undefined') return;
+  const chart = echarts.init(dom, null, {renderer:'svg'});
+  const opt = optionFn(chart);
+  opt.textStyle = Object.assign(
+    {fontFamily:'"PingFang SC","Microsoft YaHei",sans-serif', color:'#555'},
+    opt.textStyle || {}
+  );
+  chart.setOption(opt);
+  window.__charts[domId] = chart;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){
+        // ECharts 已在 init 时渲染；这里仅触发动画
+        try{ chart.dispatchAction({type:'highlight', seriesIndex:0, dataIndex:0}); }catch(err){}
+        io.disconnect();
+      }
+    });
+  }, {threshold: 0.3});
+  io.observe(dom);
+  window.addEventListener('resize', ()=>chart.resize());
+}
+
+// ===== V5-03：四点时序折线 =====
+makeChart('chart-v5-03', (chart)=>({
+  backgroundColor:'transparent',
+  grid:{left:50, right:60, top:40, bottom:50},
+  tooltip:{trigger:'axis', backgroundColor:'#1A3A4A', borderColor:'#F4C95D', textStyle:{color:'#fff', fontSize:12}},
+  legend:{
+    data:['用户规模','普及率'],
+    top:8, textStyle:{color:'#555', fontSize:12},
+    itemWidth:14, itemHeight:8
+  },
+  xAxis:{
+    type:'category',
+    data:['2024.6','2024.12','2025.6','2025.12'],
+    axisLine:{lineStyle:{color:'#6A7075'}},
+    axisLabel:{color:'#555', fontSize:12}
+  },
+  yAxis:[
+    {
+      type:'value', name:'亿人', min:0, max:7,
+      nameTextStyle:{color:'#555'},
+      axisLine:{show:false}, axisTick:{show:false},
+      splitLine:{lineStyle:{color:'rgba(26,58,74,.08)'}},
+      axisLabel:{color:'#555', fontSize:11}
+    },
+    {
+      type:'value', name:'%', min:0, max:50,
+      nameTextStyle:{color:'#555'},
+      axisLine:{show:false}, axisTick:{show:false},
+      splitLine:{show:false},
+      axisLabel:{color:'#555', fontSize:11, formatter:'{value}%'}
+    }
+  ],
+  series:[
+    {
+      name:'用户规模', type:'line', smooth:true,
+      data: window.DATA.ch1.v503.users,
+      symbol:'circle', symbolSize:9,
+      itemStyle:{color:'#3A6B8A'},
+      lineStyle:{color:'#3A6B8A', width:3},
+      areaStyle:{
+        color:new echarts.graphic.LinearGradient(0,0,0,1,[
+          {offset:0, color:'rgba(58,107,138,.25)'},
+          {offset:1, color:'rgba(58,107,138,0)'}
+        ])
+      },
+      label:{show:true, position:'top', formatter:(p)=> p.value + '亿', color:'#3A6B8A', fontSize:11, fontWeight:600},
+      markPoint:{
+        symbol:'pin', symbolSize:48,
+        data:[{coord:['2025.6', 5.15], value:'+2.66', itemStyle:{color:'#D4A017'}}],
+        label:{color:'#fff', fontSize:10}
+      },
+      markLine:{
+        silent:true, symbol:'none',
+        data:[{
+          xAxis:'2025.6',
+          lineStyle:{color:'#D4A017', type:'dashed', width:1.5},
+          label:{formatter:'半年翻番', color:'#D4A017', fontSize:11, position:'insideEndTop'}
+        }]
+      }
+    },
+    {
+      name:'普及率', type:'line', smooth:true, yAxisIndex:1,
+      data: window.DATA.ch1.v503.rate,
+      symbol:'circle', symbolSize:8,
+      itemStyle:{color:'#F4C95D'},
+      lineStyle:{color:'#F4C95D', width:2.5, type:'dashed'},
+      label:{show:true, position:'bottom', formatter:(p)=> p.value + '%', color:'#D4A017', fontSize:11, fontWeight:600}
+    }
+  ]
+}));
+
+// ===== 1.5c：载体更替·三条曲线合并总图（左轴亿人／右轴百分比） =====
+// 数值取自 data.js ch1 三条序列（S01／S04／S05／S06，对应主数据表 obs 1／2／21—31）
+// 横轴用时间轴按真实年份间距排布；三条序列各自连线、互不混用，缺测年份不插值
+makeChart('carrier-chart', ()=>{
+  const pair = (xs, ys) => xs.map((y, i) => [y + '-01-01', ys[i]]);
+
+  return {
+    backgroundColor:'transparent',
+    grid:{left:70, right:74, top:78, bottom:56},
+    tooltip:{
+      trigger:'axis',
+      backgroundColor:'#1A3A4A', borderColor:'#F4C95D',
+      textStyle:{color:'#fff', fontSize:12},
+      formatter:(ps)=>{
+        const y = ps[0].axisValue;
+        const year = typeof y === 'number' ? new Date(y).getFullYear() : String(y).slice(0, 4);
+        const val = (v) => (Array.isArray(v) ? v[1] : v);
+        const rows = ps
+          .filter(p => val(p.value) !== null && val(p.value) !== undefined)
+          .map(p => p.marker + p.seriesName + '：' + val(p.value) + (p.seriesName.indexOf('规模') > -1 ? ' 亿人' : '%'));
+        return year + ' 年<br>' + rows.join('<br>');
+      }
+    },
+    legend:{
+      top:10, left:'center',
+      textStyle:{color:'#555', fontSize:12},
+      itemWidth:16, itemHeight:8
+    },
+    xAxis:{
+      type:'time',
+      axisLine:{lineStyle:{color:'#6A7075'}},
+      axisTick:{show:false},
+      axisLabel:{color:'#555', fontSize:12, formatter:'{yyyy}'},
+      splitLine:{show:false}
+    },
+    yAxis:[
+      {
+        type:'value', name:'亿人', min:1.5, max:2.1, interval:0.15,
+        nameLocation:'middle', nameRotate:90, nameGap:46,
+        nameTextStyle:{color:'#555', fontSize:11},
+        axisLine:{show:false}, axisTick:{show:false},
+        splitLine:{lineStyle:{color:'rgba(26,58,74,.07)'}},
+        axisLabel:{color:'#555', fontSize:11}
+      },
+      {
+        type:'value', name:'%', min:0, max:100, interval:20,
+        nameLocation:'middle', nameRotate:90, nameGap:50,
+        nameTextStyle:{color:'#555', fontSize:11},
+        axisLine:{show:false}, axisTick:{show:false},
+        splitLine:{show:false},
+        axisLabel:{color:'#555', fontSize:11, formatter:'{value}%'}
+      }
+    ],
+    series:[
+      {
+        name:'未成年网民规模', type:'line', smooth:true, yAxisIndex:0,
+        data:pair(window.DATA.ch1.sm1.x, window.DATA.ch1.sm1.y),
+        symbol:'circle', symbolSize:9,
+        itemStyle:{color:'#3A6B8A'}, lineStyle:{color:'#3A6B8A', width:3},
+        areaStyle:{
+          color:new echarts.graphic.LinearGradient(0,0,0,1,[
+            {offset:0, color:'rgba(58,107,138,.20)'},
+            {offset:1, color:'rgba(58,107,138,0)'}
+          ])
+        },
+        label:{show:true, position:'right', formatter:(p)=> p.value[1] + '亿', color:'#3A6B8A', fontSize:11, fontWeight:600}
+      },
+      {
+        name:'未成年人互联网普及率', type:'line', smooth:true, yAxisIndex:1,
+        data:pair(window.DATA.ch1.sm2.x, window.DATA.ch1.sm2.y),
+        symbol:'circle', symbolSize:9,
+        itemStyle:{color:'#5B9AB5'}, lineStyle:{color:'#5B9AB5', width:2.5, type:'dashed'},
+        label:{show:true, position:'bottom', formatter:(p)=> p.value[1] + '%', color:'#3A6B8A', fontSize:11}
+      },
+      {
+        name:'常看短视频的未成年比例', type:'line', smooth:true, yAxisIndex:1,
+        data:pair(window.DATA.ch1.sm3.x, window.DATA.ch1.sm3.y),
+        symbol:'circle', symbolSize:9,
+        itemStyle:{color:'#B84A3E'}, lineStyle:{color:'#B84A3E', width:3},
+        label:{show:true, position:'top', formatter:(p)=> p.value[1] + '%', color:'#B84A3E', fontSize:11, fontWeight:600}
+      }
+    ]
+  };
+});
+
+// ===== 1.3 全球图景：3D 地球仪 =====
+(function(){
+  const stage = document.getElementById('globeStage');
+  const chartDom = document.getElementById('globeChart');
+  const storyCard = document.getElementById('globeStoryCard');
+  const dotsWrap = document.getElementById('globeDots');
+  if (!stage || !chartDom || typeof echarts === 'undefined') return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // —— 四国数据（经纬度 + 故事文案，数值严格取自原卡片） ——
+  const COUNTRIES = [
+    {
+      id:'cn', flag:'CHINA · 中', name:'中国', coord:[104.0, 35.0],
+      core:'21.5', unit:'%', coreLabel:'中小学生"只想和 AI 聊天"，小学生比例最高，超 24%',
+      body:'在 8563 份问卷里，每 5 个中小学生就有 <span class="hl">1 个</span> 说"只想和 AI 聊天，不想和真人聊天"。小学生比例最高，超过 24%。',
+      extra:'同调查：61.7% 用过 AI，18.3% 经常使用',
+      src:'来源：人民网', href:'http://yn.people.com.cn/n2/2026/0609/c361322-41604898.html'
+    },
+    {
+      id:'kr', flag:'KOREA · 韩', name:'韩国', coord:[127.0, 37.5],
+      core:'94.4', unit:'%', coreLabel:'14 岁以上青少年用过 AI 聊天机器人',
+      body:'在韩国，AI 聊天机器人几乎成了青少年的"<span class="hl">标配</span>"。更值得注意的是，75.3% 曾把 AI 的回答付诸行动或认真考虑；Zeta 用户月均使用 <span class="hl">45 小时 44 分钟</span>，超过了 Instagram。',
+      extra:'75.3% 曾把 AI 的回答付诸行动或认真考虑',
+      src:'来源：绿伞儿童基金会', href:'https://en.sedaily.ai/society/2026/07/21/94-percent-of-korean-teens-use-ai-chatbots-yet-korea-lacks'
+    },
+    {
+      id:'jp', flag:'JAPAN · 日', name:'日本', coord:[138.0, 36.0],
+      core:'200', unit:'万', coreLabel:'Zeta 进入日本一年，用户突破 200 万',
+      body:'日本市场数据显示，Zeta 进入日本仅一年，用户突破 200 万，月收入一度超过 1.2 亿日元。<span class="hl">"推し AI"</span>（为虚拟角色投入情感与金钱）正成为最烧钱的娱乐消费之一。',
+      extra:'市场口径：月收入一度超 1.2 亿日元',
+      src:'来源：ITmedia', href:'https://www.itmedia.co.jp/news/article/2606/17/1260617020/'
+    },
+    {
+      id:'us', flag:'USA · 美', name:'美国', coord:[-98.0, 39.0],
+      core:'72', unit:'%', coreLabel:'13—17 岁青少年至少用过一次 AI 伴侣',
+      body:'Common Sense Media 调查显示，72% 的美国 13—17 岁青少年至少用过一次 AI 伴侣。其中 52% 为常规用户，13% 每天使用；<span class="risk">33%</span> 曾就严肃话题选择 AI 而非真人，<span class="risk">24%</span> 向 AI 分享过个人信息。',
+      extra:'52% 常规用户；13% 每天使用；33% 选 AI 而非真人',
+      src:'来源：Common Sense Media', href:'https://www.commonsensemedia.org/sites/default/files/research/talk-trust-and-trade-offs_2025_toplines.pdf'
+    }
+  ];
+
+  let globeChart = null;
+  let currentIdx = 0;
+  let isFlying = false;
+  let autoplayTimer = null;
+  let baseTextureCanvas = null;
+  let flySeq = 0;       // 飞行动画序号，避免多次点击互相干扰
+  let flySafetyTimer = null;
+  let storyTimer = null;
+
+  // —— 把世界 GeoJSON 绘制成等距圆柱投影的 canvas 纹理（海洋深蓝 + 陆地主色） ——
+  function makeGlobeTexture(geoJson){
+    const W = 2048, H = 1024;
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#0A1620';
+    ctx.fillRect(0, 0, W, H);
+    const project = (lon, lat) => [ ((lon + 180) / 360) * W, ((90 - lat) / 180) * H ];
+    ctx.fillStyle = '#1E4A5A';
+    ctx.strokeStyle = 'rgba(244,201,93,0.35)';
+    ctx.lineWidth = 0.6;
+    geoJson.features.forEach(f => {
+      const geom = f.geometry;
+      if (!geom) return;
+      const polys = geom.type === 'MultiPolygon' ? geom.coordinates : [geom.coordinates];
+      polys.forEach(poly => {
+        ctx.beginPath();
+        poly.forEach(ring => {
+          ring.forEach((pt, i) => {
+            const [x, y] = project(pt[0], pt[1]);
+            if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          });
+        });
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      });
+    });
+    return c;
+  }
+
+  // —— 获取地球仪的相机控制器（echarts-gl 内部 viewControl） ——
+  function getViewControl(){
+    if (!globeChart) return null;
+    const views = globeChart._componentsViews || [];
+    for (let i = 0; i < views.length; i++){
+      if ((views[i].type || '') === 'globe' && views[i]._control) return views[i]._control;
+    }
+    return null;
+  }
+
+  // —— 相机缓动飞到目标经纬度 ——
+  function flyTo(idx){
+    if (!globeChart) return;
+    const mySeq = ++flySeq;
+    isFlying = true;
+    if (flySafetyTimer) clearTimeout(flySafetyTimer);
+
+    const ctrl = getViewControl();
+    if (!ctrl){ isFlying = false; return; }
+
+    const target = COUNTRIES[idx];
+    const startBeta = ctrl.getBeta();
+    const startAlpha = ctrl.getAlpha();
+    const startDist = ctrl.getDistance();   // 锁定当前距离，飞行中不缩放
+
+    // echarts-gl 地球仪纹理映射：beta = 经度 + 90，alpha = 纬度
+    const targetBeta = target.coord[0] + 90;
+    const targetAlpha = target.coord[1];
+
+    // 取最短旋转方向
+    let delta = targetBeta - startBeta;
+    while (delta > 180) delta -= 360;
+    while (delta < -180) delta += 360;
+    const endBeta = startBeta + delta;
+    const endAlpha = targetAlpha;
+
+    const duration = reduceMotion ? 1 : 1600;
+
+    // 飞行期间暂停呼吸光晕（其 setOption 会干扰相机动画），结束后恢复
+    stopHaloPulse();
+
+    // 只旋转 beta/alpha，距离锁定为起始值（避免缩放感）
+    const start = performance.now();
+    const step = (now) => {
+      if (mySeq !== flySeq) return;
+      const t = reduceMotion ? 1 : Math.min((now - start) / duration, 1);
+      const ease = t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t;
+      ctrl.setBeta(startBeta + (endBeta - startBeta) * ease);
+      ctrl.setAlpha(startAlpha + (endAlpha - startAlpha) * ease);
+      ctrl.setDistance(startDist);
+      if (t < 1) requestAnimationFrame(step);
+      else finish();
+    };
+    function finish(){
+      if (mySeq !== flySeq) return;
+      isFlying = false;
+      startHaloPulse();
+    }
+    flySafetyTimer = setTimeout(finish, duration + 400);
+    requestAnimationFrame(step);
+  }
+
+  // —— 渲染并切换故事卡片 ——
+  function showStory(idx){
+    const c = COUNTRIES[idx];
+    storyCard.classList.remove('show');
+    setTimeout(() => {
+      storyCard.innerHTML =
+        '<div class="gs-flag">' + c.flag + '</div>' +
+        '<div class="gs-name">' + c.name + '</div>' +
+        '<div class="gs-core">' + c.core + '<span class="unit">' + c.unit + '</span></div>' +
+        '<div class="gs-core-label">' + c.coreLabel + '</div>' +
+        '<div class="gs-body">' + c.body + '</div>' +
+        '<div class="gs-extra">' + c.extra + '</div>' +
+        '<div class="gs-src">来源：<a href="' + c.href + '" target="_blank" rel="noopener">' + c.src.replace('来源：','') + '</a></div>';
+      storyCard.classList.add('show');
+    }, 220);
+  }
+
+  // —— 更新标记高亮 + 呼吸光晕位置 ——
+  function updateMarkers(activeIdx){
+    if (!globeChart) return;
+    globeChart.setOption(Object.assign({
+      series: [{
+        id: 'markers',
+        data: COUNTRIES.map((c, i) => ({
+          name: c.name,
+          value: c.coord,
+          itemStyle: { color: i === activeIdx ? '#F4C95D' : 'rgba(244,201,93,0.5)' },
+          label: { show: i === activeIdx, formatter: c.name, color: '#fff', fontSize: 13, fontWeight: 600, textBorderColor: '#0F2532', textBorderWidth: 2 }
+        }))
+      },{
+        id: 'halo',
+        data: [{ name: COUNTRIES[activeIdx].name, value: COUNTRIES[activeIdx].coord }]
+      }]
+    }, currentViewControlOpt()));
+  }
+
+  // 读取当前实际相机参数，包装成 setOption 用的 globe.viewControl
+  function currentViewControlOpt(){
+    const ctrl = getViewControl();
+    if (!ctrl) return {};
+    return { globe: { viewControl: { alpha: ctrl.getAlpha(), beta: ctrl.getBeta(), distance: ctrl.getDistance() } } };
+  }
+
+  // —— 呼吸光晕动画（同步当前相机状态，避免 setOption 重置视角）——
+  let haloRaf = null;
+  function startHaloPulse(){
+    if (haloRaf) return;
+    const loop = (t) => {
+      if (!globeChart){ haloRaf = null; return; }
+      const pulse = 0.5 + 0.5 * Math.sin(t / 600);
+      const size = 24 + pulse * 26;          // 24 ~ 50
+      const opacity = 0.25 + pulse * 0.45;    // 0.25 ~ 0.7
+      globeChart.setOption(Object.assign({
+        series: [{
+          id: 'halo',
+          symbolSize: size,
+          itemStyle: {
+            color: 'rgba(244,201,93,' + (opacity*0.4).toFixed(3) + ')',
+            opacity: opacity
+          }
+        }]
+      }, currentViewControlOpt()));
+      haloRaf = requestAnimationFrame(loop);
+    };
+    haloRaf = requestAnimationFrame(loop);
+  }
+  function stopHaloPulse(){
+    if (haloRaf){ cancelAnimationFrame(haloRaf); haloRaf = null; }
+  }
+
+  // —— 切换到指定国家 ——
+  function goTo(idx){
+    if (idx === currentIdx && !isFlying) return;
+    currentIdx = idx;
+    // 导航点高亮
+    dotsWrap.querySelectorAll('.globe-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+    // 更新标记 + 呼吸光晕位置
+    updateMarkers(idx);
+    flyTo(idx);
+    // 故事卡片在飞行途中切换，保证用户总能读到内容
+    if (storyTimer) clearTimeout(storyTimer);
+    storyTimer = setTimeout(() => showStory(idx), reduceMotion ? 0 : 350);
+    resetAutoplay();
+  }
+
+  function next(){ goTo((currentIdx + 1) % COUNTRIES.length); }
+  function prev(){ goTo((currentIdx - 1 + COUNTRIES.length) % COUNTRIES.length); }
+
+  let autoplaying = false;
+  function toggleAutoplay(){
+    autoplaying = !autoplaying;
+    const btn = document.getElementById('globePlay');
+    btn.textContent = autoplaying ? '❚❚' : '▶';
+    btn.setAttribute('aria-label', autoplaying ? '暂停' : '自动播放');
+    if (autoplaying) {
+      autoplayTimer = setInterval(next, 5200);
+    } else {
+      clearInterval(autoplayTimer);
+    }
+  }
+  function resetAutoplay(){
+    if (autoplaying){
+      clearInterval(autoplayTimer);
+      autoplayTimer = setInterval(next, 5200);
+    }
+  }
+
+  // —— 初始化地球仪 ——
+  function initGlobe(textureCanvas){
+    globeChart = echarts.init(chartDom, null, { renderer: 'canvas' });
+    window.__charts = window.__charts || {};
+    window.__charts['globeChart'] = globeChart;
+
+    const startCoord = COUNTRIES[0].coord;
+    // 转成 data URL，兼容 echarts-gl 各版本对 canvas 纹理的处理
+    const texUrl = textureCanvas ? textureCanvas.toDataURL('image/png') : null;
+
+    globeChart.setOption({
+      backgroundColor: 'transparent',
+      globe: {
+        baseTexture: texUrl,
+        environment: '#0F2532',
+        shading: 'color',
+        light: {
+          main: { intensity: 1.4, shadow: false, alpha: 30 },
+          ambient: { intensity: 0.6 }
+        },
+        viewControl: {
+          distance: 150,
+          alpha: startCoord[1],
+          beta: startCoord[0] + 90,
+          autoRotate: false,
+          rotateSensitivity: 0.7,
+          zoomSensitivity: 1.0,
+          minDistance: 60,
+          maxDistance: 800
+        }
+      },
+      series: [
+        { // 静态国家标记
+          id: 'markers',
+          type: 'scatter3D', coordinateSystem: 'globe',
+          data: COUNTRIES.map((c, i) => ({
+            name: c.name,
+            value: c.coord,
+            itemStyle: { color: i === 0 ? '#F4C95D' : 'rgba(244,201,93,0.5)' },
+          label: { show: i === 0, formatter: c.name, color: '#fff', fontSize: 13, fontWeight: 600, textBorderColor: '#0F2532', textBorderWidth: 2 }
+        })),
+        symbol: 'circle',
+        symbolSize: 14,
+        height: 0,
+        animation: false,
+        itemStyle: { opacity: 0.95 },
+        emphasis: { itemStyle: { color: '#fff' }, label: { show: true, color: '#F4C95D' } }
+      },
+      { // 呼吸光晕（仅当前国家）
+        id: 'halo',
+        type: 'scatter3D', coordinateSystem: 'globe',
+        data: [{ name: COUNTRIES[0].name, value: COUNTRIES[0].coord }],
+        symbol: 'circle',
+        symbolSize: 28,
+        height: 0,
+        animation: false,
+        itemStyle: { color: 'rgba(244,201,93,0.3)', opacity: 0.6 }
+      }
+      ]
+    });
+
+    // 点击国家标记跳转
+    globeChart.on('click', (params) => {
+      if (params.seriesType === 'scatter3D' && typeof params.dataIndex === 'number'){
+        goTo(params.dataIndex);
+      }
+    });
+
+    // 初始故事卡片
+    showStory(0);
+    // 启动呼吸光晕
+    startHaloPulse();
+
+    // —— 缩放滑块绑定 ——
+    const zoomSlider = document.getElementById('globeZoom');
+    const zoomPlus = document.querySelector('.gz-plus');
+    const zoomMinus = document.querySelector('.gz-minus');
+    const zoomCtrl = getViewControl();
+    if (zoomSlider && zoomCtrl){
+      // 拖动滑块 → 改变距离（用 setOption 同步模型，避免 halo 重置）
+      const applyDistance = (d) => {
+        d = Math.max(60, Math.min(800, d));
+        zoomCtrl.setDistance(d);
+        globeChart.setOption({ globe: { viewControl: { distance: d } } });
+      };
+      zoomSlider.addEventListener('input', () => {
+        applyDistance(parseFloat(zoomSlider.value));
+      });
+      // +/- 按钮步进
+      if (zoomPlus) zoomPlus.addEventListener('click', () => {
+        applyDistance(zoomCtrl.getDistance() - 40);
+      });
+      if (zoomMinus) zoomMinus.addEventListener('click', () => {
+        applyDistance(zoomCtrl.getDistance() + 40);
+      });
+      // 同步滑块值（滚轮/flyTo 改变距离后）
+      const syncZoom = () => {
+        zoomSlider.value = Math.round(zoomCtrl.getDistance());
+        requestAnimationFrame(syncZoom);
+      };
+      requestAnimationFrame(syncZoom);
+    }
+  }
+
+  // —— 加载世界 GeoJSON → 生成纹理 → 初始化 ——
+  const GEO_URLS = [
+    'https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/json/world.json',
+    'https://geo.datav.aliyun.com/areas_v3/bound/world.json'
+  ];
+  function loadWorldGeo(idx){
+    idx = idx || 0;
+    if (idx >= GEO_URLS.length){
+      // 兜底：纯色地球 + 标记，仍可用
+      initGlobe(null);
+      return;
+    }
+    fetch(GEO_URLS[idx])
+      .then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+      .then(geo => {
+        baseTextureCanvas = makeGlobeTexture(geo);
+        initGlobe(baseTextureCanvas);
+      })
+      .catch(() => loadWorldGeo(idx + 1));
+  }
+
+  // —— 视口内才加载，节省资源 ——
+  const globeIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !globeChart){
+        loadWorldGeo(0);
+        globeIO.disconnect();
+      }
+    });
+  }, { threshold: 0.15 });
+  globeIO.observe(stage);
+
+  // —— 绑定导航 ——
+  dotsWrap.addEventListener('click', (e) => {
+    const dot = e.target.closest('.globe-dot');
+    if (dot) goTo(parseInt(dot.dataset.idx, 10));
+  });
+  document.getElementById('globePrev').addEventListener('click', prev);
+  document.getElementById('globeNext').addEventListener('click', next);
+  document.getElementById('globePlay').addEventListener('click', toggleAutoplay);
+
+  // 窗口缩放
+  window.addEventListener('resize', () => { if (globeChart) globeChart.resize(); });
+
+  // 页面卸载时清理动画
+  window.addEventListener('pagehide', () => {
+    stopHaloPulse();
+    if (globeChart){ globeChart.dispose(); globeChart = null; }
+  });
+})();
+</script>
+
+
+
+</body></html>
