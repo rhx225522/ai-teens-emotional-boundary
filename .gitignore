@@ -22,3 +22,6 @@ concept-*.html
 demo-*.html
 design-options-*.html
 prototype-*.html
+
+# ===== 文档构建工具（非网页运行必需） =====
+.docx-build/
