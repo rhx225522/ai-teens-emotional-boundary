@@ -18,7 +18,7 @@ body{
   font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--bg);
   color:var(--ink);
-  font-size:16px;
+  font-size:19px;
   line-height:1.9;
   overflow-x:hidden;
 }
@@ -93,7 +93,7 @@ body{
   margin-bottom:10px;
 }
 .stage-top-text .st-paragraph{
-  font-size:16px;
+  font-size:19px;
   line-height:1.7;
   color:var(--ink);
   letter-spacing:.3px;
@@ -106,13 +106,13 @@ body{
 }
 .stage-top-text .st-paragraph.st-think{
   color:var(--gold-deep);
-  font-size:16px;
+  font-size:19px;
   margin-top:4px;
   margin-bottom:8px;
 }
 .stage-top-text .st-paragraph.st-survey{
   color:var(--ink-sub);
-  font-size:16px;
+  font-size:19px;
 }
 .stage-top-text .st-paragraph .num{
   color:var(--gold-deep);
@@ -136,7 +136,7 @@ body{
   left:5%;
   bottom:6%;
   z-index:4;
-  font-size:13px;
+  font-size:16px;
   letter-spacing:2px;
   color:var(--gold-deep);
   pointer-events:none;
@@ -159,7 +159,7 @@ body{
   pointer-events:none;
 }
 .stage-side-text .ss-quote{
-  font-size:clamp(14px,1.05vw,17px);
+  font-size:clamp(17px,1.24vw,20px);
   line-height:1.95;
   font-weight:600;
   color:var(--ink);
@@ -169,7 +169,7 @@ body{
   border-left:2px solid var(--gold);
 }
 .stage-side-text .ss-note{
-  font-size:clamp(11.5px,.82vw,13px);
+  font-size:clamp(14.5px,1.01vw,16px);
   line-height:1.9;
   color:var(--ink-sub);
   margin:0;
@@ -221,7 +221,7 @@ body{
 }
 .video-hero h1 .q{color:var(--gold)}
 .video-hero .vh-sub{
-  font-size:clamp(16px,2vw,24px);
+  font-size:clamp(19px,2.25vw,27px);
   font-weight:500;color:rgba(255,255,255,.94);
   letter-spacing:1px;line-height:1.6;
   text-shadow:0 1px 16px rgba(8,24,32,.7);
@@ -233,7 +233,7 @@ body{
 .video-hero.play .vh-sub{opacity:1;transform:none;transition-delay:2.4s}
 .video-hero .vh-cue{
   position:absolute;bottom:30px;left:8%;
-  z-index:2;font-size:12px;letter-spacing:.24em;color:rgba(255,255,255,.7);
+  z-index:2;font-size:15px;letter-spacing:.24em;color:rgba(255,255,255,.7);
   opacity:1;transition:opacity .8s ease;
   text-shadow:0 1px 8px rgba(8,24,32,.8);
   animation:cuePulse 2.2s ease-in-out infinite;
@@ -264,7 +264,7 @@ body{
   position:sticky;
   top:56px;
   z-index:0;
-  min-height:calc(100vh - 56px);
+  min-height:calc(65vh - 56px);   /* 从 100vh 缩小，减少上下留白 */
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -273,7 +273,7 @@ body{
 .intro-text .lead{
   max-width:780px;
   margin:0 auto;
-  font-size:16px;
+  font-size:19px;
   color:var(--ink);
   font-weight:500;
   line-height:1.7;
@@ -293,7 +293,7 @@ body{
   max-width:780px;
   margin:0 auto 40px;
   color:var(--ink);
-  font-size:16px;
+  font-size:19px;
   text-align:justify;
 }
 .intro-text p.body .hl{color:var(--gold-deep);font-weight:600}
@@ -307,7 +307,7 @@ body{
 }
 .sample-chart h4{
   color:var(--gold-deep);
-  font-size:15px;
+  font-size:18px;
   margin-bottom:16px;
   font-weight:600;
   letter-spacing:1px;
@@ -317,7 +317,7 @@ body{
   align-items:center;
   gap:14px;
   margin-bottom:10px;
-  font-size:13px;
+  font-size:16px;
   color:var(--ink-sub);
 }
 .bar-row .label{width:80px;text-align:right;color:var(--ink-sub)}
@@ -330,7 +330,7 @@ body{
 }
 .bar-row .val{width:60px;color:var(--gold-deep)}
 .source-line{
-  font-size:12px;
+  font-size:15px;
   color:var(--ink-meta);
   margin-top:16px;
   line-height:1.5;
@@ -358,13 +358,13 @@ body{
   margin-bottom:50px;
 }
 .q-title .step{
-  font-size:14px;
+  font-size:17px;
   color:var(--gold-deep);
   letter-spacing:3px;
   margin-bottom:10px;
 }
 .q-title h3{
-  font-size:32px;
+  font-size:35px;
   color:var(--cover-main);
   font-weight:700;
   letter-spacing:1px;
@@ -377,7 +377,7 @@ body{
 }
 .q-left{padding:20px 0}
 .q-prompt{
-  font-size:18px;
+  font-size:21px;
   color:var(--ink);
   margin-bottom:24px;
   font-weight:500;
@@ -394,7 +394,7 @@ body{
   color:var(--ink);
   padding:12px 26px;
   border-radius:30px;
-  font-size:15px;
+  font-size:18px;
   font-family:inherit;
   cursor:pointer;
   transition:all .25s;
@@ -405,7 +405,7 @@ body{
 .q-btn:disabled{opacity:.5;cursor:not-allowed}
 .q-skip{
   display:inline-block;
-  font-size:13px;
+  font-size:16px;
   color:var(--ink-sub);
   margin-top:8px;
   text-decoration:underline;
@@ -426,14 +426,14 @@ body{
 }
 .q-feedback.show{opacity:1;transform:translateY(0)}
 .q-feedback .reveal{
-  font-size:16px;
+  font-size:19px;
   color:var(--ink);
   line-height:1.7;
   margin-bottom:8px;
 }
 .q-feedback .reveal .num{color:var(--gold-deep);font-weight:700;font-size:1.1em}
 .q-feedback .notes{
-  font-size:13px;
+  font-size:16px;
   color:var(--ink-sub);
   line-height:1.7;
 }
@@ -474,7 +474,7 @@ body{
   transform:translateY(-50%) translateX(0);
 }
 .big-num-overlay .bn-val{
-  font-size:38px;
+  font-size:41px;
   font-weight:700;
   color:var(--gold-deep);
   line-height:1;
@@ -485,7 +485,7 @@ body{
 }
 .dot-caption{
   margin-top:14px;
-  font-size:12px;
+  font-size:15px;
   color:var(--ink-sub);
   text-align:center;
 }
@@ -568,7 +568,7 @@ body{
 }
 .q-card .q-prompt{
   margin-bottom:20px;
-  font-size:16px;
+  font-size:19px;
 }
 .q-card .q-options{
   justify-content:center;
@@ -594,7 +594,7 @@ body{
   text-align:center;
   margin-bottom:52vh;
 }
-.answer-card .q-prompt{ margin-bottom:14px; font-size:16px; }
+.answer-card .q-prompt{ margin-bottom:14px; font-size:19px; }
 .answer-card .q-options{ justify-content:center; margin-bottom:12px; }
 .explain-card{
   background:rgba(255,255,255,.92);
@@ -612,8 +612,8 @@ body{
   transition:opacity .6s ease, transform .6s ease;
 }
 .explain-card.show{ opacity:1; transform:translateY(0); }
-.explain-card .reveal{ font-size:16px; color:var(--ink); line-height:1.7; margin-bottom:8px; }
-.explain-card .notes{ font-size:13px; color:var(--ink-sub); line-height:1.7; }
+.explain-card .reveal{ font-size:19px; color:var(--ink); line-height:1.7; margin-bottom:8px; }
+.explain-card .notes{ font-size:16px; color:var(--ink-sub); line-height:1.7; }
 .explain-card .big-num-overlay{ margin-top:18px; text-align:center; }
 /* Q3 两阶段卡片：拉大间距，确保第二张出现时第一张已滚出视野 */
 #explain-q3-s1{ margin-bottom:90vh; }
@@ -632,7 +632,7 @@ body{
   transform:none;
 }
 .q-crowd .big-num-overlay .bn-val{
-  font-size:52px;
+  font-size:55px;
   font-weight:800;
   line-height:1;
   letter-spacing:1px;
@@ -656,7 +656,7 @@ body{
   display:flex;
   align-items:center;
   gap:10px;
-  font-size:14px;
+  font-size:17px;
 }
 .q2-bar .name{flex:0 0 130px;color:var(--ink-sub)}
 .q2-bar .track{
@@ -672,7 +672,7 @@ body{
 .q2-bar.you::after{
   content:"你选";
   position:absolute;right:-44px;top:0;
-  font-size:11px;color:var(--gold-deep);background:rgba(244,201,93,.15);
+  font-size:12px;color:var(--gold-deep);background:rgba(244,201,93,.15);
   padding:2px 8px;border-radius:10px;
 }
 .q2-divider{
@@ -683,7 +683,7 @@ body{
 }
 .q2-divider .lbl{
   position:absolute;left:50%;top:-9px;transform:translateX(-50%);
-  font-size:11px;color:var(--gold-deep);background:var(--bg);padding:0 10px;letter-spacing:1px;
+  font-size:12px;color:var(--gold-deep);background:var(--bg);padding:0 10px;letter-spacing:1px;
 }
 
 /* 第三题两段式 */
@@ -696,7 +696,7 @@ body{
 .q3-stage2.active{display:block;animation:fadeUp .8s}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .q3-stage2 .stage-prompt{
-  font-size:14px;color:var(--risk);margin-bottom:14px;font-weight:500;
+  font-size:17px;color:var(--risk);margin-bottom:14px;font-weight:500;
 }
 
 /* 收束暗场 */
@@ -706,7 +706,7 @@ body{
   text-align:center;
 }
 .closing .lead-in{
-  font-size:16px;
+  font-size:19px;
   color:var(--ink);
   max-width:760px;
   margin:0 auto;
@@ -715,7 +715,7 @@ body{
 .closing .lead-in .hl{color:var(--gold-deep);font-weight:600}
 .final-q{
   margin-top:50px;
-  font-size:30px;
+  font-size:33px;
   font-weight:600;
   color:var(--gold-deep);
   letter-spacing:2px;
@@ -742,19 +742,19 @@ body{
 .nc-frame::before{top:0;left:0;border-right:none;border-bottom:none}
 .nc-frame::after{bottom:0;right:0;border-left:none;border-top:none}
 .next-chapter .echo{
-  font-size:18px;line-height:1.8;color:var(--ink);
+  font-size:21px;line-height:1.8;color:var(--ink);
   margin-bottom:28px;letter-spacing:.5px;
 }
 .next-chapter .echo .hl{color:var(--gold-deep);font-weight:600}
-.next-chapter .label{font-size:13px;letter-spacing:.5em;color:var(--ink-sub)}
+.next-chapter .label{font-size:16px;letter-spacing:.5em;color:var(--ink-sub)}
 .next-chapter .title{
   font-size:clamp(24px,2.6vw,32px);font-weight:700;
   margin:16px 0 10px;color:var(--cover-main);letter-spacing:.03em;
 }
-.next-chapter .hook{color:var(--ink-sub);transition:color .3s;font-size:15px}
+.next-chapter .hook{color:var(--ink-sub);transition:color .3s;font-size:18px}
 .next-chapter:hover .hook{color:var(--gold-deep)}
 .next-chapter .arrow{
-  display:inline-block;font-size:28px;margin-top:24px;color:var(--gold-deep);
+  display:inline-block;font-size:31px;margin-top:24px;color:var(--gold-deep);
   transition:transform .3s;
 }
 .next-chapter:hover .arrow{transform:translateY(4px)}
@@ -766,8 +766,8 @@ body{
   .canvas-stage,.dot-canvas{width:300px;height:230px}
   .big-num-overlay{left:230px}
   .q-crowd .q-card{padding:28px 22px}
-  .q-crowd .big-num-overlay .bn-val{font-size:42px}
-  .q-crowd .q-title h3{font-size:24px}
+  .q-crowd .big-num-overlay .bn-val{font-size:45px}
+  .q-crowd .q-title h3{font-size:27px}
 }
 
 @media (max-width:900px){
@@ -777,12 +777,12 @@ body{
     width:auto;max-width:none;
     transform:none;
   }
-  .stage-side-text .ss-quote{font-size:13.5px;line-height:1.85;margin-bottom:10px}
-  .stage-side-text .ss-note{font-size:11px;line-height:1.8}
+  .stage-side-text .ss-quote{font-size:19.5px;line-height:1.85;margin-bottom:10px}
+  .stage-side-text .ss-note{font-size:15px;line-height:1.8}
 }
 
 @media (max-width:640px){
-  .intro-text{top:50px;min-height:calc(100vh - 50px)}
+  .intro-text{top:50px;min-height:calc(65vh - 50px)}
   .section.video-hero{top:50px;height:calc(100vh - 50px);min-height:440px}
   .video-hero .vh-cue{bottom:22px}
   .scroll-stage{height:600vh}
@@ -1006,6 +1006,7 @@ body{
 </div><!-- /page-card -->
 
 <script src="../data/data.js"></script>
+<script src="../data/china-map.js"></script>
 <script src="../components/common.js"></script>
 <script src="../components/people-sprites.js"></script>
 <script src="../components/crowd.js"></script>
@@ -1086,13 +1087,18 @@ body{
   const attrs = new Array(TOTAL);
   const targets = new Float32Array(TOTAL * 8);          // 4 阶段 x/y
   const stageColors = new Float32Array(TOTAL * 12);     // 4 阶段 × 3 (r,g,b)
+  const stageColorStrs = new Array(TOTAL * 4);          // 4 阶段 × 颜色字符串 "rgb(r,g,b)"（纯阶段直接复用，避免逐帧拼接）
   const baseSizes = new Float32Array(TOTAL);            // 基础半径
   const phases = new Float32Array(TOTAL);               // 呼吸相位
   const stageBarLabels = [null, [], [], []];            // 各阶段条形标签 {x,y,text,color}
 
+  // DOM 脏检查缓存：仅在值变化时写入 style，避免逐帧触发 ECharts 重绘与回流
+  let lastMapOpacity = -1, lastTopOpacity = -1, lastStageLabel = '';
+
   // 悬停状态
   let hoveredProv = -1;
   let scrollP = 0;
+  let smoothScrollP = 0;   // 滚动平滑值：每帧 lerp 逼近 scrollP，解决"滚一下动一下"的离散跳动
 
   // ---- 计算布局 ----
   function computeLayout(){
@@ -1175,8 +1181,8 @@ body{
       const provIdx = i % 7;
       attrs[i] = {provIdx, school, urban, gender};
 
-      // 基础半径：1.5 ~ 4.0，不均匀分布
-      baseSizes[i] = 1.5 + Math.random() * 2.5;
+      // 基础半径：2.0 ~ 5.0（稍放大，增强可见度）
+      baseSizes[i] = 2.0 + Math.random() * 3.0;
       // 呼吸相位：0 ~ 2π
       phases[i] = Math.random() * Math.PI * 2;
 
@@ -1194,6 +1200,13 @@ body{
       // stage 3：性别色
       const c3 = hexToRgb(STAGE_GROUP_COLORS[3][gender]);
       stageColors[off+9] = c3[0]; stageColors[off+10] = c3[1]; stageColors[off+11] = c3[2];
+
+      // 预计算各阶段颜色字符串（纯阶段直接复用，避免逐帧 1712 次字符串拼接）
+      const sOff = i * 4;
+      stageColorStrs[sOff]   = `rgb(${c0[0]},${c0[1]},${c0[2]})`;
+      stageColorStrs[sOff+1] = `rgb(${c1[0]},${c1[1]},${c1[2]})`;
+      stageColorStrs[sOff+2] = `rgb(${c2[0]},${c2[1]},${c2[2]})`;
+      stageColorStrs[sOff+3] = `rgb(${c3[0]},${c3[1]},${c3[2]})`;
     }
   }
 
@@ -1289,14 +1302,17 @@ body{
   }
 
   // ---- 滚动进度 → 阶段混合 ----
+  // 过渡区间从 0.08 扩到 ~0.20，让粒子有更长的飞行距离，避免"滚一点就到位"的仓促感
+  // 阶段3（性别）停留区扩大到 0.22，让用户有充足时间看清男女分布再继续滚动
+  // 学段/城乡停留区也从 0.10 提到 0.12，整体节奏更从容
   function getBlend(p){
-    if (p < 0.22) return [0,0,0];
-    if (p < 0.32) return [0,1,(p-0.22)/0.10];
-    if (p < 0.52) return [1,1,0];
-    if (p < 0.60) return [1,2,(p-0.52)/0.08];
-    if (p < 0.78) return [2,2,0];
-    if (p < 0.86) return [2,3,(p-0.78)/0.08];
-    return [3,3,0];
+    if (p < 0.10) return [0,0,0];
+    if (p < 0.28) return [0,1,(p-0.10)/0.18];
+    if (p < 0.40) return [1,1,0];
+    if (p < 0.58) return [1,2,(p-0.40)/0.18];
+    if (p < 0.70) return [2,2,0];
+    if (p < 0.78) return [2,3,(p-0.70)/0.08];  // 过渡缩短到 0.08
+    return [3,3,0];  // 阶段3停留区：0.78 ~ 1.0（0.22 的停留距离）
   }
 
   const STAGE_NAMES = [
@@ -1307,6 +1323,7 @@ body{
   ];
 
   function updateScroll(){
+    // 鼠标滚动直接控制 scrollP：从页面真实滚动位置计算
     const rect = stageEl.getBoundingClientRect();
     const total = stageEl.offsetHeight - window.innerHeight;
     const scrolled = -rect.top;
@@ -1321,14 +1338,23 @@ body{
     lastTime = now;
 
     updateScroll();
-    const [sa, sb, t] = getBlend(scrollP);
+    // 滚动平滑：smoothScrollP 每帧以 lerp 逼近真实 scrollP
+    // 系数 0.03：越小越丝滑（跟随越慢），给鼠标更大操纵空间
+    // 0.03 约需 80 帧(~1.3s)逼近目标，滚动时粒子会优雅地滞后跟随
+    smoothScrollP += (scrollP - smoothScrollP) * 0.03;
+
+    const [sa, sb, t] = getBlend(smoothScrollP);
     const easeT = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
 
     ctx.clearRect(0, 0, W, H);
 
-    const hoverEnabled = scrollP < 0.22;
+    const hoverEnabled = smoothScrollP < 0.12;
     const activeProv = hoverEnabled ? hoveredProv : -1;
     const time = now * 0.001;  // 秒
+
+    // 是否纯阶段（无过渡）：可直接复用预计算颜色字符串，跳过插值与拼接
+    const pureStage = easeT <= 0 || easeT >= 1;
+    const useStage = easeT >= 1 ? sb : sa;
 
     for (let i = 0; i < TOTAL; i++){
       const off = i * 8;
@@ -1337,13 +1363,19 @@ body{
       const x = ax + (bx - ax) * easeT;
       const y = ay + (by - ay) * easeT;
 
-      // 颜色插值（阶段 A → 阶段 B）
-      const coff = i * 12;
-      const aR = stageColors[coff + sa*3], aG = stageColors[coff + sa*3+1], aB = stageColors[coff + sa*3+2];
-      const bR = stageColors[coff + sb*3], bG = stageColors[coff + sb*3+1], bB = stageColors[coff + sb*3+2];
-      const cr = Math.round(aR + (bR - aR) * easeT);
-      const cg = Math.round(aG + (bG - aG) * easeT);
-      const cb = Math.round(aB + (bB - aB) * easeT);
+      // 颜色：纯阶段直接复用预计算字符串；过渡中才插值拼接
+      let colorStr;
+      if (pureStage){
+        colorStr = stageColorStrs[i * 4 + useStage];
+      } else {
+        const coff = i * 12;
+        const aR = stageColors[coff + sa*3], aG = stageColors[coff + sa*3+1], aB = stageColors[coff + sa*3+2];
+        const bR = stageColors[coff + sb*3], bG = stageColors[coff + sb*3+1], bB = stageColors[coff + sb*3+2];
+        const cr = Math.round(aR + (bR - aR) * easeT);
+        const cg = Math.round(aG + (bG - aG) * easeT);
+        const cb = Math.round(aB + (bB - aB) * easeT);
+        colorStr = `rgb(${cr},${cg},${cb})`;
+      }
 
       // 呼吸：半径在基础值上 ±25% 脉动，相位各异
       const breath = 1 + 0.25 * Math.sin(time * 1.8 + phases[i]);
@@ -1351,63 +1383,63 @@ body{
       let radius = baseSizes[i] * breath;
       if (isHovered) radius *= 1.6;
 
-      // 荧光发光：外层光晕 + shadowBlur
-      ctx.shadowColor = `rgba(${cr},${cg},${cb},0.9)`;
-      ctx.shadowBlur = isHovered ? 16 : 8;
-
-      // 光晕（更大更透明的圆）
-      ctx.globalAlpha = 0.25;
-      ctx.fillStyle = `rgb(${cr},${cg},${cb})`;
+      // 双层光晕模拟发光质感（替代原 shadowBlur，性能友好）：
+      // 外层大范围低透明度 + 内层小范围中透明度，叠加产生柔和辉光
+      ctx.fillStyle = colorStr;
+      ctx.globalAlpha = 0.12;
       ctx.beginPath();
-      ctx.arc(x, y, radius * 2.2, 0, Math.PI * 2);
+      ctx.arc(x, y, radius * 3.0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 0.26;
+      ctx.beginPath();
+      ctx.arc(x, y, radius * 1.9, 0, Math.PI * 2);
       ctx.fill();
 
       // 核心粒子
       ctx.globalAlpha = 0.95;
-      ctx.fillStyle = `rgb(${cr},${cg},${cb})`;
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
       ctx.fill();
     }
-    ctx.shadowBlur = 0;
     ctx.globalAlpha = 1;
 
-    // 条形数据标签（学段/城乡/性别阶段，在条形右侧）
+    // 条形数据标签（学段/城乡/性别阶段，在条形右侧）—— 去掉 shadowBlur 文字辉光
     const labels = stageBarLabels[sa];
     if (labels && sa > 0){
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'left';
-      ctx.font = `600 ${Math.round(H * 0.034)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+      const titleFont = `600 ${Math.round(H * 0.034)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+      const numFont = `400 ${Math.round(H * 0.024)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+      ctx.font = titleFont;
       labels.forEach(lbl => {
         const pct = Math.round((lbl.count / TOTAL) * 1000) / 10;
-        // 组名：粒子色加深，保证在浅色背景上可读，保留同色微辉光
+        // 组名：粒子色加深，保证在浅色背景上可读
         ctx.globalAlpha = 1;
         ctx.fillStyle = darkenHex(lbl.color, 0.5);
-        ctx.shadowColor = lbl.color;
-        ctx.shadowBlur = 6;
         ctx.fillText(lbl.text, lbl.x, lbl.y - 4);
-        // 百分比 + 粒子数：深色文本（替换原白色，浅底上清晰可读）
+        // 百分比 + 粒子数：深色文本
         ctx.globalAlpha = 0.85;
         ctx.fillStyle = '#2A2A2A';
-        ctx.shadowBlur = 0;
-        ctx.font = `400 ${Math.round(H * 0.024)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+        ctx.font = numFont;
         ctx.fillText(pct + '%  ·  ' + lbl.count + ' 粒', lbl.x, lbl.y + H * 0.03);
-        ctx.font = `600 ${Math.round(H * 0.034)}px "PingFang SC","Microsoft YaHei",sans-serif`;
+        ctx.font = titleFont;
       });
       ctx.globalAlpha = 1;
-      ctx.shadowBlur = 0;
     }
 
-    // 底图与顶部文字淡化
-    const mapOpacity = Math.max(0.08, 1 - scrollP * 1.9);
-    mapChartEl.style.opacity = mapOpacity;
-    if (topText) topText.style.opacity = Math.max(0.10, 1 - scrollP * 2.8);
-    // 右侧固定说明：柱图阶段淡入后保持不变（仅在数值变化时写入，避免逐帧触发样式重算）
+    // 底图与顶部文字淡化（脏检查：仅在值变化时写入 style，避免逐帧触发 ECharts 重绘与回流）
+    // 用 smoothScrollP 保持与粒子同步
+    const mapOpacity = Math.max(0.08, 1 - smoothScrollP * 1.9);
+    if (mapOpacity !== lastMapOpacity){ lastMapOpacity = mapOpacity; mapChartEl.style.opacity = mapOpacity; }
+    const topOpacity = Math.max(0.10, 1 - smoothScrollP * 2.8);
+    if (topText && topOpacity !== lastTopOpacity){ lastTopOpacity = topOpacity; topText.style.opacity = topOpacity; }
+    // 右侧固定说明
     if (sideText){
-      const a = Math.max(0, Math.min(1, (scrollP - 0.28) / 0.06));
+      const a = Math.max(0, Math.min(1, (smoothScrollP - 0.30) / 0.06));
       if (Math.abs(a - sideAlpha) > 0.01){ sideAlpha = a; sideText.style.opacity = a; }
     }
-    if (stageLabel) stageLabel.textContent = STAGE_NAMES[sa];
+    const labelText = STAGE_NAMES[sa];
+    if (stageLabel && labelText !== lastStageLabel){ lastStageLabel = labelText; stageLabel.textContent = labelText; }
 
     requestAnimationFrame(render);
   }
@@ -1477,17 +1509,22 @@ body{
     }, 80);
   }
 
-  // ---- 加载 GeoJSON ----
+  // ---- 加载 GeoJSON（优先本地 china-map.js，避免 file:// 跨域 fetch 失败；远程作为降级） ----
   function loadGeo(){
-    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
-      .then(r => r.json())
-      .then(geo => {
-        geoJson = geo;
-        renderEChartsMap();
-      })
-      .catch(err => {
-        console.error('中国地图 GeoJSON 加载失败：', err);
-      });
+    if (window.CHINA_GEOJSON){
+      geoJson = window.CHINA_GEOJSON;
+      renderEChartsMap();
+    } else {
+      fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+        .then(r => r.json())
+        .then(geo => {
+          geoJson = geo;
+          renderEChartsMap();
+        })
+        .catch(err => {
+          console.error('中国地图 GeoJSON 加载失败：', err);
+        });
+    }
   }
 
   function init(){

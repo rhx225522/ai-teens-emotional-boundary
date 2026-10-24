@@ -16,7 +16,7 @@ body{
   font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--bg);
   color:var(--ink);
-  font-size:16px;
+  font-size:19px;
   line-height:1.9;
   overflow-x:hidden;
 }
@@ -26,19 +26,19 @@ body{
 .container{width:70%;margin:0 auto;max-width:1100px}
 .container.narrow{max-width:780px}
 h2.ch-title{
-  font-size:26px;font-weight:700;color:var(--cover-main);
+  font-size:29px;font-weight:700;color:var(--cover-main);
   letter-spacing:1px;margin-bottom:8px;
   padding-top:16px;border-top:2px solid var(--gold-deep);
   display:inline-block;padding-right:18px;
 }
 h2.ch-title .num{color:var(--gold-deep);margin-right:10px}
 h3.sec-title{
-  font-size:20px;font-weight:600;color:var(--cover-main);
+  font-size:23px;font-weight:600;color:var(--cover-main);
   margin:22px 0 14px;letter-spacing:.5px;
 }
 h3.sec-title .idx{color:var(--gold-deep);font-weight:700;margin-right:8px}
 p.body{
-  font-size:16px;color:var(--ink);line-height:1.9;
+  font-size:19px;color:var(--ink);line-height:1.9;
   margin-bottom:18px;text-align:justify;
 }
 p.body .hl{color:var(--gold-deep);font-weight:600}
@@ -48,21 +48,21 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .quote{
   margin:24px 0;padding:14px 20px;background:rgba(244,201,93,.06);
   border-left:2px solid var(--gold);color:var(--ink-sub);
-  font-size:16px;line-height:1.85;border-radius:0 4px 4px 0;
+  font-size:19px;line-height:1.85;border-radius:0 4px 4px 0;
 }
 .source-line{
-  font-size:12px;color:var(--ink-dim);
+  font-size:15px;color:var(--ink-dim);
   margin-top:8px;line-height:1.7;
 }
 .source-line a{color:var(--step-1);text-decoration:none;border-bottom:1px dotted var(--step-1)}
 .source-line a:hover{color:var(--risk);border-color:var(--risk)}
 .tag-caveat{
-  display:inline-block;font-size:12px;color:var(--ink-dim);
+  display:inline-block;font-size:15px;color:var(--ink-dim);
   background:rgba(26,58,74,.06);padding:3px 10px;border-radius:10px;
   margin-left:8px;letter-spacing:.5px;
 }
 .footnote-mark{
-  font-size:12px;color:var(--ink-dim);
+  font-size:15px;color:var(--ink-dim);
   border-bottom:1px dashed var(--gold-deep);
   cursor:help;
 }
@@ -80,7 +80,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   box-shadow:0 2px 18px rgba(26,58,74,.14);background:#E8ECEB;
 }
 .lead-figure figcaption{
-  font-size:12px;color:var(--ink-dim);line-height:1.6;
+  font-size:15px;color:var(--ink-dim);line-height:1.6;
   margin-top:10px;text-align:center;letter-spacing:.2px;
 }
 #s4-lead{padding-bottom:16px}
@@ -112,7 +112,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
 }
 .cover-text .sub{
-  font-size:23px;color:rgba(255,255,255,.92);
+  font-size:26px;color:rgba(255,255,255,.92);
   line-height:1.9;max-width:620px;margin:0 auto 28px;
   text-shadow:0 1px 14px rgba(0,0,0,.62);
 }
@@ -120,7 +120,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .cover-eyebrow{
   display:flex;align-items:center;justify-content:center;gap:22px;
   margin:0 0 17px;
-  font-size:24px;font-weight:600;letter-spacing:.34em;text-indent:.34em;
+  font-size:27px;font-weight:600;letter-spacing:.34em;text-indent:.34em;
   color:var(--gold);font-variant-numeric:tabular-nums;
 }
 .cover-eyebrow::before,.cover-eyebrow::after{
@@ -147,7 +147,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 #ch4 .cover-num{left:48%;top:33%}
 .scroll-cue{
   position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
-  font-size:13px;color:rgba(255,255,255,.7);
+  font-size:16px;color:rgba(255,255,255,.7);
   letter-spacing:.28em;text-align:center;z-index:2;
 }
 .scroll-cue::after{
@@ -208,8 +208,13 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 
 /* ========== 4.1 七国与欧盟地图 ========== */
 .map-wrap{
-  margin:30px 0;padding:30px 24px;background:#fff;
-  border:1px solid var(--divider);border-radius:8px;
+  margin:30px 0;padding:30px 24px;
+  /* 通栏全屏：作为 section 直接子元素，width:100% 铺满视口内容区（不含滚动条，无白边） */
+  width:100%;
+  box-sizing:border-box;
+  background:#fff;
+  border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);border-radius:0;
+  box-shadow:none;
   display:flex;align-items:stretch;
   --ai-w:clamp(288px,30vw,340px);
 }
@@ -219,12 +224,12 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .map-svg{width:100%;height:420px;display:block;margin-bottom:18px}
 .map-legend{
   display:flex;flex-wrap:wrap;gap:18px;justify-content:center;
-  font-size:13px;color:var(--ink-sub);margin-top:8px;
+  font-size:16px;color:var(--ink-sub);margin-top:8px;
 }
-.map-legend .lg-item{display:flex;align-items:center;gap:6px;font:inherit;font-size:13px;color:var(--ink-sub);background:none;border:1px solid transparent;border-radius:14px;padding:3px 10px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.map-legend .lg-item{display:flex;align-items:center;gap:6px;font:inherit;font-size:16px;color:var(--ink-sub);background:none;border:1px solid transparent;border-radius:14px;padding:3px 10px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
 .map-legend .lg-item:hover{background:#F7F9F9;border-color:var(--divider)}
 .map-legend .lg-item.on{background:rgba(212,160,23,.1);border-color:var(--gold-deep);color:var(--gold-deep)}
-.map-note{font-size:11.5px;line-height:1.7;color:var(--ink-dim);margin-top:8px;text-align:center}
+.map-note{font-size:12.5px;line-height:1.7;color:var(--ink-dim);margin-top:8px;text-align:center}
 .map-legend .lg-dot{
   width:14px;height:14px;border-radius:3px;display:inline-block;
 }
@@ -232,7 +237,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .lg-2{background:#D4A017}
 .lg-3{background:#5B9AB5}
 .lg-4{background:#888888}
-.lg-hint{color:var(--ink-dim);font-size:12px;margin-left:8px}
+.lg-hint{color:var(--ink-dim);font-size:15px;margin-left:8px}
 
 /* ========== 4.1 AI 交互世界地图（推挤式抽屉：展开时地图同步收缩，任何状态都不遮挡内容） ========== */
 .map-stage{position:relative;border-radius:8px;overflow:hidden}
@@ -243,11 +248,11 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
    同时由脚本把国名下的小字沿"远离国名"方向挪 7 个单位，避免两行贴住。
    补偿只在 ≥821px 生效：≤820px 时地图是全宽的，不需要补偿 */
 @media (min-width:821px){
-  .map-wrap.open .map-svg text.m-label{font-size:16px}
-  .map-wrap.open .map-svg text.m-label[font-size="12"]{font-size:14px}
-  .map-wrap.open .map-svg text.m-sub{font-size:12px}
-  .map-wrap.open .map-svg g[font-size="9"] text{font-size:11px}
-  .map-wrap.open .map-svg #aiHubG text{font-size:13px}
+  .map-wrap.open .map-svg text.m-label{font-size:19px}
+  .map-wrap.open .map-svg text.m-label[font-size="12"]{font-size:17px}
+  .map-wrap.open .map-svg text.m-sub{font-size:15px}
+  .map-wrap.open .map-svg g[font-size="9"] text{font-size:12px}
+  .map-wrap.open .map-svg #aiHubG text{font-size:16px}
 }
 .m-point{cursor:pointer}
 .m-point:focus-visible{outline:none}
@@ -267,35 +272,35 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 @keyframes ping{0%{transform:scale(.55);opacity:.9}100%{transform:scale(2.3);opacity:0}}
 
 /* 悬停提示 */
-.map-tooltip{position:absolute;z-index:5;pointer-events:none;background:rgba(15,37,50,.92);color:#fff;font-size:12px;line-height:1.6;padding:8px 12px;border-radius:6px;border:1px solid rgba(244,201,93,.5);box-shadow:0 6px 18px rgba(15,37,50,.25);max-width:250px;white-space:nowrap;transform:translate(-50%,-118%)}
+.map-tooltip{position:absolute;z-index:5;pointer-events:none;background:rgba(15,37,50,.92);color:#fff;font-size:15px;line-height:1.6;padding:8px 12px;border-radius:6px;border:1px solid rgba(244,201,93,.5);box-shadow:0 6px 18px rgba(15,37,50,.25);max-width:250px;white-space:nowrap;transform:translate(-50%,-118%)}
 .map-tooltip .tt-name{color:var(--gold);font-weight:700;margin-right:6px}
-.map-tooltip .tt-tag{font-size:10px;background:rgba(244,201,93,.15);color:var(--gold);padding:1px 6px;border-radius:8px;margin-left:6px}
-.map-tooltip .tt-geo{font-size:10px;color:rgba(255,255,255,.62)}
+.map-tooltip .tt-tag{font-size:11px;background:rgba(244,201,93,.15);color:var(--gold);padding:1px 6px;border-radius:8px;margin-left:6px}
+.map-tooltip .tt-geo{font-size:11px;color:rgba(255,255,255,.62)}
 
 /* 点击详情卡 */
 /* max-height 必须跟着地图高度走：卡片内容比地图高时（美国卡 535px、欧盟卡 487px，而地图仅 202–483px），
    超出的部分会被 .map-stage 的 overflow:hidden 从顶部切掉，而「×」正好在最顶部，于是点不到。
    这里给卡片封顶 + 中段滚动，头部（含 ×）与底部按钮固定在可视区内。 */
-.map-detail{position:absolute;z-index:6;left:16px;bottom:16px;width:320px;max-width:calc(100% - 32px);max-height:calc(100% - 32px);display:flex;flex-direction:column;background:#fff;border:1px solid var(--divider);border-radius:10px;box-shadow:0 12px 32px rgba(15,37,50,.18);padding:16px 16px 12px;font-size:13px;color:var(--ink-sub);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s ease, transform .25s ease}
+.map-detail{position:absolute;z-index:6;left:16px;bottom:16px;width:320px;max-width:calc(100% - 32px);max-height:calc(100% - 32px);display:flex;flex-direction:column;background:#fff;border:1px solid var(--divider);border-radius:10px;box-shadow:0 12px 32px rgba(15,37,50,.18);padding:16px 16px 12px;font-size:16px;color:var(--ink-sub);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s ease, transform .25s ease}
 .map-detail.show{opacity:1;transform:none;pointer-events:auto}
-.md-close{position:absolute;top:-8px;right:-6px;border:none;background:none;color:var(--ink-dim);font-size:18px;cursor:pointer;line-height:1}
+.md-close{position:absolute;top:-8px;right:-6px;border:none;background:none;color:var(--ink-dim);font-size:21px;cursor:pointer;line-height:1}
 .md-head{position:relative;display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-right:24px;cursor:grab;touch-action:none;user-select:none}
 .map-detail.dragging .md-head{cursor:grabbing}
 .md-grip{width:10px;height:14px;flex:none;opacity:.45;background-image:radial-gradient(circle,#6A7075 0 1.1px,transparent 1.2px);background-size:5px 5px;background-position:0 1px}
 .md-scroll{overflow:auto;min-height:0;flex:1 1 auto;overscroll-behavior:contain;scrollbar-width:thin}
-.md-name{font-size:16px;font-weight:700;color:var(--cover-main);letter-spacing:.5px}
-.md-tag{font-size:11px;color:#fff;padding:2px 8px;border-radius:8px;letter-spacing:.5px;flex:none}
+.md-name{font-size:19px;font-weight:700;color:var(--cover-main);letter-spacing:.5px}
+.md-tag{font-size:12px;color:#fff;padding:2px 8px;border-radius:8px;letter-spacing:.5px;flex:none}
 .md-tag.t1{background:#B84A3E}
 .md-tag.t2{background:#D4A017}
 .md-tag.t3{background:#5B9AB5}
 .md-tag.t4{background:#888888}
 .md-laws{list-style:none;margin:4px 0 10px;display:flex;flex-direction:column;gap:6px}
-.md-laws li{border-left:2px solid var(--gold-deep);padding:1px 0 1px 8px;font-size:12px;line-height:1.6}
+.md-laws li{border-left:2px solid var(--gold-deep);padding:1px 0 1px 8px;font-size:15px;line-height:1.6}
 .md-laws b{color:var(--cover-main)}
-.md-summary{font-size:12px;line-height:1.7;color:var(--ink-sub);border-top:1px dashed var(--divider);padding-top:8px}
-.md-geo{font-size:11px;line-height:1.6;color:var(--ink-dim);margin-top:6px}
+.md-summary{font-size:15px;line-height:1.7;color:var(--ink-sub);border-top:1px dashed var(--divider);padding-top:8px}
+.md-geo{font-size:12px;line-height:1.6;color:var(--ink-dim);margin-top:6px}
 .md-actions{display:flex;gap:8px;margin-top:10px}
-.md-btn{flex:1;border:none;background:var(--cover-main);color:#fff;font-size:12px;padding:7px 0;border-radius:6px;cursor:pointer;transition:opacity .2s}
+.md-btn{flex:1;border:none;background:var(--cover-main);color:#fff;font-size:15px;padding:7px 0;border-radius:6px;cursor:pointer;transition:opacity .2s}
 .md-btn:hover{opacity:.85}
 .md-btn.ghost{background:#F4F6F5;color:var(--ink-sub);border:1px solid var(--divider)}
 
@@ -310,12 +315,12 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .ai-tab{position:absolute;top:50%;right:0;transform:translateY(-50%);z-index:8;
   display:flex;flex-direction:column;align-items:center;gap:11px;padding:19px 5px;
   background:linear-gradient(135deg,#1A3A4A,#0F2532);color:#fff;border:none;cursor:pointer;
-  border-radius:9px 0 0 9px;font-family:inherit;font-size:14.5px;
+  border-radius:9px 0 0 9px;font-family:inherit;font-size:17.5px;
   box-shadow:-3px 0 15px rgba(15,37,50,.24);
   transition:background .2s}
 .ai-tab:hover{background:linear-gradient(135deg,#27556E,#153345)}
 .ai-tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.ai-tab-badge{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1A3A4A;font-size:13.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.ai-tab-badge{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1A3A4A;font-size:16.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
 .ai-tab-txt{writing-mode:vertical-rl;letter-spacing:.2em;line-height:1.05}
 /* 一次性引导（每个会话只在首次滚到这块时提示一次）：标签脉冲 + 左侧提示气泡。
    气泡是竖标签的子元素，所以点气泡＝点标签；它在标签左侧的空白海域，压不到任何光点 */
@@ -326,7 +331,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .ai-tab.hint{animation:tabHint 1.5s ease-in-out 3}
 .ai-tip{position:absolute;right:calc(100% + 17px);top:50%;white-space:nowrap;
   background:#fff;color:var(--ink);border:1px solid rgba(212,160,23,.6);border-radius:19px;
-  padding:9px 17px;font-size:14.5px;font-weight:600;letter-spacing:.02em;
+  padding:9px 17px;font-size:17.5px;font-weight:600;letter-spacing:.02em;
   box-shadow:0 8px 22px rgba(15,37,50,.18);
   opacity:0;transform:translate(8px,-50%);pointer-events:none;
   transition:opacity .3s ease,transform .3s ease}
@@ -335,21 +340,21 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border:6px solid transparent;border-left-color:#fff;
   filter:drop-shadow(1px 0 0 rgba(212,160,23,.6))}
 .ai-head{display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(135deg,#1A3A4A,#0F2532);color:#fff;flex:none}
-.ai-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1A3A4A;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
-.ai-title{font-size:13.5px;font-weight:700;letter-spacing:.5px;line-height:1.3}
-.ai-sub{font-size:11px;color:rgba(255,255,255,.72);line-height:1.35}
-.ai-clear{margin-left:auto;background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1}
+.ai-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1A3A4A;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex:none}
+.ai-title{font-size:16.5px;font-weight:700;letter-spacing:.5px;line-height:1.3}
+.ai-sub{font-size:12px;color:rgba(255,255,255,.72);line-height:1.35}
+.ai-clear{margin-left:auto;background:rgba(255,255,255,.12);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1}
 .ai-chat{flex:1;min-height:0;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;background:#FBFCFB;scroll-behavior:smooth}
 .ai-msg{display:flex;gap:8px;max-width:94%}
 .ai-msg.user{align-self:flex-end;flex-direction:row-reverse}
-.ai-msg .bubble{font-size:13px;line-height:1.7;padding:8px 12px;border-radius:10px;color:var(--ink);word-break:break-word}
+.ai-msg .bubble{font-size:16px;line-height:1.7;padding:8px 12px;border-radius:10px;color:var(--ink);word-break:break-word}
 .ai-msg.ai .bubble{background:#fff;border:1px solid var(--divider);border-top-left-radius:3px}
 .ai-msg.user .bubble{background:var(--cover-main);color:#fff;border-top-right-radius:3px}
-.ai-msg .mini{width:24px;height:24px;flex:none;border-radius:50%;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.ai-msg .mini{width:24px;height:24px;flex:none;border-radius:50%;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
 .ai-msg.ai .mini{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1A3A4A}
 .ai-msg.user .mini{background:var(--step-1);color:#fff}
 .ai-msg .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.chip{font-size:11px;color:var(--step-1);background:#EEF3F6;border:1px solid rgba(58,107,138,.25);padding:3px 9px;border-radius:12px;cursor:pointer;transition:background .2s}
+.chip{font-size:12px;color:var(--step-1);background:#EEF3F6;border:1px solid rgba(58,107,138,.25);padding:3px 9px;border-radius:12px;cursor:pointer;transition:background .2s}
 .chip:hover{background:#DDE8EE}
 .typing{display:inline-flex;gap:4px;padding:10px 12px}
 .typing i{width:6px;height:6px;border-radius:50%;background:var(--ink-dim);animation:blink 1s infinite}
@@ -361,12 +366,12 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .ai-sugs{display:flex;flex-wrap:nowrap;gap:5px;padding:6px 12px 4px;border-top:1px solid var(--divider);background:#FBFCFB;flex:none;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;
   -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}
 .ai-sugs::-webkit-scrollbar{display:none}
-.ai-sugs .chip{flex:0 0 auto;font-size:11px;color:var(--step-1);background:#fff;border:1px solid rgba(58,107,138,.3);padding:3px 9px;border-radius:14px;cursor:pointer;transition:border-color .2s,color .2s}
+.ai-sugs .chip{flex:0 0 auto;font-size:12px;color:var(--step-1);background:#fff;border:1px solid rgba(58,107,138,.3);padding:3px 9px;border-radius:14px;cursor:pointer;transition:border-color .2s,color .2s}
 .ai-sugs .chip:hover{border-color:var(--gold-deep);color:var(--gold-deep)}
 .ai-input{display:flex;gap:8px;padding:8px 12px 10px;background:#FBFCFB;flex:none}
-.ai-input input{flex:1;border:1px solid var(--divider);border-radius:8px;padding:7px 10px;font-size:13px;outline:none;font-family:inherit;min-width:0}
+.ai-input input{flex:1;border:1px solid var(--divider);border-radius:8px;padding:7px 10px;font-size:16px;outline:none;font-family:inherit;min-width:0}
 .ai-input input:focus{border-color:var(--step-1)}
-.ai-input button{border:none;background:var(--cover-main);color:#fff;border-radius:8px;padding:0 14px;font-size:13px;cursor:pointer;flex:none}
+.ai-input button{border:none;background:var(--cover-main);color:#fff;border-radius:8px;padding:0 14px;font-size:16px;cursor:pointer;flex:none}
 .ai-input button:disabled{opacity:.5;cursor:not-allowed}
 
 /* 飞线 */
@@ -415,16 +420,16 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
    1000px 级视口下下轨 38%/58%/73% 三个标签互相叠压、下轨还越出轨道高度。 */
 .dual-timeline{position:relative}
 .dual-timeline .dt-title{
-  font-size:16px;font-weight:600;color:var(--cover-main);
+  font-size:19px;font-weight:600;color:var(--cover-main);
   margin-bottom:8px;letter-spacing:.5px;line-height:1.5;
 }
 .dual-timeline .dt-sub{
-  font-size:16px;color:var(--ink-sub);line-height:1.7;margin-bottom:10px;
+  font-size:19px;color:var(--ink-sub);line-height:1.7;margin-bottom:10px;
 }
 /* 图例：与合规日历同一版式语言 */
 .dt-legend{
   display:flex;flex-wrap:wrap;gap:6px 18px;
-  margin-bottom:16px;font-size:12px;color:var(--ink-dim);
+  margin-bottom:16px;font-size:15px;color:var(--ink-dim);
 }
 .dt-legend .dl-i{display:inline-flex;align-items:center;gap:5px}
 .dt-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
@@ -440,20 +445,20 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .dt-axis.bot{top:122px}
 /* 语义标签贴在各自轴线左侧：上轨文字在轴上方，下轨文字在轴下方 */
 .dt-label{
-  position:absolute;left:0;font-size:11px;font-weight:600;letter-spacing:.5px;
+  position:absolute;left:0;font-size:12px;font-weight:600;letter-spacing:.5px;
 }
 .dt-label.top{top:96px;transform:translateY(-100%);color:var(--risk)}
 .dt-label.bot{top:122px;color:var(--gold-deep)}
 .dt-event{
   position:absolute;width:14%;transform:translateX(-50%);
-  font-size:11px;line-height:1.55;color:var(--ink-sub);
+  font-size:12px;line-height:1.55;color:var(--ink-sub);
 }
 .dt-event.top{
   top:0;height:96px;text-align:center;padding-bottom:18px;
 }
 .dt-event.bot{top:122px;width:12%;text-align:center;padding-top:18px}
 .dt-event .dt-date{
-  display:block;font-weight:700;font-size:12px;margin-bottom:4px;
+  display:block;font-weight:700;font-size:15px;margin-bottom:4px;
 }
 .dt-event.top .dt-date{color:var(--risk)}
 .dt-event.bot .dt-date{color:var(--gold-deep)}
@@ -465,7 +470,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .dt-event.top .dt-stem{background:var(--risk);bottom:0}
 .dt-event.bot .dt-stem{background:var(--gold-deep);top:0}
 .dt-foot{
-  font-size:12px;color:var(--ink-dim);margin-top:12px;line-height:1.75;
+  font-size:15px;color:var(--ink-dim);margin-top:12px;line-height:1.75;
 }
 .dt-foot .df-note{color:var(--ink-dim);opacity:.85}
 
@@ -481,17 +486,17 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 }
 .gen-step:last-child{border-right:none}
 .gen-step .gs-idx{
-  font-size:12px;color:var(--ink-dim);letter-spacing:2px;
+  font-size:15px;color:var(--ink-dim);letter-spacing:2px;
 }
 .gen-step .gs-name{
-  font-size:18px;font-weight:700;color:var(--cover-main);
+  font-size:21px;font-weight:700;color:var(--cover-main);
   margin:6px 0 8px;letter-spacing:.5px;
 }
 .gen-step .gs-obj{
-  font-size:14px;color:var(--gold-deep);font-weight:600;margin-bottom:10px;
+  font-size:17px;color:var(--gold-deep);font-weight:600;margin-bottom:10px;
 }
 .gen-step .gs-desc{
-  font-size:16px;color:var(--ink-sub);line-height:1.75;
+  font-size:19px;color:var(--ink-sub);line-height:1.75;
 }
 .gen-step .gs-desc .hl{color:var(--cover-main);font-weight:600}
 .gen-step:nth-child(1){background:rgba(58,107,138,.04)}
@@ -503,13 +508,54 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 
 /* 读图指引：每张图一句"怎么读+结论"，常显不依赖悬浮 */
 .read-guide{
-  font-size:16px;color:var(--ink-sub);line-height:1.75;
+  font-size:19px;color:var(--ink-sub);line-height:1.75;
   margin:10px 0 0;padding:10px 14px;
   background:rgba(244,201,93,.05);border-left:2px solid var(--gold);
   border-radius:0 4px 4px 0;
 }
 .read-guide b{color:var(--cover-main);font-weight:600}
 .read-guide .rg-takeaway{color:var(--gold-deep);font-weight:600}
+
+/* 4.5 合规日历左右分栏：左＝缩小后的日历图，右＝延伸叙事
+   注：日历事件标签以百分比定宽（上轨14%／下轨11%），左侧必须够宽，
+   否则标签文字会被挤压换行。比例取 1.8:0.9，左侧约占 67%。
+   时间轴各层垂直尺寸整体压缩约 24%，让图高与右侧四段文字大致对齐。 */
+.cal-split{
+  display:grid;grid-template-columns:1.8fr .9fr;gap:24px;align-items:start;
+  margin:30px 0;
+}
+.cal-split .compliance-cal{margin:0;padding:20px 16px}
+/* 分栏内日历整体字号收一档，保证标签在百分比宽度内不换行 */
+.cal-split .compliance-cal .dt-title{font-size:17px;margin-bottom:6px;line-height:1.45}
+.cal-split .compliance-cal .dt-sub{font-size:15.5px;line-height:1.6;margin-bottom:8px}
+.cal-split .compliance-cal .cal-legend{margin-bottom:10px;font-size:12px;gap:6px 14px}
+.cal-split .compliance-cal .cal-event{font-size:11px;line-height:1.4}
+.cal-split .compliance-cal .cal-event .ce-date{font-size:11.5px;margin-bottom:2px}
+.cal-split .compliance-cal .cal-zoom-ev{font-size:11px;line-height:1.4}
+.cal-split .compliance-cal .cal-zoom-ev .ze-date{font-size:11.5px}
+.cal-split .compliance-cal .cal-zoom-ev .ze-delta{font-size:10.5px}
+.cal-split .compliance-cal .cal-foot{font-size:12px;line-height:1.6;margin-top:8px}
+/* 时间轴垂直尺寸整体压缩（原 446 → 340） */
+.cal-split .compliance-cal .cal-track{height:340px}
+.cal-split .compliance-cal .cal-axis{top:112px}
+.cal-split .compliance-cal .cal-event.up{height:112px}
+.cal-split .compliance-cal .cal-event.up::after{height:18px}
+.cal-split .compliance-cal .cal-event.down{top:112px}
+.cal-split .compliance-cal .cal-event.down::before{height:18px}
+.cal-split .compliance-cal .cal-impl-line{height:224px}
+.cal-split .compliance-cal .cal-window{top:96px;height:30px}
+.cal-split .compliance-cal .cal-window-label{top:76px}
+.cal-split .compliance-cal .cal-impl-label{top:76px}
+.cal-split .compliance-cal .cal-zoom{top:208px;padding-top:10px}
+.cal-split .compliance-cal .cal-zoom-head{margin-bottom:10px}
+.cal-split .compliance-cal .cal-zoom-track{height:90px}
+.cal-split .cal-right{min-width:0}
+.cal-split .cal-right > p.body{margin-bottom:0;text-indent:2em}
+.cal-split .cal-right > p.body:first-child{margin-top:0}
+.cal-split .cal-right > p.body:last-child{margin-bottom:0}
+@media (max-width:900px){
+  .cal-split{grid-template-columns:1fr;gap:18px}
+}
 
 /* 合规日历
    注：主轴事件标签宽度按容器百分比（14%/11%）而非固定 px，
@@ -522,16 +568,16 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 /* 卡片标题／副标题／图例：原卡片未给标题定样式，
    与上方双轨时间轴同一版式语言 */
 .compliance-cal .dt-title{
-  font-size:16px;font-weight:600;color:var(--cover-main);
+  font-size:19px;font-weight:600;color:var(--cover-main);
   margin-bottom:8px;letter-spacing:.5px;line-height:1.5;
 }
 .compliance-cal .dt-sub{
-  font-size:16px;color:var(--ink-sub);line-height:1.7;
+  font-size:19px;color:var(--ink-sub);line-height:1.7;
   margin-bottom:10px;
 }
 .cal-legend{
   display:flex;flex-wrap:wrap;gap:6px 18px;
-  margin-bottom:16px;font-size:12px;color:var(--ink-dim);
+  margin-bottom:16px;font-size:15px;color:var(--ink-dim);
 }
 .cal-legend .cl-i{display:inline-flex;align-items:center;gap:5px}
 .cal-legend i{display:inline-block;flex:none}
@@ -547,7 +593,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 }
 /* 主轴两段的语义标签（与双轨时间轴 dt-label 同一用法） */
 .cal-band{
-  position:absolute;left:0;font-size:11px;font-weight:600;
+  position:absolute;left:0;font-size:12px;font-weight:600;
   letter-spacing:.5px;color:var(--ink-dim);
 }
 .cal-axis{
@@ -561,12 +607,12 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 }
 .cal-window-label{
   position:absolute;top:104px;transform:translateX(-50%);
-  font-size:11px;color:var(--gold-deep);font-weight:700;
+  font-size:12px;color:var(--gold-deep);font-weight:700;
   letter-spacing:.5px;white-space:nowrap;
 }
 .cal-event{
   position:absolute;transform:translateX(-50%);
-  width:14%;font-size:11px;color:var(--ink-sub);line-height:1.55;
+  width:14%;font-size:12px;color:var(--ink-sub);line-height:1.55;
   text-align:center;
 }
 .cal-event.up{
@@ -576,7 +622,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .cal-event.down{top:150px;width:11%}
 .cal-event .ce-date{
   display:block;font-weight:700;color:var(--cover-main);
-  font-size:12px;margin-bottom:4px;
+  font-size:15px;margin-bottom:4px;
 }
 .cal-event.up::after{
   content:"";display:block;width:1px;height:24px;
@@ -592,7 +638,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 }
 .cal-impl-label{
   position:absolute;transform:translateX(-50%);
-  font-size:11px;color:var(--gold);font-weight:700;
+  font-size:12px;color:var(--gold);font-weight:700;
   letter-spacing:.5px;background:var(--cover-deep);
   padding:2px 6px;border-radius:3px;
 }
@@ -603,7 +649,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   padding-top:12px;border-top:1px dashed var(--divider);
 }
 .cal-zoom-head{
-  font-size:11px;font-weight:700;color:var(--gold-deep);
+  font-size:12px;font-weight:700;color:var(--gold-deep);
   letter-spacing:.5px;line-height:1.6;margin-bottom:14px;
 }
 .cal-zoom-track{position:relative;height:116px}
@@ -613,15 +659,15 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 }
 .cal-zoom-ev{
   position:absolute;top:20px;transform:translateX(-50%);width:20%;
-  font-size:11px;color:var(--ink-sub);line-height:1.5;text-align:center;
+  font-size:12px;color:var(--ink-sub);line-height:1.5;text-align:center;
 }
 .cal-zoom-ev .ze-delta{
-  display:block;font-size:11px;font-weight:700;
+  display:block;font-size:12px;font-weight:700;
   color:var(--gold-deep);letter-spacing:.3px;margin-bottom:3px;
 }
 .cal-zoom-ev .ze-date{
   display:block;font-weight:700;color:var(--cover-main);
-  font-size:12px;margin-bottom:3px;
+  font-size:15px;margin-bottom:3px;
 }
 .cal-zoom-ev::before{
   content:"";position:absolute;left:50%;top:-20px;
@@ -633,7 +679,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   background:var(--gold-deep);
 }
 .cal-foot{
-  font-size:12px;color:var(--ink-dim);text-align:center;
+  font-size:15px;color:var(--ink-dim);text-align:center;
   margin-top:10px;line-height:1.7;
 }
 .cal-foot .cf-punch{color:var(--gold-deep);font-weight:700}
@@ -672,7 +718,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .ax-tip{
   position:absolute;z-index:6;width:236px;max-width:76vw;
   text-align:left;
-  background:rgba(15,37,50,.95);color:#fff;font-size:12px;line-height:1.6;
+  background:rgba(15,37,50,.95);color:#fff;font-size:15px;line-height:1.6;
   padding:10px 12px;border-radius:6px;
   border:1px solid rgba(244,201,93,.5);
   box-shadow:0 8px 22px rgba(15,37,50,.28);
@@ -748,57 +794,59 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .s42-chart{position:relative}
 #dualBarChart{width:100%;height:330px}
 .s42-note{
-  margin-top:10px;text-align:center;font-size:12.5px;color:var(--ink-dim);
+  margin-top:10px;text-align:center;font-size:15.5px;color:var(--ink-dim);
   line-height:1.7;letter-spacing:.2px;
 }
 .s42-narr > p.body:first-child{margin-top:0}
 .s42-narr > p.body:last-child{margin-bottom:0}
 
-/* 4.1 交叉滚动舞台：A＝左文案/右天平 ⇄ B＝左照片/右文案 */
-.cross{
-  position:relative;width:100%;height:140vh;margin:0;
+/* 4.1 天平两端：图文左右换位的滚动叙事（采用 2.3 syc-stick 模式）
+   静态基线（窄屏 / 减少动效 / 无脚本）：文案与图依次纵向堆叠 */
+.syc-stick{position:relative}
+.syc-field{margin:26px 0}
+.syc-copy .body{margin-bottom:16px}
+.syc-copy .body:last-child{margin-bottom:0}
+.syc-copy .quote{margin:14px 0}
+.syc-left,.syc-right{
+  background:#fff;border:1px solid var(--divider);
+  border-radius:6px;padding:24px 22px;
+  margin:26px 0;
 }
-.cross-stage{
-  position:sticky;top:56px;height:calc(100vh - 56px);overflow:hidden;
-  display:flex;flex-direction:column;justify-content:center;
+/* 主动模式（≥901px 宽且 ≥640px 高、允许动效）：把一屏钉在导航下方，图文左右换位 */
+.syc-stick.is-active{height:460vh}
+.syc-stick.is-active .syc-stage{
+  position:sticky;top:56px;height:calc(100vh - 56px);
+  display:flex;flex-direction:column;
 }
-/* 标题随内容一起整体居中，作为内容首行，不单独贴顶 */
-.cross-stage .ch-title{
-  flex:0 0 auto;align-self:flex-start;
-  border-top:none;padding-top:0;margin:0 0 12px;
+.syc-stick.is-active .syc-head{flex:none;margin:0 0 12px}
+.syc-stick.is-active .syc-field{position:relative;flex:1;margin:0}
+.syc-stick.is-active .syc-copy,
+.syc-stick.is-active .syc-fig{
+  position:absolute;top:50%;left:0;width:46%;margin:0;
+  opacity:0;will-change:transform,opacity;
 }
-.cross-inner{
-  position:relative;width:100%;flex:0 0 auto;min-height:0;
-  display:grid;grid-template-columns:1fr 1fr;gap:42px;
-}
-.cross-col{position:relative;min-height:0;display:grid}
-.cross-pane{
-  grid-area:1/1;min-width:0;display:flex;flex-direction:column;justify-content:flex-start;
-  padding:0;
-  opacity:0;pointer-events:none;will-change:opacity,transform;
-}
-.cross-pane .news-figure{margin:0}
-.cross-pane .balance-wrap{margin:0}
-.cross-pane.pane-text .body{margin-bottom:16px}
-.cross-pane.pane-text > .body:first-child{margin-top:0}
-.cross-pane.pane-text > .body:last-child{margin-bottom:0}
-.cross-pane.pane-text .quote{margin:14px 0}
+.syc-stick.is-active .syc-copy{z-index:1}
+.syc-stick.is-active .syc-fig{z-index:2}
+.syc-stick.is-active [data-syc="copy1"]{left:54%}
+.syc-stick.is-active .syc-left,
+.syc-stick.is-active .syc-right{padding:20px}
+.syc-stick.is-active .syc-fig .news-figure{margin:0}
+.syc-stick.is-active .syc-fig .balance-wrap{margin:0}
 
 /* 天平 */
 .balance-wrap{
-  margin:0;padding:8px 16px 10px;background:#fff;
-  border:1px solid var(--divider);border-radius:10px;
+  margin:0;padding:8px 16px 10px;
 }
 .balance-svg{width:100%;height:auto;aspect-ratio:600/180;display:block;margin:0 0 12px}
 /* 两项数据卡片：从 SVG 中移出，占用并填满天平的中间区域 */
 .balance-items{
   display:grid;grid-template-columns:1fr 1fr;gap:12px;
 }
-.pan-col{border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.9}
+.pan-col{border-radius:8px;padding:10px 12px;font-size:16px;line-height:1.9}
 .pan-pos{background:rgba(244,201,93,.13);border:1px solid rgba(212,160,23,.30)}
 .pan-neg{background:rgba(184,74,62,.09);border:1px solid rgba(184,74,62,.30)}
 .pan-col .pan-head{
-  font-weight:700;font-size:12px;letter-spacing:.3px;margin-bottom:2px;
+  font-weight:700;font-size:15px;letter-spacing:.3px;margin-bottom:2px;
   padding-bottom:4px;border-bottom:1px dashed rgba(0,0,0,.08);
 }
 .pan-pos .pan-head{color:#8a6d1a}
@@ -810,21 +858,12 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .pan-pos .pv{color:#7a5c0c}
 .pan-neg .pv{color:var(--risk-deep)}
 
-/* 图文平衡区已由 4.1 交叉滚动舞台接管 */
+/* 图文平衡区已由 4.1 syc-stick 滚动舞台接管 */
 
 @media (max-width:900px){
   .s42-hero{grid-template-columns:1fr;gap:18px}
   #dualBarChart{height:300px}
   .balance-items{grid-template-columns:1fr}
-  .cross{height:auto;margin:8px 0 0}
-  .cross-stage{position:static;height:auto;padding:0;overflow:visible}
-  .cross-inner{width:100%;height:auto;display:flex;flex-direction:column;gap:22px;transform:none}
-  .cross-col{display:contents}
-  .cross-pane{position:static;opacity:1;transform:none;pointer-events:auto}
-  #pText1{order:0}
-  #pFig1{order:1}
-  #pFig2{order:2}
-  #pText2{order:3}
 }
 
 /* ========== 4.3 假说辩论（两个假说并列陈述，不分高下） ========== */
@@ -863,10 +902,10 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   display:flex;gap:10px;align-items:center;z-index:5}
 .debate-hud .dp{
   display:flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
-  background:#fff;border:1px solid var(--divider);font-size:13px;color:var(--ink-dim);
+  background:#fff;border:1px solid var(--divider);font-size:16px;color:var(--ink-dim);
   font-weight:600;white-space:nowrap;transition:all .45s cubic-bezier(.22,.9,.3,1);
 }
-.debate-hud .dp .dpi{font-family:Georgia,serif;font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink-dim)}
+.debate-hud .dp .dpi{font-family:Georgia,serif;font-size:15px;font-variant-numeric:tabular-nums;color:var(--ink-dim)}
 .debate-hud .dp.on{
   background:var(--cover-main);border-color:var(--cover-main);color:#fff;
   transform:translateY(-2px);box-shadow:0 8px 22px rgba(26,58,74,.22);
@@ -895,13 +934,13 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .debater--b .d-cap{bottom:100%;margin-bottom:12px}
 .debater .d-cap .d-tag{
   display:block;width:100%;box-sizing:border-box;text-align:center;
-  font-size:12.5px;font-weight:700;letter-spacing:.5px;
+  font-size:15.5px;font-weight:700;letter-spacing:.5px;
   padding:4px 0;border-radius:999px;color:#fff;
 }
 .debater--a .d-cap .d-tag{background:var(--cover-main)}
 .debater--b .d-cap .d-tag{background:var(--step-1)}
 .debater .d-cap .d-sub{
-  display:block;font-size:11px;color:var(--ink-dim);
+  display:block;font-size:12px;color:var(--ink-dim);
   letter-spacing:.3px;line-height:1.45;
 }
 /* 气泡：居中错落 */
@@ -919,17 +958,17 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .say-bubble.sb-a[data-r="2"]{top:22%}
 /* 右侧气泡用 min() 兜底：矮视口下不会与左侧气泡上下相撞（原固定百分比会重叠） */
 .say-bubble.sb-b{right:22%;top:min(64%,calc(14% + 300px));border-right:3px solid var(--step-1)}
-.say-bubble .sb-who{font-size:11.5px;font-weight:700;letter-spacing:.6px;display:inline-block;margin-bottom:8px}
+.say-bubble .sb-who{font-size:12.5px;font-weight:700;letter-spacing:.6px;display:inline-block;margin-bottom:8px}
 .sb-a .sb-who{color:var(--cover-main)}
 .sb-b .sb-who{color:var(--step-1)}
 .say-bubble .sb-say{
-  font-size:clamp(14.5px,1.15vw,17px);line-height:1.82;color:var(--ink);
+  font-size:clamp(17.5px,1.35vw,20px);line-height:1.82;color:var(--ink);
   text-align:justify;font-weight:500;
 }
 .sb-say .sb-k{color:var(--cover-main);font-weight:700}
 .say-bubble .sb-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
 .say-bubble .sb-chip{
-  font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;
+  font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;
   letter-spacing:.3px;font-variant-numeric:tabular-nums;
 }
 .sb-a .sb-chip{background:rgba(26,58,74,.08);color:var(--cover-main)}
@@ -940,7 +979,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   .debater--b{right:1.4%}
   .say-bubble.sb-a{left:20%}
   .say-bubble.sb-b{right:17%}
-  .debate-hud .dp{padding:6px 11px;font-size:12px}
+  .debate-hud .dp{padding:6px 11px;font-size:15px}
 }
 @media (max-width:920px){
   .debate{height:auto}
@@ -977,15 +1016,15 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 }
 .fold-head:hover{background:rgba(58,107,138,.08)}
 .fold-head .fh-title{
-  font-size:16px;font-weight:600;color:var(--cover-main);
+  font-size:19px;font-weight:600;color:var(--cover-main);
   letter-spacing:.5px;
 }
 .fold-head .fh-title .tag{
-  font-size:11px;color:var(--ink-dim);font-weight:400;
+  font-size:12px;color:var(--ink-dim);font-weight:400;
   margin-left:10px;letter-spacing:.5px;
 }
 .fold-head .fh-arrow{
-  font-size:18px;color:var(--gold-deep);transition:transform .3s;
+  font-size:21px;color:var(--gold-deep);transition:transform .3s;
 }
 .fold-block.open .fh-arrow{transform:rotate(180deg)}
 .fold-body{
@@ -994,7 +1033,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .fold-block.open .fold-body{max-height:1200px}
 .fold-body-inner{padding:18px 22px}
 .fold-body-inner p{
-  font-size:16px;color:var(--ink-sub);line-height:1.85;
+  font-size:19px;color:var(--ink-sub);line-height:1.85;
   margin-bottom:14px;text-align:justify;
 }
 .fold-body-inner p .hl{color:var(--risk);font-weight:600}
@@ -1008,11 +1047,11 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border-left:3px solid var(--risk);border-radius:0 4px 4px 0;
 }
 .mit-cell .mc-num{
-  font-size:28px;font-weight:700;color:var(--risk);
+  font-size:31px;font-weight:700;color:var(--risk);
   line-height:1.2;margin-bottom:4px;
 }
 .mit-cell .mc-desc{
-  font-size:12px;color:var(--ink-sub);line-height:1.65;
+  font-size:15px;color:var(--ink-sub);line-height:1.65;
 }
 
 /* ========== 4.4 防线漏洞 ========== */
@@ -1026,16 +1065,16 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border-top:3px solid var(--risk);text-align:center;
 }
 .fn-cell .fn-num{
-  font-size:42px;font-weight:700;color:var(--risk);
+  font-size:45px;font-weight:700;color:var(--risk);
   line-height:1.1;margin-bottom:8px;letter-spacing:-1px;
 }
 .fn-cell .fn-desc{
-  font-size:16px;color:var(--ink-sub);line-height:1.65;
+  font-size:19px;color:var(--ink-sub);line-height:1.65;
 }
 .fn-cell .fn-desc .hl{color:var(--cover-main);font-weight:600}
 .est-note{
   display:inline-block;margin-top:4px;
-  font-size:11px;color:var(--risk,#B84A3E);opacity:.9;
+  font-size:12px;color:var(--risk,#B84A3E);opacity:.9;
 }
 
 .reg-type-chart{width:100%;height:280px;margin:8px 0}
@@ -1046,7 +1085,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .fam-text > .body:first-child{margin-top:0}
 .fam-text .quote{margin-bottom:0}
 .reg-type-note{
-  font-size:13px;color:var(--ink-sub);text-align:center;
+  font-size:16px;color:var(--ink-sub);text-align:center;
   margin:10px 0 0;font-style:italic;
 }
 .reg-type-note .hl{color:var(--risk);font-weight:600}
@@ -1058,7 +1097,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border:1px solid var(--divider);border-radius:8px;
 }
 .ur-col .ur-col-title{
-  font-size:15px;font-weight:700;color:var(--cover-main);
+  font-size:18px;font-weight:700;color:var(--cover-main);
   margin-bottom:14px;letter-spacing:.5px;
   padding-bottom:8px;border-bottom:2px solid var(--step-1);
 }
@@ -1066,7 +1105,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .ur-row{
   display:grid;grid-template-columns:90px 1fr 50px;gap:10px;
   align-items:center;padding:10px 0;
-  border-bottom:1px dashed var(--divider);font-size:13px;
+  border-bottom:1px dashed var(--divider);font-size:16px;
 }
 .ur-row:last-child{border-bottom:none}
 .ur-row .ur-label{color:var(--ink-sub)}
@@ -1087,7 +1126,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   display:flex;align-items:center;gap:14px;
   margin:16px 0 0;padding:14px 18px;
   background:rgba(184,74,62,.06);border-radius:6px;
-  font-size:13px;color:var(--ink-sub);
+  font-size:16px;color:var(--ink-sub);
 }
 .ur-gap-bar .ug-label{flex:0 0 90px}
 .ur-gap-bar .ug-nums{flex:1;display:flex;gap:10px;flex-wrap:wrap}
@@ -1095,7 +1134,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   font-weight:700;color:var(--risk);
 }
 .ur-foot{
-  font-size:13px;color:var(--ink-sub);text-align:center;
+  font-size:16px;color:var(--ink-sub);text-align:center;
   margin-top:14px;font-style:italic;line-height:1.7;
 }
 .ur-foot .hl{color:var(--cover-main);font-weight:600}
@@ -1112,11 +1151,26 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .part-card::before{
   content:"";position:absolute;left:0;top:0;width:100%;height:4px;
   border-radius:var(--radius) var(--radius) 0 0;
+  z-index:2;
 }
-.part-card--family{background:rgba(244,201,93,.09);border-color:rgba(212,160,23,.30)}
-.part-card--family::before{background:linear-gradient(90deg,var(--gold-deep),rgba(244,201,93,.55))}
-.part-card--school{background:rgba(58,107,138,.07);border-color:rgba(58,107,138,.26)}
-.part-card--school::before{background:linear-gradient(90deg,var(--step-1),rgba(91,154,181,.5))}
+/* 剪影水印：用伪元素承载背景图，单独控制透明度，不影响文字可读性 */
+.part-card::after{
+  content:"";position:absolute;top:0;right:0;bottom:0;left:0;z-index:0;pointer-events:none;
+  border-radius:inherit;
+  background-repeat:no-repeat;background-position:right 16px center;
+  background-size:auto 80%;opacity:.15;
+}
+.part-card > *{position:relative;z-index:1}
+.part-card--family{background:#fff;border-color:var(--divider)}
+.part-card--family::after{
+  background-image:url("../../assets/images/illustrations/ch4-family-bg.webp");
+  background-position:left 16px center;
+}
+.part-card--school{background:#fff;border-color:var(--divider)}
+.part-card--school::after{background-image:url("../../assets/images/illustrations/ch4-school-bg.webp")}
+/* 顶部细线统一为中性深色，不再用黄／蓝区分 */
+.part-card--family::before,
+.part-card--school::before{background:linear-gradient(90deg,var(--cover-main),rgba(26,58,74,.25))}
 .part-card .sec-title{margin-top:0}
 .part-card > :last-child{margin-bottom:0}
 .part-card .quote{background:rgba(255,255,255,.7);border-left-color:var(--gold-deep)}
@@ -1133,6 +1187,11 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border:1px solid var(--divider);border-radius:8px;
 }
 .pyramid-svg{width:100%;height:auto;display:block}
+.pyramid-source{
+  font-size:15px;color:var(--ink-dim);
+  line-height:1.7;margin-top:10px;text-align:center;
+  word-break:break-all;
+}
 
 .pillars{
   display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
@@ -1144,25 +1203,45 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   text-align:center;
 }
 .pillar .p-name{
-  font-size:13px;font-weight:700;color:var(--cover-main);
+  font-size:16px;font-weight:700;color:var(--cover-main);
   margin-bottom:4px;letter-spacing:.5px;
 }
 .pillar .p-desc{
-  font-size:11px;color:var(--ink-dim);line-height:1.6;
+  font-size:12px;color:var(--ink-dim);line-height:1.6;
 }
+
+/* 参与式自测：答题展开按钮 */
+.st-entry{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  margin:24px 0 0;
+}
+.st-entry > .body{margin:0;flex:1 1 auto}
+.st-toggle{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:12px 28px;
+  font-size:18px;font-weight:600;font-family:inherit;letter-spacing:.5px;
+  color:#fff;border:none;border-radius:999px;cursor:pointer;
+  background:linear-gradient(135deg,var(--cover-main),#1A3A4A);
+  box-shadow:0 6px 18px rgba(26,58,74,.22);
+  transition:transform .2s ease,box-shadow .2s ease,opacity .2s ease;
+}
+.st-toggle:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(26,58,74,.28)}
+.st-toggle:active{transform:translateY(0)}
+.st-toggle:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.st-toggle.done{background:linear-gradient(135deg,var(--gold-deep),#B88810)}
 
 /* 参与式自测 */
 .self-test{
-  margin:36px 0;padding:30px 24px;
+  margin:0 0 36px;padding:30px 24px;
   background:linear-gradient(135deg, rgba(26,58,74,.04), rgba(244,201,93,.04));
   border:1px solid var(--divider);border-radius:8px;
 }
 .self-test .st-title{
-  font-size:17px;font-weight:700;color:var(--cover-main);
+  font-size:20px;font-weight:700;color:var(--cover-main);
   margin-bottom:6px;letter-spacing:.5px;
 }
 .self-test .st-sub{
-  font-size:13px;color:var(--ink-dim);margin-bottom:22px;
+  font-size:16px;color:var(--ink-dim);margin-bottom:22px;
 }
 .st-grid{
   display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
@@ -1172,18 +1251,18 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border:1px solid var(--divider);border-radius:6px;
 }
 .st-q .sq-text{
-  font-size:14px;font-weight:600;color:var(--cover-main);
+  font-size:17px;font-weight:600;color:var(--cover-main);
   margin-bottom:10px;line-height:1.7;
 }
 .st-q .sq-text .sqn{
   display:inline-block;width:22px;height:22px;
   background:var(--gold-deep);color:#fff;border-radius:50%;
-  text-align:center;line-height:22px;font-size:12px;
+  text-align:center;line-height:22px;font-size:15px;
   margin-right:8px;font-weight:700;
 }
 .st-opts{display:flex;gap:8px;flex-wrap:wrap}
 .st-opt{
-  padding:8px 14px;font-size:13px;color:var(--ink-sub);
+  padding:8px 14px;font-size:16px;color:var(--ink-sub);
   background:rgba(26,58,74,.04);border:1px solid var(--divider);
   border-radius:14px;cursor:pointer;transition:all .25s;
 }
@@ -1192,12 +1271,12 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .st-result{
   margin-top:20px;padding:18px 22px;
   background:#fff;border-left:3px solid var(--gold);
-  border-radius:0 6px 6px 0;font-size:16px;color:var(--ink-sub);
+  border-radius:0 6px 6px 0;font-size:19px;color:var(--ink-sub);
   line-height:1.85;display:none;
 }
 .st-result.show{display:block}
 .st-result .str-tier{
-  font-size:16px;font-weight:700;color:var(--cover-main);
+  font-size:19px;font-weight:700;color:var(--cover-main);
   margin-bottom:6px;
 }
 
@@ -1231,11 +1310,11 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border-top:3px solid var(--gold);
 }
 .te-card .tc-name{
-  font-size:16px;font-weight:700;color:var(--gold);
+  font-size:19px;font-weight:700;color:var(--gold);
   letter-spacing:.5px;margin-bottom:10px;
 }
 .te-card .tc-body{
-  font-size:16px;color:rgba(255,255,255,.78);line-height:1.85;
+  font-size:19px;color:rgba(255,255,255,.78);line-height:1.85;
   text-align:justify;
 }
 .te-card .tc-body .hl{color:var(--gold);font-weight:600}
@@ -1247,7 +1326,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border:1px dashed rgba(244,201,93,.25);border-radius:8px;
 }
 .intro-recap .ir-title{
-  font-size:15px;color:var(--gold);font-weight:600;
+  font-size:18px;color:var(--gold);font-weight:600;
   letter-spacing:1px;margin-bottom:18px;text-align:center;
 }
 .ir-grid{
@@ -1262,15 +1341,15 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 }
 .ir-cell.in{opacity:1;transform:translateY(0)}
 .ir-cell .irq{
-  font-size:13px;color:rgba(255,255,255,.7);
+  font-size:16px;color:rgba(255,255,255,.7);
   line-height:1.7;margin-bottom:10px;
 }
 .ir-cell .irn{
-  font-size:30px;font-weight:700;color:var(--gold);
+  font-size:33px;font-weight:700;color:var(--gold);
   line-height:1.1;margin-bottom:6px;
 }
 .ir-cell .ir-note{
-  display:inline-block;font-size:11px;
+  display:inline-block;font-size:12px;
   color:#0F2532;background:var(--gold);
   padding:2px 8px;border-radius:8px;letter-spacing:.5px;
   font-weight:600;
@@ -1287,25 +1366,6 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 #s4-6 .intro-recap .ir-cell .irq{color:var(--ink-sub)}
 #s4-6 .intro-recap .ir-cell .irn{color:var(--gold-deep)}
 #s4-6 .intro-recap .ir-cell .ir-note{color:#0F2532;background:var(--gold-deep)}
-
-/* ========== 跋 ========== */
-.epilogue{
-  background:var(--bg);padding:48px 0 40px;
-}
-.epilogue .container{max-width:720px}
-.epigraph{
-  margin:30px 0;padding:18px 24px;
-  border-left:2px solid var(--gold);background:#fff;
-  font-size:16px;color:var(--ink-sub);line-height:1.95;
-  font-style:italic;border-radius:0 4px 4px 0;
-}
-.epigraph p{margin-bottom:14px}
-.epigraph p:last-child{margin-bottom:0}
-.epigraph .hl{color:var(--cover-main);font-weight:600}
-.epi-sign{
-  font-size:13px;color:var(--ink-dim);
-  text-align:right;margin-top:24px;letter-spacing:1px;
-}
 
 /* ========== 章末跳转（统一过渡卡片） ========== */
 .next-chapter{
@@ -1327,19 +1387,19 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .nc-frame::before{top:0;left:0;border-right:none;border-bottom:none}
 .nc-frame::after{bottom:0;right:0;border-left:none;border-top:none}
 .next-chapter .echo{
-  font-size:18px;line-height:1.8;color:#E8E8E8;
+  font-size:21px;line-height:1.8;color:#E8E8E8;
   margin-bottom:28px;letter-spacing:.5px;
 }
 .next-chapter .echo .hl{color:var(--gold);font-weight:600}
-.next-chapter .label{font-size:13px;letter-spacing:.5em;color:var(--gold)}
+.next-chapter .label{font-size:16px;letter-spacing:.5em;color:var(--gold)}
 .next-chapter .title{
   font-size:clamp(24px,2.6vw,32px);font-weight:700;
   margin:16px 0 10px;color:#fff;letter-spacing:.03em;
 }
-.next-chapter .hook{color:rgba(255,255,255,.55);transition:color .3s;font-size:15px}
+.next-chapter .hook{color:rgba(255,255,255,.55);transition:color .3s;font-size:18px}
 .next-chapter:hover .hook{color:var(--gold)}
 .next-chapter .arrow{
-  display:inline-block;font-size:28px;margin-top:24px;color:var(--gold);
+  display:inline-block;font-size:31px;margin-top:24px;color:var(--gold);
   transition:transform .3s;
 }
 .next-chapter:hover .arrow{transform:translateY(-4px)}
@@ -1381,7 +1441,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   box-shadow:0 2px 14px rgba(26,58,74,.12);background:#E8ECEB;
 }
 .news-figure figcaption{
-  font-size:13px;color:#888888;line-height:1.75;
+  font-size:16px;color:#888888;line-height:1.75;
   margin-top:10px;text-align:center;letter-spacing:.2px;
 }
 .news-figure.w50{width:50%}
@@ -1397,7 +1457,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border-top:1px solid var(--divider);
 }
 .credits details{
-  font-size:13px;color:var(--ink-sub);
+  font-size:16px;color:var(--ink-sub);
 }
 .credits summary{
   cursor:pointer;list-style:none;
@@ -1409,10 +1469,10 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 .credits summary::-webkit-details-marker{display:none}
 .credits summary:hover{color:var(--gold-deep)}
 .credits summary .cr-count{
-  font-size:12px;font-weight:400;color:var(--ink-dim);
+  font-size:15px;font-weight:400;color:var(--ink-dim);
 }
 .credits summary .cr-toggle{
-  font-size:11px;color:var(--ink-dim);
+  font-size:12px;color:var(--ink-dim);
   transition:transform .25s;
 }
 .credits details[open] summary .cr-toggle{transform:rotate(180deg)}
@@ -1421,17 +1481,89 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   border-top:1px dashed var(--divider);
 }
 .credits .cr-list p{
-  font-size:12.5px;color:var(--ink-dim);line-height:1.85;
+  font-size:15.5px;color:var(--ink-dim);line-height:1.85;
   margin-bottom:4px;word-break:break-all;
 }
 .credits .cr-note{
-  font-size:12.5px;color:var(--ink-sub);line-height:1.9;
+  font-size:15.5px;color:var(--ink-sub);line-height:1.9;
   margin-top:16px;padding-top:14px;
   border-top:1px dashed var(--divider);
 }
+
+/* ========== 文末：数据说明与参考文献（全屏深蓝底·双栏） ========== */
+.data-refs{
+  width:100%;
+  background:var(--cover-deep);
+  padding:64px 8% 72px;
+  position:relative;
+}
+.data-refs::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:80px;height:2px;background:var(--gold);
+}
+.data-refs .dr-inner{
+  max-width:1080px;margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:52px;
+}
+.data-refs .dr-col{min-width:0}
+.dr-pill{
+  display:inline-block;
+  padding:7px 24px;
+  background:rgba(244,201,93,.12);
+  color:var(--gold);
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:3px;
+  border-radius:4px;
+  margin-bottom:22px;
+}
+.dr-block{margin-bottom:18px}
+.dr-block:last-child{margin-bottom:0}
+.dr-block h4{
+  font-size:16.5px;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:5px;
+  letter-spacing:.5px;
+}
+.dr-block p{
+  font-size:16px;
+  line-height:1.9;
+  color:rgba(255,255,255,.7);
+  margin:0;
+  text-align:justify;
+}
+.dr-refs{
+  list-style:none;
+  counter-reset:ref;
+  margin:0;padding:0;
+}
+.dr-refs li{
+  counter-increment:ref;
+  font-size:16px;
+  line-height:1.85;
+  color:rgba(255,255,255,.7);
+  margin-bottom:8px;
+  text-align:justify;
+}
+.dr-refs li::before{
+  content:"[" counter(ref) "]";
+  color:var(--gold);
+  font-weight:600;
+  margin-right:3px;
+}
+@media (max-width:800px){
+  .data-refs{padding:48px 6% 56px}
+  .data-refs .dr-inner{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+}
 </style>
 </head>
-<body>
+<body data-prev="03-wound.html">
 
 <!-- ============ 顶部全局导航 ============ -->
 <nav class="site-nav" aria-label="章节导航">
@@ -1443,7 +1575,6 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
       <a href="02-cocoon.html">02 茧房</a>
       <a href="03-wound.html">03 伤口</a>
       <a href="04-breaking.html" class="active" aria-current="page">04 破茧</a>
-      <a href="05-backmatter.html">05 附录</a>
     </div>
   </div>
   <div class="site-nav-progress"><span class="site-nav-progress-fill" id="siteProgress"></span></div>
@@ -1494,7 +1625,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
         <p class="body reveal">为什么同一个工具，会同时成为深渊和扶手？因为它没有意志，只是放大了孩子原本的状态。既然无法退回没有AI的时代，要做的不是筑墙隔绝，而是划线破茧——这道线从家庭、学校一路画到平台与国家，因为AI最终应该是桥，而不是墙。</p>
       </div>
       <figure class="lead-figure reveal">
-        <img src="../../assets/images/illustrations/ch4-lead-bridge.jpg" alt="一名少年站在金色光桥前，桥的另一端是围坐交流的人群" loading="lazy">
+        <img src="../../assets/images/illustrations/ch4-lead-bridge.webp" alt="一名少年站在金色光桥前，桥的另一端是围坐交流的人群" loading="lazy">
         <figcaption>划线与破茧：AI 应是桥，而非墙（示意图）</figcaption>
       </figure>
     </div>
@@ -1504,82 +1635,85 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 <!-- ============================ 4.1 天平的两端：62.6% 与 58.8% ============================ -->
 <section class="section" id="s4-1">
   <div class="container">
-    <div class="cross" id="cross41">
-      <div class="cross-stage">
-        <h2 class="ch-title"><span class="num">4.1</span>天平的两端：62.6% 与 58.8%</h2>
-        <div class="cross-inner">
-          <!-- 左列：A＝段1 / B＝图2照片 -->
-          <div class="cross-col">
-            <div class="cross-pane pane-text" id="pText1">
-              <p class="body">2026年5月，中国青年报社社会调查中心面向1336名中小学生家长做了一次“AI时代家庭教育”专项调查。</p>
-              <p class="body">结果里，孩子用AI的场景很日常：查资料、练口语、生成创意内容，也会拿它解一道题、聊一会儿心。家长看在眼里的是另一番样子——有人发现孩子视野被打开了，有人发现孩子开始等AI给答案、自己不动脑。</p>
-              <p class="body">把这两种感受放在同一个画面里，就像一架天平：一端是拓展与陪伴，另一端是依赖与退步。而倾斜的方向取决于有没有人教孩子怎么站。</p>
-            </div>
-            <div class="cross-pane" id="pFig2">
-              <figure class="news-figure">
-                <img src="../../assets/images/news/fig07-leftbehind-people-visual.webp" alt="湖北巴东县暑期爱心托管班，老师带着孩子们与AI机器人互动" loading="lazy">
-                <figcaption>图7：2026年8月10日，在湖北巴东县信陵镇青年之家暑期爱心托管班，老师带着孩子们与AI机器人互动，焦国斌 摄（人民视觉 供图）；刊于人民日报海外版《给“AI陪伴”划定安全边界》（2026-08-21）</figcaption>
-              </figure>
-            </div>
+    <div class="syc-stick" id="cross41">
+      <div class="syc-stage">
+        <h2 class="ch-title syc-head"><span class="num">4.1</span>天平的两端：62.6% 与 58.8%</h2>
+        <div class="syc-field">
+
+          <!-- 文案一 → 对应图一（天平） -->
+          <div class="syc-copy" data-syc="copy1">
+            <p class="body">2026年5月，中国青年报社社会调查中心面向1336名中小学生家长做了一次“AI时代家庭教育”专项调查。</p>
+            <p class="body">结果里，孩子用AI的场景很日常：查资料、练口语、生成创意内容，也会拿它解一道题、聊一会儿心。家长看在眼里的是另一番样子——有人发现孩子视野被打开了，有人发现孩子开始等AI给答案、自己不动脑。</p>
+            <p class="body">把这两种感受放在同一个画面里，就像一架天平：一端是拓展与陪伴，另一端是依赖与退步。而倾斜的方向取决于有没有人教孩子怎么站。</p>
           </div>
-          <!-- 右列：A＝图1天平 / B＝段2·3·4 -->
-          <div class="cross-col">
-            <div class="cross-pane" id="pFig1">
-              <div class="balance-wrap">
-                <svg class="balance-svg" viewBox="0 40 600 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="天平：左机遇侧 62.6%，右风险侧 58.8%">
-                  <!-- 立柱与底座 -->
-                  <line x1="300" y1="50" x2="300" y2="205" stroke="#1A3A4A" stroke-width="2"/>
-                  <rect x="262" y="205" width="76" height="7" rx="2" fill="#1A3A4A"/>
-                  <line x1="276" y1="212" x2="324" y2="212" stroke="#1A3A4A" stroke-width="3" stroke-linecap="round"/>
-                  <!-- 支点 -->
-                  <polygon points="300,52 314,69 286,69" fill="#1A3A4A"/>
-                  <!-- 横梁：两端拉近、保持水平，倾斜由下方文案点题 -->
-                  <line x1="200" y1="100" x2="400" y2="100" stroke="#1A3A4A" stroke-width="2.5" stroke-linecap="round"/>
-                  <!-- 左盘（机遇/金） -->
-                  <line x1="200" y1="100" x2="200" y2="137" stroke="#999" stroke-width="1.2"/>
-                  <path d="M 155 137 Q 200 174 245 137 Z" fill="#F4C95D" stroke="#D4A017" stroke-width="1"/>
-                  <text x="200" y="159" text-anchor="middle" font-size="21" font-weight="700" fill="#1A3A4A">62.6%</text>
-                  <!-- 右盘（风险/暗红） -->
-                  <line x1="400" y1="100" x2="400" y2="137" stroke="#999" stroke-width="1.2"/>
-                  <path d="M 355 137 Q 400 174 445 137 Z" fill="#B84A3E" stroke="#7A2E25" stroke-width="1"/>
-                  <text x="400" y="159" text-anchor="middle" font-size="21" font-weight="700" fill="#fff">58.8%</text>
-                </svg>
-                <div class="balance-items">
-                  <div class="pan-col pan-pos">
-                    <div class="pan-head">机遇侧 · 拓展与陪伴（4 项）</div>
-                    <ul>
-                      <li><span>拓展视野</span><span class="pv">62.6%</span></li>
-                      <li><span>激发创造</span><span class="pv">59.8%</span></li>
-                      <li><span>答疑解惑</span><span class="pv">49.9%</span></li>
-                      <li><span>学习辅助</span><span class="pv">44.7%</span></li>
-                    </ul>
-                  </div>
-                  <div class="pan-col pan-neg">
-                    <div class="pan-head">风险侧 · 依赖与退步（5 项）</div>
-                    <ul>
-                      <li><span>心理依赖</span><span class="pv">58.8%</span></li>
-                      <li><span>思考下降</span><span class="pv">42.7%</span></li>
-                      <li><span>现实互动减少</span><span class="pv">42.7%</span></li>
-                      <li><span>注意力分散</span><span class="pv">39.1%</span></li>
-                      <li><span>视力睡眠</span><span class="pv">30.8%</span></li>
-                    </ul>
-                  </div>
+
+          <!-- 图一：天平（起始位在画面左侧） -->
+          <div class="syc-fig syc-left" data-syc="fig1">
+            <div class="balance-wrap">
+              <svg class="balance-svg" viewBox="0 40 600 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="天平：左机遇侧 62.6%，右风险侧 58.8%">
+                <!-- 立柱与底座 -->
+                <line x1="300" y1="50" x2="300" y2="205" stroke="#1A3A4A" stroke-width="2"/>
+                <rect x="262" y="205" width="76" height="7" rx="2" fill="#1A3A4A"/>
+                <line x1="276" y1="212" x2="324" y2="212" stroke="#1A3A4A" stroke-width="3" stroke-linecap="round"/>
+                <!-- 支点 -->
+                <polygon points="300,52 314,69 286,69" fill="#1A3A4A"/>
+                <!-- 横梁：两端拉近、保持水平，倾斜由下方文案点题 -->
+                <line x1="200" y1="100" x2="400" y2="100" stroke="#1A3A4A" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- 左盘（机遇/金） -->
+                <line x1="200" y1="100" x2="200" y2="137" stroke="#999" stroke-width="1.2"/>
+                <path d="M 155 137 Q 200 174 245 137 Z" fill="#F4C95D" stroke="#D4A017" stroke-width="1"/>
+                <text x="200" y="159" text-anchor="middle" font-size="21" font-weight="700" fill="#1A3A4A">62.6%</text>
+                <!-- 右盘（风险/暗红） -->
+                <line x1="400" y1="100" x2="400" y2="137" stroke="#999" stroke-width="1.2"/>
+                <path d="M 355 137 Q 400 174 445 137 Z" fill="#B84A3E" stroke="#7A2E25" stroke-width="1"/>
+                <text x="400" y="159" text-anchor="middle" font-size="21" font-weight="700" fill="#fff">58.8%</text>
+              </svg>
+              <div class="balance-items">
+                <div class="pan-col pan-pos">
+                  <div class="pan-head">机遇侧 · 拓展与陪伴（4 项）</div>
+                  <ul>
+                    <li><span>拓展视野</span><span class="pv">62.6%</span></li>
+                    <li><span>激发创造</span><span class="pv">59.8%</span></li>
+                    <li><span>答疑解惑</span><span class="pv">49.9%</span></li>
+                    <li><span>学习辅助</span><span class="pv">44.7%</span></li>
+                  </ul>
+                </div>
+                <div class="pan-col pan-neg">
+                  <div class="pan-head">风险侧 · 依赖与退步（5 项）</div>
+                  <ul>
+                    <li><span>心理依赖</span><span class="pv">58.8%</span></li>
+                    <li><span>思考下降</span><span class="pv">42.7%</span></li>
+                    <li><span>现实互动减少</span><span class="pv">42.7%</span></li>
+                    <li><span>注意力分散</span><span class="pv">39.1%</span></li>
+                    <li><span>视力睡眠</span><span class="pv">30.8%</span></li>
+                  </ul>
                 </div>
               </div>
             </div>
-            <div class="cross-pane pane-text" id="pText2">
-              <p class="body">Common Sense Media 2026 年 6 月那份报告把硬币翻了另一面：即便在最常使用 AI 陪伴的青少年里，<span class="hl">80% 仍把真人友谊放在第一位</span>；38% 的 AI 用户说，他们"把练到的社交技能用回了现实"。<span class="hl">光不是没有，只是不会自己落下来</span>。</p>
-              <div class="quote">
-                <p>"AI 为青少年提供情绪倾诉出口……能起到一定的情感缓冲作用。应将 AI 陪伴定位为<span class="hl-risk">辅助性学习与情感陪伴工具，只应作为陪伴补充而不是替代</span>。"</p>
-                <p style="margin-top:8px;font-size:12px;color:var(--ink-dim)">—— 孙宏艳，中国青少年研究中心研究员，《人民教育》2026-10</p>
-              </div>
-              <p class="body">北京安定医院儿童精神医学首席专家郑毅的临床观察更深一层：<span class="hl-risk">"AI 沉迷往往是'果'而不是'因'——先有焦虑、抑郁、社交困境，才有 AI 填补。"</span>把 AI 拿走，伤口还在。这也是为什么"禁用"这一派政策在临床医生那里，从未获得过支持。</p>
-            </div>
           </div>
+
+          <!-- 文案二 → 对应图二（照片） -->
+          <div class="syc-copy" data-syc="copy2">
+            <p class="body">Common Sense Media 2026 年 6 月那份报告把硬币翻了另一面：即便在最常使用 AI 陪伴的青少年里，<span class="hl">80% 仍把真人友谊放在第一位</span>；38% 的 AI 用户说，他们"把练到的社交技能用回了现实"。<span class="hl">光不是没有，只是不会自己落下来</span>。</p>
+            <div class="quote">
+              <p>"AI 为青少年提供情绪倾诉出口……能起到一定的情感缓冲作用。应将 AI 陪伴定位为<span class="hl-risk">辅助性学习与情感陪伴工具，只应作为陪伴补充而不是替代</span>。"</p>
+              <p style="margin-top:8px;font-size:15px;color:var(--ink-dim)">—— 孙宏艳，中国青少年研究中心研究员，《人民教育》2026-10</p>
+            </div>
+            <p class="body">北京安定医院儿童精神医学首席专家郑毅的临床观察更深一层：<span class="hl-risk">"AI 沉迷往往是'果'而不是'因'——先有焦虑、抑郁、社交困境，才有 AI 填补。"</span>把 AI 拿走，伤口还在。这也是为什么"禁用"这一派政策在临床医生那里，从未获得过支持。</p>
+          </div>
+
+          <!-- 图二：照片（换位后落在画面右侧） -->
+          <div class="syc-fig syc-right" data-syc="fig2">
+            <figure class="news-figure">
+              <img src="../../assets/images/news/fig07-leftbehind-people-visual.webp" alt="湖北巴东县暑期爱心托管班，老师带着孩子们与AI机器人互动" loading="lazy">
+              <figcaption>图7：2026年8月10日，在湖北巴东县信陵镇青年之家暑期爱心托管班，老师带着孩子们与AI机器人互动，焦国斌 摄（人民视觉 供图）；刊于人民日报海外版《给"AI陪伴"划定安全边界》（2026-08-21）</figcaption>
+            </figure>
+          </div>
+
         </div>
       </div>
     </div>
-    <p class="source-line reveal">
+    <p class="source-line reveal" style="margin-bottom:48px">
       来源：中青报 2026-05-27 chinanews.com.cn/sh/2026/05-28/10629852.shtml · Common Sense Media 同上 · 孙宏艳 yn.people.com.cn/n2/2026/0609/c361322-41604898.html · 郑毅 chinanews.com.cn/sh/2026/08-29/10686316.shtml
     </p>
   </div>
@@ -1720,37 +1854,10 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
     </div>
   </div>
   <div class="container">
-    <div class="fold-block reveal" id="mitFold">
-      <div class="fold-head" onclick="document.getElementById('mitFold').classList.toggle('open')">
-        <p class="fh-title">深读 · 认知债务 <span class="tag">MIT Media Lab · 2025</span></p>
-        <span class="fh-arrow">▼</span>
-      </div>
-      <div class="fold-body">
-        <div class="fold-body-inner">
-          <p>MIT Media Lab 的 Nataliya Kosmyna 团队在 2025 年做了一项 EEG 实验：把 54 名成年人分成三组——<span class="hl">LLM 辅助 / 搜索引擎辅助 / 裸写</span>——完成同一篇论文。过程中持续监测脑电。</p>
-          <div class="mit-grid">
-            <div class="mit-cell">
-              <p class="mc-num">−55%</p>
-              <p class="mc-desc">AI 组大脑"连接性"比裸写组最多降低 55%</p>
-            </div>
-            <div class="mit-cell">
-              <p class="mc-num">83%</p>
-              <p class="mc-desc">AI 组受试者无法复述自己几分钟前"写"出的段落</p>
-            </div>
-            <div class="mit-cell">
-              <p class="mc-num">54人</p>
-              <p class="mc-desc">均为成年人样本；"发育中的大脑风险最高"属推断警告，非实验直接测得</p>
-            </div>
-          </div>
-          <p>Kosmyna 把这种状态命名为 <span class="hl">"认知债务（cognitive debt）"</span>——AI 帮你写出来，但你不拥有它。当大脑不再被要求完成"提取—组织—表达"的链条，那些神经回路就开始悄悄闲置。</p>
-          <p>需要诚实地说：<span class="num">这项研究的样本是成年人，不是青少年</span>。"发育中的大脑风险更高"是基于发展神经科学的合理推断，但不是这项实验直接测出来的。把它当成结论贴在所有孩子身上，是不严谨的；把它当成"无需关心"的反例，同样是不严谨的。</p>
-        </div>
-      </div>
-    </div>
-    <p class="body reveal" style="margin-top:30px">正因这场争论没有定论，它才真正教会我们一件事——单纯依靠<span class="hl-risk">"禁止"</span>，是站不住脚的。无人能否认 AI 从孩子身上夺走了什么，也无人能否认它曾给过什么；临床医生的观察更是一针见血：AI 沉迷往往只是"果"，而非"因"，纵使把 AI 移走，伤口依然留在原地。既然"一刀切"并不成立，这道线便应当换一个方向去画——从孩子站得最近的三个方向，自内而外、层层落笔：先到家庭，再到学校，最终抵达孩子自己够不到的地方。</p>
     <p class="source-line reveal">
       来源：人民日报海外版 2026-08-21 paper.people.com.cn/rmrbhwb/pc/content/202608/21/content_30176220.html · MIT media.mit.edu/projects/your-brain-on-chatgpt/overview/ · 港大 papers.ssrn.com/sol3/papers.cfm?abstract_id=6868618 · 人民网转述 theory.people.com.cn/n1/2026/0905/c40531-40792962.html
     </p>
+    <p class="body reveal" style="margin-top:30px">正因这场争论没有定论，它才真正教会我们一件事——单纯依靠<span class="hl-risk">"禁止"</span>，是站不住脚的。无人能否认 AI 从孩子身上夺走了什么，也无人能否认它曾给过什么；临床医生的观察更是一针见血：AI 沉迷往往只是"果"，而非"因"，纵使把 AI 移走，伤口依然留在原地。既然"一刀切"并不成立，这道线便应当换一个方向去画——从孩子站得最近的三个方向，自内而外、层层落笔：先到家庭，再到学校，最终抵达孩子自己够不到的地方。</p>
   </div>
 </section>
 
@@ -1767,7 +1874,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
           <p class="body">这道线最先落在手中的人，是父母。然而，恰恰是这片最想守住孩子的地方，最容易画错了方向。<span class="hl">67.9% 的家庭</span>，餐桌上至今没有一条关于 AI 的规矩；更令人意外的，是那些最卖力"禁止"的家庭。调查将家长的管教方式分为四类——支持、限制、放任与禁止；数据却站在了直觉的对立面：管得最严的家庭里，"想依赖 AI、不愿自己思考"的孩子比例反而<span class="hl-risk">最高（36.6%）</span>，愿意用 AI 学习文化知识的反而<span class="hl-risk">最低（26.8%）</span>。</p>
           <div class="quote">
             <p>"家庭防线的结构性漏洞在于——家长只关心<span class="hl-risk">'孩子今天跟我说话了吗'</span>，不关心<span class="hl-risk">'孩子不敢说的那部分是什么'</span>。AI 接住的不是孩子说出来的，是孩子不敢对你说出来的。"</p>
-            <p style="margin-top:8px;font-size:12px;color:var(--ink-dim)">—— 边玉芳，北京师范大学教授</p>
+            <p style="margin-top:8px;font-size:15px;color:var(--ink-dim)">—— 边玉芳，北京师范大学教授</p>
           </div>
         </div>
         <div class="fam-chart">
@@ -1794,10 +1901,10 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 <section class="section" id="s4-4">
   <div class="container">
     <h2 class="ch-title reveal"><span class="num">4.4</span>素养五层：把"防沉迷"升级为"会使用"</h2>
-    <p class="body reveal">家庭与学校这两条线索，最终汇聚到同一处，指向的其实是同一个命题：一个孩子，究竟应当以怎样的方式与 AI 相处。也正是在这一交汇点上，<span class="hl">"防沉迷"</span> 这三个字显现出了它的局限——"防"所筑起的，不过是一道被动的墙；而真正能够对抗依赖的，是另一种截然不同的能力——"会"。与其把全部力气，都用在将孩子拦在 AI 之外，不如把这股力气，转向教会他如何与 AI 安然共处。</p>
     <div class="s44-split reveal">
       <div class="s44-narr">
-        <p class="body">而这种能力，需要先厘清"它是什么"，再说明"它如何养成"。它自下而上垒作五层：最底层是识真——让孩子明白，屏幕那头的并非一个"人"，而只是一套概率模型，是照见自身的一面镜子；往上一层是辨伪——分辨 AI 是在顺着自己的话说，还是在信口编造；再往上一层是立界——在时间、隐私与情绪之间，划下属于自己的边界；其上为共生——将它当作练手的工具，而非托付心事的伴侣；最高一层是破茧——主动回到真实的人际关系之中，唯有当现实足够结实，虚拟才会退居为一个选项，而非唯一的出口。</p>
+        <p class="body">家庭与学校最终指向同一命题：孩子该如何与AI相处。"防沉迷"只是被动筑墙，真正对抗依赖的是"会"——教会孩子与AI共处的能力。</p>
+        <p class="body">这种能力自下而上分五层：识真（明白AI是概率模型而非"人"）、辨伪（分辨AI是在迎合还是编造）、立界（在时间、隐私、情绪上划边界）、共生（当作工具而非情感伴侣）、破茧（回归真实人际，让现实足够结实）。</p>
       </div>
       <div class="pyramid-fig">
         <svg class="pyramid-svg" viewBox="0 0 730 382" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="素养五层金字塔及各层释义">
@@ -1882,15 +1989,18 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
             <text x="340" y="56" text-anchor="start">公共政策</text>
           </g>
         </svg>
+        <p class="pyramid-source">来源：郑毅《未成年人健康使用网络专家共识》chinanews.com.cn/sh/2026/08-29/10686316.shtml · health.people.com.cn/n1/2026/0304/c14739-40674306.html</p>
       </div>
     </div>
-    <p class="body reveal">至于它的养成途径，集中在两处：在家庭的规则里"陪"，在学校的课程里"教"。塔外还有另外两根虚线支柱——平台设计与公共政策，前两根握在家长和老师手里，后两根却不在这张桌上。这几根支柱即便垒得再高，也仅能撑起那座塔的一半；剩下的那一半，孩子凭一己之力无法企及，需要一只更强有力的手，越过家庭的餐桌与学校的讲台，替他把那道尚未收笔的线继续画下去。</p>
     <div class="quote reveal">
       <p>人民锐评：未成年人模式<span class="hl-risk">绝不能成为"摆设"</span>，算法必须升级——能识别异常情绪，能在危险边缘主动说<span class="hl">"这个话题我不太懂，要不要和爸爸妈妈聊聊？"</span>
     </div>
-    <p class="body reveal">下面五道题是给你自己用的：答完，看你在哪一层。</p>
+    <div class="st-entry reveal">
+      <p class="body">下面五道题是给你自己用的：答完，看你在哪一层。</p>
+      <button class="st-toggle" id="stToggle" type="button">开始答题 ›</button>
+    </div>
     <!-- 参与式自测 -->
-    <div class="self-test reveal">
+    <div class="self-test reveal" id="selfTest" hidden>
       <p class="st-title">测测你的 AI 使用模式</p>
       <p class="st-sub">5 道题对应素养五层 · 答完给层级解读与建议 · 引导反思而非贴标签</p>
 
@@ -1937,10 +2047,6 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
         <p class="str-body"></p>
       </div>
     </div>
-    <p class="source-line reveal">
-      来源：郑毅《未成年人健康使用网络专家共识》chinanews.com.cn/sh/2026/08-29/10686316.shtml · health.people.com.cn/n1/2026/0304/c14739-40674306.html
-    </p>
-    <p class="body reveal">以上就是家庭能做的全部。剩下的，要靠国家来画。</p>
   </div>
 </section>
 
@@ -1948,9 +2054,8 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
 <section class="section" id="s4-5">
   <div class="container">
     <h2 class="ch-title reveal"><span class="num">4.5</span>国家画下的线：从中国到全球</h2>
-    <p class="body reveal">然而有些线，家庭与学校画不到，唯有制度能够画出。<span class="num">2026-07-15</span>，《人工智能拟人化互动服务管理暂行办法》正式施行；9 月 18 日，国务院又就未成年人健康安全使用网络公开征求意见，从部门规章到行政法规，二者之间只隔了 <span class="num">65 天</span>。</p>
-    <p class="body reveal">那这条线落到企业身上管不管用？办法 2026-07-15 施行——从这一天起，向境内未成年人提供"虚拟伴侣"就属违规。盯住中间那条金线，左边虚线框是施行前 15 天。但"网动了"的方式，值得多看一眼。施行日前后，豆包、千问、元宝在半个月内<span class="hl-risk">整体下线了"用户自建智能体"功能</span>——而办法本身只管"情感互动"，明确把工具型智能体排除在外。为什么整条功能被端掉？北京大学法学院教授薛军给出的解释是：<span class="hl">"持续性情感互动服务"的边界模糊、合规成本高，企业宁愿"一刀切"暂停，也不愿冒违规风险</span>。官方口径称这是主动合规、影响局部；用户却在应用商店刷差评，讨论"我的 AI 数字资产谁做主"。<span class="hl">这条线画得够不够细、执行有没有走样，仍在争论</span>。可真正棘手的是，这条线画得再细，也终究只是一条底线——<span class="hl-risk">《拟人化办法》管住了平台，管不住家长把手机塞给哭闹的孩子</span>；管住了"虚拟伴侣"这个词，管不住孩子在算法面前把心交出去。<span class="hl">底线之上，机遇与风险仍在天平两端摇晃</span>。</p>
-    <!-- 合规日历 -->
+    <!-- 合规日历（左右分栏：左图右文） -->
+    <div class="cal-split">
     <div class="compliance-cal reveal">
       <p class="dt-title">紧贴施行日（2026-07-15）：四平台五项动作全部落地</p>
       <p class="dt-sub">上方＝施行日前的事件，下方＝施行日后的事件；中间虚线框是施行前 15 天的窗口，在下方放大逐项展开。</p>
@@ -1962,7 +2067,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
       </p>
       <div class="cal-track">
         <div class="cal-axis"></div>
-        <span class="cal-band" style="top:126px">施行日前</span>
+        <span class="cal-band" style="top:94px">施行日前</span>
 
         <!-- 上轨事件（窗口前） -->
         <div class="cal-event up" style="left:8%" data-info="2025-10-13｜加州 SB 243 签署｜州法（全球节点）｜出处：附表1 S32｜备注：全美第二部此类州法（首部为佛州 SB 1344，2025-07-01 生效）；2026-01-01 施行" tabindex="0" role="button" aria-label="2025-10-13 加州 SB 243 签署，点击查看详情">
@@ -2020,7 +2125,7 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
         </div>
 
         <!-- 下轨事件（窗口后） -->
-        <span class="cal-band" style="top:156px">施行日后</span>
+        <span class="cal-band" style="top:118px">施行日后</span>
         <div class="cal-event down" style="left:84%" data-info="2026-09-18｜国务院网络保护规定征求意见稿｜行政法规（征求意见）｜出处：附表1 S11｜备注：未满 16 周岁强制启用未成年人模式；五类禁止服务含虚拟亲属、虚拟伴侣等虚拟亲密关系；意见截止 2026-10-17" tabindex="0" role="button" aria-label="2026-09-18 国务院网络保护规定征求意见稿，点击查看详情">
           <span class="ce-date">2026-09-18</span>
           国务院网络保护规定征求意见稿
@@ -2032,8 +2137,14 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
       </div>
       <p class="cal-foot">施行日窗口期内（2026-06-30 至 07-15），腾讯元宝 / 千问（网页端与 App 端）/ 网易妙时 / 豆包四家平台共完成五项关停、下架、停运，其中两项落在施行日当天。<span class="cf-punch">线画下之后，网确实动了。</span></p>
     </div>
+    <div class="cal-right">
+    <p class="body reveal">2026 年 7 月，国家出台新规，禁止向未成年人提供 AI 虚拟伴侣、诱导情感依赖。65 天后，国务院跟进，将"虚拟亲密关系"纳入监管。</p>
+    <p class="body reveal">新规落地，豆包、千问下线用户自建 AI 角色，元宝提前调整。企业"先停再改"，因"情感互动"边界模糊，怕踩线宁可暂停。不是禁 AI，而是装护栏——学习工具照用，但不准处感情。</p>
+    <p class="body reveal">落地伴随磨合成本：数据迁移与数字资产归属，细则待跟进。方向已定——国家划底线，平台守细节，家长管生活，三方合力，让 AI 当好工具，让孩子留在真实世界里。</p>
+    </div>
+    </div>
     <p class="body reveal">中国画的这条线不是孤例。把镜头往外拉，就在办法施行的前后，一轮针对"AI 陪伴"的立法几乎同时展开。美国加州 SB 243 是这一代监管的样本：它要求 AI 聊天产品在检测到未成年人表达自伤、暴力或性侵害意图时<span class="hl-risk">启动危机干预协议、推送求助资源</span>；并要求平台明确告知用户"正在与 AI 对话"，对已知的未成年用户<span class="hl-risk">每 3 小时提醒一次"该休息了"</span>。"提醒"两个字背后，是一个被算法推到悬崖边、又被算法拉回来的少年。</p>
-    <p class="body reveal">先看画在哪。这张图上八个地方，过去一年多都动过手——颜色越暖，管得越严。</p>
+    </div><!-- /.container -->
     <!-- 七国与欧盟：AI 交互世界地图 -->
     <div class="map-wrap reveal" id="mapWrap">
       <div class="map-main">
@@ -2225,8 +2336,6 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
         </div>
       </div><!-- /.ai-drawer -->
     </div>
-    <p class="body reveal">同样是 AI 陪伴，全球松紧差了好几个量级：澳大利亚直接立法禁止未成年人使用社交 AI，中国用部门规章加行政法规双线推进，美国靠州法接力，日本至今只有行业自律。</p>
-  </div>
 </section>
 
 <!-- ============================ 4.6 收笔：把这条线，画到每一个少年身上 ============================ -->
@@ -2236,25 +2345,10 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
     <p class="body reveal">其实，那幅"八个地方同一条线、谁先动笔、谁仍未动笔"的时间表，本不必铺陈成一幅复杂的图，一句便可概括：在过去一年多里，从美国 44 州检察长的联名信、FTC 发出的调查令，到加州接连签署的两部州法，再到中国一条办法的落地——有的地方已将算法关进了笼子，有的地方至今仍没有一条硬性的成文规定。进度快慢的背后，并非几个国家之间的胜负，而是这世上所有孩子共同面对的时间差。</p>
     <p class="body reveal">我们真正要争取的，从来不是谁的线画得更多、更严，而是让每一条线都指向同一个方向——令 AI 永远停驻在它应当停驻的位置：它是一座桥，而非一堵墙；是一面镜子，而非一个归宿。</p>
     <p class="body reveal">也正因如此，这条线最终要由每一位大人来收笔——画在归家的那张餐桌上，画在学校的讲台上，也写进法条中那个被反复斟酌的字眼里。它究竟画到哪里？画到一个少年，不再需要向一块屏幕讨要安全感，而能安心地走进真实的世界，在那里用力地、自由地，破茧而出，肆意飞翔。</p>
-    <p class="source-line reveal">
-      来源：中国两法 cac.gov.cn/2026-04/10/c_1777558395078289.htm · chinanews.com.cn/sh/2026/09-18/10699063.shtml ｜ 美国 naag.org/.../AI-Chatbot_FINAL-44.pdf · ftc.gov/.../GenerativeAI6%28b%29resolution.pdf · sd18.senate.ca.gov/.../signed-law · governor.ny.gov/.../safeguard-requirements · gov.ca.gov/2026/09/10/... ｜ 欧盟 digital-strategy.ec.europa.eu/en/library/commission-publishes-guidelines-protection-minors（DSA 指南 2025-07-14 · S30）· bernama.com/en/news.php?id=2608631（2026-09 新提案 · S38）｜ 英国 gov.uk/.../online-safety-act-explainer · ofcom.org.uk（罚款上限 10%／1800 万英镑 · S34；2025-01-15 调查 · S29）｜ 澳大利亚 esafety.gov.au/.../social-media-age-restrictions（4950 万澳元 · S14）｜ 意大利 edpb.europa.eu/.../replika_lt ｜ 韩国 digitaltoday.co.kr/cn/view/102394 · biz.heraldcorp.com/article/10784599（信息通信网法修订案 2026-10 · S37）
-    </p>
   </div>
 </section>
 
-<!-- ============================ 跋 ============================ -->
-<section class="section epilogue" id="epilogue">
-  <div class="container">
-    <h2 class="ch-title reveal"><span class="num">跋</span>把镜子擦亮（记者手记）</h2>
-    <div class="epigraph reveal">
-      <p>"搭子"不是洪水猛兽，也不是救世主。它是一面镜子——<span class="hl">照出这代少年真实的孤独，也照出大人世界真实的缺席</span>。</p>
-      <p>这篇报道能做的，只是把镜子擦亮：让每一组数字都有出处，让每一个伤口都被看见，让每一次划线都有依据。</p>
-      <p>剩下的，不在算法手里，在你回家的那张餐桌上。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ 图片来源与致谢（折叠） ============================ -->
+<!-- ============================ 图片来源与致谢 + 数据说明与参考文献（同一板块） ============================ -->
 <section class="section" id="credits" style="padding:0 0 20px">
   <div class="container" style="max-width:860px">
     <div class="credits">
@@ -2279,16 +2373,42 @@ p.body .num-risk{color:var(--risk);font-weight:700;font-size:1.05em}
   </div>
 </section>
 
-<!-- ============================ 章末跳转：回到序言（统一过渡卡片） ============================ -->
-<a class="next-chapter" href="05-backmatter.html" data-next="5" id="nextJump">
-  <div class="nc-frame">
-    <p class="echo">技术负责在线，<span class="hl">人负责在场</span>。</p>
-    <p class="label">下 一 章</p>
-    <p class="title">附录 · 数据来源与参考文献</p>
-    <p class="hook">每一组数字的来处，每一份材料的出处。</p>
-    <span class="arrow" aria-hidden="true">↓</span>
+<!-- ============================ 数据说明与参考文献（全屏深蓝底） ============================ -->
+<section class="data-refs" id="data-refs">
+  <div class="dr-inner">
+    <div class="dr-col">
+      <span class="dr-pill">数据说明</span>
+      <div class="dr-block">
+        <h4>数据来源</h4>
+        <p>问卷调查数据来源于中国青少年研究中心《8563名中小学生AI使用调查》；行业统计数据来源于共青团中央、CNNIC《青少年发展蓝皮书》、CNNIC第57次统计报告及《生成式AI应用发展报告（2025）》；政策法规来源于国家网信办官网、国务院政策文件库及欧盟委员会公开信息；案例素材来源于法院公开文书与主流媒体报道；学术观点来源于Science、Nature Human Behaviour等期刊文献。</p>
+      </div>
+      <div class="dr-block">
+        <h4>数据处理</h4>
+        <p>对量化数据使用Excel、Python等工具进行统计与交叉分析；对对话类型、人物性格特征等非结构化文本信息借助大语言模型进行初步标注，再经人工逐条校核校正，确保事实与数据可追溯。</p>
+      </div>
+      <div class="dr-block">
+        <h4>数据可视化</h4>
+        <p>图表与交互可视化借助ECharts、D3.js等库与Tableau平台完成，地图数据采用开源GeoJSON，所有图表均附数据来源说明。</p>
+      </div>
+    </div>
+    <div class="dr-col">
+      <span class="dr-pill">参考文献</span>
+      <ol class="dr-refs">
+        <li>共青团中央, 中国互联网络信息中心. 青少年发展蓝皮书[R]. 2026.</li>
+        <li>中国青少年研究中心. 8563名中小学生AI使用调查[R]. 2025.</li>
+        <li>中国互联网络信息中心. 第57次中国互联网络发展状况统计报告[R]. 2025.</li>
+        <li>Common Sense Media. Talk, Trust, and Trade-offs: Teens, AI, and the Future of Human Connection[R]. 2025.</li>
+        <li>国家互联网信息办公室. 人工智能拟人化互动服务管理暂行办法[Z]. 2026.</li>
+        <li>中华人民共和国国务院. 未成年人网络保护条例[Z]. 2024.</li>
+        <li>European Commission. Artificial Intelligence Act[Z]. 2024.</li>
+        <li>Cheng Y, et al. The sycophancy problem in large language models[J]. Science, 2026.</li>
+        <li>De Freitas J, et al. Letting go of control: Human-AI interaction and autonomy[J]. Nature Human Behaviour, 2026.</li>
+        <li>Horton D E, Wohl R R. Mass communication and para-social interaction[J]. Psychiatry, 1956, 19(3):215-229.</li>
+        <li>人民网. 人民直击丨当孩子和AI"交心"[EB/OL]. 2026-03-01.</li>
+      </ol>
+    </div>
   </div>
-</a>
+</section>
 
 <script src="../data/data.js"></script>
 <script src="../components/common.js"></script>
@@ -2332,6 +2452,23 @@ const urIO = new IntersectionObserver((entries)=>{
   });
 }, {threshold: 0.3});
 document.querySelectorAll('.urban-rural').forEach(el=>urIO.observe(el));
+
+// ===== 参与式自测：点击按钮展开答题 =====
+const stToggle = document.getElementById('stToggle');
+const selfTest = document.getElementById('selfTest');
+if (stToggle && selfTest){
+  stToggle.addEventListener('click', ()=>{
+    selfTest.hidden = false;
+    // 元素原本因 hidden 无布局盒，IntersectionObserver 未触发 reveal，
+    // 此处手动补 .in 避免停留在 opacity:0
+    selfTest.classList.add('in');
+    stToggle.hidden = true;
+    // 展开后平滑滚动到答题区
+    setTimeout(()=>{
+      selfTest.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 60);
+  });
+}
 
 // ===== 参与式自测 =====
 const testState = {1:null,2:null,3:null,4:null,5:null};
@@ -3018,83 +3155,87 @@ window.addEventListener('resize', ()=>{
 </script>
 
 <script>
-/* ===== 4.1 交叉滚动：A(段1|天平) ⇄ B(照片|段2·3·4) ===== */
+/* ===== 4.1 天平两端：图文左右换位的滚动叙事（2.3 syc-stick 模式） =====
+   起始＝图一（天平）停在画面左侧；滚动 → 文案一自右侧下方滑入右栏
+   → 图由左栏平移到右栏并切换为图二（照片）→ 文案二自左侧下方滑入左栏。
+   窄屏 / 减少动效时自动降级为纵向堆叠的静态排版。 */
 (function(){
-  var cross = document.getElementById('cross41');
-  if(!cross) return;
-  var stage = cross.querySelector('.cross-stage');
-  var panes = Array.prototype.slice.call(cross.querySelectorAll('.cross-pane'));
-  var pText1 = document.getElementById('pText1');
-  var pFig1  = document.getElementById('pFig1');
-  var pFig2  = document.getElementById('pFig2');
-  var pText2 = document.getElementById('pText2');
-  if(!stage || !pText1 || !pFig1 || !pFig2 || !pText2) return;
+  const stick = document.getElementById('cross41');
+  if (!stick) return;
+  const stage = stick.querySelector('.syc-stage');
+  const copy1 = stick.querySelector('[data-syc="copy1"]');
+  const fig1  = stick.querySelector('[data-syc="fig1"]');
+  const copy2 = stick.querySelector('[data-syc="copy2"]');
+  const fig2  = stick.querySelector('[data-syc="fig2"]');
+  if (!stage || !copy1 || !fig1 || !copy2 || !fig2) return;
 
-  var NAV_H = 56;
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var mq = window.matchMedia('(max-width: 900px)');
+  const NAV   = 56;                 // 顶部导航高度，与 4.x 的 .site-nav 对齐
+  const SLIDE = (54 / 46) * 100;    // 图从左栏移到右栏＝自身宽度的 117.4%
 
-  /* 0→1 平滑插值（smoothstep），限定在 a..b 区间 */
-  function s(p, a, b){
-    var t = (p - a) / (b - a);
-    t = t < 0 ? 0 : (t > 1 ? 1 : t);
-    return t * t * (3 - 2 * t);
-  }
-  function setPane(el, o, x, y){
-    el.style.opacity = o.toFixed(3);
-    el.style.transform = (x || y) ? ('translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)') : 'none';
-    el.style.pointerEvents = (o > 0.5) ? 'auto' : 'none';
-  }
-  function apply(p){
-    var aIn  = s(p, 0, 0.30);     /* 天平入场：由下而上 */
-    var swap = s(p, 0.46, 0.74);  /* A→B 交叉切换 */
-    var bTxt = s(p, 0.55, 0.82);  /* 段2·3·4 稍后入场 */
-    /* 段1：随切换向左让位 */
-    setPane(pText1, 1 - swap, -46 * swap, 0);
-    /* 天平：先上滑进入右列，切换时向右让位退出 */
-    setPane(pFig1, aIn * (1 - swap), 28 * swap, 70 * (1 - aIn));
-    /* 照片：切换时由右向左进入左列（图从右侧变到左侧） */
-    setPane(pFig2, swap, 48 * (1 - swap), 0);
-    /* 段2·3·4：由右下方向上滑入右列 */
-    setPane(pText2, bTxt, 0, 70 * (1 - bTxt));
-  }
-  function progress(){
-    var rect = cross.getBoundingClientRect();
-    var total = cross.offsetHeight - stage.offsetHeight;
-    if(total <= 0) return 1;
-    var p = (NAV_H - rect.top) / total;
-    return p < 0 ? 0 : (p > 1 ? 1 : p);
-  }
-  function clearPanes(){
-    panes.forEach(function(el){
-      el.style.opacity = ''; el.style.transform = ''; el.style.pointerEvents = '';
-    });
+  const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+  const smooth  = t => t * t * (3 - 2 * t);
+  const seg     = (p, a, b) => smooth(clamp01((p - a) / (b - a)));
+
+  // 仅宽屏且高度足够、允许动效时启用；否则降级为纵向堆叠
+  const mq = window.matchMedia('(min-width: 901px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');
+  let active = false, ticking = false, rafId = null;
+
+  // 进度 → 各元素的位移与透明度
+  function render(p){
+    const t1  = seg(p, 0.08, 0.36);   // 文案一：右下方 → 右栏就位
+    const t1o = seg(p, 0.38, 0.48);   // 文案一：上移退场，先让出右栏
+    const tf  = seg(p, 0.50, 0.76);   // 图：左栏 → 右栏（文案一退净后才起步，避免叠在一起）
+    const tx  = seg(p, 0.60, 0.70);   // 图：内容交叉切换（图一天平 → 图二照片）
+    const t2  = seg(p, 0.78, 1.00);   // 文案二：左下方 → 左栏就位
+
+    copy1.style.opacity = (t1 * (1 - t1o)).toFixed(3);
+    copy1.style.transform = 'translate3d(' + ((1 - t1) * 14).toFixed(2) + '%, calc(-50% + ' +
+      ((1 - t1) * 60 - t1o * 70).toFixed(1) + 'px), 0)';
+
+    copy2.style.opacity = t2.toFixed(3);
+    copy2.style.transform = 'translate3d(' + (-(1 - t2) * 14).toFixed(2) + '%, calc(-50% + ' +
+      ((1 - t2) * 60).toFixed(1) + 'px), 0)';
+
+    const fx = 'translate3d(' + (SLIDE * tf).toFixed(2) + '%, -50%, 0)';
+    fig1.style.transform = fx;
+    fig2.style.transform = fx;
+    fig1.style.opacity = (1 - tx).toFixed(3);
+    fig2.style.opacity = tx.toFixed(3);
   }
 
-  var ticking = false;
+  function update(){
+    if (!active) return;
+    const dist = stick.offsetHeight - stage.offsetHeight;
+    if (dist <= 0) return;
+    render(clamp01((NAV - stick.getBoundingClientRect().top) / dist));
+  }
+
   function onScroll(){
-    if(mq.matches) return;
-    if(ticking) return;
+    if (ticking) return;
     ticking = true;
-    requestAnimationFrame(function(){ apply(progress()); ticking = false; });
+    rafId = requestAnimationFrame(() => { ticking = false; update(); });
   }
-  function onResize(){
-    if(mq.matches){ clearPanes(); return; }
-    apply(progress());
+
+  function activate(on){
+    if (on === active) return;
+    active = on;
+    stick.classList.toggle('is-active', on);
+    if (on){
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    } else {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', update);
+      if (rafId){ cancelAnimationFrame(rafId); rafId = null; }
+      ticking = false;
+      [copy1, copy2, fig1, fig2].forEach(el => { el.style.opacity = ''; el.style.transform = ''; });
+    }
   }
-  if(reduceMotion){
-    /* 减弱动效：无位移，仅按滚动位置在两面之间直接切换 */
-    window.addEventListener('scroll', function(){
-      if(mq.matches) return;
-      apply(progress() < 0.5 ? 0 : 1);
-    }, {passive:true});
-    window.addEventListener('resize', onResize, {passive:true});
-    if(!mq.matches) apply(progress() < 0.5 ? 0 : 1);
-  } else {
-    window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', onResize, {passive:true});
-    if(!mq.matches) apply(progress());
-  }
+
+  if (mq.addEventListener) mq.addEventListener('change', e => activate(e.matches));
+  else if (mq.addListener) mq.addListener(e => activate(e.matches));
+  activate(mq.matches);
 })();
 </script>
 </body>

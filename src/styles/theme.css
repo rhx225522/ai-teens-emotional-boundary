@@ -21,13 +21,13 @@
   --divider:rgba(26,58,74,.12);
 
   /* —— 排版刻度（角色化，替代散落的固定 px） —— */
-  --fs-display:clamp(34px,4.6vw,56px);
-  --fs-h2:clamp(26px,2.4vw,34px);
-  --fs-h3:21px;
-  --fs-lead:19px;
-  --fs-body:16px;
-  --fs-cap:13px;
-  --fs-meta:12.5px;
+  --fs-display:clamp(37px,5vw,60px);
+  --fs-h2:clamp(29px,2.7vw,38px);
+  --fs-h3:24px;
+  --fs-lead:21px;
+  --fs-body:19px;
+  --fs-cap:16px;
+  --fs-meta:13px;
 
   /* —— 间距刻度（4 基数） —— */
   --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px; --sp-5:24px;
